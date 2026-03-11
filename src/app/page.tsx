@@ -273,13 +273,13 @@ export default function HomePage() {
             <a href="#consultation" className="btn btn--accent btn--lg">
               Book a Free Consultation
             </a>
-            <a href="tel:+16179491046" className="btn btn--outline-white btn--lg">
+            <a href="tel:+16179491046" className="btn btn--ghost btn--lg">
               <i className="ph ph-phone" aria-hidden="true"></i> (617) 949-1046
             </a>
           </div>
-          <div className="hero__scroll" aria-hidden="true">
+          <button className="hero__scroll-hint" aria-label="Scroll to next section">
             <i className="ph ph-caret-down"></i>
-          </div>
+          </button>
         </div>
       </section>
 
@@ -559,7 +559,7 @@ export default function HomePage() {
               href="https://www.google.com/maps/place/Jessica+Shauffer"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn--secondary"
+              className="btn btn--primary"
             >
               <i className="ph ph-google-logo" aria-hidden="true"></i> See All 19 Reviews on Google
             </a>
