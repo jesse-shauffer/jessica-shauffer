@@ -3,14 +3,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
-import { getNeighborhood, getAllSlugs } from '@/data/neighborhoods';
+import {
+  getNeighborhoodBySlug,
+  getAllNeighborhoodSlugs,
+  getOtherNeighborhoods,
+} from '@/lib/sanity';
 
-export function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+export const revalidate = 3600; // ISR: revalidate every hour
+
+export async function generateStaticParams() {
+  const slugs = await getAllNeighborhoodSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const n = getNeighborhood(params.slug);
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const n = await getNeighborhoodBySlug(params.slug);
   if (!n) return {};
   return {
     title: n.metaTitle,
@@ -20,13 +27,15 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
       description: n.metaDescription,
       images: ['/assets/jessica.jpg'],
     },
-    alternates: { canonical: `/neighborhoods/${n.slug}` },
+    alternates: { canonical: `/neighborhoods/${n.slug.current}` },
   };
 }
 
-export default function NeighborhoodPage({ params }: { params: { slug: string } }) {
-  const n = getNeighborhood(params.slug);
+export default async function NeighborhoodPage({ params }: { params: { slug: string } }) {
+  const n = await getNeighborhoodBySlug(params.slug);
   if (!n) notFound();
+
+  const others = await getOtherNeighborhoods(params.slug);
 
   const placeSchema = {
     '@context': 'https://schema.org',
@@ -48,7 +57,7 @@ export default function NeighborhoodPage({ params }: { params: { slug: string } 
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
       { '@type': 'ListItem', position: 2, name: 'Neighborhoods', item: 'https://jessicashauffer.com/neighborhoods' },
-      { '@type': 'ListItem', position: 3, name: n.name, item: `https://jessicashauffer.com/neighborhoods/${n.slug}` },
+      { '@type': 'ListItem', position: 3, name: n.name, item: `https://jessicashauffer.com/neighborhoods/${n.slug.current}` },
     ],
   };
 
@@ -132,7 +141,7 @@ export default function NeighborhoodPage({ params }: { params: { slug: string } 
             <p>Easton has six distinct communities, each with its own character.</p>
           </div>
           <div className="neighborhood-grid">
-            {n.otherNeighborhoods.map((other) => (
+            {others.map((other) => (
               <Link key={other.slug} href={`/neighborhoods/${other.slug}`} className="neighborhood-card">
                 <div className="neighborhood-card__bg">
                   <Image src={other.image} alt={other.name} fill style={{ objectFit: 'cover' }} />

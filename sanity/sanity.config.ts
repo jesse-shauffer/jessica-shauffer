@@ -5,8 +5,8 @@ import { schemaTypes } from './schemas';
 export default defineConfig({
   name: 'jessica-shauffer',
   title: 'Jessica Shauffer Real Estate',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  projectId: 'zrerdn9o',
+  dataset: 'production',
   plugins: [structureTool()],
   schema: { types: schemaTypes },
 });

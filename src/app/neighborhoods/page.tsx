@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { neighborhoods } from '@/data/neighborhoods';
+import { getAllNeighborhoods } from '@/lib/sanity';
+
+export const revalidate = 3600; // ISR: revalidate every hour
 
 export const metadata: Metadata = {
   title: 'Easton, MA Neighborhoods — Explore Communities | Jessica Shauffer',
@@ -15,19 +17,21 @@ export const metadata: Metadata = {
   alternates: { canonical: '/neighborhoods' },
 };
 
-const itemListSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Easton, MA Neighborhoods',
-  itemListElement: neighborhoods.map((n, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    name: n.name,
-    url: `https://jessicashauffer.com/neighborhoods/${n.slug}`,
-  })),
-};
+export default async function NeighborhoodsPage() {
+  const neighborhoods = await getAllNeighborhoods();
 
-export default function NeighborhoodsPage() {
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Easton, MA Neighborhoods',
+    itemListElement: neighborhoods.map((n, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: n.name,
+      url: `https://jessicashauffer.com/neighborhoods/${n.slug.current}`,
+    })),
+  };
+
   return (
     <>
       <JsonLd data={itemListSchema} />
@@ -60,7 +64,7 @@ export default function NeighborhoodsPage() {
           </div>
           <div className="neighborhood-grid">
             {neighborhoods.map((n) => (
-              <Link key={n.slug} href={`/neighborhoods/${n.slug}`} className="neighborhood-card">
+              <Link key={n.slug.current} href={`/neighborhoods/${n.slug.current}`} className="neighborhood-card">
                 <div className="neighborhood-card__bg">
                   <Image src={n.heroImage} alt={n.name} fill style={{ objectFit: 'cover' }} />
                 </div>
