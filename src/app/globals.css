@@ -473,6 +473,7 @@ a, button, [role="button"], input, textarea, select {
   max-width: 600px;
   margin-inline: auto;
   margin-bottom: var(--space-8);
+  text-wrap: balance;
 }
 
 .hero__ctas {
@@ -1471,6 +1472,7 @@ a, button, [role="button"], input, textarea, select {
   line-height: 1.7;
   max-width: 600px;
   margin-inline: auto;
+  text-wrap: balance;
 }
 
 /* --- Breadcrumbs --- */
