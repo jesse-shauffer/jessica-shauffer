@@ -6,7 +6,7 @@ interface StatCardProps {
   value: string;
   label: string;
   delta: string;
-  deltaType: 'up' | 'down' | 'neutral';
+  deltaType: 'up' | 'down' | 'neutral' | 'muted';
 }
 
 export default function StatCard({ value, label, delta, deltaType }: StatCardProps) {

@@ -250,14 +250,14 @@ export default function HomePage() {
           <div className="hero__overlay" aria-hidden="true" />
         </div>
         <div className="hero__content">
-          <span className="hero__badge">Coldwell Banker Presidents Circle</span>
+          <span className="hero__badge">Coldwell Banker Presidents Circle — Top 3% Globally</span>
           <h1 className="hero__title">
-            Your Trusted Guide to<br />
-            Easton Real Estate
+            Your Easton Real Estate Expert
           </h1>
           <p className="hero__subtitle">
-            Helping buyers and sellers across Easton, MA with data-driven strategy,
-            local expertise, and a 5.0-star track record across 19 verified reviews.
+            Whether you&apos;re buying your dream home or selling for top dollar, get the
+            results you deserve with Jessica Shauffer and the award-winning Weinstein
+            Keach Group.
           </p>
           <div className="hero__trust">
             <div className="hero__rating">
@@ -266,16 +266,19 @@ export default function HomePage() {
               <i className="ph-fill ph-star" aria-hidden="true"></i>
               <i className="ph-fill ph-star" aria-hidden="true"></i>
               <i className="ph-fill ph-star" aria-hidden="true"></i>
-              <span>5.0 &mdash; 19 Google Reviews</span>
+              <span>5.0 from 19 Google Reviews</span>
             </div>
           </div>
           <div className="hero__ctas">
             <a href="#consultation" className="btn btn--accent btn--lg">
               Book a Free Consultation
             </a>
-            <Link href="/market" className="btn btn--outline-white btn--lg">
-              View Market Data
-            </Link>
+            <a href="tel:+16179491046" className="btn btn--outline-white btn--lg">
+              <i className="ph ph-phone" aria-hidden="true"></i> (617) 949-1046
+            </a>
+          </div>
+          <div className="hero__scroll" aria-hidden="true">
+            <i className="ph ph-caret-down"></i>
           </div>
         </div>
       </section>
@@ -297,35 +300,36 @@ export default function HomePage() {
               <p className="section__label">Meet Your Agent</p>
               <h2 className="section__title">Jessica Shauffer</h2>
               <p className="agent-subtitle">
-                Coldwell Banker Presidents Circle &bull; Easton, MA Specialist
+                Weinstein Keach Group | Coldwell Banker Realty
               </p>
               <p>
-                With deep roots in the Easton community and years of experience navigating the South
-                Shore market, Jessica brings data-driven strategy and genuine care to every transaction.
-                Whether you&apos;re buying your first home or selling a property you&apos;ve loved for
-                decades, she&apos;s your advocate from first showing to closing day.
+                Jessica is a seasoned, top-producing agent known for her outgoing personality,
+                excellent communication, and detail-focused mindset. A member of the Coldwell Banker
+                Presidents Circle (top 3% globally), she&apos;s a local expert who studies market
+                trends daily and offers invaluable insights on neighborhoods, schools, and amenities.
+              </p>
+              <p>
+                With a UMass degree in Sociology and Education, Jessica brings a natural talent for
+                helping people. Whether you&apos;re a first-time buyer or selling your family home,
+                she guides every step with patience, integrity, and relentless advocacy.
               </p>
               <div className="agent-creds">
                 <span className="agent-cred">
-                  <i className="ph-fill ph-seal-check" aria-hidden="true"></i>
+                  <i className="ph ph-trophy" aria-hidden="true"></i>
                   Presidents Circle
                 </span>
                 <span className="agent-cred">
-                  <i className="ph-fill ph-seal-check" aria-hidden="true"></i>
-                  Licensed MA Salesperson
+                  <i className="ph ph-star" aria-hidden="true"></i>
+                  5.0 Google Rating
                 </span>
                 <span className="agent-cred">
-                  <i className="ph-fill ph-seal-check" aria-hidden="true"></i>
-                  Easton &amp; Surrounding Towns
-                </span>
-                <span className="agent-cred">
-                  <i className="ph-fill ph-seal-check" aria-hidden="true"></i>
-                  Buyer &amp; Seller Specialist
+                  <i className="ph ph-certificate" aria-hidden="true"></i>
+                  10+ Designations
                 </span>
               </div>
-              <a href="#consultation" className="btn btn--primary btn--lg">
-                Work With Jessica
-              </a>
+              <Link href="/about" className="btn btn--primary btn--lg">
+                Learn More About Jessica
+              </Link>
             </div>
           </div>
         </div>
@@ -335,41 +339,40 @@ export default function HomePage() {
       <section className="section section--stats" id="market-stats">
         <div className="container">
           <div className="section__header">
-            <p className="section__label">Easton, MA Market Snapshot</p>
-            <h2 className="section__title">The Numbers Behind the Market</h2>
+            <p className="section__label">Market Snapshot</p>
+            <h2 className="section__title">Easton by the Numbers</h2>
             <p className="section__desc">
-              Current data for Easton&apos;s residential real estate market. Updated regularly so you
-              can make informed decisions.
+              A competitive market with steady appreciation &mdash; here&apos;s what you need to know right now.
             </p>
           </div>
           <div className="stats-grid">
             <StatCard
               value="$662K"
-              label="Median Sale Price"
-              delta="+8.2% vs last year"
+              label="Avg. Home Value"
+              delta="+5% YoY"
               deltaType="up"
             />
             <StatCard
               value="23"
-              label="Avg. Days on Market"
-              delta="-4 days vs last year"
-              deltaType="up"
+              label="Median Days on Market"
+              delta="Selling Fast"
+              deltaType="down"
             />
             <StatCard
               value="101%"
               label="Sale-to-List Ratio"
-              delta="Homes selling over ask"
+              delta="Above Asking"
               deltaType="up"
             />
             <StatCard
               value="$380"
-              label="Median Price / Sq Ft"
-              delta="+6.1% vs last year"
-              deltaType="up"
+              label="Price per Sq. Ft."
+              delta="Steady Growth"
+              deltaType="neutral"
             />
           </div>
           <p className="stats-source">
-            Source: MLS PIN &bull; Data reflects Easton, MA single-family &amp; condo sales, trailing 12 months.
+            Data sourced from Zillow, Redfin, and Realtor.com &mdash; updated regularly.
           </p>
         </div>
       </section>
@@ -388,33 +391,32 @@ export default function HomePage() {
             </div>
             <div className="split__content">
               <p className="section__label">For Buyers</p>
-              <h2 className="section__title">Find Your Perfect Home in Easton</h2>
+              <h2 className="section__title">Find Your Dream Home in Easton</h2>
               <p>
-                Navigating today&apos;s competitive market requires more than an MLS search. Jessica
-                provides access to off-market listings, expert negotiation strategy, and deep knowledge
-                of every Easton neighborhood — from the historic village to the newer developments off
-                Route 138.
+                Easton offers the perfect balance of suburban charm and city access. Top-rated
+                schools, beautiful neighborhoods like North Easton Village and Tanglewood Estates,
+                and easy commutes via Route 24 and I-495.
               </p>
               <ul className="check-list">
                 <li>
-                  <i className="ph ph-magnifying-glass" aria-hidden="true"></i>
-                  Personalized property search &amp; off-market access
+                  <i className="ph ph-check-circle" aria-hidden="true"></i>
+                  Access off-market and pre-listed properties
                 </li>
                 <li>
-                  <i className="ph ph-handshake" aria-hidden="true"></i>
-                  Skilled negotiation to protect your investment
+                  <i className="ph ph-check-circle" aria-hidden="true"></i>
+                  Expert negotiation to win in a competitive market
                 </li>
                 <li>
-                  <i className="ph ph-buildings" aria-hidden="true"></i>
-                  Expert neighborhood guidance &mdash; schools, commutes, lifestyle
+                  <i className="ph ph-check-circle" aria-hidden="true"></i>
+                  Neighborhood tours and school district guidance
                 </li>
                 <li>
-                  <i className="ph ph-file-text" aria-hidden="true"></i>
-                  End-to-end support: mortgage, inspection, closing
+                  <i className="ph ph-check-circle" aria-hidden="true"></i>
+                  Mortgage pre-qualification referrals
                 </li>
               </ul>
               <Link href="/buyers" className="btn btn--primary btn--lg">
-                Buyer&apos;s Guide
+                Full Buyer&apos;s Guide
               </Link>
             </div>
           </div>
@@ -425,68 +427,43 @@ export default function HomePage() {
       <section className="section section--dark" id="sellers">
         <div className="container">
           <div className="split split--reverse">
-            <div className="split__content">
-              <p className="section__label section__label--light">For Sellers</p>
-              <h2 className="section__title section__title--light">Sell Faster, for More Money</h2>
-              <p className="text--light">
-                Jessica&apos;s proven listing strategy combines precise pricing, professional staging
-                guidance, and targeted marketing to maximize your home&apos;s exposure and final sale
-                price. Homes listed with Jessica sell in an average of 23 days — often over asking.
-              </p>
+            <div className="split__media">
               <div className="seller-card">
                 <div className="seller-card__header">
-                  <i className="ph-fill ph-chart-line-up" aria-hidden="true"></i>
-                  Jessica&apos;s Listing Performance
+                  <i className="ph ph-chart-line-up"></i>
+                  <span>Average Seller Outcome</span>
                 </div>
                 <div className="seller-card__stat">
-                  <span className="seller-card__big">101%</span>
-                  <span className="seller-card__sub">Average Sale-to-List Ratio</span>
+                  <span className="seller-card__big">3.4%</span>
+                  <span className="seller-card__sub">Year-over-year appreciation</span>
                 </div>
                 <div className="seller-card__divider"></div>
                 <div className="seller-card__stat">
                   <span className="seller-card__big">23 Days</span>
-                  <span className="seller-card__sub">Average Days on Market</span>
+                  <span className="seller-card__sub">Average time to sell</span>
                 </div>
                 <div className="seller-card__divider"></div>
                 <div className="seller-card__stat">
-                  <span className="seller-card__big">$662K</span>
-                  <span className="seller-card__sub">Median Sale Price (Easton)</span>
+                  <span className="seller-card__big">101%</span>
+                  <span className="seller-card__sub">Of list price received</span>
                 </div>
               </div>
-              <ul className="check-list check-list--light">
-                <li>
-                  <i className="ph ph-chart-line-up" aria-hidden="true"></i>
-                  Comparative market analysis &amp; strategic pricing
-                </li>
-                <li>
-                  <i className="ph ph-camera" aria-hidden="true"></i>
-                  Professional photography &amp; virtual tour production
-                </li>
-                <li>
-                  <i className="ph ph-megaphone" aria-hidden="true"></i>
-                  Multi-channel marketing: MLS, Zillow, social &amp; email
-                </li>
-                <li>
-                  <i className="ph ph-currency-dollar" aria-hidden="true"></i>
-                  Expert negotiation &mdash; average 101% of list price
-                </li>
-              </ul>
-              <div className="hero__ctas">
-                <a href="#consultation" className="btn btn--accent btn--lg">
-                  Get My Home&apos;s Value
-                </a>
-                <Link href="/sellers" className="btn btn--outline-white btn--lg">
-                  Seller Resources
-                </Link>
-              </div>
             </div>
-            <div className="split__media">
-              <Image
-                src="/assets/market-kitchen.webp"
-                alt="Beautifully staged kitchen in Easton MA"
-                width={640}
-                height={480}
-              />
+            <div className="split__content">
+              <p className="section__label section__label--light">For Sellers</p>
+              <h2 className="section__title section__title--light">Sell Smarter, Net More</h2>
+              <p className="text--light">
+                Easton homes are selling fast and at or above asking price. Jessica leverages her
+                market analysis expertise, proven pricing strategies, innovative digital marketing,
+                and home staging specialization to maximize your return.
+              </p>
+              <ul className="check-list check-list--light">
+                <li><i className="ph ph-check-circle"></i> Complimentary home valuation</li>
+                <li><i className="ph ph-check-circle"></i> Professional staging and photography</li>
+                <li><i className="ph ph-check-circle"></i> Marketing across hundreds of websites and social platforms</li>
+                <li><i className="ph ph-check-circle"></i> Tenacious negotiation for top dollar</li>
+              </ul>
+              <Link href="/sellers" className="btn btn--accent">Full Seller&apos;s Guide</Link>
             </div>
           </div>
         </div>
@@ -496,12 +473,10 @@ export default function HomePage() {
       <section className="section" id="easton">
         <div className="container">
           <div className="section__header">
-            <p className="section__label">Why Easton</p>
-            <h2 className="section__title">Life in Easton, Massachusetts</h2>
+            <p className="section__label">Life in Easton</p>
+            <h2 className="section__title">Why Families Love Easton</h2>
             <p className="section__desc">
-              Thirty miles south of Boston, Easton blends small-town character with easy access to the
-              city. Top-rated schools, preserved open space, and a tight-knit community feel that keeps
-              residents here for generations.
+              A tight-knit community with New England charm, natural beauty, and everything you need.
             </p>
           </div>
           <div className="community-grid">
@@ -515,7 +490,7 @@ export default function HomePage() {
               />
               <div className="community-card__overlay">
                 <h3>Borderland State Park</h3>
-                <p>1,800+ acres of trails, ponds, and wildlife right in Easton&apos;s backyard.</p>
+                <p>1,800+ acres of trails, ponds, and historic beauty right in your backyard.</p>
               </div>
             </div>
             <div className="community-card">
@@ -523,35 +498,31 @@ export default function HomePage() {
                 <i className="ph-fill ph-graduation-cap" aria-hidden="true"></i>
               </div>
               <h3>Top-Rated Schools</h3>
-              <p>Oliver Ames High School consistently ranks among the best in Norfolk County.</p>
+              <p>Oliver Ames High School rated 8/10 with strong academics and extracurriculars.</p>
             </div>
             <div className="community-card">
               <div className="community-card__icon">
-                <i className="ph-fill ph-train" aria-hidden="true"></i>
+                <i className="ph-fill ph-train-simple" aria-hidden="true"></i>
               </div>
-              <h3>Easy Boston Commute</h3>
-              <p>Commuter rail from Stoughton puts downtown Boston under an hour away.</p>
+              <h3>Easy Commute</h3>
+              <p>Quick access to Boston via Route 24 and I-495. Suburban living, city opportunity.</p>
             </div>
             <div className="community-card">
               <div className="community-card__icon">
-                <i className="ph-fill ph-storefront" aria-hidden="true"></i>
+                <i className="ph-fill ph-tree" aria-hidden="true"></i>
               </div>
-              <h3>Thriving Local Scene</h3>
-              <p>Shops, restaurants, and a growing downtown that locals are proud of.</p>
+              <h3>New England Charm</h3>
+              <p>Historic villages, tree-lined streets, and a genuine sense of community.</p>
             </div>
             <div className="community-card">
               <div className="community-card__icon">
-                <i className="ph-fill ph-shield-check" aria-hidden="true"></i>
+                <i className="ph-fill ph-house-line" aria-hidden="true"></i>
               </div>
-              <h3>Safe &amp; Family-Friendly</h3>
-              <p>Ranked among the safest and best towns to raise a family in Massachusetts.</p>
+              <h3>Growing Neighborhoods</h3>
+              <p>New developments like Sawmill Village alongside established favorites like Tanglewood Estates.</p>
             </div>
           </div>
-          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <Link href="/neighborhoods" className="btn btn--primary btn--lg">
-              Explore Neighborhoods
-            </Link>
-          </div>
+
         </div>
       </section>
 
@@ -559,8 +530,8 @@ export default function HomePage() {
       <section className="section section--testimonials" id="reviews">
         <div className="container">
           <div className="section__header">
-            <p className="section__label">Client Reviews</p>
-            <h2 className="section__title">What Clients Are Saying</h2>
+            <p className="section__label">Google Reviews</p>
+            <h2 className="section__title">What Jessica&apos;s Clients Say</h2>
             <div className="reviews-summary">
               <div className="reviews-summary__stars">
                 <i className="ph-fill ph-star" aria-hidden="true"></i>
@@ -590,7 +561,10 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="btn btn--secondary"
             >
-              Read All 19 Reviews on Google
+              <i className="ph ph-google-logo" aria-hidden="true"></i> See All 19 Reviews on Google
+            </a>
+            <a href="#consultation" className="btn btn--accent">
+              Book a Free Consultation
             </a>
           </div>
         </div>
@@ -602,45 +576,38 @@ export default function HomePage() {
           <div className="form-split">
             <div className="form-split__content">
               <p className="section__label">Free Consultation</p>
-              <h2 className="section__title">Ready to Make Your Move?</h2>
+              <h2 className="section__title">Let&apos;s Talk About Your Goals</h2>
               <p>
-                Whether you&apos;re buying, selling, or just exploring your options, a 30-minute call
-                with Jessica costs you nothing and could save you thousands. Let&apos;s talk about your
-                goals.
+                Whether you&apos;re ready to make a move or just exploring &mdash; a quick conversation
+                with Jessica can save you time, money, and stress. No pressure, just expert advice
+                from a top 3% agent.
               </p>
               <div className="form-benefits">
                 <div className="form-benefit">
-                  <i className="ph-fill ph-clock" aria-hidden="true"></i>
+                  <i className="ph ph-clock" aria-hidden="true"></i>
                   <div>
-                    <strong>30-Minute Strategy Call</strong>
-                    <span>No-pressure conversation about your goals and timeline.</span>
+                    <strong>15-Minute Call</strong>
+                    <span>Quick, focused, and tailored to you</span>
                   </div>
                 </div>
                 <div className="form-benefit">
-                  <i className="ph-fill ph-chart-bar" aria-hidden="true"></i>
+                  <i className="ph ph-currency-dollar-simple" aria-hidden="true"></i>
                   <div>
-                    <strong>Personalized Market Analysis</strong>
-                    <span>Custom data for your specific property or neighborhood.</span>
+                    <strong>100% Free</strong>
+                    <span>No cost, no obligation, no strings</span>
                   </div>
                 </div>
                 <div className="form-benefit">
-                  <i className="ph-fill ph-currency-dollar" aria-hidden="true"></i>
+                  <i className="ph ph-shield-check" aria-hidden="true"></i>
                   <div>
-                    <strong>100% Free, Zero Obligation</strong>
-                    <span>Get expert insight with nothing to lose.</span>
-                  </div>
-                </div>
-                <div className="form-benefit">
-                  <i className="ph-fill ph-phone" aria-hidden="true"></i>
-                  <div>
-                    <strong>Fast Response Time</strong>
-                    <span>Jessica responds within 24 hours, often same day.</span>
+                    <strong>Local Expertise</strong>
+                    <span>Nearly a decade of Easton market knowledge</span>
                   </div>
                 </div>
               </div>
               <div className="form-privacy">
                 <i className="ph ph-lock-simple" aria-hidden="true"></i>
-                Or call directly: <a href="tel:+16179491046">(617) 949-1046</a>
+                Your info is private and will never be shared.
               </div>
             </div>
             <div className="form-split__form">
