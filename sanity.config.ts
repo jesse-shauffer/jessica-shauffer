@@ -1,6 +1,6 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
-import { schemaTypes } from './schemas';
+import { schemaTypes } from './sanity/schemas';
 
 export default defineConfig({
   name: 'jessica-shauffer',
@@ -9,4 +9,5 @@ export default defineConfig({
   dataset: 'production',
   plugins: [structureTool()],
   schema: { types: schemaTypes },
+  basePath: '/studio',
 });

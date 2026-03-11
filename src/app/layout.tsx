@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import ScrollEffects from '@/components/ScrollEffects';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://jessicashauffer.com'),
@@ -32,10 +29,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/fill/style.css" />
       </head>
       <body>
-        <Header />
         {children}
-        <Footer />
-        <ScrollEffects />
         <Analytics />
       </body>
     </html>
