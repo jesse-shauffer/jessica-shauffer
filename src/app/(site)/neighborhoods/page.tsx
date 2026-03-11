@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { getAllNeighborhoods } from '@/lib/sanity';
+import { getAllNeighborhoods, resolveHeroImage } from '@/lib/sanity';
 
 export const revalidate = 3600; // ISR: revalidate every hour
 
@@ -66,7 +66,7 @@ export default async function NeighborhoodsPage() {
             {neighborhoods.map((n) => (
               <Link key={n.slug.current} href={`/neighborhoods/${n.slug.current}`} className="neighborhood-card">
                 <div className="neighborhood-card__bg">
-                  <Image src={n.heroImage} alt={n.name} fill style={{ objectFit: 'cover' }} />
+                  <Image src={resolveHeroImage(n.heroImage, 600)} alt={n.name} fill style={{ objectFit: 'cover' }} />
                 </div>
                 <div className="neighborhood-card__arrow"><i className="ph ph-arrow-right"></i></div>
                 <div className="neighborhood-card__content">

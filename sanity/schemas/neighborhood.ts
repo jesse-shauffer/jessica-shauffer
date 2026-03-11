@@ -19,9 +19,10 @@ export default defineType({
     defineField({ name: 'heroDesc', title: 'Hero Description', type: 'text', rows: 3 }),
     defineField({
       name: 'heroImage',
-      title: 'Hero Image Path',
-      type: 'string',
-      description: 'Path to hero image, e.g. /assets/north-easton.webp',
+      title: 'Hero Image',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Main hero banner image for this neighborhood.',
     }),
     defineField({
       name: 'description',

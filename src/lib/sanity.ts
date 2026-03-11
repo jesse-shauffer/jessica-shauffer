@@ -1,4 +1,6 @@
 import { createClient } from '@sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
+import type { SanityImageSource } from '@sanity/image-url';
 
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'zrerdn9o',
@@ -7,6 +9,12 @@ export const client = createClient({
   useCdn: process.env.NODE_ENV === 'production',
   token: process.env.SANITY_API_TOKEN,
 });
+
+const builder = imageUrlBuilder(client);
+
+export function urlFor(source: SanityImageSource) {
+  return builder.image(source);
+}
 
 /* ── Types ── */
 export interface SanityNeighborhood {
@@ -17,7 +25,7 @@ export interface SanityNeighborhood {
   tagline: string;
   heroTitle: string;
   heroDesc: string;
-  heroImage: string;
+  heroImage: SanityImageSource | string;
   description: string[];
   highlights: { icon: string; title: string; description: string }[];
   metaTitle: string;
@@ -31,6 +39,13 @@ const neighborhoodFields = `
   description, highlights[]{ icon, title, description },
   metaTitle, metaDescription
 `;
+
+/** Resolve a heroImage field to a URL string — handles both legacy string paths and Sanity image objects */
+export function resolveHeroImage(heroImage: SanityImageSource | string | undefined, width = 1200): string {
+  if (!heroImage) return '/assets/eastondale.webp';
+  if (typeof heroImage === 'string') return heroImage;
+  return urlFor(heroImage).width(width).auto('format').quality(80).url();
+}
 
 export async function getAllNeighborhoods(): Promise<SanityNeighborhood[]> {
   return client.fetch(
@@ -53,7 +68,7 @@ export async function getAllNeighborhoodSlugs(): Promise<string[]> {
 }
 
 export async function getOtherNeighborhoods(currentSlug: string) {
-  return client.fetch<{ slug: string; name: string; tagline: string; image: string }[]>(
+  return client.fetch<{ slug: string; name: string; tagline: string; image: SanityImageSource | string }[]>(
     `*[_type == "neighborhood" && slug.current != $slug] | order(name asc) {
       "slug": slug.current,
       name,

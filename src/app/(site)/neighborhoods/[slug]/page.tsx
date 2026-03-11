@@ -7,6 +7,7 @@ import {
   getNeighborhoodBySlug,
   getAllNeighborhoodSlugs,
   getOtherNeighborhoods,
+  resolveHeroImage,
 } from '@/lib/sanity';
 
 export const revalidate = 3600; // ISR: revalidate every hour
@@ -68,7 +69,7 @@ export default async function NeighborhoodPage({ params }: { params: { slug: str
 
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src={n.heroImage} alt={`${n.name}, Easton MA`} fill style={{ objectFit: 'cover' }} priority />
+          <Image src={resolveHeroImage(n.heroImage, 1600)} alt={`${n.name}, Easton MA`} fill style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">{n.name}</p>
@@ -98,7 +99,7 @@ export default async function NeighborhoodPage({ params }: { params: { slug: str
               ))}
             </div>
             <div className="split__media">
-              <Image src={n.heroImage} alt={`${n.name} neighborhood in Easton MA`} width={600} height={450} style={{ borderRadius: 'var(--radius-lg)' }} />
+              <Image src={resolveHeroImage(n.heroImage, 600)} alt={`${n.name} neighborhood in Easton MA`} width={600} height={450} style={{ borderRadius: 'var(--radius-lg)' }} />
             </div>
           </div>
         </div>
@@ -144,7 +145,7 @@ export default async function NeighborhoodPage({ params }: { params: { slug: str
             {others.map((other) => (
               <Link key={other.slug} href={`/neighborhoods/${other.slug}`} className="neighborhood-card">
                 <div className="neighborhood-card__bg">
-                  <Image src={other.image} alt={other.name} fill style={{ objectFit: 'cover' }} />
+                  <Image src={resolveHeroImage(other.image, 600)} alt={other.name} fill style={{ objectFit: 'cover' }} />
                 </div>
                 <div className="neighborhood-card__arrow"><i className="ph ph-arrow-right"></i></div>
                 <div className="neighborhood-card__content">
