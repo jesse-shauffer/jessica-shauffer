@@ -55,7 +55,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="split">
             <div className="split__media">
-              <Image src="/assets/jessica.jpg" alt="Jessica Shauffer, Real Estate Agent" width={500} height={600} className="agent-portrait" />
+              <Image src="/assets/jessica.jpg" alt="Jessica Shauffer, Real Estate Agent" width={640} height={768} className="agent-portrait" />
             </div>
             <div className="split__content">
               <p className="section__label">Meet Jessica Shauffer</p>

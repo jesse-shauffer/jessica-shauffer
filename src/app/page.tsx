@@ -290,8 +290,8 @@ export default function HomePage() {
               <Image
                 src="/assets/jessica.jpg"
                 alt="Jessica Shauffer, Coldwell Banker Realty"
-                width={420}
-                height={420}
+                width={640}
+                height={640}
                 className="agent-portrait"
               />
             </div>
