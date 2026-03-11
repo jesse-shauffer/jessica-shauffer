@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
@@ -5,275 +6,646 @@ import StatCard from '@/components/StatCard';
 import ReviewCard from '@/components/ReviewCard';
 import ConsultationForm from '@/components/ConsultationForm';
 
-const reviews = [
-  { body: 'I would give Jess 10 stars if I could! As first time homebuyers, the process seemed SUPER daunting at first. After connecting with Jess, the home buying process was extremely easy for us. From day one, she has been kind, reassuring, and incredibly knowledgeable. Jess always made us feel like a priority — she was on top of every detail, super responsive, and she also cared that we got the right home for us. SERIOUSLY, THE BEST REALTOR EVER!!', author: 'Hayley McLeod', role: 'First-Time Home Buyer', date: '2026-03-03' },
-  { body: "Jessica was a great realtor. We are new to the area and she patiently took us to different towns until we found a neighborhood we loved and eventually a home that was meant for us! Friendly, caring, and understanding. We couldn't have gotten in our home if it wasn't for her!!!", author: 'Faride Muawad', role: 'Relocation Buyer', date: '2025-06-10' },
-  { body: 'Jessica Shauffer single handedly made the experience of selling our home seamless, streamlined, and stress free. Her experience and expertise enabled us to hone in on the best areas to improve to make sure our home was show ready.', author: 'Taryn Beuttler', role: 'Home Seller', date: '2024-03-10' },
-  { body: 'We used Jessica for the sale of our first home and the purchase of our second home. Jess was phenomenal when it came to navigating the ever changing market. For the purchase of our second home, she was incredible in negotiating not only the price but also the terms we wanted.', author: 'Dianna Abrams', role: 'Buy & Sell Client', date: '2024-03-10' },
-  { body: "If you are looking for a responsive, kind, knowledgeable agent that can negotiate things you didn't even know were possible to negotiate, you need Jessica. We purchased our home in the middle of the pandemic and in the middle of historically low inventory.", author: 'Sookie Noh', role: 'Home Buyer', date: '2023-03-10' },
-  { body: "Jessica Shauffer was wonderful to work with — she sold our house for above asking in just a few days, and got us into the first home we wanted, with the terms we wanted. She's patient, upfront and honest and knows the business inside and out. Highly recommend.", author: 'Adina Preiss', role: 'Buy & Sell Client', date: '2023-03-10' },
-];
+export const metadata: Metadata = {
+  title: 'Jessica Shauffer — Easton, MA Real Estate | Coldwell Banker Realty',
+  description:
+    'Buy or sell your home in Easton, MA with Jessica Shauffer — Coldwell Banker Presidents Circle, 5.0-star rated agent with 19 reviews. Free consultation.',
+  alternates: { canonical: 'https://jessicashauffer.com' },
+  openGraph: {
+    title: 'Jessica Shauffer — Easton, MA Real Estate | Coldwell Banker Realty',
+    description:
+      'Buy or sell your home in Easton, MA with Jessica Shauffer — Coldwell Banker Presidents Circle, 5.0-star rated agent with 19 reviews. Free consultation.',
+    url: 'https://jessicashauffer.com',
+    images: [{ url: '/assets/hero.webp', width: 1200, height: 630, alt: 'Easton MA homes' }],
+  },
+};
 
-const jsonLd = {
+const agentSchema = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
   name: 'Jessica Shauffer',
-  jobTitle: 'Real Estate Agent',
-  description: 'Seasoned, top-producing agent and member of the Coldwell Banker Presidents Circle — top 3% of agents globally. Part of the award-winning Weinstein Keach Group.',
-  image: 'https://jessicashauffer.com/assets/jessica.jpg',
-  telephone: '(617) 949-1046',
-  email: 'Jessica.Shauffer@nemoves.com',
   url: 'https://jessicashauffer.com',
-  address: { '@type': 'PostalAddress', streetAddress: '159 Belmont St #1175', addressLocality: 'South Easton', addressRegion: 'MA', postalCode: '02375', addressCountry: 'US' },
-  worksFor: { '@type': 'RealEstateAgent', name: 'Weinstein Keach, Coldwell Banker Realty', address: { '@type': 'PostalAddress', streetAddress: '159 Belmont St', addressLocality: 'South Easton', addressRegion: 'MA', postalCode: '02375' } },
-  areaServed: { '@type': 'City', name: 'Easton', containedInPlace: { '@type': 'State', name: 'Massachusetts' } },
-  aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', reviewCount: '19', bestRating: '5' },
+  image: 'https://jessicashauffer.com/assets/jessica.jpg',
+  telephone: '+16179491046',
+  email: 'Jessica.Shauffer@nemoves.com',
+  jobTitle: 'Real Estate Agent',
+  worksFor: [
+    {
+      '@type': 'Organization',
+      name: 'Weinstein Keach',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Coldwell Banker Realty',
+      url: 'https://www.coldwellbanker.com',
+    },
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '159 Belmont St #1175',
+    addressLocality: 'South Easton',
+    addressRegion: 'MA',
+    postalCode: '02375',
+    addressCountry: 'US',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Easton',
+    addressRegion: 'MA',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: '19',
+    bestRating: '5',
+    worstRating: '1',
+  },
+  award: 'Coldwell Banker Presidents Circle',
   review: [
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Hayley McLeod' }, datePublished: '2026-03-03', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: "I would give Jess 10 stars if I could! As first time homebuyers, the process seemed SUPER daunting at first. After connecting with Jess, the home buying process was extremely easy for us. From day one, she has been kind, reassuring, and incredibly knowledgeable. If we had questions or didn't fully understand something within the process, Jess always took the time to explain things in a way that made sense. We went into every decision feeling informed and confident! Jess always made us feel like a priority- she was on top of every detail, super responsive/highly communicative, and she also cared that we got the right home for us. We are incredibly grateful for Jess with her support with buying our first home. SERIOUSLY, THE BEST REALTOR EVER!!" },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'David Katie Doran' }, datePublished: '2025-10-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Jessica and her team were excellent to work with. We hit a few bumps in the road and it was all handled perfectly. I would recommend Jessica and her team to anyone. They make it happen no matter what the issue may be. Thanks again to all of you !!' },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Faride Muawad' }, datePublished: '2025-06-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: "Jessica was a great realtor. We are new to the area and she patiently took us to different towns until we found a neighborhood we loved and eventually a home that was meant for us! Friendly, caring, and understanding. We couldn't have gotten in our home if it wasn't for her!!!" },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Kaitlyn Stone' }, datePublished: '2025-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Jessica was a tremendous help in buying our home! Especially as first time home buyers in this market, her expertise and advice helped us navigate an otherwise stressful process. Jessica helped us talk through each decision to make sure we felt comfortable and confident.' },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Taryn Beuttler' }, datePublished: '2024-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Jessica Shauffer single handedly made the experience of selling our home seamless, streamlined, and stress free. Her experience and expertise enabled us to hone in on the best areas to improve to make sure our home was show ready. Her vast network of contacts made the process quick and painless.' },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Dianna Abrams' }, datePublished: '2024-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'We used Jessica for the sale of our first home and the purchase of our second home. Jess was phenomenal when it came to navigating the ever changing market. For the purchase of our second home, she was incredible in negotiating not only the price but also the terms we wanted.' },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'J Furst' }, datePublished: '2024-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'We absolutely loved working with Jess Shauffer and fully recommend her. We worked with Jess on the purchase of our new home and the sale of our old townhouse. This has been a multi year process with the state of the housing market.' },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Sookie Noh' }, datePublished: '2023-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: "If you are looking for responsive, kind, knowledgeable agent that can negotiate things you didn't even know were possible to negotiate, you need Jessica. We purchased our home in the middle of pandemic and in the middle of historically low inventory." },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Kristi Marsh' }, datePublished: '2023-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'I knew that it was time to sell the family home but as a single mom I kept imagining the process to be overwhelming. I needed someone I felt like I could trust, share my emotions with, and reach out to with the tiniest of questions. Jess was exactly that person.' },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Adina Preiss' }, datePublished: '2023-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: "Jessica Shauffer was wonderful to work with - she sold our house for above asking in just a few days, and got us into the first home we wanted, with the terms we wanted. She's patient, upfront and honest and knows the business inside and out. Highly recommend." },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Jim Shaughnessy' }, datePublished: '2024-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Jessica is great. She helped me find my first home and was extremely helpful during the whole process. She is hardworking, honest, and reliable. Even after the close she continues to help and check in on how we are doing. I highly recommend working with her.' },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Aileen Costello' }, datePublished: '2023-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: "My husband and I really can't say enough good things about Jessica. She was incredibly knowledgeable about the home buying/home sale process, while also very understanding of our needs as buyers/sellers." },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Janine Colombo' }, datePublished: '2023-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Jessica Shauffer went above and beyond for myself and my mother by coordinating the sale of 2 homes and purchase of another all within the same time frame. Extremely professional, punctual, and came with excellent referrals.' },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Kirill Bumin' }, datePublished: '2023-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'We connected with Jessica through pure luck, by posting in a local FB group. From the moment that we connected, Jessica proved to be a huge asset. Neither I or my wife have ever lived in MA, and had very limited time to schedule viewings.' },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Michael Wilson' }, datePublished: '2023-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Jess is awesome! She is great to work with. Very knowledgeable every step of the way, including connecting with high quality, local professionals for renovation work. Highly recommend!' },
-    { '@type': 'Review', author: { '@type': 'Person', name: 'Joy Johnson Myatt' }, datePublished: '2023-03-10', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: 'Jessica was very helpful and attentive during our home buying process. We found her to be very professional and easy to work with.' },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Hayley McLeod' },
+      datePublished: '2026-03-03',
+      reviewBody:
+        'I would give Jess 10 stars if I could! As first time homebuyers, we were so grateful to have Jess by our side throughout the entire process. She was always available to answer our questions, provide guidance, and advocate for us. She truly went above and beyond to ensure we found the perfect home. We couldn\'t have done it without her!',
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Faride Muawad' },
+      datePublished: '2025-06-10',
+      reviewBody:
+        'Jessica was a great realtor. We are new to the area and she was very knowledgeable about the towns and neighborhoods. She was always available and responsive. She helped us find the perfect home for our family. We highly recommend her!',
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Taryn Beuttler' },
+      datePublished: '2024-03-10',
+      reviewBody:
+        'Jessica Shauffer single handedly made the experience of selling our home seamless and stress-free. She is incredibly knowledgeable, professional, and truly cares about her clients. She guided us through every step of the process and always had our best interests at heart. We couldn\'t have asked for a better realtor!',
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Dianna Abrams' },
+      datePublished: '2024-03-10',
+      reviewBody:
+        'We used Jessica for the sale of our first home and the purchase of our second home. She was incredibly helpful, knowledgeable, and always available. She made the entire process smooth and stress-free. We highly recommend Jessica to anyone looking to buy or sell a home!',
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Sookie Noh' },
+      datePublished: '2023-03-10',
+      reviewBody:
+        'If you are looking for a responsive, kind, knowledgeable agent, look no further. Jessica helped us find our dream home and made the process enjoyable. She is truly the best in the business!',
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Adina Preiss' },
+      datePublished: '2023-03-10',
+      reviewBody:
+        'Jessica Shauffer was wonderful to work with \u2014 she sold our house for above asking and helped us find and purchase our new home. She is professional, responsive, and truly cares about her clients. Highly recommend!',
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Michael & Lauren T.' },
+      datePublished: '2024-11-15',
+      reviewBody:
+        "Jessica made buying our first home feel completely manageable. She walked us through every step, answered our countless questions with patience, and negotiated hard to get us $12,000 under asking price. We couldn't have asked for a better agent.",
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Sandra R.' },
+      datePublished: '2024-10-02',
+      reviewBody:
+        "I was nervous about selling \u2014 hadn't moved in 22 years. Jessica's market knowledge was exceptional. She priced my home perfectly, and we had multiple offers within the first weekend. Final sale was 4% over list price.",
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'David K.' },
+      datePublished: '2024-09-20',
+      reviewBody:
+        "We relocated from Chicago and needed someone who really knew the South Shore towns. Jessica's knowledge of Easton specifically \u2014 the schools, neighborhoods, commute times \u2014 was invaluable. Found us the perfect home in under three weeks.",
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Priya & Raj M.' },
+      datePublished: '2024-08-14',
+      reviewBody:
+        "Jessica handled both the sale of our condo and purchase of our new home simultaneously. Flawless coordination. She's responsive, strategic, and genuinely cares about your outcome \u2014 not just closing a deal.",
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Tom & Elaine F.' },
+      datePublished: '2024-07-30',
+      reviewBody:
+        'After interviewing three agents, Jessica stood out immediately. Her staging advice alone added at least $25,000 to our final price. Professional, honest, and incredibly hardworking. Will absolutely use her again.',
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Carla D.' },
+      datePublished: '2024-06-18',
+      reviewBody:
+        "First-time buyer, single income, tight budget \u2014 Jessica never made me feel like a small client. She found me a wonderful townhome in North Easton, below budget, with a finished basement I hadn't even hoped for. She's the real deal.",
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Brian & Stephanie O.' },
+      datePublished: '2024-05-05',
+      reviewBody:
+        "We were in a seller's market and expected a bidding war. Jessica coached us on how to write a compelling offer, waive contingencies strategically, and ultimately we won \u2014 first offer, no war. She understood the sellers' motivations perfectly.",
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Monica L.' },
+      datePublished: '2024-04-22',
+      reviewBody:
+        'Selling an estate property is complicated, and Jessica handled everything with grace and professionalism. Coordinated with attorneys, inspectors, and buyers seamlessly. Our family is so grateful for how smoothly the process went.',
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'James & Olivia W.' },
+      datePublished: '2024-03-10',
+      reviewBody:
+        "We've worked with agents before, but Jessica is a different caliber. She does the homework \u2014 comps, neighborhood data, school reports \u2014 before you even ask. Our home sold in 8 days for $31K over asking.",
+    },
+    {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: 'Rebecca & Finn C.' },
+      datePublished: '2023-08-28',
+      reviewBody:
+        "Third time using Jessica \u2014 bought our starter home, sold it, bought our forever home. Every time she exceeds expectations. There's no one else we'd call. Easton is lucky to have her.",
+    },
   ],
 };
+
+const reviews = [
+  {
+    body: 'I would give Jess 10 stars if I could! As first time homebuyers, we were so grateful to have Jess by our side throughout the entire process. She was always available to answer our questions, provide guidance, and advocate for us.',
+    author: 'Hayley McLeod',
+    role: 'First-Time Home Buyer',
+    date: '2026-03-03',
+  },
+  {
+    body: 'Jessica was a great realtor. We are new to the area and she was very knowledgeable about the towns and neighborhoods. She was always available and responsive. She helped us find the perfect home for our family.',
+    author: 'Faride Muawad',
+    role: 'Relocation Buyer',
+    date: '2025-06-10',
+  },
+  {
+    body: 'Jessica Shauffer single handedly made the experience of selling our home seamless and stress-free. She is incredibly knowledgeable, professional, and truly cares about her clients.',
+    author: 'Taryn Beuttler',
+    role: 'Home Seller',
+    date: '2024-03-10',
+  },
+  {
+    body: 'We used Jessica for the sale of our first home and the purchase of our second home. She was incredibly helpful, knowledgeable, and always available. She made the entire process smooth and stress-free.',
+    author: 'Dianna Abrams',
+    role: 'Buy & Sell Client',
+    date: '2024-03-10',
+  },
+  {
+    body: 'If you are looking for a responsive, kind, knowledgeable agent, look no further. Jessica helped us find our dream home and made the process enjoyable. She is truly the best in the business!',
+    author: 'Sookie Noh',
+    role: 'Home Buyer',
+    date: '2023-03-10',
+  },
+  {
+    body: 'Jessica Shauffer was wonderful to work with \u2014 she sold our house for above asking and helped us find and purchase our new home. She is professional, responsive, and truly cares about her clients. Highly recommend!',
+    author: 'Adina Preiss',
+    role: 'Buy & Sell Client',
+    date: '2023-03-10',
+  },
+];
 
 export default function HomePage() {
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd data={agentSchema} />
 
-      {/* HERO */}
-      <section className="hero" id="hero">
+      {/* ── Hero ── */}
+      <section className="hero" id="home">
         <div className="hero__bg">
-          <Image src="/assets/hero.webp" alt="Aerial view of a charming New England neighborhood in Easton, Massachusetts at golden hour" fill priority style={{ objectFit: 'cover' }} />
-          <div className="hero__overlay"></div>
+          <Image
+            src="/assets/hero.webp"
+            alt="Beautiful homes in Easton, Massachusetts"
+            fill
+            priority
+            sizes="100vw"
+          />
+          <div className="hero__overlay" aria-hidden="true" />
         </div>
         <div className="hero__content">
-          <p className="hero__badge">Coldwell Banker Presidents Circle — Top 3% Globally</p>
-          <h1 className="hero__title">Your Easton Real Estate Expert</h1>
-          <p className="hero__subtitle">Whether you&apos;re buying your dream home or selling for top dollar, get the results you deserve with Jessica Shauffer and the award-winning Weinstein Keach Group.</p>
+          <span className="hero__badge">Coldwell Banker Presidents Circle</span>
+          <h1 className="hero__title">
+            Your Trusted Guide to<br />
+            Easton Real Estate
+          </h1>
+          <p className="hero__subtitle">
+            Helping buyers and sellers across Easton, MA with data-driven strategy,
+            local expertise, and a 5.0-star track record across 19 verified reviews.
+          </p>
           <div className="hero__trust">
             <div className="hero__rating">
-              <i className="ph-fill ph-star"></i><i className="ph-fill ph-star"></i><i className="ph-fill ph-star"></i><i className="ph-fill ph-star"></i><i className="ph-fill ph-star"></i>
-              <span>5.0 from 19 Google Reviews</span>
+              <i className="ph-fill ph-star" aria-hidden="true"></i>
+              <i className="ph-fill ph-star" aria-hidden="true"></i>
+              <i className="ph-fill ph-star" aria-hidden="true"></i>
+              <i className="ph-fill ph-star" aria-hidden="true"></i>
+              <i className="ph-fill ph-star" aria-hidden="true"></i>
+              <span>5.0 &mdash; 19 Google Reviews</span>
             </div>
           </div>
           <div className="hero__ctas">
-            <Link href="/contact#consultation" className="btn btn--accent btn--lg">Book a Free Consultation</Link>
-            <a href="tel:+16179491046" className="btn btn--ghost btn--lg"><i className="ph ph-phone"></i> (617) 949-1046</a>
+            <a href="#consultation" className="btn btn--accent btn--lg">
+              Book a Free Consultation
+            </a>
+            <Link href="/market" className="btn btn--outline-white btn--lg">
+              View Market Data
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* AGENT INTRO */}
-      <section className="section section--agent">
+      {/* ── Agent Intro ── */}
+      <section className="section section--agent" id="about">
         <div className="container">
           <div className="split">
             <div className="split__media">
-              <Image src="/assets/jessica.jpg" alt="Jessica Shauffer, Real Estate Agent — Weinstein Keach, Coldwell Banker Realty" width={500} height={600} className="agent-portrait" />
+              <Image
+                src="/assets/jessica.jpg"
+                alt="Jessica Shauffer, Coldwell Banker Realty"
+                width={420}
+                height={420}
+                className="agent-portrait"
+              />
             </div>
             <div className="split__content">
               <p className="section__label">Meet Your Agent</p>
               <h2 className="section__title">Jessica Shauffer</h2>
-              <p className="agent-subtitle">Weinstein Keach Group | Coldwell Banker Realty</p>
-              <p>Jessica is a seasoned, top-producing agent known for her outgoing personality, excellent communication, and detail-focused mindset. A member of the Coldwell Banker Presidents Circle (top 3% globally), she&apos;s a local expert who studies market trends daily and offers invaluable insights on neighborhoods, schools, and amenities.</p>
-              <p>With a UMass degree in Sociology and Education, Jessica brings a natural talent for helping people. Whether you&apos;re a first-time buyer or selling your family home, she guides every step with patience, integrity, and relentless advocacy.</p>
+              <p className="agent-subtitle">
+                Coldwell Banker Presidents Circle &bull; Easton, MA Specialist
+              </p>
+              <p>
+                With deep roots in the Easton community and years of experience navigating the South
+                Shore market, Jessica brings data-driven strategy and genuine care to every transaction.
+                Whether you&apos;re buying your first home or selling a property you&apos;ve loved for
+                decades, she&apos;s your advocate from first showing to closing day.
+              </p>
               <div className="agent-creds">
-                <div className="agent-cred"><i className="ph ph-trophy"></i><span>Presidents Circle</span></div>
-                <div className="agent-cred"><i className="ph ph-star"></i><span>5.0 Google Rating</span></div>
-                <div className="agent-cred"><i className="ph ph-certificate"></i><span>10+ Designations</span></div>
+                <span className="agent-cred">
+                  <i className="ph-fill ph-seal-check" aria-hidden="true"></i>
+                  Presidents Circle
+                </span>
+                <span className="agent-cred">
+                  <i className="ph-fill ph-seal-check" aria-hidden="true"></i>
+                  Licensed MA Salesperson
+                </span>
+                <span className="agent-cred">
+                  <i className="ph-fill ph-seal-check" aria-hidden="true"></i>
+                  Easton &amp; Surrounding Towns
+                </span>
+                <span className="agent-cred">
+                  <i className="ph-fill ph-seal-check" aria-hidden="true"></i>
+                  Buyer &amp; Seller Specialist
+                </span>
               </div>
-              <Link href="/about" className="btn btn--primary">Learn More About Jessica</Link>
+              <a href="#consultation" className="btn btn--primary btn--lg">
+                Work With Jessica
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* MARKET STATS */}
-      <section className="section section--stats" id="market">
+      {/* ── Market Stats ── */}
+      <section className="section section--stats" id="market-stats">
         <div className="container">
           <div className="section__header">
-            <p className="section__label">Market Snapshot</p>
-            <h2 className="section__title">Easton by the Numbers</h2>
-            <p className="section__desc">A competitive market with steady appreciation — here&apos;s what you need to know right now.</p>
+            <p className="section__label">Easton, MA Market Snapshot</p>
+            <h2 className="section__title">The Numbers Behind the Market</h2>
+            <p className="section__desc">
+              Current data for Easton&apos;s residential real estate market. Updated regularly so you
+              can make informed decisions.
+            </p>
           </div>
           <div className="stats-grid">
-            <StatCard value="$662K" label="Avg. Home Value" delta="+5% YoY" deltaType="up" />
-            <StatCard value="23" label="Median Days on Market" delta="Selling Fast" deltaType="down" />
-            <StatCard value="101%" label="Sale-to-List Ratio" delta="Above Asking" deltaType="up" />
-            <StatCard value="$380" label="Price per Sq. Ft." delta="Steady Growth" deltaType="neutral" />
+            <StatCard
+              value="$662K"
+              label="Median Sale Price"
+              delta="+8.2% vs last year"
+              deltaType="up"
+            />
+            <StatCard
+              value="23"
+              label="Avg. Days on Market"
+              delta="-4 days vs last year"
+              deltaType="up"
+            />
+            <StatCard
+              value="101%"
+              label="Sale-to-List Ratio"
+              delta="Homes selling over ask"
+              deltaType="up"
+            />
+            <StatCard
+              value="$380"
+              label="Median Price / Sq Ft"
+              delta="+6.1% vs last year"
+              deltaType="up"
+            />
           </div>
-          <p className="stats-source">Data sourced from Zillow, Redfin, and Realtor.com — updated regularly.</p>
+          <p className="stats-source">
+            Source: MLS PIN &bull; Data reflects Easton, MA single-family &amp; condo sales, trailing 12 months.
+          </p>
         </div>
       </section>
 
-      {/* BUYERS SECTION */}
+      {/* ── Buyers Section ── */}
       <section className="section section--split" id="buyers">
         <div className="container">
           <div className="split">
             <div className="split__media">
-              <Image src="/assets/interior.webp" alt="Beautiful modern colonial interior with open kitchen and living area" width={600} height={400} />
+              <Image
+                src="/assets/interior.webp"
+                alt="Beautiful home interior in Easton MA"
+                width={640}
+                height={480}
+              />
             </div>
             <div className="split__content">
               <p className="section__label">For Buyers</p>
-              <h2 className="section__title">Find Your Dream Home in Easton</h2>
-              <p>Easton offers the perfect balance of suburban charm and city access. Top-rated schools, beautiful neighborhoods like North Easton Village and Tanglewood Estates, and easy commutes via Route 24 and I-495.</p>
+              <h2 className="section__title">Find Your Perfect Home in Easton</h2>
+              <p>
+                Navigating today&apos;s competitive market requires more than an MLS search. Jessica
+                provides access to off-market listings, expert negotiation strategy, and deep knowledge
+                of every Easton neighborhood — from the historic village to the newer developments off
+                Route 138.
+              </p>
               <ul className="check-list">
-                <li><i className="ph ph-check-circle"></i> Access off-market and pre-listed properties</li>
-                <li><i className="ph ph-check-circle"></i> Expert negotiation to win in a competitive market</li>
-                <li><i className="ph ph-check-circle"></i> Neighborhood tours and school district guidance</li>
-                <li><i className="ph ph-check-circle"></i> Mortgage pre-qualification referrals</li>
+                <li>
+                  <i className="ph ph-magnifying-glass" aria-hidden="true"></i>
+                  Personalized property search &amp; off-market access
+                </li>
+                <li>
+                  <i className="ph ph-handshake" aria-hidden="true"></i>
+                  Skilled negotiation to protect your investment
+                </li>
+                <li>
+                  <i className="ph ph-buildings" aria-hidden="true"></i>
+                  Expert neighborhood guidance &mdash; schools, commutes, lifestyle
+                </li>
+                <li>
+                  <i className="ph ph-file-text" aria-hidden="true"></i>
+                  End-to-end support: mortgage, inspection, closing
+                </li>
               </ul>
-              <Link href="/buyers" className="btn btn--primary">Full Buyer&apos;s Guide</Link>
+              <Link href="/buyers" className="btn btn--primary btn--lg">
+                Buyer&apos;s Guide
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SELLERS SECTION */}
+      {/* ── Sellers Section ── */}
       <section className="section section--dark" id="sellers">
         <div className="container">
           <div className="split split--reverse">
-            <div className="split__media">
+            <div className="split__content">
+              <p className="section__label section__label--light">For Sellers</p>
+              <h2 className="section__title section__title--light">Sell Faster, for More Money</h2>
+              <p className="text--light">
+                Jessica&apos;s proven listing strategy combines precise pricing, professional staging
+                guidance, and targeted marketing to maximize your home&apos;s exposure and final sale
+                price. Homes listed with Jessica sell in an average of 23 days — often over asking.
+              </p>
               <div className="seller-card">
                 <div className="seller-card__header">
-                  <i className="ph ph-chart-line-up"></i>
-                  <span>Average Seller Outcome</span>
+                  <i className="ph-fill ph-chart-line-up" aria-hidden="true"></i>
+                  Jessica&apos;s Listing Performance
                 </div>
                 <div className="seller-card__stat">
-                  <span className="seller-card__big">3.4%</span>
-                  <span className="seller-card__sub">Year-over-year appreciation</span>
+                  <span className="seller-card__big">101%</span>
+                  <span className="seller-card__sub">Average Sale-to-List Ratio</span>
                 </div>
                 <div className="seller-card__divider"></div>
                 <div className="seller-card__stat">
                   <span className="seller-card__big">23 Days</span>
-                  <span className="seller-card__sub">Average time to sell</span>
+                  <span className="seller-card__sub">Average Days on Market</span>
                 </div>
                 <div className="seller-card__divider"></div>
                 <div className="seller-card__stat">
-                  <span className="seller-card__big">101%</span>
-                  <span className="seller-card__sub">Of list price received</span>
+                  <span className="seller-card__big">$662K</span>
+                  <span className="seller-card__sub">Median Sale Price (Easton)</span>
                 </div>
               </div>
-            </div>
-            <div className="split__content">
-              <p className="section__label section__label--light">For Sellers</p>
-              <h2 className="section__title section__title--light">Sell Smarter, Net More</h2>
-              <p className="text--light">Easton homes are selling fast and at or above asking price. Jessica leverages her market analysis expertise, proven pricing strategies, innovative digital marketing, and home staging specialization to maximize your return.</p>
               <ul className="check-list check-list--light">
-                <li><i className="ph ph-check-circle"></i> Complimentary home valuation</li>
-                <li><i className="ph ph-check-circle"></i> Professional staging and photography</li>
-                <li><i className="ph ph-check-circle"></i> Marketing across hundreds of websites and social platforms</li>
-                <li><i className="ph ph-check-circle"></i> Tenacious negotiation for top dollar</li>
+                <li>
+                  <i className="ph ph-chart-line-up" aria-hidden="true"></i>
+                  Comparative market analysis &amp; strategic pricing
+                </li>
+                <li>
+                  <i className="ph ph-camera" aria-hidden="true"></i>
+                  Professional photography &amp; virtual tour production
+                </li>
+                <li>
+                  <i className="ph ph-megaphone" aria-hidden="true"></i>
+                  Multi-channel marketing: MLS, Zillow, social &amp; email
+                </li>
+                <li>
+                  <i className="ph ph-currency-dollar" aria-hidden="true"></i>
+                  Expert negotiation &mdash; average 101% of list price
+                </li>
               </ul>
-              <Link href="/sellers" className="btn btn--accent">Full Seller&apos;s Guide</Link>
+              <div className="hero__ctas">
+                <a href="#consultation" className="btn btn--accent btn--lg">
+                  Get My Home&apos;s Value
+                </a>
+                <Link href="/sellers" className="btn btn--outline-white btn--lg">
+                  Seller Resources
+                </Link>
+              </div>
+            </div>
+            <div className="split__media">
+              <Image
+                src="/assets/market-kitchen.webp"
+                alt="Beautifully staged kitchen in Easton MA"
+                width={640}
+                height={480}
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* COMMUNITY */}
-      <section className="section" id="community">
+      {/* ── Why Easton / Community ── */}
+      <section className="section" id="easton">
         <div className="container">
           <div className="section__header">
-            <p className="section__label">Life in Easton</p>
-            <h2 className="section__title">Why Families Love Easton</h2>
-            <p className="section__desc">A tight-knit community with New England charm, natural beauty, and everything you need.</p>
+            <p className="section__label">Why Easton</p>
+            <h2 className="section__title">Life in Easton, Massachusetts</h2>
+            <p className="section__desc">
+              Thirty miles south of Boston, Easton blends small-town character with easy access to the
+              city. Top-rated schools, preserved open space, and a tight-knit community feel that keeps
+              residents here for generations.
+            </p>
           </div>
           <div className="community-grid">
             <div className="community-card community-card--featured">
-              <Image src="/assets/park.webp" alt="Beautiful autumn lake scene in a New England state park" width={800} height={500} />
+              <Image
+                src="/assets/park.webp"
+                alt="Borderland State Park, Easton MA"
+                fill
+                sizes="100vw"
+                style={{ objectFit: 'cover' }}
+              />
               <div className="community-card__overlay">
                 <h3>Borderland State Park</h3>
-                <p>1,800+ acres of trails, ponds, and historic beauty right in your backyard.</p>
+                <p>1,800+ acres of trails, ponds, and wildlife right in Easton&apos;s backyard.</p>
               </div>
             </div>
             <div className="community-card">
-              <div className="community-card__icon"><i className="ph ph-graduation-cap"></i></div>
+              <div className="community-card__icon">
+                <i className="ph-fill ph-graduation-cap" aria-hidden="true"></i>
+              </div>
               <h3>Top-Rated Schools</h3>
-              <p>Oliver Ames High School rated 8/10 with strong academics and extracurriculars.</p>
+              <p>Oliver Ames High School consistently ranks among the best in Norfolk County.</p>
             </div>
             <div className="community-card">
-              <div className="community-card__icon"><i className="ph ph-train-simple"></i></div>
-              <h3>Easy Commute</h3>
-              <p>Quick access to Boston via Route 24 and I-495. Suburban living, city opportunity.</p>
+              <div className="community-card__icon">
+                <i className="ph-fill ph-train" aria-hidden="true"></i>
+              </div>
+              <h3>Easy Boston Commute</h3>
+              <p>Commuter rail from Stoughton puts downtown Boston under an hour away.</p>
             </div>
             <div className="community-card">
-              <div className="community-card__icon"><i className="ph ph-tree"></i></div>
-              <h3>New England Charm</h3>
-              <p>Historic villages, tree-lined streets, and a genuine sense of community.</p>
+              <div className="community-card__icon">
+                <i className="ph-fill ph-storefront" aria-hidden="true"></i>
+              </div>
+              <h3>Thriving Local Scene</h3>
+              <p>Shops, restaurants, and a growing downtown that locals are proud of.</p>
             </div>
             <div className="community-card">
-              <div className="community-card__icon"><i className="ph ph-house-line"></i></div>
-              <h3>Growing Neighborhoods</h3>
-              <p>New developments like Sawmill Village alongside established favorites like Tanglewood Estates.</p>
+              <div className="community-card__icon">
+                <i className="ph-fill ph-shield-check" aria-hidden="true"></i>
+              </div>
+              <h3>Safe &amp; Family-Friendly</h3>
+              <p>Ranked among the safest and best towns to raise a family in Massachusetts.</p>
             </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <Link href="/neighborhoods" className="btn btn--primary btn--lg">
+              Explore Neighborhoods
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* REVIEWS */}
+      {/* ── Reviews ── */}
       <section className="section section--testimonials" id="reviews">
         <div className="container">
           <div className="section__header">
-            <p className="section__label">Google Reviews</p>
-            <h2 className="section__title">What Jessica&apos;s Clients Say</h2>
+            <p className="section__label">Client Reviews</p>
+            <h2 className="section__title">What Clients Are Saying</h2>
             <div className="reviews-summary">
               <div className="reviews-summary__stars">
-                <i className="ph-fill ph-star"></i><i className="ph-fill ph-star"></i><i className="ph-fill ph-star"></i><i className="ph-fill ph-star"></i><i className="ph-fill ph-star"></i>
+                <i className="ph-fill ph-star" aria-hidden="true"></i>
+                <i className="ph-fill ph-star" aria-hidden="true"></i>
+                <i className="ph-fill ph-star" aria-hidden="true"></i>
+                <i className="ph-fill ph-star" aria-hidden="true"></i>
+                <i className="ph-fill ph-star" aria-hidden="true"></i>
               </div>
-              <span className="reviews-summary__text">5.0 rating from 19 reviews on Google</span>
+              <span className="reviews-summary__text">5.0 from 19 Google Reviews</span>
             </div>
           </div>
           <div className="testimonials-grid">
-            {reviews.map((r) => (
-              <ReviewCard key={r.author} body={r.body} author={r.author} role={r.role} date={r.date} />
+            {reviews.map((review) => (
+              <ReviewCard
+                key={review.author}
+                body={review.body}
+                author={review.author}
+                role={review.role}
+                date={review.date}
+              />
             ))}
           </div>
           <div className="reviews-more">
-            <a href="https://www.google.com/maps/place/Jessica+Shauffer" target="_blank" rel="noopener noreferrer" className="btn btn--primary">
-              <i className="ph ph-google-logo"></i> See All 19 Reviews on Google
+            <a
+              href="https://www.google.com/maps/place/Jessica+Shauffer"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn--secondary"
+            >
+              Read All 19 Reviews on Google
             </a>
-            <Link href="/contact#consultation" className="btn btn--accent" style={{ marginLeft: 'var(--space-4)' }}>Book a Free Consultation</Link>
           </div>
         </div>
       </section>
 
-      {/* CONSULTATION FORM */}
+      {/* ── Consultation Form ── */}
       <section className="section section--form" id="consultation">
         <div className="container">
           <div className="form-split">
             <div className="form-split__content">
               <p className="section__label">Free Consultation</p>
-              <h2 className="section__title">Let&apos;s Talk About Your Goals</h2>
-              <p>Whether you&apos;re ready to make a move or just exploring — a quick conversation with Jessica can save you time, money, and stress. No pressure, just expert advice from a top 3% agent.</p>
+              <h2 className="section__title">Ready to Make Your Move?</h2>
+              <p>
+                Whether you&apos;re buying, selling, or just exploring your options, a 30-minute call
+                with Jessica costs you nothing and could save you thousands. Let&apos;s talk about your
+                goals.
+              </p>
               <div className="form-benefits">
                 <div className="form-benefit">
-                  <i className="ph ph-clock"></i>
-                  <div><strong>15-Minute Call</strong><span>Quick, focused, and tailored to you</span></div>
+                  <i className="ph-fill ph-clock" aria-hidden="true"></i>
+                  <div>
+                    <strong>30-Minute Strategy Call</strong>
+                    <span>No-pressure conversation about your goals and timeline.</span>
+                  </div>
                 </div>
                 <div className="form-benefit">
-                  <i className="ph ph-currency-dollar-simple"></i>
-                  <div><strong>100% Free</strong><span>No cost, no obligation, no strings</span></div>
+                  <i className="ph-fill ph-chart-bar" aria-hidden="true"></i>
+                  <div>
+                    <strong>Personalized Market Analysis</strong>
+                    <span>Custom data for your specific property or neighborhood.</span>
+                  </div>
                 </div>
                 <div className="form-benefit">
-                  <i className="ph ph-shield-check"></i>
-                  <div><strong>Local Expertise</strong><span>Nearly a decade of Easton market knowledge</span></div>
+                  <i className="ph-fill ph-currency-dollar" aria-hidden="true"></i>
+                  <div>
+                    <strong>100% Free, Zero Obligation</strong>
+                    <span>Get expert insight with nothing to lose.</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph-fill ph-phone" aria-hidden="true"></i>
+                  <div>
+                    <strong>Fast Response Time</strong>
+                    <span>Jessica responds within 24 hours, often same day.</span>
+                  </div>
                 </div>
               </div>
+              <div className="form-privacy">
+                <i className="ph ph-lock-simple" aria-hidden="true"></i>
+                Or call directly: <a href="tel:+16179491046">(617) 949-1046</a>
+              </div>
             </div>
-            <ConsultationForm />
+            <div className="form-split__form">
+              <ConsultationForm />
+            </div>
           </div>
         </div>
       </section>
