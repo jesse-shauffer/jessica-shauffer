@@ -480,7 +480,7 @@ a, button, [role="button"], input, textarea, select {
 
 .hero__scroll-hint {
   position: absolute;
-  bottom: var(--space-8);
+  bottom: var(--space-3);
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -595,11 +595,10 @@ a, button, [role="button"], input, textarea, select {
 .agent-portrait {
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-lg);
-  aspect-ratio: 1;
   object-fit: cover;
   object-position: center top;
   width: 100%;
-  max-width: 420px;
+  height: auto;
 }
 
 .agent-subtitle {

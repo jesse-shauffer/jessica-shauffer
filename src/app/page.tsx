@@ -5,6 +5,7 @@ import JsonLd from '@/components/JsonLd';
 import StatCard from '@/components/StatCard';
 import ReviewCard from '@/components/ReviewCard';
 import ConsultationForm from '@/components/ConsultationForm';
+import ScrollHint from '@/components/ScrollHint';
 
 export const metadata: Metadata = {
   title: 'Jessica Shauffer — Easton, MA Real Estate | Coldwell Banker Realty',
@@ -277,10 +278,8 @@ export default function HomePage() {
               <i className="ph ph-phone" aria-hidden="true"></i> (617) 949-1046
             </a>
           </div>
-          <button className="hero__scroll-hint" aria-label="Scroll to next section">
-            <i className="ph ph-caret-down"></i>
-          </button>
         </div>
+        <ScrollHint />
       </section>
 
       {/* ── Agent Intro ── */}
