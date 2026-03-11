@@ -6,6 +6,7 @@ import StatCard from '@/components/StatCard';
 import ReviewCard from '@/components/ReviewCard';
 import ConsultationForm from '@/components/ConsultationForm';
 import ScrollHint from '@/components/ScrollHint';
+import CountUp from '@/components/CountUp';
 
 export const metadata: Metadata = {
   title: 'Jessica Shauffer — Easton, MA Real Estate | Coldwell Banker Realty',
@@ -433,17 +434,17 @@ export default function HomePage() {
                   <span>Average Seller Outcome</span>
                 </div>
                 <div className="seller-card__stat">
-                  <span className="seller-card__big">3.4%</span>
+                  <CountUp value="3.4%" className="seller-card__big" />
                   <span className="seller-card__sub">Year-over-year appreciation</span>
                 </div>
                 <div className="seller-card__divider"></div>
                 <div className="seller-card__stat">
-                  <span className="seller-card__big">23 Days</span>
+                  <CountUp value="23 Days" className="seller-card__big" />
                   <span className="seller-card__sub">Average time to sell</span>
                 </div>
                 <div className="seller-card__divider"></div>
                 <div className="seller-card__stat">
-                  <span className="seller-card__big">101%</span>
+                  <CountUp value="101%" className="seller-card__big" />
                   <span className="seller-card__sub">Of list price received</span>
                 </div>
               </div>

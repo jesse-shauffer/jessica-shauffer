@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import SellersChart from '@/components/SellersChart';
+import StatCard from '@/components/StatCard';
 
 export const metadata: Metadata = {
   title: "Seller's Guide — Sell Your Easton, MA Home | Jessica Shauffer",
@@ -60,10 +61,10 @@ export default function SellersPage() {
             <h2 className="section__title">It&apos;s a Great Time to Sell</h2>
           </div>
           <div className="stats-grid">
-            <div className="stat-card"><span className="stat-card__value">101%</span><span className="stat-card__label">Sale-to-List Ratio</span><span className="stat-card__delta stat-card__delta--up">Above Asking</span></div>
-            <div className="stat-card"><span className="stat-card__value">23</span><span className="stat-card__label">Median Days to Sell</span><span className="stat-card__delta stat-card__delta--down">Selling Fast</span></div>
-            <div className="stat-card"><span className="stat-card__value">+5%</span><span className="stat-card__label">Year-over-Year Growth</span><span className="stat-card__delta stat-card__delta--up">Steady Gains</span></div>
-            <div className="stat-card"><span className="stat-card__value">$380</span><span className="stat-card__label">Price per Sq. Ft.</span><span className="stat-card__delta stat-card__delta--neutral">Strong Demand</span></div>
+            <StatCard value="101%" label="Sale-to-List Ratio" delta="Above Asking" deltaType="up" />
+            <StatCard value="23" label="Median Days to Sell" delta="Selling Fast" deltaType="down" />
+            <StatCard value="+5%" label="Year-over-Year Growth" delta="Steady Gains" deltaType="up" />
+            <StatCard value="$380" label="Price per Sq. Ft." delta="Strong Demand" deltaType="neutral" />
           </div>
         </div>
       </section>

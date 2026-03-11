@@ -178,7 +178,8 @@ a, button, [role="button"], input, textarea, select {
   margin-bottom: var(--space-3);
 }
 
-.section__label--light {
+.section__label--light,
+.section--dark .section__label {
   color: var(--gold-light);
 }
 
