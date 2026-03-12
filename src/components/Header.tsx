@@ -33,7 +33,7 @@ export default function Header() {
         <div className="header__inner">
           <Link href="/" className="header__logo" aria-label="Jessica Shauffer Real Estate">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/coldwell-banker-logo-nav.svg" alt="Coldwell Banker Realty" className="header__logo-img" width={180} height={40} />
+            <img src="/assets/coldwell-banker-logo-nav.svg" alt="Coldwell Banker Realty" className="header__logo-img" />
           </Link>
           <nav className="header__nav" aria-label="Main navigation">
             <Link href="/about" className={isActive('about')}>About</Link>

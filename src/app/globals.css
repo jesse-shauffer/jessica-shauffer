@@ -316,9 +316,8 @@ a, button, [role="button"], input, textarea, select {
 .header__logo .logo-bg { color: var(--primary); }
 
 .header__logo-img {
-  height: 36px;
-  width: auto;
-  max-width: 180px;
+  height: auto;
+  width: clamp(140px, 18vw, 260px);
   display: block;
   object-fit: contain;
 }
