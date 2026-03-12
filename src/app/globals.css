@@ -350,7 +350,7 @@ a, button, [role="button"], input, textarea, select {
 
 .header__cta {
   flex-shrink: 0;
-  margin-left: var(--space-4);
+  margin-left: 2rem;
 }
 
 .header__menu-btn {
