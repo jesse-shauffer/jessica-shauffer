@@ -604,10 +604,7 @@ export default async function HomePage() {
                   </div>
                 </div>
               </div>
-              <div className="form-privacy">
-                <i className="ph ph-lock-simple" aria-hidden="true"></i>
-                Your info is private and will never be shared.
-              </div>
+
             </div>
             <div className="form-split__form">
               <ConsultationForm />
