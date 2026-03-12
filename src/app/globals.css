@@ -750,6 +750,10 @@ a, button, [role="button"], input, textarea, select {
   object-fit: cover;
 }
 
+.split__media img.agent-portrait {
+  aspect-ratio: 1 / 1;
+}
+
 .split__content p {
   color: var(--color-text-muted);
   line-height: 1.7;
