@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
@@ -33,7 +32,8 @@ export default function Header() {
       <header className="header" id="header">
         <div className="header__inner">
           <Link href="/" className="header__logo" aria-label="Jessica Shauffer Real Estate">
-            <Image src="/assets/coldwell-banker-logo.webp" alt="Coldwell Banker Realty" className="header__logo-img" width={180} height={40} priority />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/coldwell-banker-logo-nav.svg" alt="Coldwell Banker Realty" className="header__logo-img" width={180} height={40} />
           </Link>
           <nav className="header__nav" aria-label="Main navigation">
             <Link href="/about" className={isActive('about')}>About</Link>

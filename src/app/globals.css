@@ -29,14 +29,22 @@
   --space-24: 6rem;
   --space-32: 8rem;
 
-  /* Colors — Navy + Gold Real Estate */
-  --navy-950: #0a1628;
-  --navy-900: #0f1f3d;
-  --navy-800: #162a52;
+  /* Colors — Coldwell Banker Brand Palette */
+  --cb-midnight:   #0A1730;
+  --cb-blue:       #012169;
+  --cb-celestial:  #418FDE;
+  --cb-icy-blue:   #F0F5FB;
+  --cb-tide:       #B8CFEA;
+  --cb-smoky-gray: #58718D;
+
+  /* Navy scale (mapped from CB brand) */
+  --navy-950: #0A1730;
+  --navy-900: #012169;
+  --navy-800: #0A1730;
   --navy-700: #1e3a6e;
-  --navy-600: #2a4f8f;
-  --navy-100: #d4dce8;
-  --navy-50:  #eef2f7;
+  --navy-600: #418FDE;
+  --navy-100: #B8CFEA;
+  --navy-50:  #F0F5FB;
 
   --gold: #c8a24e;
   --gold-light: #e4c97a;
@@ -47,18 +55,18 @@
   --warm-gray: #f3f1ec;
   --gray-200: #e5e2db;
   --gray-400: #a8a49c;
-  --gray-600: #6b6760;
+  --gray-600: #58718D;
   --gray-800: #3d3a35;
   --gray-900: #2a2825;
 
   --color-bg: var(--off-white);
   --color-surface: var(--white);
   --color-text: var(--gray-900);
-  --color-text-muted: var(--gray-600);
+  --color-text-muted: var(--cb-smoky-gray);
   --accent: var(--gold);
   --accent-hover: var(--gold-dark);
-  --primary: var(--navy-800);
-  --primary-hover: var(--navy-900);
+  --primary: var(--cb-midnight);
+  --primary-hover: var(--cb-blue);
 
   --success: #2e7d32;
   --error: #c62828;

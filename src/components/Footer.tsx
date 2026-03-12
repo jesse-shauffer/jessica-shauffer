@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 const gReviewUrl = "https://www.google.com/maps/place/Jessica+Shauffer+%E2%80%93+Weinstein+Keach,+Coldwell+Banker+Realty/@42.0556882,-71.0717385,17z/data=!4m8!3m7!1s0x89e485762d91504d:0xa1d3cddd7b582786!8m2!3d42.0556882!4d-71.0717385!9m1!1b1!16s%2Fg%2F11h5qq5tp7?entry=ttu&g_ep=EgoyMDI2MDMwOC4wIKXMDSoASAFQAw%3D%3D";
 
@@ -10,7 +9,8 @@ export default function Footer() {
         <div className="footer__inner">
           <div className="footer__brand">
             <Link href="/" className="header__logo" aria-label="Jessica Shauffer Real Estate">
-              <Image src="/assets/coldwell-banker-logo-white.webp" alt="Coldwell Banker Realty" className="header__logo-img" width={180} height={40} />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/assets/coldwell-banker-logo-footer.svg" alt="Coldwell Banker Realty" className="footer__logo-img" width={140} height={144} />
             </Link>
             <p>Weinstein Keach Group | Coldwell Banker Realty<br />Top-producing agent serving Easton, MA and surrounding areas.</p>
           </div>
