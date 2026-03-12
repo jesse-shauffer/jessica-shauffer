@@ -59,7 +59,7 @@ export async function POST(request: Request) {
       const interestName = interestLabels[interest] || interest;
 
       await resend.emails.send({
-        from: 'Jessica Shauffer Website <onboarding@resend.dev>',
+        from: 'Jessica Shauffer Website <notifications@scalermarketing.com>',
         to: NOTIFY_EMAIL,
         subject: `New Lead: ${fullName} — ${interestName}`,
         html: `
