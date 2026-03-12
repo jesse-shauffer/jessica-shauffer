@@ -27,7 +27,7 @@ export default function Footer() {
             <h4>Contact Jessica</h4>
             <a href="tel:+16179491046">(617) 949-1046</a>
             <a href="mailto:Jessica.Shauffer@nemoves.com">Jessica.Shauffer@nemoves.com</a>
-            <a href={gReviewUrl} target="_blank" rel="noopener noreferrer">159 Belmont St, South Easton, MA 02375</a>
+            <a href={gReviewUrl} target="_blank" rel="noopener noreferrer">159 Belmont Street<br />South Easton, MA 02375</a>
             <a href="https://weinsteinkeach.com/jessica-shauffer" target="_blank" rel="noopener noreferrer">weinsteinkeach.com</a>
             <a href={gReviewUrl} target="_blank" rel="noopener noreferrer">See Google Reviews</a>
             <div className="footer__social">
