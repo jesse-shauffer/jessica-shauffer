@@ -124,7 +124,7 @@ h1, h2, h3, h4, h5, h6 { text-wrap: balance; line-height: 1.15; font-family: var
 p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
 
 ::selection {
-  background: rgba(200,162,78,0.2);
+  background: rgba(65,143,222,0.2);
   color: var(--color-text);
 }
 
@@ -1384,7 +1384,7 @@ a, button, [role="button"], input, textarea, select {
 }
 
 .footer__links a:hover {
-  color: var(--gold-light);
+  color: var(--white);
 }
 
 .footer__social {
@@ -1408,8 +1408,8 @@ a, button, [role="button"], input, textarea, select {
 
 .footer__social a:hover {
   color: var(--white);
-  border-color: var(--gold-light);
-  background: rgba(255,255,255,0.05);
+  border-color: var(--cb-celestial);
+  background: rgba(65,143,222,0.1);
 }
 
 .footer__bottom {
@@ -1428,7 +1428,7 @@ a, button, [role="button"], input, textarea, select {
 }
 
 .footer__bottom a:hover {
-  color: var(--gold-light);
+  color: var(--white);
 }
 
 @media (max-width: 767px) {
