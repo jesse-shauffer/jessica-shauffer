@@ -80,7 +80,7 @@
   --shadow-lg: 0 12px 40px rgba(10,22,40,0.12);
 
   /* Layout */
-  --content-default: 1120px;
+  --content-default: 1280px;
   --content-narrow: 720px;
   --gutter: clamp(var(--space-4), 4vw, var(--space-8));
 
