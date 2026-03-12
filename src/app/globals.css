@@ -42,7 +42,7 @@
   --navy-900: #012169;
   --navy-800: #0A1730;
   --navy-700: #1e3a6e;
-  --navy-600: #418FDE;
+  --navy-600: #2a4f8f;
   --navy-100: #B8CFEA;
   --navy-50:  #F0F5FB;
 
@@ -55,14 +55,14 @@
   --warm-gray: #f3f1ec;
   --gray-200: #e5e2db;
   --gray-400: #a8a49c;
-  --gray-600: #58718D;
+  --gray-600: #6b6760;
   --gray-800: #3d3a35;
-  --gray-900: #2a2825;
+  --gray-900: #1a1816;
 
   --color-bg: var(--off-white);
   --color-surface: var(--white);
   --color-text: var(--gray-900);
-  --color-text-muted: var(--cb-smoky-gray);
+  --color-text-muted: var(--gray-600);
   --accent: var(--gold);
   --accent-hover: var(--gold-dark);
   --primary: var(--cb-midnight);
