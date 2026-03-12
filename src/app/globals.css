@@ -125,7 +125,7 @@ p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
 
 ::selection {
   background: rgba(65,143,222,0.2);
-  color: var(--color-text);
+  color: #ffffff;
 }
 
 :focus-visible {
