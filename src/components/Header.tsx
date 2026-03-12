@@ -43,12 +43,12 @@ export default function Header() {
             <div className="nav-dropdown">
               <Link href="/neighborhoods" className={isActive('neighborhoods')}>Neighborhoods <i className="ph ph-caret-down"></i></Link>
               <div className="nav-dropdown__menu">
-                <Link href="/neighborhoods/north-easton">North Easton</Link>
-                <Link href="/neighborhoods/south-easton">South Easton</Link>
-                <Link href="/neighborhoods/five-corners">Five Corners</Link>
-                <Link href="/neighborhoods/furnace-village">Furnace Village</Link>
-                <Link href="/neighborhoods/eastondale">Eastondale</Link>
-                <Link href="/neighborhoods/unionville">Unionville</Link>
+                <Link href="/neighborhoods/north-easton" className={pathname === '/neighborhoods/north-easton' ? 'is-active' : ''}>North Easton</Link>
+                <Link href="/neighborhoods/south-easton" className={pathname === '/neighborhoods/south-easton' ? 'is-active' : ''}>South Easton</Link>
+                <Link href="/neighborhoods/five-corners" className={pathname === '/neighborhoods/five-corners' ? 'is-active' : ''}>Five Corners</Link>
+                <Link href="/neighborhoods/furnace-village" className={pathname === '/neighborhoods/furnace-village' ? 'is-active' : ''}>Furnace Village</Link>
+                <Link href="/neighborhoods/eastondale" className={pathname === '/neighborhoods/eastondale' ? 'is-active' : ''}>Eastondale</Link>
+                <Link href="/neighborhoods/unionville" className={pathname === '/neighborhoods/unionville' ? 'is-active' : ''}>Unionville</Link>
               </div>
             </div>
             <Link href="/contact" className={isActive('contact')}>Contact</Link>

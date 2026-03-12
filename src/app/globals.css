@@ -1341,19 +1341,22 @@ a, button, [role="button"], input, textarea, select {
 
 .footer__brand .header__logo {
   color: var(--white);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
 }
 
 .footer__brand .logo-bg { color: var(--white); }
 
-.footer__brand .header__logo-img {
-  height: 52px;
+.footer__logo-img {
+  width: 6.5rem;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .footer__brand p {
   font-size: var(--text-sm);
   line-height: 1.7;
-  max-width: 320px;
+  max-width: 34rem;
 }
 
 .footer__links {
@@ -1515,7 +1518,8 @@ a, button, [role="button"], input, textarea, select {
   white-space: nowrap;
 }
 
-.nav-dropdown__menu a:hover {
+.nav-dropdown__menu a:hover,
+.nav-dropdown__menu a.is-active {
   background: var(--navy-50);
 }
 

@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="footer__brand">
             <Link href="/" className="header__logo" aria-label="Jessica Shauffer Real Estate">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/coldwell-banker-logo-footer.svg" alt="Coldwell Banker Realty" className="footer__logo-img" width={140} height={144} />
+              <img src="/assets/coldwell-banker-logo-footer.svg" alt="Coldwell Banker Realty" className="footer__logo-img" />
             </Link>
             <p>Weinstein Keach Group | Coldwell Banker Realty<br />Top-producing agent serving Easton, MA and surrounding areas.</p>
           </div>
