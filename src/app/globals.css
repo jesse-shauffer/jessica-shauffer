@@ -334,6 +334,12 @@ a, button, [role="button"], input, textarea, select {
   }
 }
 
+@media (max-width: 47.9375rem) {
+  .header__logo-img {
+    width: 14rem;
+  }
+}
+
 .header__nav {
   display: flex;
   align-items: center;
