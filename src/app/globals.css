@@ -1067,6 +1067,63 @@ a, button, [role="button"], input, textarea, select {
   }
 }
 
+/* --- Review Carousel --- */
+.review-carousel {
+  position: relative;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.carousel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--primary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.carousel-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.carousel-dots {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.carousel-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--gray-200);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.carousel-dot--active {
+  background: var(--accent);
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
 /* --- Form Section --- */
 .section--form {
   background: var(--white);
@@ -1174,6 +1231,19 @@ a, button, [role="button"], input, textarea, select {
   background-repeat: no-repeat;
   background-position: right var(--space-3) center;
   padding-right: var(--space-10);
+}
+
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md);
+  color: #991b1b;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
 }
 
 .form-privacy {
