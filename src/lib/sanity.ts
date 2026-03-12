@@ -17,6 +17,16 @@ export function urlFor(source: SanityImageSource) {
 }
 
 /* ── Types ── */
+export interface SanityReview {
+  _id: string;
+  author: string;
+  role?: string;
+  rating: number;
+  text: string;
+  date: string;
+  source?: string;
+}
+
 export interface SanityNeighborhood {
   _id: string;
   name: string;
@@ -76,5 +86,12 @@ export async function getOtherNeighborhoods(currentSlug: string) {
       "image": heroImage
     }`,
     { slug: currentSlug }
+  );
+}
+
+/* ── Review Queries ── */
+export async function getAllReviews(): Promise<SanityReview[]> {
+  return client.fetch(
+    `*[_type == "review"] | order(date desc) { _id, author, role, rating, text, date, source }`
   );
 }

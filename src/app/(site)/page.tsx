@@ -3,10 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import StatCard from '@/components/StatCard';
-import ReviewCard from '@/components/ReviewCard';
+import ReviewCarousel from '@/components/ReviewCarousel';
 import ConsultationForm from '@/components/ConsultationForm';
 import ScrollHint from '@/components/ScrollHint';
 import CountUp from '@/components/CountUp';
+import { getAllReviews } from '@/lib/sanity';
 
 export const metadata: Metadata = {
   title: 'Jessica Shauffer — Easton, MA Real Estate | Coldwell Banker Realty',
@@ -234,7 +235,15 @@ const reviews = [
   },
 ];
 
-export default function HomePage() {
+// Hardcoded fallback reviews (used if Sanity has none yet)
+const fallbackReviews = reviews.map((r, i) => ({ ...r, _id: `fallback-${i}`, rating: 5, text: r.body, source: 'google' as const }));
+
+export const revalidate = 3600; // ISR: revalidate every hour
+
+export default async function HomePage() {
+  const sanityReviews = await getAllReviews().catch(() => []);
+  const displayReviews = sanityReviews.length > 0 ? sanityReviews : fallbackReviews;
+
   return (
     <>
       <JsonLd data={agentSchema} />
@@ -543,17 +552,7 @@ export default function HomePage() {
               <span className="reviews-summary__text">5.0 from 19 Google Reviews</span>
             </div>
           </div>
-          <div className="testimonials-grid">
-            {reviews.map((review) => (
-              <ReviewCard
-                key={review.author}
-                body={review.body}
-                author={review.author}
-                role={review.role}
-                date={review.date}
-              />
-            ))}
-          </div>
+          <ReviewCarousel reviews={displayReviews} />
           <div className="reviews-more">
             <a
               href="https://www.google.com/maps/place/Jessica+Shauffer+%E2%80%93+Weinstein+Keach,+Coldwell+Banker+Realty/@42.0556882,-71.0717385,762m/data=!3m1!1e3!4m8!3m7!1s0x89e485762d91504d:0xa1d3cddd7b582786!8m2!3d42.0556882!4d-71.0717385!9m1!1b1!16s%2Fg%2F11h5qq5tp7?entry=ttu&g_ep=EgoyMDI2MDMwOS4wIKXMDSoASAFQAw%3D%3D"

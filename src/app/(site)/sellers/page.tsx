@@ -4,6 +4,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import SellersChart from '@/components/SellersChart';
 import StatCard from '@/components/StatCard';
+import ConsultationForm from '@/components/ConsultationForm';
 
 export const metadata: Metadata = {
   title: "Seller's Guide — Sell Your Easton, MA Home | Jessica Shauffer",
@@ -119,12 +120,40 @@ export default function SellersPage() {
         </div>
       </section>
 
-      <section className="section" style={{ background: 'var(--white)', paddingBlock: 'var(--space-16)' }}>
+      <section className="section section--form" id="valuation" style={{ background: 'var(--white)' }}>
         <div className="container">
-          <div className="cta-banner">
-            <h2>What&apos;s Your Home Worth?</h2>
-            <p>Get a free, no-obligation home valuation based on current market conditions and comparable sales in your neighborhood.</p>
-            <Link href="/contact#consultation" className="btn btn--accent btn--lg">Get My Free Valuation</Link>
+          <div className="form-split">
+            <div className="form-split__content">
+              <p className="section__label">What&apos;s Your Home Worth?</p>
+              <h2 className="section__title">Get Your Free Home Valuation</h2>
+              <p>Get a free, no-obligation home valuation based on current market conditions and comparable sales in your neighborhood. Jessica will prepare a detailed analysis within 24 hours.</p>
+              <div className="form-benefits">
+                <div className="form-benefit">
+                  <i className="ph ph-chart-bar"></i>
+                  <div>
+                    <strong>Data-Driven Analysis</strong>
+                    <span>Based on recent comparable sales</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-currency-dollar-simple"></i>
+                  <div>
+                    <strong>100% Free</strong>
+                    <span>No cost, no obligation</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-clock"></i>
+                  <div>
+                    <strong>24-Hour Turnaround</strong>
+                    <span>Get your valuation fast</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="form-split__form">
+              <ConsultationForm source="sellers" />
+            </div>
           </div>
         </div>
       </section>

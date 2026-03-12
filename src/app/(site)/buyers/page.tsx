@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import BuyersChart from '@/components/BuyersChart';
+import ConsultationForm from '@/components/ConsultationForm';
 
 export const metadata: Metadata = {
   title: "Buyer's Guide — Easton, MA Homes for Sale | Jessica Shauffer",
@@ -105,11 +106,44 @@ export default function BuyersPage() {
             </div>
             <div>
               <Image src="/assets/interior.webp" alt="Beautiful home interior" width={600} height={400} style={{ borderRadius: 'var(--radius-2xl)', boxShadow: 'var(--shadow-lg)', width: '100%', height: 'auto' }} />
-              <div className="cta-banner" style={{ marginTop: 'var(--space-8)' }}>
-                <h2>Ready to Start Looking?</h2>
-                <p>Your perfect home in Easton is waiting. Book a free consultation to begin your search.</p>
-                <Link href="/contact#consultation" className="btn btn--accent btn--lg">Start My Home Search</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--form" id="consultation" style={{ background: 'var(--white)' }}>
+        <div className="container">
+          <div className="form-split">
+            <div className="form-split__content">
+              <p className="section__label">Ready to Start Looking?</p>
+              <h2 className="section__title">Find Your Easton Home</h2>
+              <p>Your perfect home in Easton is waiting. Book a free consultation and Jessica will help you navigate the market, find the right neighborhood, and make a winning offer.</p>
+              <div className="form-benefits">
+                <div className="form-benefit">
+                  <i className="ph ph-magnifying-glass"></i>
+                  <div>
+                    <strong>Custom Home Search</strong>
+                    <span>Listings tailored to your criteria</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-map-pin"></i>
+                  <div>
+                    <strong>Neighborhood Tours</strong>
+                    <span>See the area before you commit</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-handshake"></i>
+                  <div>
+                    <strong>Expert Negotiation</strong>
+                    <span>Win in a competitive market</span>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div className="form-split__form">
+              <ConsultationForm source="buyers" />
             </div>
           </div>
         </div>
