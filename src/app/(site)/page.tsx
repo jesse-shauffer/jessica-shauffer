@@ -298,10 +298,10 @@ export default async function HomePage() {
           <div className="split">
             <div className="split__media">
               <Image
-                src="/assets/jessica.jpg"
+                src="/assets/jessica-portrait-01.webp"
                 alt="Jessica Shauffer, Coldwell Banker Realty"
-                width={640}
-                height={640}
+                width={1024}
+                height={1024}
                 className="agent-portrait"
               />
             </div>

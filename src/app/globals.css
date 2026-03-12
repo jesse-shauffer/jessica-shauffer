@@ -634,6 +634,7 @@ a, button, [role="button"], input, textarea, select {
   object-position: center top;
   width: 100%;
   height: auto;
+  aspect-ratio: 1 / 1;
 }
 
 .agent-subtitle {
