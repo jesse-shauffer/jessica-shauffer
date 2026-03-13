@@ -79,7 +79,7 @@ export default function ContactPage() {
             <div className="contact-info-card">
               <i className="ph ph-map-pin"></i>
               <h3>Office</h3>
-              <p>159 Belmont St #1175<br />South Easton, MA 02375</p>
+              <a href="https://www.google.com/maps/place/Jessica+Shauffer+%E2%80%93+Weinstein+Keach,+Coldwell+Banker+Realty/@42.0556882,-71.0717385,17z/data=!4m8!3m7!1s0x89e485762d91504d:0xa1d3cddd7b582786!8m2!3d42.0556882!4d-71.0717385!9m1!1b1!16s%2Fg%2F11h5qq5tp7?entry=ttu&g_ep=EgoyMDI2MDMwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">159 Belmont Street #1175<br />South Easton, MA 02375</a>
             </div>
           </div>
         </div>
