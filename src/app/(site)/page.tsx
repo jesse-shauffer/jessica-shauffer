@@ -251,8 +251,8 @@ export default async function HomePage() {
               <p className="county-card__tagline">The Heart of the South Shore</p>
               <p className="county-card__desc">Bristol County is home to some of the most sought-after communities in Eastern Massachusetts, including Easton, Mansfield, and the Bridgewater towns. With a mix of historic charm, excellent schools, and strong commuter access to Boston and Providence, Bristol County offers exceptional value for buyers and strong returns for sellers.</p>
               <div className="county-card__pills">
-                {['Easton','North Easton','South Easton','Mansfield','Norton','Raynham','Taunton','Attleboro','North Attleborough','Bridgewater','West Bridgewater','East Bridgewater'].map(t => (
-                  <span key={t} className="county-pill">{t}</span>
+                {[['Easton','easton'],['North Easton','north-easton'],['South Easton','south-easton'],['Mansfield','mansfield'],['Norton','norton'],['Raynham','raynham'],['Taunton','taunton'],['Attleboro','attleboro'],['North Attleborough','north-attleborough'],['Bridgewater','bridgewater'],['West Bridgewater','west-bridgewater'],['East Bridgewater','east-bridgewater']].map(([name, slug]) => (
+                  <Link key={slug} href={`/communities/${slug}`} className="county-pill">{name}</Link>
                 ))}
               </div>
               <Link href="/counties/bristol-county" className="btn btn--outline county-card__btn">Explore Bristol County →</Link>
@@ -267,8 +267,8 @@ export default async function HomePage() {
               <p className="county-card__tagline">Affluent Towns, Top-Rated Schools</p>
               <p className="county-card__desc">Norfolk County consistently ranks among the most desirable counties in Massachusetts, featuring high-income communities like Canton, Sharon, Westwood, and Weston. With top-rated school districts, convenient highway access, and a strong luxury market, Norfolk County attracts discerning buyers from across the region.</p>
               <div className="county-card__pills">
-                {['Canton','Sharon','Norwood','Westwood','Stoughton','Foxborough','Weston'].map(t => (
-                  <span key={t} className="county-pill">{t}</span>
+                {[['Canton','canton'],['Sharon','sharon'],['Norwood','norwood'],['Westwood','westwood'],['Stoughton','stoughton'],['Foxborough','foxborough'],['Weston','weston']].map(([name, slug]) => (
+                  <Link key={slug} href={`/communities/${slug}`} className="county-pill">{name}</Link>
                 ))}
               </div>
               <Link href="/counties/norfolk-county" className="btn btn--outline county-card__btn">Explore Norfolk County →</Link>
@@ -283,8 +283,8 @@ export default async function HomePage() {
               <p className="county-card__tagline">Coastal Living &amp; Historic Charm</p>
               <p className="county-card__desc">Plymouth County stretches from the historic town of Plymouth on the coast to the inland communities of Lakeville and Middleborough. With waterfront properties, strong tourism economies, and growing residential demand, Plymouth County offers diverse opportunities for buyers and investors alike.</p>
               <div className="county-card__pills">
-                {['Plymouth','Hingham','Kingston','Halifax','Lakeville','Middleborough'].map(t => (
-                  <span key={t} className="county-pill">{t}</span>
+                {[['Plymouth','plymouth'],['Hingham','hingham'],['Kingston','kingston'],['Halifax','halifax'],['Lakeville','lakeville'],['Middleborough','middleborough']].map(([name, slug]) => (
+                  <Link key={slug} href={`/communities/${slug}`} className="county-pill">{name}</Link>
                 ))}
               </div>
               <Link href="/counties/plymouth-county" className="btn btn--outline county-card__btn">Explore Plymouth County →</Link>
