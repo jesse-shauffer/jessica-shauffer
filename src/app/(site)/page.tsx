@@ -163,7 +163,8 @@ export default async function HomePage() {
             <span className="hero__badge">Top 3% Coldwell Banker Agent Globally</span>
             <h1 className="hero__title">
               Jessica Shauffer &mdash;<br />
-              Coldwell Banker&apos;s Top Agent for the South Shore
+              Coldwell Banker&apos;s Top Agent<br />
+              for the South Shore
             </h1>
             <p className="hero__subtitle">
               Whether you&apos;re buying your dream home or selling for top dollar, get the results you deserve with Jessica Shauffer and the award-winning Weinstein Keach Group.
@@ -199,13 +200,10 @@ export default async function HomePage() {
                 src="/assets/jessica-portrait-01.webp"
                 alt="Jessica Shauffer — Top Real Estate Agent, South Shore MA"
                 width={600}
-                height={800}
+                height={600}
+                className="agent-portrait"
                 style={{ borderRadius: 'var(--radius-lg)' }}
               />
-              <div className="experience-badge">
-                <span className="experience-badge__number">Weinstein Keach</span>
-                <span className="experience-badge__text">Award-Winning Team</span>
-              </div>
             </div>
             <div className="split__content">
               <p className="section__label">Meet Jessica Shauffer</p>

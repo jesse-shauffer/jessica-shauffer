@@ -115,7 +115,7 @@ export async function getAllNeighborhoodSlugs(): Promise<string[]> {
 }
 
 export async function getOtherNeighborhoods(currentSlug: string) {
-  return client.fetch<{ slug: string; name: string; tagline: string; image: SanityImageSource | string }[]>(
+  const results = await client.fetch<{ slug: string; name: string; tagline: string; image: SanityImageSource | string }[]>(
     `*[_type == "neighborhood" && slug.current != $slug] | order(name asc) {
       "slug": slug.current,
       name,
@@ -124,6 +124,16 @@ export async function getOtherNeighborhoods(currentSlug: string) {
     }`,
     { slug: currentSlug }
   );
+  // If Sanity returns results, use them; otherwise fall back to static towns
+  if (results && results.length > 0) return results;
+  return Object.entries(STATIC_TOWNS)
+    .filter(([slug]) => slug !== currentSlug)
+    .map(([slug, town]) => ({
+      slug,
+      name: town.name,
+      tagline: town.tagline,
+      image: town.heroImage,
+    }));
 }
 
 /* ── County Types & Queries ── */

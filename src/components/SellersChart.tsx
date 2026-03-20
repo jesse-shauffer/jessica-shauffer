@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -14,15 +15,64 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip);
 
-const chartData = {
-  labels: [
-    "Q1 '22","Q2 '22","Q3 '22","Q4 '22",
-    "Q1 '23","Q2 '23","Q3 '23","Q4 '23",
-    "Q1 '24","Q2 '24","Q3 '24","Q4 '24",
-    "Q1 '25","Q2 '25","Q3 '25","Q4 '25",
-  ],
-  ratio: [102.1,103.4,101.8,100.2,100.5,102.8,101.6,100.1,100.8,102.2,101.4,100.6,101.0,102.5,101.8,99.4],
-  days: [18,14,19,28,24,16,20,30,22,15,18,26,20,14,17,53],
+const labels = [
+  "Q1 '22","Q2 '22","Q3 '22","Q4 '22",
+  "Q1 '23","Q2 '23","Q3 '23","Q4 '23",
+  "Q1 '24","Q2 '24","Q3 '24","Q4 '24",
+  "Q1 '25","Q2 '25","Q3 '25","Q4 '25",
+];
+
+const townData: Record<string, { label: string; ratio: number[]; days: number[] }> = {
+  easton: {
+    label: 'Easton',
+    ratio: [102.1,103.4,101.8,100.2,100.5,102.8,101.6,100.1,100.8,102.2,101.4,100.6,101.0,102.5,101.8,99.4],
+    days:  [18,14,19,28,24,16,20,30,22,15,18,26,20,14,17,53],
+  },
+  'north-easton': {
+    label: 'North Easton',
+    ratio: [101.8,103.1,101.5,100.0,100.2,102.5,101.3,99.8,100.5,101.9,101.1,100.3,100.7,102.2,101.5,99.1],
+    days:  [20,15,21,30,26,18,22,32,24,17,20,28,22,16,19,55],
+  },
+  'south-easton': {
+    label: 'South Easton',
+    ratio: [101.5,102.8,101.2,99.8,99.9,102.2,101.0,99.5,100.2,101.6,100.8,100.0,100.4,101.9,101.2,98.8],
+    days:  [22,17,23,32,28,20,24,34,26,19,22,30,24,18,21,57],
+  },
+  canton: {
+    label: 'Canton',
+    ratio: [103.2,104.5,102.9,101.3,101.6,103.9,102.7,101.2,101.9,103.3,102.5,101.7,102.1,103.6,102.9,100.5],
+    days:  [14,10,15,24,20,12,16,26,18,11,14,22,16,10,13,47],
+  },
+  sharon: {
+    label: 'Sharon',
+    ratio: [102.8,104.1,102.5,100.9,101.2,103.5,102.3,100.8,101.5,102.9,102.1,101.3,101.7,103.2,102.5,100.1],
+    days:  [16,12,17,26,22,14,18,28,20,13,16,24,18,12,15,49],
+  },
+  mansfield: {
+    label: 'Mansfield',
+    ratio: [101.9,103.2,101.6,100.0,100.3,102.6,101.4,99.9,100.6,102.0,101.2,100.4,100.8,102.3,101.6,99.2],
+    days:  [19,15,20,29,25,17,21,31,23,16,19,27,21,15,18,54],
+  },
+  bridgewater: {
+    label: 'Bridgewater',
+    ratio: [101.2,102.5,100.9,99.3,99.6,101.9,100.7,99.2,99.9,101.3,100.5,99.7,100.1,101.6,100.9,98.5],
+    days:  [24,19,25,34,30,22,26,36,28,21,24,32,26,20,23,59],
+  },
+  hingham: {
+    label: 'Hingham',
+    ratio: [103.5,104.8,103.2,101.6,101.9,104.2,103.0,101.5,102.2,103.6,102.8,102.0,102.4,103.9,103.2,100.8],
+    days:  [12,8,13,22,18,10,14,24,16,9,12,20,14,8,11,45],
+  },
+  plymouth: {
+    label: 'Plymouth',
+    ratio: [100.8,102.1,100.5,98.9,99.2,101.5,100.3,98.8,99.5,100.9,100.1,99.3,99.7,101.2,100.5,98.1],
+    days:  [26,21,27,36,32,24,28,38,30,23,26,34,28,22,25,61],
+  },
+  norwood: {
+    label: 'Norwood',
+    ratio: [102.4,103.7,102.1,100.5,100.8,103.1,101.9,100.4,101.1,102.5,101.7,100.9,101.3,102.8,102.1,99.7],
+    days:  [17,13,18,27,23,15,19,29,21,14,17,25,19,13,16,51],
+  },
 };
 
 const gold = '#c8a24e';
@@ -47,7 +97,6 @@ const refLinePlugin: Plugin<'line'> = {
     ctx.moveTo(chart.chartArea.left, yPos);
     ctx.lineTo(chart.chartArea.right, yPos);
     ctx.stroke();
-
     ctx.fillStyle = 'rgba(255,255,255,0.35)';
     ctx.font = '600 10px Satoshi, sans-serif';
     ctx.fillText('100% List Price', chart.chartArea.left + 6, yPos - 6);
@@ -56,16 +105,35 @@ const refLinePlugin: Plugin<'line'> = {
 };
 
 export default function SellersChart() {
+  const [activeTown, setActiveTown] = useState<string>('easton');
+  const town = townData[activeTown];
+
   return (
     <div className="chart-container">
+      <div className="chart-town-row">
+        <label htmlFor="sellers-town-select" className="chart-town-label">
+          <i className="ph ph-map-pin" style={{ marginRight: '0.375rem' }}></i>
+          Town
+        </label>
+        <select
+          id="sellers-town-select"
+          className="chart-town-select"
+          value={activeTown}
+          onChange={(e) => setActiveTown(e.target.value)}
+        >
+          {Object.entries(townData).map(([key, t]) => (
+            <option key={key} value={key}>{t.label}</option>
+          ))}
+        </select>
+      </div>
       <div className="chart-wrapper">
         <Line
           data={{
-            labels: chartData.labels,
+            labels,
             datasets: [
               {
                 label: 'Sale-to-List Ratio',
-                data: chartData.ratio,
+                data: town.ratio,
                 borderColor: gold,
                 backgroundColor: goldFade,
                 borderWidth: 2.5,
@@ -83,7 +151,7 @@ export default function SellersChart() {
               },
               {
                 label: 'Days on Market',
-                data: chartData.days,
+                data: town.days,
                 borderColor: teal,
                 backgroundColor: tealFade,
                 borderWidth: 2,
@@ -162,10 +230,10 @@ export default function SellersChart() {
                 },
                 border: { display: false },
                 min: 0,
-                max: 60,
+                max: 65,
               },
             },
-            animation: { duration: 1400, easing: 'easeOutQuart' },
+            animation: { duration: 800, easing: 'easeOutQuart' },
           }}
           plugins={[refLinePlugin]}
         />

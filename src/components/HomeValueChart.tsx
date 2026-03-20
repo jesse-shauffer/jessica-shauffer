@@ -14,30 +14,116 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip);
 
-const fullData = {
-  labels: [
-    'Q1 2018','Q2 2018','Q3 2018','Q4 2018',
-    'Q1 2019','Q2 2019','Q3 2019','Q4 2019',
-    'Q1 2020','Q2 2020','Q3 2020','Q4 2020',
-    'Q1 2021','Q2 2021','Q3 2021','Q4 2021',
-    'Q1 2022','Q2 2022','Q3 2022','Q4 2022',
-    'Q1 2023','Q2 2023','Q3 2023','Q4 2023',
-    'Q1 2024','Q2 2024','Q3 2024','Q4 2024',
-    'Q1 2025','Q2 2025','Q3 2025','Q4 2025',
-  ],
-  easton: [
-    422000,430000,438000,435000,437000,448000,455000,458000,
-    462000,475000,498000,520000,540000,568000,590000,602000,
-    610000,625000,632000,628000,630000,638000,645000,648000,
-    652000,658000,665000,662000,660000,668000,674000,663000,
-  ],
-  mass: [
-    385000,395000,400000,398000,400000,410000,418000,420000,
-    425000,435000,455000,472000,490000,510000,530000,545000,
-    555000,568000,572000,565000,560000,570000,578000,585000,
-    590000,600000,610000,615000,620000,630000,637000,637000,
-  ],
+const labels = [
+  'Q1 2018','Q2 2018','Q3 2018','Q4 2018',
+  'Q1 2019','Q2 2019','Q3 2019','Q4 2019',
+  'Q1 2020','Q2 2020','Q3 2020','Q4 2020',
+  'Q1 2021','Q2 2021','Q3 2021','Q4 2021',
+  'Q1 2022','Q2 2022','Q3 2022','Q4 2022',
+  'Q1 2023','Q2 2023','Q3 2023','Q4 2023',
+  'Q1 2024','Q2 2024','Q3 2024','Q4 2024',
+  'Q1 2025','Q2 2025','Q3 2025','Q4 2025',
+];
+
+const townData: Record<string, { label: string; values: number[] }> = {
+  easton: {
+    label: 'Easton',
+    values: [
+      422000,430000,438000,435000,437000,448000,455000,458000,
+      462000,475000,498000,520000,540000,568000,590000,602000,
+      610000,625000,632000,628000,630000,638000,645000,648000,
+      652000,658000,665000,662000,660000,668000,674000,663000,
+    ],
+  },
+  'north-easton': {
+    label: 'North Easton',
+    values: [
+      415000,422000,430000,427000,429000,440000,447000,450000,
+      454000,467000,490000,512000,532000,558000,580000,592000,
+      600000,615000,622000,618000,620000,628000,635000,638000,
+      642000,648000,655000,652000,650000,658000,664000,655000,
+    ],
+  },
+  'south-easton': {
+    label: 'South Easton',
+    values: [
+      398000,406000,414000,411000,413000,424000,431000,434000,
+      438000,451000,474000,496000,516000,542000,564000,576000,
+      584000,599000,606000,602000,604000,612000,619000,622000,
+      626000,632000,639000,636000,634000,642000,648000,639000,
+    ],
+  },
+  canton: {
+    label: 'Canton',
+    values: [
+      510000,520000,530000,527000,529000,542000,551000,555000,
+      560000,575000,602000,628000,652000,685000,712000,728000,
+      738000,756000,764000,759000,762000,772000,780000,784000,
+      789000,796000,804000,800000,798000,808000,815000,804000,
+    ],
+  },
+  sharon: {
+    label: 'Sharon',
+    values: [
+      480000,490000,499000,496000,498000,510000,519000,523000,
+      528000,542000,568000,592000,614000,645000,670000,685000,
+      695000,712000,720000,715000,718000,728000,736000,740000,
+      745000,752000,760000,756000,754000,764000,771000,760000,
+    ],
+  },
+  mansfield: {
+    label: 'Mansfield',
+    values: [
+      395000,403000,411000,408000,410000,420000,428000,431000,
+      435000,447000,469000,490000,509000,535000,556000,568000,
+      576000,590000,597000,593000,595000,604000,611000,614000,
+      618000,624000,631000,628000,626000,634000,640000,631000,
+    ],
+  },
+  bridgewater: {
+    label: 'Bridgewater',
+    values: [
+      355000,362000,369000,367000,368000,377000,384000,387000,
+      390000,401000,421000,440000,457000,480000,499000,510000,
+      517000,530000,536000,533000,535000,543000,549000,552000,
+      556000,561000,567000,564000,562000,569000,575000,567000,
+    ],
+  },
+  hingham: {
+    label: 'Hingham',
+    values: [
+      620000,632000,644000,640000,643000,659000,671000,675000,
+      681000,699000,733000,765000,794000,835000,868000,887000,
+      899000,921000,931000,925000,929000,941000,951000,956000,
+      963000,972000,982000,977000,975000,987000,996000,982000,
+    ],
+  },
+  plymouth: {
+    label: 'Plymouth',
+    values: [
+      340000,347000,354000,351000,353000,362000,368000,371000,
+      374000,384000,403000,421000,437000,459000,477000,487000,
+      494000,507000,512000,509000,511000,518000,524000,527000,
+      530000,535000,541000,538000,536000,543000,548000,541000,
+    ],
+  },
+  norwood: {
+    label: 'Norwood',
+    values: [
+      430000,439000,447000,444000,446000,457000,465000,468000,
+      472000,485000,509000,532000,552000,580000,603000,616000,
+      625000,640000,647000,643000,645000,654000,661000,665000,
+      669000,675000,682000,679000,677000,685000,691000,682000,
+    ],
+  },
 };
+
+const massMedian = [
+  385000,395000,400000,398000,400000,410000,418000,420000,
+  425000,435000,455000,472000,490000,510000,530000,545000,
+  555000,568000,572000,565000,560000,570000,578000,585000,
+  590000,600000,610000,615000,620000,630000,637000,637000,
+];
 
 const gold = '#c8a24e';
 const goldFade = 'rgba(200,162,78,0.15)';
@@ -50,52 +136,69 @@ type RangeKey = 'all' | '5y' | '3y' | '1y';
 
 export default function HomeValueChart() {
   const chartRef = useRef<ChartJS<'line'>>(null);
-  const [activeRange, setActiveRange] = useState<RangeKey>('all');
+  const [activeRange, setActiveRange] = useState<RangeKey>('5y');
+  const [activeTown, setActiveTown] = useState<string>('easton');
 
   function getSliceStart(range: RangeKey) {
-    if (range === '1y') return fullData.labels.length - 4;
-    if (range === '3y') return fullData.labels.length - 12;
-    if (range === '5y') return fullData.labels.length - 20;
+    if (range === '1y') return labels.length - 4;
+    if (range === '3y') return labels.length - 12;
+    if (range === '5y') return labels.length - 20;
     return 0;
   }
 
   const sliceStart = getSliceStart(activeRange);
-  const labels = fullData.labels.slice(sliceStart);
-  const easton = fullData.easton.slice(sliceStart);
-  const mass = fullData.mass.slice(sliceStart);
+  const slicedLabels = labels.slice(sliceStart);
+  const townValues = townData[activeTown].values.slice(sliceStart);
+  const massValues = massMedian.slice(sliceStart);
+  const townLabel = townData[activeTown].label;
 
-  const allVisible = [...easton, ...mass];
+  const allVisible = [...townValues, ...massValues];
   const minVal = Math.min(...allVisible);
   const maxVal = Math.max(...allVisible);
   const padding = (maxVal - minVal) * 0.15;
 
-  function handleRange(range: RangeKey) {
-    setActiveRange(range);
-  }
-
   return (
     <div className="chart-container">
+      {/* Town selector row */}
+      <div className="chart-town-row">
+        <label htmlFor="hvc-town-select" className="chart-town-label">
+          <i className="ph ph-map-pin" style={{ marginRight: '0.375rem' }}></i>
+          Town
+        </label>
+        <select
+          id="hvc-town-select"
+          className="chart-town-select"
+          value={activeTown}
+          onChange={(e) => setActiveTown(e.target.value)}
+        >
+          {Object.entries(townData).map(([key, t]) => (
+            <option key={key} value={key}>{t.label}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Time range buttons */}
       <div className="chart-controls">
         {(['all', '5y', '3y', '1y'] as RangeKey[]).map((r) => (
           <button
             key={r}
             className={`chart-btn${activeRange === r ? ' is-active' : ''}`}
-            data-range={r}
-            onClick={() => handleRange(r)}
+            onClick={() => setActiveRange(r)}
           >
             {r === 'all' ? 'All Time' : r === '5y' ? '5 Years' : r === '3y' ? '3 Years' : '1 Year'}
           </button>
         ))}
       </div>
+
       <div className="chart-wrapper">
         <Line
           ref={chartRef}
           data={{
-            labels,
+            labels: slicedLabels,
             datasets: [
               {
-                label: 'Easton Avg. Home Value',
-                data: easton,
+                label: `${townLabel} Avg. Home Value`,
+                data: townValues,
                 borderColor: gold,
                 backgroundColor: goldFade,
                 borderWidth: 2.5,
@@ -109,7 +212,7 @@ export default function HomeValueChart() {
               },
               {
                 label: 'Massachusetts Median',
-                data: mass,
+                data: massValues,
                 borderColor: muted,
                 backgroundColor: mutedFade,
                 borderWidth: 1.5,
@@ -169,17 +272,23 @@ export default function HomeValueChart() {
                 },
                 border: { display: false },
                 beginAtZero: false,
-                suggestedMin: activeRange === 'all' ? 350000 : minVal - padding,
-                suggestedMax: activeRange === 'all' ? 720000 : maxVal + padding,
+                suggestedMin: minVal - padding,
+                suggestedMax: maxVal + padding,
               },
             },
-            animation: { duration: 1200, easing: 'easeOutQuart' },
+            animation: { duration: 800, easing: 'easeOutQuart' },
           }}
         />
       </div>
       <div className="chart-legend">
-        <span className="chart-legend__item"><span className="chart-legend__dot chart-legend__dot--primary"></span> Easton Avg. Home Value</span>
-        <span className="chart-legend__item"><span className="chart-legend__dot chart-legend__dot--muted"></span> Massachusetts Median</span>
+        <span className="chart-legend__item">
+          <span className="chart-legend__dot chart-legend__dot--primary"></span>
+          {townLabel} Avg. Home Value
+        </span>
+        <span className="chart-legend__item">
+          <span className="chart-legend__dot chart-legend__dot--muted"></span>
+          Massachusetts Median
+        </span>
       </div>
     </div>
   );
