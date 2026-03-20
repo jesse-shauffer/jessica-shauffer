@@ -1,0 +1,582 @@
+[
+  {
+    "keyword": "homes for sale plymouth ma",
+    "volume": 1600,
+    "difficulty": 4,
+    "cpc": 7,
+    "traffic_potential": 3400,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale west bridgewater ma",
+    "volume": 800,
+    "difficulty": 0,
+    "cpc": 4,
+    "traffic_potential": 600,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale easton ma",
+    "volume": 600,
+    "difficulty": 1,
+    "cpc": 2,
+    "traffic_potential": 900,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale kingston ma",
+    "volume": 600,
+    "difficulty": 1,
+    "cpc": 4,
+    "traffic_potential": 450,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale norwood ma",
+    "volume": 600,
+    "difficulty": 1,
+    "cpc": 2,
+    "traffic_potential": 1000,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale canton ma",
+    "volume": 500,
+    "difficulty": 1,
+    "cpc": 4,
+    "traffic_potential": 800,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale lakeville ma",
+    "volume": 500,
+    "difficulty": 0,
+    "cpc": 3,
+    "traffic_potential": 700,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale sharon ma",
+    "volume": 400,
+    "difficulty": 1,
+    "cpc": 5,
+    "traffic_potential": 500,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale norton ma",
+    "volume": 400,
+    "difficulty": 0,
+    "cpc": 2,
+    "traffic_potential": 700,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale raynham ma",
+    "volume": 400,
+    "difficulty": 1,
+    "cpc": 2,
+    "traffic_potential": 500,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate plymouth ma",
+    "volume": 300,
+    "difficulty": 6,
+    "cpc": 10,
+    "traffic_potential": 2600,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale weston ma",
+    "volume": 250,
+    "difficulty": 0,
+    "cpc": 4,
+    "traffic_potential": 350,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale east bridgewater ma",
+    "volume": 250,
+    "difficulty": 0,
+    "cpc": 4,
+    "traffic_potential": 500,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "homes for sale halifax ma",
+    "volume": 250,
+    "difficulty": 0,
+    "cpc": 4,
+    "traffic_potential": 250,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "south shore ma homes for sale",
+    "volume": 80,
+    "difficulty": 0,
+    "cpc": 10,
+    "traffic_potential": 70,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "south shore ma real estate",
+    "volume": 70,
+    "difficulty": 0,
+    "cpc": 8,
+    "traffic_potential": 80,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate east bridgewater ma",
+    "volume": 60,
+    "difficulty": null,
+    "cpc": 6,
+    "traffic_potential": null,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "realtor stoughton ma",
+    "volume": 40,
+    "difficulty": null,
+    "cpc": null,
+    "traffic_potential": null,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "realtor norwood ma",
+    "volume": 30,
+    "difficulty": 0,
+    "cpc": null,
+    "traffic_potential": 1100,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "realtor attleboro ma",
+    "volume": 30,
+    "difficulty": null,
+    "cpc": null,
+    "traffic_potential": null,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "realtor hingham ma",
+    "volume": 20,
+    "difficulty": 0,
+    "cpc": 70,
+    "traffic_potential": 1400,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate kingston ma",
+    "volume": 20,
+    "difficulty": 1,
+    "cpc": 0,
+    "traffic_potential": 500,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate taunton ma",
+    "volume": 20,
+    "difficulty": 2,
+    "cpc": 15,
+    "traffic_potential": 1000,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate mansfield ma",
+    "volume": 20,
+    "difficulty": 0,
+    "cpc": null,
+    "traffic_potential": 700,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate attleboro ma",
+    "volume": 20,
+    "difficulty": 2,
+    "cpc": 7,
+    "traffic_potential": 1700,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "realtor taunton ma",
+    "volume": 20,
+    "difficulty": 0,
+    "cpc": 300,
+    "traffic_potential": 1000,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate bridgewater ma",
+    "volume": 10,
+    "difficulty": 1,
+    "cpc": 6,
+    "traffic_potential": 700,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate norwood ma",
+    "volume": 10,
+    "difficulty": 1,
+    "cpc": null,
+    "traffic_potential": 900,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate westwood ma",
+    "volume": 10,
+    "difficulty": 0,
+    "cpc": null,
+    "traffic_potential": 700,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate canton ma",
+    "volume": 10,
+    "difficulty": 0,
+    "cpc": 9,
+    "traffic_potential": 500,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate raynham ma",
+    "volume": 10,
+    "difficulty": 1,
+    "cpc": 7,
+    "traffic_potential": 450,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": true,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "realtor canton ma",
+    "volume": 10,
+    "difficulty": 0,
+    "cpc": null,
+    "traffic_potential": 500,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate halifax ma",
+    "volume": 10,
+    "difficulty": null,
+    "cpc": null,
+    "traffic_potential": null,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate lakeville ma",
+    "volume": 10,
+    "difficulty": 0,
+    "cpc": 6,
+    "traffic_potential": 600,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "real estate west bridgewater ma",
+    "volume": 0,
+    "difficulty": null,
+    "cpc": 8,
+    "traffic_potential": null,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "realtor lakeville ma",
+    "volume": 0,
+    "difficulty": null,
+    "cpc": null,
+    "traffic_potential": null,
+    "intents": {
+      "informational": true,
+      "navigational": false,
+      "commercial": true,
+      "transactional": false,
+      "branded": false,
+      "local": true
+    }
+  },
+  {
+    "keyword": "realtor raynham ma",
+    "volume": 0,
+    "difficulty": null,
+    "cpc": 0,
+    "traffic_potential": null,
+    "intents": null
+  },
+  {
+    "keyword": "realtor east bridgewater ma",
+    "volume": 0,
+    "difficulty": null,
+    "cpc": 0,
+    "traffic_potential": null,
+    "intents": null
+  },
+  {
+    "keyword": "homes for sale middleborough ma",
+    "volume": 0,
+    "difficulty": null,
+    "cpc": null,
+    "traffic_potential": null,
+    "intents": {}
+  },
+  {
+    "keyword": "realtor north attleborough ma",
+    "volume": 0,
+    "difficulty": null,
+    "cpc": null,
+    "traffic_potential": null,
+    "intents": {}
+  },
+  {
+    "keyword": "realtor halifax ma",
+    "volume": 0,
+    "difficulty": null,
+    "cpc": null,
+    "traffic_potential": null,
+    "intents": {}
+  }
+]

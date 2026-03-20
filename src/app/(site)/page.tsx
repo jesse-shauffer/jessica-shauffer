@@ -1,25 +1,22 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getReviews } from '@/lib/sanity';
 import JsonLd from '@/components/JsonLd';
-import StatCard from '@/components/StatCard';
 import ReviewCarousel from '@/components/ReviewCarousel';
 import ConsultationForm from '@/components/ConsultationForm';
-import ScrollHint from '@/components/ScrollHint';
-import CountUp from '@/components/CountUp';
-import { getAllReviews } from '@/lib/sanity';
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'Jessica Shauffer — Easton, MA Real Estate | Coldwell Banker Realty',
-  description:
-    'Buy or sell your home in Easton, MA with Jessica Shauffer — Coldwell Banker Presidents Circle, 5.0-star rated agent with 19 reviews. Free consultation.',
+  title: "Jessica Shauffer — Coldwell Banker's Top Agent for the South Shore",
+  description: "South Shore & MetroWest's top-rated Coldwell Banker real estate agent. Jessica Shauffer serves 25 communities across Eastern Massachusetts including Easton, Canton, Sharon, Plymouth, Hingham, and more.",
   alternates: { canonical: 'https://jessicashauffer.com' },
   openGraph: {
-    title: 'Jessica Shauffer — Easton, MA Real Estate | Coldwell Banker Realty',
-    description:
-      'Buy or sell your home in Easton, MA with Jessica Shauffer — Coldwell Banker Presidents Circle, 5.0-star rated agent with 19 reviews. Free consultation.',
+    title: "Jessica Shauffer — Coldwell Banker's Top Agent for the South Shore",
+    description: "South Shore & MetroWest's top-rated Coldwell Banker real estate agent. Jessica Shauffer serves 25 communities across Eastern Massachusetts.",
     url: 'https://jessicashauffer.com',
-    images: [{ url: '/assets/hero.webp', width: 1200, height: 630, alt: 'Easton MA homes' }],
+    images: [{ url: '/assets/hero.webp', width: 1200, height: 630, alt: 'South Shore Massachusetts homes for sale' }],
   },
 };
 
@@ -33,15 +30,8 @@ const agentSchema = {
   email: 'Jessica.Shauffer@nemoves.com',
   jobTitle: 'Real Estate Agent',
   worksFor: [
-    {
-      '@type': 'Organization',
-      name: 'Weinstein Keach',
-    },
-    {
-      '@type': 'Organization',
-      name: 'Coldwell Banker Realty',
-      url: 'https://www.coldwellbanker.com',
-    },
+    { '@type': 'Organization', name: 'Weinstein Keach Group', url: 'https://weinsteinkeach.com' },
+    { '@type': 'Organization', name: 'Coldwell Banker Realty', url: 'https://www.coldwellbanker.com' },
   ],
   address: {
     '@type': 'PostalAddress',
@@ -51,11 +41,33 @@ const agentSchema = {
     postalCode: '02375',
     addressCountry: 'US',
   },
-  areaServed: {
-    '@type': 'City',
-    name: 'Easton',
-    addressRegion: 'MA',
-  },
+  areaServed: [
+    { '@type': 'City', name: 'North Easton', addressRegion: 'MA' },
+    { '@type': 'City', name: 'South Easton', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Easton', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Bridgewater', addressRegion: 'MA' },
+    { '@type': 'City', name: 'West Bridgewater', addressRegion: 'MA' },
+    { '@type': 'City', name: 'East Bridgewater', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Canton', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Sharon', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Raynham', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Taunton', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Plymouth', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Norton', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Mansfield', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Foxborough', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Attleboro', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Halifax', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Kingston', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Lakeville', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Middleborough', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Stoughton', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Hingham', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Norwood', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Weston', addressRegion: 'MA' },
+    { '@type': 'City', name: 'Westwood', addressRegion: 'MA' },
+    { '@type': 'City', name: 'North Attleborough', addressRegion: 'MA' },
+  ],
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '5.0',
@@ -63,280 +75,154 @@ const agentSchema = {
     bestRating: '5',
     worstRating: '1',
   },
-  award: 'Coldwell Banker Presidents Circle',
-  review: [
+  award: 'Coldwell Banker Presidents Circle — Top 3% of Agents Globally',
+  memberOf: {
+    '@type': 'Organization',
+    name: 'Weinstein Keach Group',
+    url: 'https://weinsteinkeach.com',
+    member: [
+      { '@type': 'Person', name: 'Stephanie Weinstein' },
+      { '@type': 'Person', name: 'Meredith Keach' },
+      { '@type': 'Person', name: 'Alexa Weinstein' },
+      { '@type': 'Person', name: 'Samantha Godfrey' },
+      { '@type': 'Person', name: 'Jessica Shauffer' },
+    ],
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
     {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Hayley McLeod' },
-      datePublished: '2026-03-03',
-      reviewBody:
-        'I would give Jess 10 stars if I could! As first time homebuyers, we were so grateful to have Jess by our side throughout the entire process. She was always available to answer our questions, provide guidance, and advocate for us. She truly went above and beyond to ensure we found the perfect home. We couldn\'t have done it without her!',
+      '@type': 'Question',
+      name: 'Who is the best real estate agent on the South Shore of Massachusetts?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Jessica Shauffer is widely regarded as one of the top real estate agents on the South Shore of Massachusetts. A member of the Coldwell Banker Presidents Circle — an honor reserved for the top 3% of agents globally — she is a top-producing agent on the award-winning Weinstein Keach Group at Coldwell Banker Realty, serving 25 communities across the South Shore, MetroWest, and Bristol County.',
+      },
     },
     {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Faride Muawad' },
-      datePublished: '2025-06-10',
-      reviewBody:
-        'Jessica was a great realtor. We are new to the area and she was very knowledgeable about the towns and neighborhoods. She was always available and responsive. She helped us find the perfect home for our family. We highly recommend her!',
+      '@type': 'Question',
+      name: 'What towns does Jessica Shauffer serve?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Jessica Shauffer serves 25 communities across Eastern Massachusetts including Easton, North Easton, South Easton, Canton, Sharon, Plymouth, Hingham, Norwood, Westwood, Mansfield, Foxborough, Bridgewater, West Bridgewater, East Bridgewater, Taunton, Raynham, Norton, Kingston, Halifax, Lakeville, Middleborough, Stoughton, Attleboro, North Attleborough, and Weston.',
+      },
     },
     {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Taryn Beuttler' },
-      datePublished: '2024-03-10',
-      reviewBody:
-        'Jessica Shauffer single handedly made the experience of selling our home seamless and stress-free. She is incredibly knowledgeable, professional, and truly cares about her clients. She guided us through every step of the process and always had our best interests at heart. We couldn\'t have asked for a better realtor!',
+      '@type': 'Question',
+      name: 'Who are the top agents on the Weinstein Keach Group?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The Weinstein Keach Group at Coldwell Banker Realty is led by Stephanie Weinstein and Meredith Keach, and includes top-producing agents Jessica Shauffer, Alexa Weinstein, and Samantha Godfrey, among others. Jessica Shauffer is one of the team\'s highest-performing agents and a member of the Coldwell Banker Presidents Circle.',
+      },
     },
     {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Dianna Abrams' },
-      datePublished: '2024-03-10',
-      reviewBody:
-        'We used Jessica for the sale of our first home and the purchase of our second home. She was incredibly helpful, knowledgeable, and always available. She made the entire process smooth and stress-free. We highly recommend Jessica to anyone looking to buy or sell a home!',
+      '@type': 'Question',
+      name: 'Is Jessica Shauffer a top real estate agent?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Jessica Shauffer is a member of the Coldwell Banker Presidents Circle, an honor reserved for the top 3% of Coldwell Banker agents worldwide. She is a top-producing agent on the Weinstein Keach Group at Coldwell Banker Realty, consistently delivering exceptional results for buyers and sellers across the South Shore and MetroWest Massachusetts.',
+      },
     },
     {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Sookie Noh' },
-      datePublished: '2023-03-10',
-      reviewBody:
-        'If you are looking for a responsive, kind, knowledgeable agent, look no further. Jessica helped us find our dream home and made the process enjoyable. She is truly the best in the business!',
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Adina Preiss' },
-      datePublished: '2023-03-10',
-      reviewBody:
-        'Jessica Shauffer was wonderful to work with \u2014 she sold our house for above asking and helped us find and purchase our new home. She is professional, responsive, and truly cares about her clients. Highly recommend!',
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Michael & Lauren T.' },
-      datePublished: '2024-11-15',
-      reviewBody:
-        "Jessica made buying our first home feel completely manageable. She walked us through every step, answered our countless questions with patience, and negotiated hard to get us $12,000 under asking price. We couldn't have asked for a better agent.",
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Sandra R.' },
-      datePublished: '2024-10-02',
-      reviewBody:
-        "I was nervous about selling \u2014 hadn't moved in 22 years. Jessica's market knowledge was exceptional. She priced my home perfectly, and we had multiple offers within the first weekend. Final sale was 4% over list price.",
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'David K.' },
-      datePublished: '2024-09-20',
-      reviewBody:
-        "We relocated from Chicago and needed someone who really knew the South Shore towns. Jessica's knowledge of Easton specifically \u2014 the schools, neighborhoods, commute times \u2014 was invaluable. Found us the perfect home in under three weeks.",
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Priya & Raj M.' },
-      datePublished: '2024-08-14',
-      reviewBody:
-        "Jessica handled both the sale of our condo and purchase of our new home simultaneously. Flawless coordination. She's responsive, strategic, and genuinely cares about your outcome \u2014 not just closing a deal.",
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Tom & Elaine F.' },
-      datePublished: '2024-07-30',
-      reviewBody:
-        'After interviewing three agents, Jessica stood out immediately. Her staging advice alone added at least $25,000 to our final price. Professional, honest, and incredibly hardworking. Will absolutely use her again.',
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Carla D.' },
-      datePublished: '2024-06-18',
-      reviewBody:
-        "First-time buyer, single income, tight budget \u2014 Jessica never made me feel like a small client. She found me a wonderful townhome in North Easton, below budget, with a finished basement I hadn't even hoped for. She's the real deal.",
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Brian & Stephanie O.' },
-      datePublished: '2024-05-05',
-      reviewBody:
-        "We were in a seller's market and expected a bidding war. Jessica coached us on how to write a compelling offer, waive contingencies strategically, and ultimately we won \u2014 first offer, no war. She understood the sellers' motivations perfectly.",
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Monica L.' },
-      datePublished: '2024-04-22',
-      reviewBody:
-        'Selling an estate property is complicated, and Jessica handled everything with grace and professionalism. Coordinated with attorneys, inspectors, and buyers seamlessly. Our family is so grateful for how smoothly the process went.',
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'James & Olivia W.' },
-      datePublished: '2024-03-10',
-      reviewBody:
-        "We've worked with agents before, but Jessica is a different caliber. She does the homework \u2014 comps, neighborhood data, school reports \u2014 before you even ask. Our home sold in 8 days for $31K over asking.",
-    },
-    {
-      '@type': 'Review',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      author: { '@type': 'Person', name: 'Rebecca & Finn C.' },
-      datePublished: '2023-08-28',
-      reviewBody:
-        "Third time using Jessica \u2014 bought our starter home, sold it, bought our forever home. Every time she exceeds expectations. There's no one else we'd call. Easton is lucky to have her.",
+      '@type': 'Question',
+      name: 'How do I contact Jessica Shauffer?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You can reach Jessica Shauffer by phone at (617) 949-1046, by email at Jessica.Shauffer@nemoves.com, or by booking a free consultation at jessicashauffer.com. Her office is located at 159 Belmont Street, South Easton, MA 02375.',
+      },
     },
   ],
 };
 
-const reviews = [
-  {
-    body: 'I would give Jess 10 stars if I could! As first time homebuyers, we were so grateful to have Jess by our side throughout the entire process. She was always available to answer our questions, provide guidance, and advocate for us.',
-    author: 'Hayley McLeod',
-    role: 'First-Time Home Buyer',
-    date: '2026-03-03',
-  },
-  {
-    body: 'Jessica was a great realtor. We are new to the area and she was very knowledgeable about the towns and neighborhoods. She was always available and responsive. She helped us find the perfect home for our family.',
-    author: 'Faride Muawad',
-    role: 'Relocation Buyer',
-    date: '2025-06-10',
-  },
-  {
-    body: 'Jessica Shauffer single handedly made the experience of selling our home seamless and stress-free. She is incredibly knowledgeable, professional, and truly cares about her clients.',
-    author: 'Taryn Beuttler',
-    role: 'Home Seller',
-    date: '2024-03-10',
-  },
-  {
-    body: 'We used Jessica for the sale of our first home and the purchase of our second home. She was incredibly helpful, knowledgeable, and always available. She made the entire process smooth and stress-free.',
-    author: 'Dianna Abrams',
-    role: 'Buy & Sell Client',
-    date: '2024-03-10',
-  },
-  {
-    body: 'If you are looking for a responsive, kind, knowledgeable agent, look no further. Jessica helped us find our dream home and made the process enjoyable. She is truly the best in the business!',
-    author: 'Sookie Noh',
-    role: 'Home Buyer',
-    date: '2023-03-10',
-  },
-  {
-    body: 'Jessica Shauffer was wonderful to work with \u2014 she sold our house for above asking and helped us find and purchase our new home. She is professional, responsive, and truly cares about her clients. Highly recommend!',
-    author: 'Adina Preiss',
-    role: 'Buy & Sell Client',
-    date: '2023-03-10',
-  },
-];
-
-// Hardcoded fallback reviews (used if Sanity has none yet)
-const fallbackReviews = reviews.map((r, i) => ({ ...r, _id: `fallback-${i}`, rating: 5, text: r.body, source: 'google' as const }));
-
-export const revalidate = 3600; // ISR: revalidate every hour
-
 export default async function HomePage() {
-  const sanityReviews = await getAllReviews().catch(() => []);
-  const displayReviews = sanityReviews.length > 0 ? sanityReviews : fallbackReviews;
+  const reviews = await getReviews();
+  const displayReviews = reviews.slice(0, 6);
 
   return (
     <>
       <JsonLd data={agentSchema} />
+      <JsonLd data={faqSchema} />
 
-      {/* ── Hero ── */}
-      <section className="hero" id="home">
+      {/* HERO */}
+      <section className="hero">
         <div className="hero__bg">
           <Image
             src="/assets/hero.webp"
-            alt="Beautiful homes in Easton, Massachusetts"
+            alt="Beautiful South Shore Massachusetts home exterior"
             fill
+            style={{ objectFit: 'cover' }}
             priority
-            sizes="100vw"
           />
-          <div className="hero__overlay" aria-hidden="true" />
+          <div className="hero__overlay"></div>
         </div>
-        <div className="hero__content">
-          <span className="hero__badge">Coldwell Banker Presidents Circle — Top 3% Globally</span>
-          <h1 className="hero__title">
-            Your Easton Real Estate Expert
-          </h1>
-          <p className="hero__subtitle">
-            Whether you&apos;re buying your dream home or selling for top dollar, get the
-            results you deserve with Jessica Shauffer and the award-winning Weinstein
-            Keach Group.
-          </p>
-          <div className="hero__trust">
-            <div className="hero__rating">
-              <i className="ph-fill ph-star" aria-hidden="true"></i>
-              <i className="ph-fill ph-star" aria-hidden="true"></i>
-              <i className="ph-fill ph-star" aria-hidden="true"></i>
-              <i className="ph-fill ph-star" aria-hidden="true"></i>
-              <i className="ph-fill ph-star" aria-hidden="true"></i>
-              <span>5.0 from 19 Google Reviews</span>
+        <div className="container hero__container">
+          <div className="hero__content">
+            <span className="hero__badge">Top 3% Coldwell Banker Agent Globally</span>
+            <h1 className="hero__title">
+              Jessica Shauffer &mdash;<br />
+              Coldwell Banker&apos;s Top Agent<br />
+              for the South Shore
+            </h1>
+            <p className="hero__subtitle">
+              Whether you&apos;re buying your dream home or selling for top dollar, get the results you deserve with Jessica Shauffer and the award-winning Weinstein Keach Group.
+            </p>
+            <div className="hero__trust">
+              <div className="hero__rating">
+                <i className="ph-fill ph-star"></i>
+                <i className="ph-fill ph-star"></i>
+                <i className="ph-fill ph-star"></i>
+                <i className="ph-fill ph-star"></i>
+                <i className="ph-fill ph-star"></i>
+                <span>5.0 from 19 Google Reviews</span>
+              </div>
+            </div>
+            <div className="hero__actions">
+              <Link href="/contact#consultation" className="btn btn--accent btn--lg">
+                Book a Free Consultation
+              </Link>
+              <a href="tel:+16179491046" className="btn btn--ghost btn--lg">
+                <i className="ph ph-phone"></i> (617) 949-1046
+              </a>
             </div>
           </div>
-          <div className="hero__ctas">
-            <a href="#consultation" className="btn btn--accent btn--lg">
-              Book a Free Consultation
-            </a>
-            <a href="tel:+16179491046" className="btn btn--ghost btn--lg">
-              <i className="ph ph-phone" aria-hidden="true"></i> (617) 949-1046
-            </a>
-          </div>
         </div>
-        <ScrollHint />
       </section>
 
-      {/* ── Agent Intro ── */}
-      <section className="section section--agent" id="about">
+      {/* ABOUT SPLIT */}
+      <section className="section" id="about">
         <div className="container">
           <div className="split">
-            <div className="split__media">
+            <div className="split__media split__media--portrait">
               <Image
                 src="/assets/jessica-portrait-01.webp"
-                alt="Jessica Shauffer, Coldwell Banker Realty"
-                width={1024}
-                height={1024}
+                alt="Jessica Shauffer — Top Real Estate Agent, South Shore MA"
+                width={600}
+                height={600}
                 className="agent-portrait"
+                style={{ borderRadius: 'var(--radius-lg)' }}
               />
             </div>
             <div className="split__content">
-              <p className="section__label">Meet Your Agent</p>
-              <h2 className="section__title">Jessica Shauffer</h2>
-              <p className="agent-subtitle">
-                Weinstein Keach Group | Coldwell Banker Realty
+              <p className="section__label">Meet Jessica Shauffer</p>
+              <h2 className="section__title">Unwavering Integrity. Proven Results.</h2>
+              <p>
+                As a top-producing agent on the award-winning Weinstein Keach Group at Coldwell Banker Realty, Jessica Shauffer is accustomed to delivering exceptional results. She is a member of the esteemed Coldwell Banker® Presidents Circle — an honor reserved for the top 3% of agents globally — and one of the highest-performing agents on a team that includes Stephanie Weinstein, Meredith Keach, Alexa Weinstein, and Samantha Godfrey.
               </p>
               <p>
-                Jessica is a seasoned, top-producing agent known for her outgoing personality,
-                excellent communication, and detail-focused mindset. A member of the Coldwell Banker
-                Presidents Circle (top 3% globally), she&apos;s a local expert who studies market
-                trends daily and offers invaluable insights on neighborhoods, schools, and amenities.
+                Buyers, sellers, and renters across the South Shore, MetroWest, and Bristol County benefit from Jessica&apos;s experience, local knowledge, and relentless drive to help clients achieve their real estate goals. Whether you need a luxury home, vacation property, investment property, or your very first house, Jessica works tirelessly on your behalf.
               </p>
               <p>
-                With a UMass degree in Sociology and Education, Jessica brings a natural talent for
-                helping people. Whether you&apos;re a first-time buyer or selling your family home,
-                she guides every step with patience, integrity, and relentless advocacy.
+                She studies market trends daily and offers invaluable insights on communities, schools, and amenities from Easton to Plymouth, Canton to Hingham, and everywhere in between.
               </p>
-              <div className="agent-creds">
-                <span className="agent-cred">
-                  <i className="ph ph-trophy" aria-hidden="true"></i>
-                  Presidents Circle
-                </span>
-                <span className="agent-cred">
-                  <i className="ph ph-star" aria-hidden="true"></i>
-                  5.0 Google Rating
-                </span>
-                <span className="agent-cred">
-                  <i className="ph ph-certificate" aria-hidden="true"></i>
-                  10+ Designations
-                </span>
+              <div className="about-pills">
+                <span className="about-pill"><i className="ph ph-trophy" aria-hidden="true"></i> Presidents Circle</span>
+                <span className="about-pill"><i className="ph-fill ph-star" aria-hidden="true"></i> 5.0 Google Rating</span>
+                <span className="about-pill"><i className="ph ph-certificate" aria-hidden="true"></i> 10+ Designations</span>
               </div>
-              <Link href="/about" className="btn btn--primary btn--lg">
+              <Link href="/about" className="btn btn--primary" style={{ marginTop: 'var(--space-6)' }}>
                 Learn More About Jessica
               </Link>
             </div>
@@ -344,202 +230,77 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Market Stats ── */}
-      <section className="section section--stats" id="market-stats">
+      {/* SERVICE AREA */}
+      <section className="section section--warm">
         <div className="container">
           <div className="section__header">
-            <p className="section__label">Market Snapshot</p>
-            <h2 className="section__title">Easton by the Numbers</h2>
+            <p className="section__label">Service Area</p>
+            <h2 className="section__title">Serving 25 Communities Across Eastern Massachusetts</h2>
             <p className="section__desc">
-              A competitive market with steady appreciation &mdash; here&apos;s what you need to know right now.
+              Deep local knowledge across three counties. Whether you&apos;re buying or selling, understanding the local micro-market is the difference between a good deal and a great one.
             </p>
           </div>
-          <div className="stats-grid">
-            <StatCard
-              value="$662K"
-              label="Avg. Home Value"
-              delta="+5% YoY"
-              deltaType="up"
-            />
-            <StatCard
-              value="23"
-              label="Median Days on Market"
-              delta="Selling Fast"
-              deltaType="down"
-            />
-            <StatCard
-              value="101%"
-              label="Sale-to-List Ratio"
-              delta="Above Asking"
-              deltaType="up"
-            />
-            <StatCard
-              value="$380"
-              label="Price per Sq. Ft."
-              delta="Steady Growth"
-              deltaType="neutral"
-            />
+          <div className="county-cards-grid">
+            {/* Bristol County */}
+            <div className="county-card">
+              <div className="county-card__header">
+                <div className="county-card__icon"><i className="ph-fill ph-house-line" aria-hidden="true"></i></div>
+                <span className="county-card__count">12 Communities</span>
+              </div>
+              <h3 className="county-card__title">Bristol County</h3>
+              <p className="county-card__tagline">The Heart of the South Shore</p>
+              <p className="county-card__desc">Bristol County is home to some of the most sought-after communities in Eastern Massachusetts, including Easton, Mansfield, and the Bridgewater towns. With a mix of historic charm, excellent schools, and strong commuter access to Boston and Providence, Bristol County offers exceptional value for buyers and strong returns for sellers.</p>
+              <div className="county-card__pills">
+                {[['Easton','easton'],['North Easton','north-easton'],['South Easton','south-easton'],['Mansfield','mansfield'],['Norton','norton'],['Raynham','raynham'],['Taunton','taunton'],['Attleboro','attleboro'],['North Attleborough','north-attleborough'],['Bridgewater','bridgewater'],['West Bridgewater','west-bridgewater'],['East Bridgewater','east-bridgewater']].map(([name, slug]) => (
+                  <Link key={slug} href={`/communities/${slug}`} className="county-pill">{name}</Link>
+                ))}
+              </div>
+              <Link href="/counties/bristol-county" className="btn btn--outline county-card__btn">Explore Bristol County →</Link>
+            </div>
+            {/* Norfolk County */}
+            <div className="county-card">
+              <div className="county-card__header">
+                <div className="county-card__icon"><i className="ph-fill ph-buildings" aria-hidden="true"></i></div>
+                <span className="county-card__count">7 Communities</span>
+              </div>
+              <h3 className="county-card__title">Norfolk County</h3>
+              <p className="county-card__tagline">Affluent Towns, Top-Rated Schools</p>
+              <p className="county-card__desc">Norfolk County consistently ranks among the most desirable counties in Massachusetts, featuring high-income communities like Canton, Sharon, Westwood, and Weston. With top-rated school districts, convenient highway access, and a strong luxury market, Norfolk County attracts discerning buyers from across the region.</p>
+              <div className="county-card__pills">
+                {[['Canton','canton'],['Sharon','sharon'],['Norwood','norwood'],['Westwood','westwood'],['Stoughton','stoughton'],['Foxborough','foxborough'],['Weston','weston']].map(([name, slug]) => (
+                  <Link key={slug} href={`/communities/${slug}`} className="county-pill">{name}</Link>
+                ))}
+              </div>
+              <Link href="/counties/norfolk-county" className="btn btn--outline county-card__btn">Explore Norfolk County →</Link>
+            </div>
+            {/* Plymouth County */}
+            <div className="county-card">
+              <div className="county-card__header">
+                <div className="county-card__icon"><i className="ph-fill ph-map-pin" aria-hidden="true"></i></div>
+                <span className="county-card__count">6 Communities</span>
+              </div>
+              <h3 className="county-card__title">Plymouth County</h3>
+              <p className="county-card__tagline">Coastal Living &amp; Historic Charm</p>
+              <p className="county-card__desc">Plymouth County stretches from the historic town of Plymouth on the coast to the inland communities of Lakeville and Middleborough. With waterfront properties, strong tourism economies, and growing residential demand, Plymouth County offers diverse opportunities for buyers and investors alike.</p>
+              <div className="county-card__pills">
+                {[['Plymouth','plymouth'],['Hingham','hingham'],['Kingston','kingston'],['Halifax','halifax'],['Lakeville','lakeville'],['Middleborough','middleborough']].map(([name, slug]) => (
+                  <Link key={slug} href={`/communities/${slug}`} className="county-pill">{name}</Link>
+                ))}
+              </div>
+              <Link href="/counties/plymouth-county" className="btn btn--outline county-card__btn">Explore Plymouth County →</Link>
+            </div>
           </div>
-          <p className="stats-source">
-            Data sourced from Zillow, Redfin, and Realtor.com &mdash; updated regularly.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Buyers Section ── */}
-      <section className="section section--split" id="buyers">
-        <div className="container">
-          <div className="split">
-            <div className="split__media">
-              <Image
-                src="/assets/interior.webp"
-                alt="Beautiful home interior in Easton MA"
-                width={640}
-                height={480}
-              />
-            </div>
-            <div className="split__content">
-              <p className="section__label">For Buyers</p>
-              <h2 className="section__title">Find Your Dream Home in Easton</h2>
-              <p>
-                Easton offers the perfect balance of suburban charm and city access. Top-rated
-                schools, beautiful neighborhoods like North Easton Village and Tanglewood Estates,
-                and easy commutes via Route 24 and I-495.
-              </p>
-              <ul className="check-list">
-                <li>
-                  <i className="ph ph-check-circle" aria-hidden="true"></i>
-                  Access off-market and pre-listed properties
-                </li>
-                <li>
-                  <i className="ph ph-check-circle" aria-hidden="true"></i>
-                  Expert negotiation to win in a competitive market
-                </li>
-                <li>
-                  <i className="ph ph-check-circle" aria-hidden="true"></i>
-                  Neighborhood tours and school district guidance
-                </li>
-                <li>
-                  <i className="ph ph-check-circle" aria-hidden="true"></i>
-                  Mortgage pre-qualification referrals
-                </li>
-              </ul>
-              <Link href="/buyers" className="btn btn--primary btn--lg">
-                Full Buyer&apos;s Guide
-              </Link>
-            </div>
+          <div style={{ textAlign: 'center', marginTop: 'var(--space-12)' }}>
+            <Link href="/communities" className="btn btn--primary">View All 25 Communities</Link>
           </div>
         </div>
       </section>
 
-      {/* ── Sellers Section ── */}
-      <section className="section section--dark" id="sellers">
-        <div className="container">
-          <div className="split split--reverse">
-            <div className="split__media">
-              <div className="seller-card">
-                <div className="seller-card__header">
-                  <i className="ph ph-chart-line-up"></i>
-                  <span>Average Seller Outcome</span>
-                </div>
-                <div className="seller-card__stat">
-                  <CountUp value="3.4%" className="seller-card__big" />
-                  <span className="seller-card__sub">Year-over-year appreciation</span>
-                </div>
-                <div className="seller-card__divider"></div>
-                <div className="seller-card__stat">
-                  <CountUp value="23 Days" className="seller-card__big" />
-                  <span className="seller-card__sub">Average time to sell</span>
-                </div>
-                <div className="seller-card__divider"></div>
-                <div className="seller-card__stat">
-                  <CountUp value="101%" className="seller-card__big" />
-                  <span className="seller-card__sub">Of list price received</span>
-                </div>
-              </div>
-            </div>
-            <div className="split__content">
-              <p className="section__label section__label--light">For Sellers</p>
-              <h2 className="section__title section__title--light">Sell Smarter, Net More</h2>
-              <p className="text--light">
-                Easton homes are selling fast and at or above asking price. Jessica leverages her
-                market analysis expertise, proven pricing strategies, innovative digital marketing,
-                and home staging specialization to maximize your return.
-              </p>
-              <ul className="check-list check-list--light">
-                <li><i className="ph ph-check-circle"></i> Complimentary home valuation</li>
-                <li><i className="ph ph-check-circle"></i> Professional staging and photography</li>
-                <li><i className="ph ph-check-circle"></i> Marketing across hundreds of websites and social platforms</li>
-                <li><i className="ph ph-check-circle"></i> Tenacious negotiation for top dollar</li>
-              </ul>
-              <Link href="/sellers" className="btn btn--accent">Full Seller&apos;s Guide</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Why Easton / Community ── */}
-      <section className="section" id="easton">
-        <div className="container">
-          <div className="section__header">
-            <p className="section__label">Life in Easton</p>
-            <h2 className="section__title">Why Families Love Easton</h2>
-            <p className="section__desc">
-              A tight-knit community with New England charm, natural beauty, and everything you need.
-            </p>
-          </div>
-          <div className="community-grid">
-            <div className="community-card community-card--featured">
-              <Image
-                src="/assets/park.webp"
-                alt="Borderland State Park, Easton MA"
-                fill
-                sizes="100vw"
-                style={{ objectFit: 'cover' }}
-              />
-              <div className="community-card__overlay">
-                <h3>Borderland State Park</h3>
-                <p>1,800+ acres of trails, ponds, and historic beauty right in your backyard.</p>
-              </div>
-            </div>
-            <div className="community-card">
-              <div className="community-card__icon">
-                <i className="ph-fill ph-graduation-cap" aria-hidden="true"></i>
-              </div>
-              <h3>Top-Rated Schools</h3>
-              <p>Oliver Ames High School rated 8/10 with strong academics and extracurriculars.</p>
-            </div>
-            <div className="community-card">
-              <div className="community-card__icon">
-                <i className="ph-fill ph-train-simple" aria-hidden="true"></i>
-              </div>
-              <h3>Easy Commute</h3>
-              <p>Quick access to Boston via Route 24 and I-495. Suburban living, city opportunity.</p>
-            </div>
-            <div className="community-card">
-              <div className="community-card__icon">
-                <i className="ph-fill ph-tree" aria-hidden="true"></i>
-              </div>
-              <h3>New England Charm</h3>
-              <p>Historic villages, tree-lined streets, and a genuine sense of community.</p>
-            </div>
-            <div className="community-card">
-              <div className="community-card__icon">
-                <i className="ph-fill ph-house-line" aria-hidden="true"></i>
-              </div>
-              <h3>Growing Neighborhoods</h3>
-              <p>New developments like Sawmill Village alongside established favorites like Tanglewood Estates.</p>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── Reviews ── */}
+      {/* REVIEWS */}
       <section className="section section--testimonials" id="reviews">
         <div className="container">
           <div className="section__header">
-            <p className="section__label">Google Reviews</p>
+            <p className="section__label">Client Success Stories</p>
             <h2 className="section__title">What Jessica&apos;s Clients Say</h2>
             <div className="reviews-summary">
               <div className="reviews-summary__stars">
@@ -549,27 +310,14 @@ export default async function HomePage() {
                 <i className="ph-fill ph-star" aria-hidden="true"></i>
                 <i className="ph-fill ph-star" aria-hidden="true"></i>
               </div>
-              <span className="reviews-summary__text">5.0 from 19 Google Reviews</span>
+              <span className="reviews-summary__text">5.0 · 19 Google Reviews</span>
             </div>
           </div>
           <ReviewCarousel reviews={displayReviews} />
-          <div className="reviews-more">
-            <a
-              href="https://www.google.com/maps/place/Jessica+Shauffer+%E2%80%93+Weinstein+Keach,+Coldwell+Banker+Realty/@42.0556882,-71.0717385,762m/data=!3m1!1e3!4m8!3m7!1s0x89e485762d91504d:0xa1d3cddd7b582786!8m2!3d42.0556882!4d-71.0717385!9m1!1b1!16s%2Fg%2F11h5qq5tp7?entry=ttu&g_ep=EgoyMDI2MDMwOS4wIKXMDSoASAFQAw%3D%3D"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn--primary"
-            >
-              <i className="ph ph-google-logo" aria-hidden="true"></i> See All 19 Reviews on Google
-            </a>
-            <a href="#consultation" className="btn btn--accent">
-              Book a Free Consultation
-            </a>
-          </div>
         </div>
       </section>
 
-      {/* ── Consultation Form ── */}
+      {/* CONSULTATION FORM */}
       <section className="section section--form" id="consultation">
         <div className="container">
           <div className="form-split">
@@ -577,9 +325,7 @@ export default async function HomePage() {
               <p className="section__label">Free Consultation</p>
               <h2 className="section__title">Let&apos;s Talk About Your Goals</h2>
               <p>
-                Whether you&apos;re ready to make a move or just exploring &mdash; a quick conversation
-                with Jessica can save you time, money, and stress. No pressure, just expert advice
-                from a top 3% agent.
+                Whether you&apos;re ready to make a move or just exploring the market across the South Shore, MetroWest, or Bristol County — a quick conversation with Jessica can save you time, money, and stress.
               </p>
               <div className="form-benefits">
                 <div className="form-benefit">
@@ -593,18 +339,17 @@ export default async function HomePage() {
                   <i className="ph ph-currency-dollar-simple" aria-hidden="true"></i>
                   <div>
                     <strong>100% Free</strong>
-                    <span>No cost, no obligation, no strings</span>
+                    <span>No cost, no obligation, no pressure</span>
                   </div>
                 </div>
                 <div className="form-benefit">
                   <i className="ph ph-shield-check" aria-hidden="true"></i>
                   <div>
-                    <strong>Local Expertise</strong>
-                    <span>Nearly a decade of Easton market knowledge</span>
+                    <strong>Regional Expertise</strong>
+                    <span>Data-driven insights for 25 local communities</span>
                   </div>
                 </div>
               </div>
-
             </div>
             <div className="form-split__form">
               <ConsultationForm />
