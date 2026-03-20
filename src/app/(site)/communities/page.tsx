@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import CommunitiesHoverList from '@/components/CommunitiesHoverList';
 import { getAllNeighborhoods, resolveHeroImage } from '@/lib/sanity';
 
-export const revalidate = 3600; // ISR: revalidate every hour
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'South Shore & MetroWest MA Communities — Jessica Shauffer',
@@ -17,9 +18,54 @@ export const metadata: Metadata = {
   alternates: { canonical: '/communities' },
 };
 
+// County mapping for each town slug
+const COUNTY_MAP: Record<string, string> = {
+  'easton': 'Bristol County',
+  'north-easton': 'Bristol County',
+  'south-easton': 'Bristol County',
+  'mansfield': 'Bristol County',
+  'norton': 'Bristol County',
+  'raynham': 'Bristol County',
+  'taunton': 'Bristol County',
+  'attleboro': 'Bristol County',
+  'north-attleborough': 'Bristol County',
+  'bridgewater': 'Plymouth County',
+  'west-bridgewater': 'Plymouth County',
+  'east-bridgewater': 'Plymouth County',
+  'hingham': 'Plymouth County',
+  'kingston': 'Plymouth County',
+  'halifax': 'Plymouth County',
+  'lakeville': 'Plymouth County',
+  'middleborough': 'Plymouth County',
+  'plymouth': 'Plymouth County',
+  'duxbury': 'Plymouth County',
+  'marshfield': 'Plymouth County',
+  'canton': 'Norfolk County',
+  'sharon': 'Norfolk County',
+  'stoughton': 'Norfolk County',
+  'norwood': 'Norfolk County',
+  'westwood': 'Norfolk County',
+  'foxborough': 'Norfolk County',
+  'weston': 'Norfolk County',
+};
+
+// Sub-neighborhoods to exclude (old Easton parts)
+const EXCLUDED_SLUGS = new Set(['eastondale', 'north-easton', 'south-easton']);
+
 export default async function CommunitiesPage() {
-  const communities = await getAllNeighborhoods();
-  
+  const rawCommunities = await getAllNeighborhoods();
+
+  // Filter out old sub-neighborhoods and map to the shape CommunitiesHoverList needs
+  const communities = rawCommunities
+    .filter((c) => !EXCLUDED_SLUGS.has(c.slug.current))
+    .map((c) => ({
+      slug: c.slug.current,
+      name: c.name,
+      tagline: c.tagline || `Explore ${c.name} real estate`,
+      county: COUNTY_MAP[c.slug.current] || 'Massachusetts',
+      image: resolveHeroImage(c.heroImage, 600),
+    }));
+
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -28,14 +74,14 @@ export default async function CommunitiesPage() {
       '@type': 'ListItem',
       position: i + 1,
       name: c.name,
-      url: `https://jessicashauffer.com/communities/${c.slug.current}`,
+      url: `https://jessicashauffer.com/communities/${c.slug}`,
     })),
   };
 
   return (
     <>
       <JsonLd data={itemListSchema} />
-      
+
       <section className="page-hero">
         <div className="page-hero__bg">
           <Image src="/assets/park.webp" alt="Beautiful New England scenery in Eastern MA" fill style={{ objectFit: 'cover' }} priority />
@@ -58,25 +104,12 @@ export default async function CommunitiesPage() {
 
       <section className="section">
         <div className="container">
-          <div className="content-block__header" style={{ textAlign: 'center', maxWidth: 640, marginInline: 'auto', marginBottom: 'var(--space-12)' }}>
+          <div className="content-block__header" style={{ textAlign: 'center', maxWidth: 640, marginInline: 'auto', marginBottom: 'var(--space-16)' }}>
             <h2>Discover Your Next Hometown</h2>
-            <p>We serve over 25 distinct communities across Eastern Massachusetts. Click any town below to explore market data, local highlights, and active real estate listings.</p>
+            <p>We serve {communities.length} distinct communities across Eastern Massachusetts. Hover any town to preview, then click to explore market data, local highlights, and listings.</p>
           </div>
-          
-          <div className="neighborhood-grid">
-            {communities.map((c) => (
-              <Link key={c.slug.current} href={`/communities/${c.slug.current}`} className="neighborhood-card">
-                <div className="neighborhood-card__bg">
-                  <Image src={resolveHeroImage(c.heroImage, 600)} alt={c.name} fill style={{ objectFit: 'cover' }} />
-                </div>
-                <div className="neighborhood-card__arrow"><i className="ph ph-arrow-right"></i></div>
-                <div className="neighborhood-card__content">
-                  <h3>{c.name}</h3>
-                  <p>{c.tagline}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+
+          <CommunitiesHoverList towns={communities} />
         </div>
       </section>
 
