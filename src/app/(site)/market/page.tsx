@@ -4,6 +4,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import StatCard from '@/components/StatCard';
 import HomeValueChart from '@/components/HomeValueChart';
+import TownSelectorChart from '@/components/TownSelectorChart';
 
 export const metadata: Metadata = {
   title: 'South Shore & MetroWest MA Real Estate Market Data — Jessica Shauffer',
@@ -85,6 +86,9 @@ export default function MarketPage() {
             <p className="section__desc" style={{ color: 'rgba(255,255,255,0.7)' }}>Home values across the South Shore and MetroWest have appreciated significantly since 2018, consistently outpacing the national average. Explore the trend below.</p>
           </div>
           <HomeValueChart />
+          <div style={{ marginTop: 'var(--space-10)' }}>
+            <TownSelectorChart />
+          </div>
         </div>
       </section>
 

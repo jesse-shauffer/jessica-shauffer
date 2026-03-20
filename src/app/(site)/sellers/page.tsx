@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import SellersChart from '@/components/SellersChart';
+import TownSelectorChart from '@/components/TownSelectorChart';
 import StatCard from '@/components/StatCard';
 import ConsultationForm from '@/components/ConsultationForm';
 
@@ -94,6 +95,9 @@ export default function SellersPage() {
             <p className="section__desc" style={{ color: 'rgba(255,255,255,0.7)' }}>Homes across our 25 target communities consistently sell at or above asking price. Track the regional trends below.</p>
           </div>
           <SellersChart />
+          <div style={{ marginTop: 'var(--space-10)' }}>
+            <TownSelectorChart />
+          </div>
         </div>
       </section>
 

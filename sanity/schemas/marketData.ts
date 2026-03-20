@@ -6,9 +6,10 @@ export default defineType({
   type: "document",
   preview: {
     select: { title: "townSlug", subtitle: "period" },
-    prepare({ title, subtitle }: { title: string; subtitle: string }) {
+    prepare(selection) {
+      const { title, subtitle } = selection as { title: string; subtitle: string };
       return {
-        title: title ? title.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase()) : "Unknown Town",
+        title: title ? title.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) : "Unknown Town",
         subtitle: subtitle || "No period",
       };
     },

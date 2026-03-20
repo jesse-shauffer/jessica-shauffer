@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import BuyersChart from '@/components/BuyersChart';
+import TownSelectorChart from '@/components/TownSelectorChart';
 import ConsultationForm from '@/components/ConsultationForm';
 
 export const metadata: Metadata = {
@@ -95,6 +96,9 @@ export default function BuyersPage() {
             <p className="section__desc" style={{ color: 'rgba(255,255,255,0.7)' }}>Compare median home prices across our key service areas to find the right fit for your budget and lifestyle.</p>
           </div>
           <BuyersChart />
+          <div style={{ marginTop: 'var(--space-10)' }}>
+            <TownSelectorChart />
+          </div>
         </div>
       </section>
 
