@@ -86,16 +86,18 @@ export default function BuyersChart() {
           <i className="ph ph-map-pin" style={{ marginRight: '0.375rem' }}></i>
           County
         </label>
-        <select
-          id="buyers-county-select"
-          className="chart-town-select"
-          value={activeCounty}
-          onChange={(e) => setActiveCounty(e.target.value)}
-        >
-          {Object.entries(countyData).map(([key, c]) => (
-            <option key={key} value={key}>{c.label}</option>
-          ))}
-        </select>
+        <div className="chart-town-select-wrapper">
+          <select
+            id="buyers-county-select"
+            className="chart-town-select"
+            value={activeCounty}
+            onChange={(e) => setActiveCounty(e.target.value)}
+          >
+            {Object.entries(countyData).map(([key, c]) => (
+              <option key={key} value={key}>{c.label}</option>
+            ))}
+          </select>
+        </div>
       </div>
       <div className="chart-wrapper" style={{ height: `${Math.max(280, towns.length * 44)}px` }}>
         <Bar

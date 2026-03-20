@@ -2218,6 +2218,77 @@ a, button, [role="button"], input, textarea, select {
   border-radius: var(--radius-2xl);
   padding: var(--space-6);
   backdrop-filter: blur(8px);
+  padding-bottom: var(--space-8);
+}
+
+.chart-town-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.chart-town-label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.chart-town-select-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 18rem;
+}
+
+.chart-town-select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--gold);
+  pointer-events: none;
+}
+
+.chart-town-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(10,23,48,0.85);
+  border: 1.5px solid var(--gold);
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: 0.5rem 2.25rem 0.5rem 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+
+.chart-town-select:hover {
+  border-color: #d4b262;
+  box-shadow: 0 0 0 3px rgba(200,162,78,0.15);
+}
+
+.chart-town-select:focus {
+  border-color: #d4b262;
+  box-shadow: 0 0 0 3px rgba(200,162,78,0.2);
+}
+
+.chart-town-select option {
+  background: #0a1730;
+  color: #fff;
 }
 
 .chart-controls {
