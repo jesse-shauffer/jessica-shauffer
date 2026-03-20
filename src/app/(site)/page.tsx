@@ -217,8 +217,13 @@ export default async function HomePage() {
               <p>
                 She studies market trends daily and offers invaluable insights on communities, schools, and amenities from Easton to Plymouth, Canton to Hingham, and everywhere in between.
               </p>
-              <Link href="/about" className="btn btn--outline" style={{ marginTop: 'var(--space-4)' }}>
-                Read Full Bio
+              <div className="about-pills">
+                <span className="about-pill"><i className="ph ph-trophy" aria-hidden="true"></i> Presidents Circle</span>
+                <span className="about-pill"><i className="ph-fill ph-star" aria-hidden="true"></i> 5.0 Google Rating</span>
+                <span className="about-pill"><i className="ph ph-certificate" aria-hidden="true"></i> 10+ Designations</span>
+              </div>
+              <Link href="/about" className="btn btn--primary" style={{ marginTop: 'var(--space-6)' }}>
+                Learn More About Jessica
               </Link>
             </div>
           </div>

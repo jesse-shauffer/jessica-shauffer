@@ -807,6 +807,34 @@ a, button, [role="button"], input, textarea, select {
   }
 }
 
+/* --- About Credential Pills --- */
+.about-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-2);
+}
+
+.about-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--off-white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.about-pill i {
+  color: var(--accent);
+  font-size: 1rem;
+}
+
 /* --- Check List --- */
 .check-list {
   list-style: none;
