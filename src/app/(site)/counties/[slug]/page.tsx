@@ -222,7 +222,6 @@ export default async function CountyPage({ params }: { params: { slug: string } 
       <section className="page-hero">
         <div className="page-hero__bg">
           <Image src={heroImageUrl} alt={`${name} Massachusetts real estate`} fill style={{ objectFit: 'cover' }} priority />
-          <div className="hero__overlay"></div>
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Massachusetts Real Estate</p>

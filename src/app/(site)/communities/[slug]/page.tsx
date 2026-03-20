@@ -87,7 +87,6 @@ export default async function CommunityPage({ params }: { params: { slug: string
       <section className="page-hero">
         <div className="page-hero__bg">
           <Image src={resolveHeroImage(n.heroImage, 1600)} alt={`${n.name}, MA real estate`} fill style={{ objectFit: 'cover' }} priority />
-          <div className="hero__overlay"></div>
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Community Guide</p>

@@ -96,7 +96,6 @@ export default function CountiesPage() {
       <section className="page-hero">
         <div className="page-hero__bg">
           <Image src="/assets/hero.webp" alt="Eastern Massachusetts real estate by county" fill style={{ objectFit: 'cover' }} priority />
-          <div className="hero__overlay"></div>
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Service Area</p>
