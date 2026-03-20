@@ -163,7 +163,7 @@ export default async function HomePage() {
             <span className="hero__badge">Top 3% Coldwell Banker Agent Globally</span>
             <h1 className="hero__title">
               Jessica Shauffer —<br />
-              Coldwell Banker&apos;s Top Agent for the South Shore
+              South Shore&apos;s Top Real Estate Agent
             </h1>
             <p className="hero__subtitle">
               South Shore &amp; MetroWest&apos;s Top-Rated Real Estate Agent Serving 25 Communities Across Eastern Massachusetts
