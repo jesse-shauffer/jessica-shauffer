@@ -168,7 +168,7 @@ export default async function CommunityPage({ params }: { params: { slug: string
               <p>Discover other highly-rated towns across the South Shore and MetroWest.</p>
             </div>
             <div className="neighborhood-grid">
-              {others.slice(0, 3).map((other: { slug: string; name: string; image: string }) => (
+              {others.slice(0, 3).map((other) => (
                 <Link key={other.slug} href={`/communities/${other.slug}`} className="neighborhood-card">
                   <div className="neighborhood-card__bg">
                     <Image src={resolveHeroImage(other.image, 600)} alt={other.name} fill style={{ objectFit: 'cover' }} />
