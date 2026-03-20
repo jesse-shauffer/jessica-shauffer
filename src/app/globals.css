@@ -960,6 +960,57 @@ a, button, [role="button"], input, textarea, select {
   }
 }
 
+/* --- Community Highlights Grid (Service Area section on homepage) --- */
+.community-highlights {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+@media (max-width: 61.9375rem) {
+  .community-highlights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .community-highlights {
+    grid-template-columns: 1fr;
+  }
+}
+
+.community-highlights .community-card {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.community-highlights .community-card h3 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 0 var(--space-2);
+}
+
+.community-highlights .community-card p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 var(--space-4);
+}
+
+.community-card__link {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  margin-top: auto;
+}
+
+.community-card__link:hover {
+  text-decoration: underline;
+}
+
 /* --- Community Grid --- */
 .community-grid {
   display: grid;
