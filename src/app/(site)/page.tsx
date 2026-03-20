@@ -291,7 +291,7 @@ export default async function HomePage() {
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: 'var(--space-12)' }}>
-            <Link href="/communities" className="btn btn--primary">View All 25 Communities</Link>
+            <Link href="/communities" className="btn btn--primary">View All Communities</Link>
           </div>
         </div>
       </section>

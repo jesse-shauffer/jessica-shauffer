@@ -328,7 +328,7 @@ export default async function CountyPage({ params }: { params: { slug: string } 
             </p>
             <div style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/contact#consultation" className="btn btn--accent btn--lg">Book a Free Consultation</Link>
-              <Link href="/communities" className="btn btn--outline btn--lg">View All 25 Communities</Link>
+              <Link href="/communities" className="btn btn--outline btn--lg">View All Communities</Link>
             </div>
           </div>
         </div>

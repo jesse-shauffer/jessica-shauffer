@@ -103,7 +103,7 @@ export default function Header() {
                   href="/communities"
                   style={{ fontWeight: 600, borderTop: '1px solid rgba(0,0,0,0.08)', marginTop: '0.25rem', paddingTop: '0.5rem' }}
                 >
-                  View All 25 Communities →
+                  View All Communities →
                 </Link>
               </div>
             </div>
@@ -157,7 +157,7 @@ export default function Header() {
                 {FEATURED_COMMUNITIES.map((c) => (
                   <Link key={c.slug} href={`/communities/${c.slug}`} onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none' }}>{c.name}</Link>
                 ))}
-                <Link href="/communities" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none', fontWeight: 600 }}>View All 25 Communities →</Link>
+                <Link href="/communities" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none', fontWeight: 600 }}>View All Communities →</Link>
               </div>
             )}
 
