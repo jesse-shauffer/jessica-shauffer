@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -284,7 +284,6 @@ const ALL_TOWNS = Object.keys(TOWN_DATA).sort((a, b) => {
 // ── Chart Colors ───────────────────────────────────────────────────────────
 const CB_BLUE = '#003087';
 const CB_BLUE_LIGHT = 'rgba(0, 48, 135, 0.12)';
-const CB_RED = '#c8102e';
 
 type ChartMetric = 'medianPrice' | 'daysOnMarket' | 'saleToList' | 'pricePerSqFt';
 

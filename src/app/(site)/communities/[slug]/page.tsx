@@ -136,7 +136,7 @@ export default async function CommunityPage({ params }: { params: { slug: string
               <p>Discover the highlights that make {n.name} a unique and highly sought-after community.</p>
             </div>
             <div className="highlight-grid">
-              {n.highlights.map((h: any, i: number) => (
+              {n.highlights.map((h: { icon: string; title: string; description: string }, i: number) => (
                 <div key={i} className="highlight-card">
                   <i className={`ph ${h.icon}`}></i>
                   <div>
@@ -168,7 +168,7 @@ export default async function CommunityPage({ params }: { params: { slug: string
               <p>Discover other highly-rated towns across the South Shore and MetroWest.</p>
             </div>
             <div className="neighborhood-grid">
-              {others.slice(0, 3).map((other: any) => (
+              {others.slice(0, 3).map((other: { slug: string; name: string; image: string }) => (
                 <Link key={other.slug} href={`/communities/${other.slug}`} className="neighborhood-card">
                   <div className="neighborhood-card__bg">
                     <Image src={resolveHeroImage(other.image, 600)} alt={other.name} fill style={{ objectFit: 'cover' }} />
