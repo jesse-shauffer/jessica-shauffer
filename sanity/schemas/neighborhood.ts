@@ -48,6 +48,13 @@ export default defineType({
         },
       }],
     }),
+    defineField({
+      name: 'county',
+      title: 'County',
+      type: 'reference',
+      to: [{ type: 'county' }],
+      description: 'Which county does this town belong to?',
+    }),
     defineField({ name: 'metaTitle', title: 'Meta Title', type: 'string' }),
     defineField({ name: 'metaDescription', title: 'Meta Description', type: 'text', rows: 3 }),
   ],

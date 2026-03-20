@@ -8,6 +8,8 @@ const COMMUNITY_SLUGS = [
   'westwood', 'north-attleborough',
 ];
 
+const COUNTY_SLUGS = ['bristol-county', 'norfolk-county', 'plymouth-county'];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://jessicashauffer.com';
 
@@ -18,8 +20,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/buyers`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: `${base}/sellers`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: `${base}/communities`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${base}/counties`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.9 },
     { url: `${base}/contact`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
   ];
+
+  const countyPages = COUNTY_SLUGS.map((slug) => ({
+    url: `${base}/counties/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.85,
+  }));
 
   const communityPages = COMMUNITY_SLUGS.map((slug) => ({
     url: `${base}/communities/${slug}`,
@@ -28,5 +38,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...communityPages];
+  return [...staticPages, ...countyPages, ...communityPages];
 }

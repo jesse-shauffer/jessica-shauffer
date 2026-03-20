@@ -89,9 +89,68 @@ export async function getOtherNeighborhoods(currentSlug: string) {
   );
 }
 
+/* ── County Types & Queries ── */
+export interface SanityCounty {
+  _id: string;
+  name: string;
+  slug: { current: string };
+  state?: string;
+  tagline?: string;
+  heroTitle?: string;
+  heroDesc?: string;
+  heroImage?: SanityImageSource | string;
+  description?: string[];
+  highlights?: { icon: string; title: string; description: string }[];
+  metaTitle?: string;
+  metaDescription?: string;
+}
+
+const countyFields = `
+  _id, name, slug, state, tagline,
+  heroTitle, heroDesc, heroImage,
+  description, highlights[]{ icon, title, description },
+  metaTitle, metaDescription
+`;
+
+export async function getAllCounties(): Promise<SanityCounty[]> {
+  return client.fetch(
+    `*[_type == "county"] | order(name asc) { ${countyFields} }`
+  );
+}
+
+export async function getCountyBySlug(slug: string): Promise<SanityCounty | null> {
+  return client.fetch(
+    `*[_type == "county" && slug.current == $slug][0] { ${countyFields} }`,
+    { slug }
+  );
+}
+
+export async function getAllCountySlugs(): Promise<string[]> {
+  const result = await client.fetch<{ current: string }[]>(
+    `*[_type == "county"].slug`
+  );
+  return result.map((s) => s.current);
+}
+
+export async function getNeighborhoodsByCounty(countyId: string) {
+  return client.fetch<{ slug: string; name: string; tagline: string; zipCode: string; image: SanityImageSource | string }[]>(
+    `*[_type == "neighborhood" && county._ref == $countyId] | order(name asc) {
+      "slug": slug.current,
+      name,
+      tagline,
+      zipCode,
+      "image": heroImage
+    }`,
+    { countyId }
+  );
+}
+
 /* ── Review Queries ── */
 export async function getAllReviews(): Promise<SanityReview[]> {
   return client.fetch(
     `*[_type == "review"] | order(date desc) { _id, author, role, rating, text, date, source }`
   );
 }
+
+/** Alias used by homepage and other pages */
+export const getReviews = getAllReviews;
