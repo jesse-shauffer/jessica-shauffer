@@ -20,18 +20,9 @@ export default function Footer() {
             <Link href="/market">Market</Link>
             <Link href="/buyers">Buyers</Link>
             <Link href="/sellers">Sellers</Link>
+            <Link href="/counties">Counties</Link>
             <Link href="/communities">Communities</Link>
             <Link href="/contact">Contact</Link>
-          </div>
-          <div className="footer__links">
-            <h4>Featured Communities</h4>
-            <Link href="/communities/easton">Easton, MA</Link>
-            <Link href="/communities/canton">Canton, MA</Link>
-            <Link href="/communities/sharon">Sharon, MA</Link>
-            <Link href="/communities/plymouth">Plymouth, MA</Link>
-            <Link href="/communities/hingham">Hingham, MA</Link>
-            <Link href="/communities/norwood">Norwood, MA</Link>
-            <Link href="/communities">View All 25 Communities →</Link>
           </div>
           <div className="footer__links">
             <h4>Contact Jessica</h4>

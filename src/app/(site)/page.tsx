@@ -162,33 +162,29 @@ export default async function HomePage() {
           <div className="hero__content">
             <span className="hero__badge">Top 3% Coldwell Banker Agent Globally</span>
             <h1 className="hero__title">
-              Jessica Shauffer —<br />
-              South Shore&apos;s Top Real Estate Agent
+              Jessica Shauffer &mdash;<br />
+              Coldwell Banker&apos;s Top Agent for the South Shore
             </h1>
             <p className="hero__subtitle">
-              South Shore &amp; MetroWest&apos;s Top-Rated Real Estate Agent Serving 25 Communities Across Eastern Massachusetts
+              Whether you&apos;re buying your dream home or selling for top dollar, get the results you deserve with Jessica Shauffer and the award-winning Weinstein Keach Group.
             </p>
+            <div className="hero__trust">
+              <div className="hero__rating">
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <span>5.0 from 19 Google Reviews</span>
+              </div>
+            </div>
             <div className="hero__actions">
-              <Link href="/contact#consultation" className="btn btn--primary btn--lg">
+              <Link href="/contact#consultation" className="btn btn--accent btn--lg">
                 Book a Free Consultation
               </Link>
-              <Link href="/communities" className="btn btn--outline btn--lg">
-                Explore Communities
-              </Link>
-            </div>
-            <div className="hero__stats">
-              <div className="hero__stat">
-                <span className="hero__stat-val">5.0</span>
-                <span className="hero__stat-label">Google Rating</span>
-              </div>
-              <div className="hero__stat">
-                <span className="hero__stat-val">Top 3%</span>
-                <span className="hero__stat-label">Agents Globally</span>
-              </div>
-              <div className="hero__stat">
-                <span className="hero__stat-val">25</span>
-                <span className="hero__stat-label">Communities Served</span>
-              </div>
+              <a href="tel:+16179491046" className="btn btn--ghost btn--lg">
+                <i className="fa-solid fa-phone"></i> (617) 949-1046
+              </a>
             </div>
           </div>
         </div>
