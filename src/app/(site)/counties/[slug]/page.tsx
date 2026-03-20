@@ -278,12 +278,12 @@ export default async function CountyPage({ params }: { params: { slug: string } 
       </section>
 
       {/* TOWNS GRID */}
-      <section className="section section--dark">
+      <section className="section section--warm">
         <div className="container">
           <div className="section__header">
-            <p className="section__label section__label--light">Communities</p>
-            <h2 className="section__title section__title--light">Towns in {name}</h2>
-            <p className="section__desc" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            <p className="section__label">Communities</p>
+            <h2 className="section__title">Towns in {name}</h2>
+            <p className="section__desc" style={{ color: 'var(--color-text-muted)' }}>
               Explore each community in {name} — with local market data, school information, and neighborhood insights.
             </p>
           </div>

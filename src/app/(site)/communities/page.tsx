@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description: 'Explore real estate and homes for sale across 25+ communities in the South Shore, MetroWest, and Bristol County, MA. Find your perfect town with Jessica Shauffer.',
     images: ['/assets/jessica.jpg'],
   },
-  alternates: { canonical: '/neighborhoods' },
+  alternates: { canonical: '/communities' },
 };
 
 export default async function CommunitiesPage() {
@@ -28,7 +28,7 @@ export default async function CommunitiesPage() {
       '@type': 'ListItem',
       position: i + 1,
       name: c.name,
-      url: `https://jessicashauffer.com/neighborhoods/${c.slug.current}`,
+      url: `https://jessicashauffer.com/communities/${c.slug.current}`,
     })),
   };
 
@@ -65,7 +65,7 @@ export default async function CommunitiesPage() {
           
           <div className="neighborhood-grid">
             {communities.map((c) => (
-              <Link key={c.slug.current} href={`/neighborhoods/${c.slug.current}`} className="neighborhood-card">
+              <Link key={c.slug.current} href={`/communities/${c.slug.current}`} className="neighborhood-card">
                 <div className="neighborhood-card__bg">
                   <Image src={resolveHeroImage(c.heroImage, 600)} alt={c.name} fill style={{ objectFit: 'cover' }} />
                 </div>

@@ -160,12 +160,12 @@ export default function CountiesPage() {
         </div>
       </section>
 
-      <section className="section section--dark">
+      <section className="section section--warm">
         <div className="container">
           <div className="section__header">
-            <p className="section__label section__label--light">Why It Matters</p>
-            <h2 className="section__title section__title--light">County-Level Market Intelligence</h2>
-            <p className="section__desc" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            <p className="section__label">Why It Matters</p>
+            <h2 className="section__title">County-Level Market Intelligence</h2>
+            <p className="section__desc" style={{ color: 'var(--color-text-muted)' }}>
               Real estate markets vary significantly even between neighboring towns. Understanding county-level trends — median prices, inventory levels, days on market — gives buyers and sellers a critical edge. Jessica Shauffer tracks all of this data monthly across all 25 communities she serves.
             </p>
           </div>
