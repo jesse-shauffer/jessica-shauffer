@@ -873,6 +873,10 @@ a, button, [role="button"], input, textarea, select {
   color: var(--white);
 }
 
+.section--warm {
+  background: var(--warm-gray);
+}
+
 /* --- Seller Card --- */
 .seller-card {
   background: rgba(255,255,255,0.06);
@@ -2508,6 +2512,12 @@ a, button, [role="button"], input, textarea, select {
 .county-card__desc { font-size: var(--text-sm); color: var(--color-text); line-height: 1.7; margin: 0; }
 .county-card__towns { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .county-card__cta { margin-top: auto; align-self: flex-start; }
+.county-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.county-card__count { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); background: rgba(200,162,78,0.1); padding: 0.2rem 0.6rem; border-radius: var(--radius-full); }
+.county-card__pills { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-1); }
+.county-pill { display: inline-block; font-size: 0.75rem; font-weight: 500; color: var(--primary); background: var(--warm-gray); border: 1px solid rgba(0,0,0,0.08); border-radius: var(--radius-full); padding: 0.25rem 0.75rem; }
+.county-card__btn { margin-top: auto; width: 100%; text-align: center; }
+@media (max-width: 61.9375rem) { .county-cards-grid { grid-template-columns: 1fr; } }
 .community-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
 .community-card { background: rgba(255,255,255,0.95); border: 1px solid rgba(255,255,255,0.3); border-radius: var(--radius-lg); padding: var(--space-4); transition: background 0.2s, border-color 0.2s; }
 .community-card--link { text-decoration: none; display: flex; flex-direction: column; gap: 0.25rem; cursor: pointer; }

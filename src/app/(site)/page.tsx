@@ -231,43 +231,67 @@ export default async function HomePage() {
       </section>
 
       {/* SERVICE AREA */}
-      <section className="section section--dark">
+      <section className="section section--warm">
         <div className="container">
           <div className="section__header">
-            <p className="section__label section__label--light">Service Area</p>
-            <h2 className="section__title section__title--light">Serving 25 Communities Across Eastern Massachusetts</h2>
-            <p className="section__desc" style={{ color: 'rgba(255,255,255,0.7)' }}>
+            <p className="section__label">Service Area</p>
+            <h2 className="section__title">Serving 25 Communities Across Eastern Massachusetts</h2>
+            <p className="section__desc">
               Deep local knowledge across three counties. Whether you&apos;re buying or selling, understanding the local micro-market is the difference between a good deal and a great one.
             </p>
           </div>
-          <div className="community-highlights">
-            <div className="community-card">
-              <div className="community-card__icon"><i className="ph-fill ph-map-pin" aria-hidden="true"></i></div>
-              <h3>Plymouth County</h3>
-              <p>Expert guidance in Plymouth, Hingham, Kingston, Halifax, Lakeville, Middleborough, and surrounding coastal communities.</p>
-              <Link href="/counties/plymouth-county" className="community-card__link">Explore Plymouth County →</Link>
+          <div className="county-cards-grid">
+            {/* Bristol County */}
+            <div className="county-card">
+              <div className="county-card__header">
+                <div className="county-card__icon"><i className="ph-fill ph-house-line" aria-hidden="true"></i></div>
+                <span className="county-card__count">12 Communities</span>
+              </div>
+              <h3 className="county-card__title">Bristol County</h3>
+              <p className="county-card__tagline">The Heart of the South Shore</p>
+              <p className="county-card__desc">Bristol County is home to some of the most sought-after communities in Eastern Massachusetts, including Easton, Mansfield, and the Bridgewater towns. With a mix of historic charm, excellent schools, and strong commuter access to Boston and Providence, Bristol County offers exceptional value for buyers and strong returns for sellers.</p>
+              <div className="county-card__pills">
+                {['Easton','North Easton','South Easton','Mansfield','Norton','Raynham','Taunton','Attleboro','North Attleborough','Bridgewater','West Bridgewater','East Bridgewater'].map(t => (
+                  <span key={t} className="county-pill">{t}</span>
+                ))}
+              </div>
+              <Link href="/counties/bristol-county" className="btn btn--outline county-card__btn">Explore Bristol County →</Link>
             </div>
-            <div className="community-card">
-              <div className="community-card__icon"><i className="ph-fill ph-buildings" aria-hidden="true"></i></div>
-              <h3>Norfolk County</h3>
-              <p>Strategic representation in Canton, Sharon, Norwood, Westwood, Stoughton, Foxborough, and Weston.</p>
-              <Link href="/counties/norfolk-county" className="community-card__link">Explore Norfolk County →</Link>
+            {/* Norfolk County */}
+            <div className="county-card">
+              <div className="county-card__header">
+                <div className="county-card__icon"><i className="ph-fill ph-buildings" aria-hidden="true"></i></div>
+                <span className="county-card__count">7 Communities</span>
+              </div>
+              <h3 className="county-card__title">Norfolk County</h3>
+              <p className="county-card__tagline">Affluent Towns, Top-Rated Schools</p>
+              <p className="county-card__desc">Norfolk County consistently ranks among the most desirable counties in Massachusetts, featuring high-income communities like Canton, Sharon, Westwood, and Weston. With top-rated school districts, convenient highway access, and a strong luxury market, Norfolk County attracts discerning buyers from across the region.</p>
+              <div className="county-card__pills">
+                {['Canton','Sharon','Norwood','Westwood','Stoughton','Foxborough','Weston'].map(t => (
+                  <span key={t} className="county-pill">{t}</span>
+                ))}
+              </div>
+              <Link href="/counties/norfolk-county" className="btn btn--outline county-card__btn">Explore Norfolk County →</Link>
             </div>
-            <div className="community-card">
-              <div className="community-card__icon"><i className="ph-fill ph-house-line" aria-hidden="true"></i></div>
-              <h3>Bristol County</h3>
-              <p>Deep roots in Easton, Mansfield, Norton, Raynham, Taunton, Attleboro, Bridgewater, and the Bridgewater towns.</p>
-              <Link href="/counties/bristol-county" className="community-card__link">Explore Bristol County →</Link>
-            </div>
-            <div className="community-card">
-              <div className="community-card__icon"><i className="ph-fill ph-trend-up" aria-hidden="true"></i></div>
-              <h3>Market Intelligence</h3>
-              <p>Daily tracking of inventory, pricing trends, and buyer demand. Monthly updated charts for every town.</p>
-              <Link href="/market" className="community-card__link">View Market Data →</Link>
+            {/* Plymouth County */}
+            <div className="county-card">
+              <div className="county-card__header">
+                <div className="county-card__icon"><i className="ph-fill ph-map-pin" aria-hidden="true"></i></div>
+                <span className="county-card__count">6 Communities</span>
+              </div>
+              <h3 className="county-card__title">Plymouth County</h3>
+              <p className="county-card__tagline">Coastal Living &amp; Historic Charm</p>
+              <p className="county-card__desc">Plymouth County stretches from the historic town of Plymouth on the coast to the inland communities of Lakeville and Middleborough. With waterfront properties, strong tourism economies, and growing residential demand, Plymouth County offers diverse opportunities for buyers and investors alike.</p>
+              <div className="county-card__pills">
+                {['Plymouth','Hingham','Kingston','Halifax','Lakeville','Middleborough'].map(t => (
+                  <span key={t} className="county-pill">{t}</span>
+                ))}
+              </div>
+              <Link href="/counties/plymouth-county" className="btn btn--outline county-card__btn">Explore Plymouth County →</Link>
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: 'var(--space-12)' }}>
-            <Link href="/communities" className="btn btn--accent">View All 25 Communities</Link>
+            <Link href="/communities" className="btn btn--primary">View All 25 Communities</Link>
           </div>
         </div>
       </section>
