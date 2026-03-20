@@ -451,9 +451,9 @@ a, button, [role="button"], input, textarea, select {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(10,22,40,0.55) 0%,
-    rgba(10,22,40,0.7) 50%,
-    rgba(10,22,40,0.85) 100%
+    rgba(10,22,40,0.3) 0%,
+    rgba(10,22,40,0.45) 50%,
+    rgba(10,22,40,0.6) 100%
   );
 }
 
@@ -1568,7 +1568,7 @@ a, button, [role="button"], input, textarea, select {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--navy-900);
+  background: rgba(10,22,40,0.4);
 }
 
 .page-hero__bg {
@@ -1581,7 +1581,7 @@ a, button, [role="button"], input, textarea, select {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.65;
+  opacity: 0.4;
 }
 
 .page-hero__content {

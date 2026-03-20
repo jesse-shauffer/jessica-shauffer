@@ -94,7 +94,6 @@ export default function AboutPage() {
       <section className="page-hero">
         <div className="page-hero__bg">
           <Image src="/assets/hero.webp" alt="South Shore Massachusetts real estate" fill style={{ objectFit: 'cover' }} priority />
-          <div className="hero__overlay"></div>
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">About Jessica Shauffer</p>
