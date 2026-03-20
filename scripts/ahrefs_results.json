@@ -1,0 +1,1157 @@
+{
+  "North Easton": [
+    {
+      "keyword": "north easton ma real estate",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in north easton ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    }
+  ],
+  "South Easton": [
+    {
+      "keyword": "homes for sale in south easton ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "south easton ma real estate",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": 0,
+      "traffic_potential": null,
+      "intents": null
+    }
+  ],
+  "Easton": [
+    {
+      "keyword": "easton ma real estate",
+      "volume": 450,
+      "difficulty": 3,
+      "cpc": 3,
+      "traffic_potential": 1100,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in easton ma",
+      "volume": 450,
+      "difficulty": 1,
+      "cpc": 2,
+      "traffic_potential": 1100,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "easton ma housing market",
+      "volume": 10,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "homes for sale in south easton ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "real estate agent easton ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "north easton ma real estate",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in north easton ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "south easton ma real estate",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": 0,
+      "traffic_potential": null,
+      "intents": null
+    }
+  ],
+  "Bridgewater": [
+    {
+      "keyword": "homes for sale in bridgewater ma",
+      "volume": 350,
+      "difficulty": 0,
+      "cpc": 4,
+      "traffic_potential": 700,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "bridgewater ma real estate",
+      "volume": 200,
+      "difficulty": 1,
+      "cpc": 6,
+      "traffic_potential": 1000,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in east bridgewater ma",
+      "volume": 80,
+      "difficulty": 0,
+      "cpc": 7,
+      "traffic_potential": 500,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in west bridgewater ma",
+      "volume": 70,
+      "difficulty": 0,
+      "cpc": 4,
+      "traffic_potential": 200,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "west bridgewater ma real estate",
+      "volume": 40,
+      "difficulty": 0,
+      "cpc": 8,
+      "traffic_potential": 600,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "east bridgewater ma real estate",
+      "volume": 30,
+      "difficulty": 0,
+      "cpc": 6,
+      "traffic_potential": 100,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "real estate agent bridgewater ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "real estate agent east bridgewater ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ],
+  "West Bridgewater": [
+    {
+      "keyword": "homes for sale in west bridgewater ma",
+      "volume": 70,
+      "difficulty": 0,
+      "cpc": 4,
+      "traffic_potential": 200,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "west bridgewater ma real estate",
+      "volume": 40,
+      "difficulty": 0,
+      "cpc": 8,
+      "traffic_potential": 600,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    }
+  ],
+  "East Bridgewater": [
+    {
+      "keyword": "homes for sale in east bridgewater ma",
+      "volume": 80,
+      "difficulty": 0,
+      "cpc": 7,
+      "traffic_potential": 500,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "east bridgewater ma real estate",
+      "volume": 30,
+      "difficulty": 0,
+      "cpc": 6,
+      "traffic_potential": 100,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "real estate agent east bridgewater ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ],
+  "Canton": [
+    {
+      "keyword": "homes for sale in canton ma",
+      "volume": 350,
+      "difficulty": 1,
+      "cpc": 4,
+      "traffic_potential": 900,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "canton ma real estate",
+      "volume": 350,
+      "difficulty": 1,
+      "cpc": 5,
+      "traffic_potential": 800,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "canton ma housing market",
+      "volume": 10,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "moving to canton ma",
+      "volume": 10,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "real estate agent canton ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ],
+  "Sharon": [
+    {
+      "keyword": "sharon ma real estate",
+      "volume": 200,
+      "difficulty": 0,
+      "cpc": 8,
+      "traffic_potential": 450,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in sharon ma",
+      "volume": 200,
+      "difficulty": 1,
+      "cpc": 5,
+      "traffic_potential": 450,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "real estate agent sharon ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "sharon ma housing market",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": 0,
+      "traffic_potential": null,
+      "intents": null
+    },
+    {
+      "keyword": "moving to sharon ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": 0,
+      "traffic_potential": null,
+      "intents": null
+    }
+  ],
+  "Raynham": [
+    {
+      "keyword": "homes for sale in raynham ma",
+      "volume": 350,
+      "difficulty": 1,
+      "cpc": 2,
+      "traffic_potential": 450,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "raynham ma real estate",
+      "volume": 90,
+      "difficulty": 1,
+      "cpc": 7,
+      "traffic_potential": 250,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "real estate agent raynham ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ],
+  "Taunton": [
+    {
+      "keyword": "homes for sale in taunton ma",
+      "volume": 900,
+      "difficulty": 2,
+      "cpc": 5,
+      "traffic_potential": 1500,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "taunton ma real estate",
+      "volume": 150,
+      "difficulty": 2,
+      "cpc": 6,
+      "traffic_potential": 2300,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "real estate agent taunton ma",
+      "volume": 40,
+      "difficulty": 0,
+      "cpc": 300,
+      "traffic_potential": 20,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "taunton ma housing market",
+      "volume": 20,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ],
+  "Plymouth": [
+    {
+      "keyword": "plymouth ma real estate",
+      "volume": 1600,
+      "difficulty": 8,
+      "cpc": 10,
+      "traffic_potential": 3200,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in plymouth ma",
+      "volume": 1300,
+      "difficulty": 3,
+      "cpc": 7,
+      "traffic_potential": 1300,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "real estate agent plymouth ma",
+      "volume": 30,
+      "difficulty": 5,
+      "cpc": 450,
+      "traffic_potential": 100,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "plymouth ma housing market",
+      "volume": 20,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "best realtor plymouth ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "moving to plymouth ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": false,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    }
+  ],
+  "Norton": [
+    {
+      "keyword": "homes for sale in norton ma",
+      "volume": 300,
+      "difficulty": 1,
+      "cpc": 2,
+      "traffic_potential": 800,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "norton ma real estate",
+      "volume": 300,
+      "difficulty": 1,
+      "cpc": 5,
+      "traffic_potential": 400,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "real estate agent norton ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ],
+  "Mansfield": [
+    {
+      "keyword": "homes for sale in mansfield ma",
+      "volume": 400,
+      "difficulty": 0,
+      "cpc": 6,
+      "traffic_potential": 700,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "mansfield ma real estate",
+      "volume": 350,
+      "difficulty": 0,
+      "cpc": 10,
+      "traffic_potential": 350,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "moving to mansfield ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": 0,
+      "traffic_potential": null,
+      "intents": null
+    }
+  ],
+  "Foxborough": [
+    {
+      "keyword": "foxborough ma real estate",
+      "volume": 20,
+      "difficulty": 0,
+      "cpc": null,
+      "traffic_potential": 700,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in foxborough ma",
+      "volume": 10,
+      "difficulty": null,
+      "cpc": 0,
+      "traffic_potential": null,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    }
+  ],
+  "Attleboro": [
+    {
+      "keyword": "homes for sale in attleboro ma",
+      "volume": 800,
+      "difficulty": 0,
+      "cpc": 3,
+      "traffic_potential": 1600,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "attleboro ma real estate",
+      "volume": 150,
+      "difficulty": 2,
+      "cpc": 10,
+      "traffic_potential": 800,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "attleboro ma housing market",
+      "volume": 10,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "real estate agent north attleborough ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "north attleborough ma real estate",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "homes for sale in north attleborough ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ],
+  "Halifax": [
+    {
+      "keyword": "halifax ma real estate",
+      "volume": 100,
+      "difficulty": 0,
+      "cpc": 7,
+      "traffic_potential": 350,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in halifax ma",
+      "volume": 70,
+      "difficulty": 0,
+      "cpc": 7,
+      "traffic_potential": 250,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "real estate agent halifax ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": 0,
+      "traffic_potential": null,
+      "intents": null
+    }
+  ],
+  "Kingston": [
+    {
+      "keyword": "homes for sale in kingston ma",
+      "volume": 250,
+      "difficulty": 1,
+      "cpc": 4,
+      "traffic_potential": 350,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "kingston ma real estate",
+      "volume": 200,
+      "difficulty": 1,
+      "cpc": 1,
+      "traffic_potential": 250,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    }
+  ],
+  "Lakeville": [
+    {
+      "keyword": "homes for sale in lakeville ma",
+      "volume": 300,
+      "difficulty": 0,
+      "cpc": 3,
+      "traffic_potential": 700,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "lakeville ma real estate",
+      "volume": 150,
+      "difficulty": 0,
+      "cpc": 1,
+      "traffic_potential": 700,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    }
+  ],
+  "Middleborough": [
+    {
+      "keyword": "homes for sale in middleborough ma",
+      "volume": 40,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "middleborough ma real estate",
+      "volume": 40,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ],
+  "Stoughton": [
+    {
+      "keyword": "homes for sale in stoughton ma",
+      "volume": 350,
+      "difficulty": 0,
+      "cpc": 4,
+      "traffic_potential": 600,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "stoughton ma real estate",
+      "volume": 200,
+      "difficulty": 0,
+      "cpc": 4,
+      "traffic_potential": 900,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    }
+  ],
+  "Hingham": [
+    {
+      "keyword": "hingham ma real estate",
+      "volume": 700,
+      "difficulty": 1,
+      "cpc": 7,
+      "traffic_potential": 1200,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in hingham ma",
+      "volume": 600,
+      "difficulty": 1,
+      "cpc": 3,
+      "traffic_potential": 1500,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": true,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "best realtor hingham ma",
+      "volume": 10,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "hingham ma housing market",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "sell my home hingham ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "real estate agent hingham ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ],
+  "Norwood": [
+    {
+      "keyword": "homes for sale in norwood ma",
+      "volume": 600,
+      "difficulty": 1,
+      "cpc": 6,
+      "traffic_potential": 1300,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "norwood ma real estate",
+      "volume": 300,
+      "difficulty": 1,
+      "cpc": 5,
+      "traffic_potential": 1200,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "moving to norwood ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": 0,
+      "traffic_potential": null,
+      "intents": null
+    }
+  ],
+  "Weston": [
+    {
+      "keyword": "weston ma real estate",
+      "volume": 250,
+      "difficulty": 0,
+      "cpc": 7,
+      "traffic_potential": 400,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in weston ma",
+      "volume": 150,
+      "difficulty": 0,
+      "cpc": 4,
+      "traffic_potential": 300,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    }
+  ],
+  "Westwood": [
+    {
+      "keyword": "westwood ma real estate",
+      "volume": 500,
+      "difficulty": 0,
+      "cpc": 2,
+      "traffic_potential": 700,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "homes for sale in westwood ma",
+      "volume": 200,
+      "difficulty": 0,
+      "cpc": 4,
+      "traffic_potential": 1000,
+      "intents": {
+        "informational": true,
+        "navigational": false,
+        "commercial": true,
+        "transactional": false,
+        "branded": false,
+        "local": true
+      }
+    },
+    {
+      "keyword": "westwood ma housing market",
+      "volume": 10,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ],
+  "North Attleborough": [
+    {
+      "keyword": "real estate agent north attleborough ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "north attleborough ma real estate",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    },
+    {
+      "keyword": "homes for sale in north attleborough ma",
+      "volume": 0,
+      "difficulty": null,
+      "cpc": null,
+      "traffic_potential": null,
+      "intents": {}
+    }
+  ]
+}

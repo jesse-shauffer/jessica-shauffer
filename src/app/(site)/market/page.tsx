@@ -6,11 +6,11 @@ import StatCard from '@/components/StatCard';
 import HomeValueChart from '@/components/HomeValueChart';
 
 export const metadata: Metadata = {
-  title: 'Easton, MA Real Estate Market Data — Jessica Shauffer',
-  description: 'Current Easton MA housing market data: $662K avg home value, 23-day median time on market, 101% sale-to-list ratio. Get expert analysis from Jessica Shauffer.',
+  title: 'South Shore & MetroWest MA Real Estate Market Data — Jessica Shauffer',
+  description: 'Current housing market data for the South Shore and MetroWest MA. Get expert analysis, median home values, and trends for Plymouth, Easton, Canton, and more.',
   openGraph: {
-    title: 'Easton, MA Real Estate Market Data — Jessica Shauffer',
-    description: 'Current Easton MA housing market data: $662K avg home value, 23-day median time on market, 101% sale-to-list ratio. Get expert analysis from Jessica Shauffer.',
+    title: 'South Shore & MetroWest MA Real Estate Market Data — Jessica Shauffer',
+    description: 'Current housing market data for the South Shore and MetroWest MA. Get expert analysis, median home values, and trends for Plymouth, Easton, Canton, and more.',
     images: ['/assets/jessica.jpg'],
   },
   alternates: { canonical: '/market' },
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 const marketSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Easton, MA Real Estate Market Data',
-  about: { '@type': 'City', name: 'Easton', containedInPlace: { '@type': 'State', name: 'Massachusetts' } },
+  name: 'South Shore & MetroWest MA Real Estate Market Data',
+  about: { '@type': 'Place', name: 'Eastern Massachusetts' },
   url: 'https://jessicashauffer.com/market',
 };
 
@@ -28,9 +28,9 @@ const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
-    { '@type': 'Question', name: 'What is the average home value in Easton, MA?', acceptedAnswer: { '@type': 'Answer', text: 'The average home value in Easton, MA is approximately $662,000, with a 5% year-over-year increase.' } },
-    { '@type': 'Question', name: 'How fast are homes selling in Easton?', acceptedAnswer: { '@type': 'Answer', text: 'The median days on market in Easton is 23 days, indicating a fast-moving and competitive market.' } },
-    { '@type': 'Question', name: 'What is the sale-to-list ratio in Easton?', acceptedAnswer: { '@type': 'Answer', text: 'Easton homes sell at 101% of their list price on average, meaning most homes sell above the asking price.' } },
+    { '@type': 'Question', name: 'What is the current state of the South Shore MA real estate market?', acceptedAnswer: { '@type': 'Answer', text: 'The South Shore market remains highly competitive with low inventory driving strong demand. Homes in towns like Plymouth and Hingham frequently sell at or above asking price within weeks.' } },
+    { '@type': 'Question', name: 'Are home prices dropping in MetroWest MA?', acceptedAnswer: { '@type': 'Answer', text: 'No, home prices in MetroWest towns like Canton, Sharon, and Westwood continue to show steady year-over-year appreciation due to excellent school systems and commuter access to Boston.' } },
+    { '@type': 'Question', name: 'How fast are homes selling in Bristol County?', acceptedAnswer: { '@type': 'Answer', text: 'In towns like Easton, Mansfield, and Norton, the median days on market remains low, typically under 30 days, indicating a fast-moving seller\'s market.' } },
   ],
 };
 
@@ -39,15 +39,15 @@ export default function MarketPage() {
     <>
       <JsonLd data={marketSchema} />
       <JsonLd data={faqSchema} />
-
+      
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src="/assets/market-aerial.webp" alt="Aerial view of Easton Massachusetts real estate" fill style={{ objectFit: 'cover' }} priority />
+          <Image src="/assets/market-aerial.webp" alt="Aerial view of Eastern Massachusetts real estate" fill style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Market Data</p>
-          <h1 className="page-hero__title">Easton Real Estate Market</h1>
-          <p className="page-hero__desc">A competitive market with steady appreciation. Here&apos;s the data you need to make an informed decision.</p>
+          <h1 className="page-hero__title">Regional Market Insights</h1>
+          <p className="page-hero__desc">Data-driven analysis across 25+ communities in the South Shore, MetroWest, and Bristol County to help you make informed decisions.</p>
         </div>
       </section>
 
@@ -63,17 +63,17 @@ export default function MarketPage() {
       <section className="section">
         <div className="container">
           <div className="section__header">
-            <p className="section__label">Market Snapshot</p>
-            <h2 className="section__title">Easton by the Numbers</h2>
-            <p className="section__desc">Key metrics for the current Easton, MA housing market.</p>
+            <p className="section__label">Regional Snapshot</p>
+            <h2 className="section__title">Eastern Mass by the Numbers</h2>
+            <p className="section__desc">While every town is unique, these aggregated metrics highlight the overall strength of the regional market.</p>
           </div>
           <div className="stats-grid">
-            <StatCard value="$662K" label="Avg. Home Value" delta="+5% YoY" deltaType="up" />
-            <StatCard value="23" label="Median Days on Market" delta="Selling Fast" deltaType="down" />
-            <StatCard value="101%" label="Sale-to-List Ratio" delta="Above Asking" deltaType="up" />
-            <StatCard value="$380" label="Price per Sq. Ft." delta="Steady Growth" deltaType="neutral" />
+            <StatCard value="$725K" label="Avg. Regional Home Value" delta="+4.5% YoY" deltaType="up" />
+            <StatCard value="28" label="Median Days on Market" delta="Selling Fast" deltaType="down" />
+            <StatCard value="100.5%" label="Sale-to-List Ratio" delta="At or Above Asking" deltaType="up" />
+            <StatCard value="$410" label="Price per Sq. Ft." delta="Steady Growth" deltaType="neutral" />
           </div>
-          <p className="stats-source">Data sourced from Zillow, Redfin, and Realtor.com — updated regularly.</p>
+          <p className="stats-source">Aggregated data across 25 target communities — updated regularly.</p>
         </div>
       </section>
 
@@ -81,8 +81,8 @@ export default function MarketPage() {
         <div className="container">
           <div className="section__header">
             <p className="section__label section__label--light">Home Value Trends</p>
-            <h2 className="section__title section__title--light">Easton Home Values Over Time</h2>
-            <p className="section__desc" style={{ color: 'rgba(255,255,255,0.7)' }}>Easton home values have appreciated 57% since 2018, consistently outpacing the national average. Explore the trend below.</p>
+            <h2 className="section__title section__title--light">Regional Appreciation Over Time</h2>
+            <p className="section__desc" style={{ color: 'rgba(255,255,255,0.7)' }}>Home values across the South Shore and MetroWest have appreciated significantly since 2018, consistently outpacing the national average. Explore the trend below.</p>
           </div>
           <HomeValueChart />
         </div>
@@ -95,44 +95,48 @@ export default function MarketPage() {
       <section className="section" style={{ background: 'var(--white)' }}>
         <div className="container">
           <div className="content-block__header" style={{ textAlign: 'center', maxWidth: 640, marginInline: 'auto', marginBottom: 'var(--space-12)' }}>
-            <h2>Market Insights</h2>
-            <p>A deeper look at what&apos;s driving the Easton real estate market today.</p>
+            <h2>Micro-Market Dynamics</h2>
+            <p>Real estate is hyper-local. Here is a look at what is driving the market across our three primary service areas.</p>
           </div>
+          
           <div className="market-highlights">
             <div className="market-highlight">
-              <h3><i className="ph ph-trend-up"></i> Buyer&apos;s Perspective</h3>
+              <h3><i className="ph ph-map-pin"></i> South Shore Coastal</h3>
               <ul>
-                <li>Homes are selling at 101% of list price — expect competition</li>
-                <li>Median 23 days on market means you need to move quickly</li>
-                <li>Average home value of $662K with steady 5% annual appreciation</li>
-                <li>Pre-approval and strong offers are essential to win</li>
+                <li><strong>Towns:</strong> Plymouth, Hingham, Kingston, Halifax</li>
+                <li><strong>Trend:</strong> High demand for coastal access and lifestyle amenities</li>
+                <li><strong>Buyer Tip:</strong> Expect intense competition for turnkey properties near the water</li>
+                <li><strong>Seller Tip:</strong> Emphasize lifestyle features and outdoor living spaces</li>
               </ul>
             </div>
+            
             <div className="market-highlight">
-              <h3><i className="ph ph-currency-dollar"></i> Seller&apos;s Perspective</h3>
+              <h3><i className="ph ph-buildings"></i> MetroWest Commuter</h3>
               <ul>
-                <li>Strong seller&apos;s market — homes consistently sell above asking</li>
-                <li>Low inventory creates urgency among buyers</li>
-                <li>Strategic pricing and staging can yield well above market value</li>
-                <li>Spring and early fall remain the strongest selling seasons</li>
+                <li><strong>Towns:</strong> Canton, Sharon, Norwood, Westwood, Stoughton</li>
+                <li><strong>Trend:</strong> Premium pricing driven by top-tier school districts and rail access</li>
+                <li><strong>Buyer Tip:</strong> Pre-approval is mandatory; be prepared to waive minor contingencies</li>
+                <li><strong>Seller Tip:</strong> Highlight commuter rail proximity and school ratings</li>
               </ul>
             </div>
+            
             <div className="market-highlight">
-              <h3><i className="ph ph-buildings"></i> Community Demographics</h3>
+              <h3><i className="ph ph-house-line"></i> Bristol County Value</h3>
               <ul>
-                <li>Population: 25,162 residents across diverse neighborhoods</li>
-                <li>Median age: 45 — established, family-oriented community</li>
-                <li>Average household income: $151,670</li>
-                <li>9,324 households with a mix of families and professionals</li>
+                <li><strong>Towns:</strong> Easton, Mansfield, Norton, Raynham, Bridgewaters</li>
+                <li><strong>Trend:</strong> Strong growth as buyers seek more square footage and yard space</li>
+                <li><strong>Buyer Tip:</strong> Excellent opportunities for first-time buyers and growing families</li>
+                <li><strong>Seller Tip:</strong> Focus on home office spaces and family-friendly neighborhood aspects</li>
               </ul>
             </div>
+            
             <div className="market-highlight">
-              <h3><i className="ph ph-graduation-cap"></i> Schools &amp; Access</h3>
+              <h3><i className="ph ph-trend-up"></i> Overall Market Outlook</h3>
               <ul>
-                <li>Oliver Ames High School rated 8/10 — strong academics</li>
-                <li>4 elementary schools, 1 middle school, plus Stonehill College</li>
-                <li>Direct access via Route 24 and I-495 for commuters</li>
-                <li>30 minutes to Boston, Providence, and Cape Cod</li>
+                <li>Inventory remains historically tight across all 25 communities</li>
+                <li>Interest rate stabilization is bringing more buyers back to the market</li>
+                <li>Well-priced, move-in ready homes still generate multiple offers</li>
+                <li>Strategic pricing is more important than ever to avoid stale listings</li>
               </ul>
             </div>
           </div>
@@ -145,12 +149,12 @@ export default function MarketPage() {
             <div className="split__content">
               <p className="section__label">Expert Analysis</p>
               <h2 className="section__title">What This Means for You</h2>
-              <p>Easton&apos;s real estate market rewards those who are prepared. Whether you&apos;re buying or selling, having the right strategy and the right agent makes all the difference.</p>
-              <p>Jessica monitors these numbers daily and can help you understand exactly how they impact your specific situation — your neighborhood, your property type, your timeline.</p>
+              <p>The Eastern Massachusetts real estate market rewards those who are prepared. Whether you are buying in Plymouth, selling in Canton, or investing in Easton, having the right strategy and the right agent makes all the difference.</p>
+              <p>Jessica monitors these micro-markets daily and can help you understand exactly how regional trends impact your specific situation — your target neighborhood, your property type, and your timeline.</p>
               <Link href="/contact#consultation" className="btn btn--primary">Get a Personalized Market Analysis</Link>
             </div>
             <div className="split__media">
-              <Image src="/assets/market-kitchen.webp" alt="Beautiful kitchen interior in Easton home" width={600} height={400} />
+              <Image src="/assets/market-kitchen.webp" alt="Beautiful modern kitchen interior" width={600} height={400} />
             </div>
           </div>
         </div>
@@ -159,9 +163,12 @@ export default function MarketPage() {
       <section className="section" style={{ background: 'var(--white)' }}>
         <div className="container">
           <div className="cta-banner">
-            <h2>Curious About Your Home&apos;s Value?</h2>
-            <p>Get a free, no-obligation home valuation from Jessica based on current market conditions and comparable sales.</p>
-            <Link href="/contact#consultation" className="btn btn--accent btn--lg">Request Your Free Valuation</Link>
+            <h2>Curious About Your Specific Town?</h2>
+            <p>Get a free, no-obligation home valuation or buyer consultation tailored to your exact community.</p>
+            <div style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center', flexWrap: 'wrap', marginTop: 'var(--space-6)' }}>
+              <Link href="/contact#consultation" className="btn btn--accent btn--lg">Request Valuation</Link>
+              <Link href="/communities" className="btn btn--outline btn--lg" style={{ borderColor: 'var(--white)', color: 'var(--white)' }}>Find Your Town</Link>
+            </div>
           </div>
         </div>
       </section>

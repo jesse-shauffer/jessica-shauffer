@@ -2,7 +2,7 @@ import { defineType, defineField } from 'sanity';
 
 export default defineType({
   name: 'neighborhood',
-  title: 'Neighborhood',
+  title: 'Community',
   type: 'document',
   fields: [
     defineField({ name: 'name', title: 'Name', type: 'string', validation: (r) => r.required() }),
@@ -14,7 +14,7 @@ export default defineType({
       validation: (r) => r.required(),
     }),
     defineField({ name: 'zipCode', title: 'ZIP Code', type: 'string' }),
-    defineField({ name: 'tagline', title: 'Tagline', type: 'string', description: 'Short tagline for neighborhood cards.' }),
+    defineField({ name: 'tagline', title: 'Tagline', type: 'string', description: 'Short tagline for community cards.' }),
     defineField({ name: 'heroTitle', title: 'Hero Title', type: 'string' }),
     defineField({ name: 'heroDesc', title: 'Hero Description', type: 'text', rows: 3 }),
     defineField({
@@ -22,7 +22,7 @@ export default defineType({
       title: 'Hero Image',
       type: 'image',
       options: { hotspot: true },
-      description: 'Main hero banner image for this neighborhood.',
+      description: 'Main hero banner image for this community.',
     }),
     defineField({
       name: 'description',

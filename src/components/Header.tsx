@@ -4,14 +4,25 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+const FEATURED_COMMUNITIES = [
+  { name: 'Easton', slug: 'easton' },
+  { name: 'Canton', slug: 'canton' },
+  { name: 'Sharon', slug: 'sharon' },
+  { name: 'Plymouth', slug: 'plymouth' },
+  { name: 'Hingham', slug: 'hingham' },
+  { name: 'Norwood', slug: 'norwood' },
+  { name: 'Westwood', slug: 'westwood' },
+  { name: 'Mansfield', slug: 'mansfield' },
+];
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
 
   function isActive(page: string) {
-    if (page === 'neighborhoods') {
-      return pathname.startsWith('/neighborhoods') ? 'is-active' : '';
+    if (page === 'communities') {
+      return pathname.startsWith('/communities') ? 'is-active' : '';
     }
     return pathname === `/${page}` ? 'is-active' : '';
   }
@@ -41,14 +52,12 @@ export default function Header() {
             <Link href="/buyers" className={isActive('buyers')}>Buyers</Link>
             <Link href="/sellers" className={isActive('sellers')}>Sellers</Link>
             <div className="nav-dropdown">
-              <Link href="/neighborhoods" className={isActive('neighborhoods')}>Neighborhoods <i className="ph ph-caret-down"></i></Link>
+              <Link href="/communities" className={isActive('communities')}>Communities <i className="ph ph-caret-down"></i></Link>
               <div className="nav-dropdown__menu">
-                <Link href="/neighborhoods/north-easton" className={pathname === '/neighborhoods/north-easton' ? 'is-active' : ''}>North Easton</Link>
-                <Link href="/neighborhoods/south-easton" className={pathname === '/neighborhoods/south-easton' ? 'is-active' : ''}>South Easton</Link>
-                <Link href="/neighborhoods/five-corners" className={pathname === '/neighborhoods/five-corners' ? 'is-active' : ''}>Five Corners</Link>
-                <Link href="/neighborhoods/furnace-village" className={pathname === '/neighborhoods/furnace-village' ? 'is-active' : ''}>Furnace Village</Link>
-                <Link href="/neighborhoods/eastondale" className={pathname === '/neighborhoods/eastondale' ? 'is-active' : ''}>Eastondale</Link>
-                <Link href="/neighborhoods/unionville" className={pathname === '/neighborhoods/unionville' ? 'is-active' : ''}>Unionville</Link>
+                {FEATURED_COMMUNITIES.map((c) => (
+                  <Link key={c.slug} href={`/communities/${c.slug}`} className={pathname === `/communities/${c.slug}` ? 'is-active' : ''}>{c.name}</Link>
+                ))}
+                <Link href="/communities" style={{ fontWeight: 600, borderTop: '1px solid rgba(0,0,0,0.08)', marginTop: '0.25rem', paddingTop: '0.5rem' }}>View All Communities →</Link>
               </div>
             </div>
             <Link href="/contact" className={isActive('contact')}>Contact</Link>
@@ -71,22 +80,20 @@ export default function Header() {
             <Link href="/buyers" onClick={closeMobile}>Buyers</Link>
             <Link href="/sellers" onClick={closeMobile}>Sellers</Link>
             <a
-              href="/neighborhoods"
+              href="/communities"
               onClick={(e) => {
                 e.preventDefault();
                 setDropdownOpen(!dropdownOpen);
               }}
             >
-              Neighborhoods <i className="ph ph-caret-down" style={{ fontSize: '0.75rem', transition: 'transform 0.2s', transform: dropdownOpen ? 'rotate(180deg)' : '' }}></i>
+              Communities <i className="ph ph-caret-down" style={{ fontSize: '0.75rem', transition: 'transform 0.2s', transform: dropdownOpen ? 'rotate(180deg)' : '' }}></i>
             </a>
             {dropdownOpen && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', paddingLeft: 'var(--space-4)' }}>
-                <Link href="/neighborhoods/north-easton" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none' }}>North Easton</Link>
-                <Link href="/neighborhoods/south-easton" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none' }}>South Easton</Link>
-                <Link href="/neighborhoods/five-corners" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none' }}>Five Corners</Link>
-                <Link href="/neighborhoods/furnace-village" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none' }}>Furnace Village</Link>
-                <Link href="/neighborhoods/eastondale" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none' }}>Eastondale</Link>
-                <Link href="/neighborhoods/unionville" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none' }}>Unionville</Link>
+                {FEATURED_COMMUNITIES.map((c) => (
+                  <Link key={c.slug} href={`/communities/${c.slug}`} onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none' }}>{c.name}</Link>
+                ))}
+                <Link href="/communities" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none', fontWeight: 600 }}>View All Communities →</Link>
               </div>
             )}
             <Link href="/contact" onClick={closeMobile}>Contact</Link>

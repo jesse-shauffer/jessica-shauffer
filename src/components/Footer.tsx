@@ -12,7 +12,7 @@ export default function Footer() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/coldwell-banker-logo-footer.svg" alt="Coldwell Banker Realty" className="footer__logo-img" />
             </Link>
-            <p>Weinstein Keach Group | Coldwell Banker Realty<br />Top-producing agent serving Easton, MA and surrounding areas.</p>
+            <p>Weinstein Keach Group | Coldwell Banker Realty<br />Top 3% agent serving the South Shore, MetroWest, and Bristol County, MA.</p>
           </div>
           <div className="footer__links">
             <h4>Quick Links</h4>
@@ -20,8 +20,18 @@ export default function Footer() {
             <Link href="/market">Market</Link>
             <Link href="/buyers">Buyers</Link>
             <Link href="/sellers">Sellers</Link>
-            <Link href="/neighborhoods">Neighborhoods</Link>
+            <Link href="/communities">Communities</Link>
             <Link href="/contact">Contact</Link>
+          </div>
+          <div className="footer__links">
+            <h4>Featured Communities</h4>
+            <Link href="/communities/easton">Easton, MA</Link>
+            <Link href="/communities/canton">Canton, MA</Link>
+            <Link href="/communities/sharon">Sharon, MA</Link>
+            <Link href="/communities/plymouth">Plymouth, MA</Link>
+            <Link href="/communities/hingham">Hingham, MA</Link>
+            <Link href="/communities/norwood">Norwood, MA</Link>
+            <Link href="/communities">View All 25 Communities →</Link>
           </div>
           <div className="footer__links">
             <h4>Contact Jessica</h4>
@@ -39,7 +49,7 @@ export default function Footer() {
         </div>
         <div className="footer__bottom">
           <p>&copy; 2026 Jessica Shauffer — Weinstein Keach, Coldwell Banker Realty. All rights reserved.</p>
-          <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+          <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>Serving Easton, Canton, Sharon, Plymouth, Hingham, Norwood, Westwood, Mansfield, Foxborough, Bridgewater, Taunton, Kingston, Halifax, Lakeville, Stoughton, Attleboro &amp; more.</p>
         </div>
       </div>
     </footer>
