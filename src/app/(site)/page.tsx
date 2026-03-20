@@ -170,11 +170,11 @@ export default async function HomePage() {
             </p>
             <div className="hero__trust">
               <div className="hero__rating">
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
+                <i className="ph-fill ph-star"></i>
+                <i className="ph-fill ph-star"></i>
+                <i className="ph-fill ph-star"></i>
+                <i className="ph-fill ph-star"></i>
+                <i className="ph-fill ph-star"></i>
                 <span>5.0 from 19 Google Reviews</span>
               </div>
             </div>
@@ -183,7 +183,7 @@ export default async function HomePage() {
                 Book a Free Consultation
               </Link>
               <a href="tel:+16179491046" className="btn btn--ghost btn--lg">
-                <i className="fa-solid fa-phone"></i> (617) 949-1046
+                <i className="ph ph-phone"></i> (617) 949-1046
               </a>
             </div>
           </div>
