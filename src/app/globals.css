@@ -2247,7 +2247,7 @@ a, button, [role="button"], input, textarea, select {
 
 .contact-info-card a,
 .contact-info-card p {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--color-text-muted);
   text-decoration: none;
   line-height: 1.6;
