@@ -2157,7 +2157,7 @@ a, button, [role="button"], input, textarea, select {
 .feature-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-10);
 }
 
 .feature-item {
@@ -2167,8 +2167,8 @@ a, button, [role="button"], input, textarea, select {
 }
 
 .feature-item__icon {
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 4.5rem;
+  height: 4.5rem;
   border-radius: var(--radius-lg);
   background: var(--navy-50);
   display: flex;
@@ -2178,7 +2178,7 @@ a, button, [role="button"], input, textarea, select {
 }
 
 .feature-item__icon i {
-  font-size: 1.625rem;
+  font-size: 2.25rem;
   color: var(--primary);
 }
 
