@@ -6,7 +6,7 @@ import CommunitiesHoverList from '@/components/CommunitiesHoverList';
 import ConsultationForm from '@/components/ConsultationForm';
 import { getAllNeighborhoods, resolveHeroImage } from '@/lib/sanity';
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'South Shore & MetroWest MA Communities — Jessica Shauffer',
@@ -56,9 +56,10 @@ const EXCLUDED_SLUGS = new Set(['eastondale', 'five-corners', 'furnace-village',
 export default async function CommunitiesPage() {
   const rawCommunities = await getAllNeighborhoods();
 
-  // Filter out old sub-neighborhoods and map to the shape CommunitiesHoverList needs
+  // Filter out old sub-neighborhoods, sort alphabetically, and map to the shape CommunitiesHoverList needs
   const communities = rawCommunities
     .filter((c) => !EXCLUDED_SLUGS.has(c.slug.current))
+    .sort((a, b) => a.name.localeCompare(b.name))
     .map((c) => ({
       slug: c.slug.current,
       name: c.name,

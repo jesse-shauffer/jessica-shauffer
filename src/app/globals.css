@@ -2096,7 +2096,7 @@ a, button, [role="button"], input, textarea, select {
 /* Desktop: num | thumb | name | county | tagline | arrow */
 @media (min-width: 1024px) {
   .communities-hover-list__row {
-    grid-template-columns: 2.5rem 9rem 1fr max-content auto auto;
+    grid-template-columns: 2.5rem 9rem 18rem 1fr auto auto;
     gap: var(--space-6);
     padding: var(--space-6) var(--space-4);
   }

@@ -11,7 +11,7 @@ const deskStructure = (S: StructureBuilder) =>
         S.documentTypeList('formSubmission').title('Form Submissions').defaultOrdering([{ field: 'submittedAt', direction: 'desc' }])
       ),
       S.divider(),
-      S.listItem().title('Neighborhoods').child(S.documentTypeList('neighborhood').title('Neighborhoods')),
+      S.listItem().title('Communities').child(S.documentTypeList('neighborhood').title('Communities').defaultOrdering([{ field: 'name', direction: 'asc' }])),
       S.listItem().title('Reviews').child(S.documentTypeList('review').title('Reviews')),
       S.listItem().title('Market Data').child(S.documentTypeList('marketData').title('Market Data')),
       S.divider(),
