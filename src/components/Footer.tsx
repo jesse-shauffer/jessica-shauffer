@@ -31,6 +31,7 @@ export default function Footer() {
             <a href="mailto:Jessica.Shauffer@nemoves.com">Jessica.Shauffer@nemoves.com</a>
             <a href={gReviewUrl} target="_blank" rel="noopener noreferrer">159 Belmont Street<br />South Easton, MA 02375</a>
             <a href="https://weinsteinkeach.com/jessica-shauffer" target="_blank" rel="noopener noreferrer">weinsteinkeach.com</a>
+            <a href="https://search.jessicashauffer.com/" target="_blank" rel="noopener noreferrer">Search MLS</a>
             <a href={gReviewUrl} target="_blank" rel="noopener noreferrer">See Google Reviews</a>
             <div className="footer__social">
               <a href="https://share.google/xq286yJyhfi6ZCQmD" target="_blank" rel="noopener noreferrer" aria-label="Google Business Profile"><i className="ph ph-google-logo"></i></a>
