@@ -885,6 +885,126 @@ a, button, [role="button"], input, textarea, select {
   background: var(--warm-gray);
 }
 
+/* --- Section Navy (For Sellers) --- */
+.section--navy {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* --- Buyers / Sellers Split --- */
+.split--buyers,
+.split--sellers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .split--buyers,
+  .split--sellers {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+  .split--sellers .split__content { order: 1; }
+  .split--sellers .split__stats-card { order: 2; }
+}
+
+.section__label--gold {
+  color: var(--gold);
+}
+
+.section__title--light {
+  color: #fff;
+}
+
+.split__desc--light {
+  color: rgba(255,255,255,0.75);
+  margin-bottom: var(--space-6);
+}
+
+/* Checklist */
+.split__checklist {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.split__checklist li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--gray-700);
+}
+
+.split__checklist li i {
+  color: var(--gold);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.split__checklist--light li {
+  color: rgba(255,255,255,0.85);
+}
+
+.split__checklist--light li i {
+  color: var(--gold);
+}
+
+/* Stats Card */
+.split__stats-card {
+  display: flex;
+  justify-content: center;
+}
+
+.stats-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-10);
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.stats-card__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0;
+}
+
+.stats-card__stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: var(--space-6);
+}
+
+.stats-card__number {
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.stats-card__desc {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.55);
+}
+
 /* --- Seller Card --- */
 .seller-card {
   background: rgba(255,255,255,0.06);

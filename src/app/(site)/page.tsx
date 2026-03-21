@@ -302,6 +302,76 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* FOR BUYERS */}
+      <section className="section">
+        <div className="container">
+          <div className="split split--buyers">
+            <div className="split__media">
+              <Image
+                src="/assets/market-kitchen.webp"
+                alt="Beautiful South Shore home interior for buyers"
+                width={720}
+                height={540}
+                style={{ borderRadius: 'var(--radius-lg)', width: '100%', height: 'auto' }}
+              />
+            </div>
+            <div className="split__content">
+              <p className="section__label">For Buyers</p>
+              <h2 className="section__title">Find Your Dream Home on the South Shore</h2>
+              <p>Whether you&apos;re a first-time buyer or upgrading to your forever home, Jessica Shauffer delivers expert guidance, access to off-market listings, and tenacious negotiation across 25 communities in Eastern Massachusetts.</p>
+              <ul className="split__checklist">
+                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Access off-market and pre-listed properties</li>
+                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Expert negotiation to win in a competitive market</li>
+                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Neighborhood tours and school district guidance</li>
+                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Mortgage pre-qualification referrals</li>
+              </ul>
+              <Link href="/buyers" className="btn btn--primary" style={{ marginTop: 'var(--space-6)' }}>
+                Full Buyer&apos;s Guide
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOR SELLERS */}
+      <section className="section section--navy">
+        <div className="container">
+          <div className="split split--sellers">
+            <div className="split__content">
+              <p className="section__label section__label--gold">For Sellers</p>
+              <h2 className="section__title section__title--light">Sell Smarter, Net More</h2>
+              <p className="split__desc--light">South Shore homes are selling fast and at or above asking price. Jessica leverages her market analysis expertise, proven pricing strategies, innovative digital marketing, and home staging specialization to maximize your return.</p>
+              <ul className="split__checklist split__checklist--light">
+                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Complimentary home valuation</li>
+                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Professional staging and photography</li>
+                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Marketing across hundreds of websites and social platforms</li>
+                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Tenacious negotiation for top dollar</li>
+              </ul>
+              <Link href="/sellers" className="btn btn--accent" style={{ marginTop: 'var(--space-6)' }}>
+                Full Seller&apos;s Guide
+              </Link>
+            </div>
+            <div className="split__stats-card">
+              <div className="stats-card">
+                <p className="stats-card__label"><i className="ph ph-trend-up" aria-hidden="true"></i> Average Seller Outcome</p>
+                <div className="stats-card__stat">
+                  <span className="stats-card__number">3.4%</span>
+                  <span className="stats-card__desc">Year-over-year appreciation</span>
+                </div>
+                <div className="stats-card__stat">
+                  <span className="stats-card__number">23 Days</span>
+                  <span className="stats-card__desc">Average time to sell</span>
+                </div>
+                <div className="stats-card__stat">
+                  <span className="stats-card__number">101%</span>
+                  <span className="stats-card__desc">Of list price received</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* REVIEWS */}
       <section className="section section--testimonials" id="reviews">
         <div className="container">
