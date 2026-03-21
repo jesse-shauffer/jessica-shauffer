@@ -1976,12 +1976,12 @@ a, button, [role="button"], input, textarea, select {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.5;
+  opacity: 0.72;
   transition: opacity var(--transition-interactive), transform 0.4s ease;
 }
 
 .neighborhood-card:hover .neighborhood-card__bg img {
-  opacity: 0.6;
+  opacity: 0.88;
   transform: scale(1.05);
 }
 
@@ -2076,7 +2076,7 @@ a, button, [role="button"], input, textarea, select {
 /* Inline thumbnail */
 .communities-hover-list__thumb {
   width: 9rem;
-  height: 5rem;
+  height: 6rem;
   border-radius: var(--radius-md);
   overflow: hidden;
   flex-shrink: 0;
