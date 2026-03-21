@@ -181,7 +181,7 @@ export default async function HomePage() {
             </div>
             <div className="hero__actions">
               <Link href="#consultation" className="btn btn--accent btn--lg">
-                Book a Free Consultation
+                Free Consultation
               </Link>
               <a href="tel:+16179491046" className="btn btn--ghost btn--lg">
                 <i className="ph ph-phone"></i> (617) 949-1046
