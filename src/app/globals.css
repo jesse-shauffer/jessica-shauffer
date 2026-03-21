@@ -1660,6 +1660,22 @@ a, button, [role="button"], input, textarea, select {
   background: var(--navy-50);
 }
 
+.nav-dropdown__divider {
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  margin: var(--space-2) 0;
+}
+
+.nav-dropdown__view-all {
+  font-weight: 600 !important;
+  color: var(--navy-900) !important;
+}
+
+.nav-dropdown__view-all:hover {
+  background: var(--navy-50);
+  color: var(--gold-dark) !important;
+}
+
 /* --- Inner Page Hero Banner --- */
 .page-hero {
   position: relative;

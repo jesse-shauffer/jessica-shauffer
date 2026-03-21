@@ -76,10 +76,8 @@ export default function Header() {
                     {c.name}
                   </Link>
                 ))}
-                <Link
-                  href="/counties"
-                  style={{ fontWeight: 600, borderTop: '1px solid rgba(0,0,0,0.08)', marginTop: '0.25rem', paddingTop: '0.5rem' }}
-                >
+                <div className="nav-dropdown__divider"></div>
+                <Link href="/counties" className="nav-dropdown__view-all">
                   All Counties →
                 </Link>
               </div>
@@ -100,10 +98,8 @@ export default function Header() {
                     {c.name}
                   </Link>
                 ))}
-                <Link
-                  href="/communities"
-                  style={{ fontWeight: 600, borderTop: '1px solid rgba(0,0,0,0.08)', marginTop: '0.25rem', paddingTop: '0.5rem' }}
-                >
+                <div className="nav-dropdown__divider"></div>
+                <Link href="/communities" className="nav-dropdown__view-all">
                   View All Communities →
                 </Link>
               </div>
