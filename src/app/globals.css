@@ -2470,6 +2470,77 @@ a, button, [role="button"], input, textarea, select {
   height: 23.75rem;
 }
 
+/* ── Community Chart Tabs ──────────────────────────────────────────────────── */
+.community-chart-tabs .community-chart__header {
+  margin-bottom: var(--space-4);
+}
+
+.chart-tab-bar {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: var(--space-4);
+}
+
+.chart-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: rgba(255,255,255,0.45);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-interactive);
+  white-space: nowrap;
+}
+
+.chart-tab-btn i {
+  font-size: 0.875rem;
+}
+
+.chart-tab-btn:hover {
+  border-color: rgba(255,255,255,0.28);
+  color: rgba(255,255,255,0.75);
+}
+
+.chart-tab-btn.is-active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy-900);
+}
+
+.chart-tab-subtitle {
+  margin-bottom: var(--space-5);
+}
+
+.chart-tab-subtitle p {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+}
+
+@media (max-width: 47.9375rem) {
+  .chart-tab-bar {
+    gap: var(--space-1);
+  }
+  .chart-tab-btn span {
+    display: none;
+  }
+  .chart-tab-btn {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-xs);
+  }
+  .chart-tab-btn i {
+    font-size: 1rem;
+  }
+}
+
 .chart-legend {
   display: flex;
   gap: var(--space-6);

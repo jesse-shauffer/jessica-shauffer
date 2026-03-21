@@ -5,7 +5,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import FaqAccordion from '@/components/FaqAccordion';
-import CommunityHomeValueChart from '@/components/CommunityHomeValueChart';
+import CommunityChartTabs from '@/components/CommunityChartTabs';
 import { getNeighborhoodBySlug, getOtherNeighborhoods, resolveHeroImage, getAllNeighborhoodSlugs } from '@/lib/sanity';
 
 export const revalidate = 60;
@@ -214,10 +214,10 @@ export default async function CommunityPage({ params }: { params: { slug: string
         </div>
       </section>
 
-      {/* HOME VALUE CHART */}
+      {/* MARKET DATA CHARTS — Home Values · Sale-to-List · Days on Market */}
       <section className="section community-chart-section">
         <div className="container">
-          <CommunityHomeValueChart slug={params.slug} />
+          <CommunityChartTabs slug={params.slug} />
         </div>
       </section>
 
