@@ -171,7 +171,7 @@ export default async function TestimonialsPage() {
           </div>
 
           <div className="testimonials-rows" itemScope itemType="https://schema.org/ItemList">
-            {reviews.map((review, i) => (
+            {reviews.map((review) => (
               <article
                 key={review._id}
                 className="testimonial-row"
@@ -179,11 +179,8 @@ export default async function TestimonialsPage() {
                 itemType="https://schema.org/Review"
                 itemProp="itemListElement"
               >
-                {/* Left: number + stars */}
+                {/* Left: stars + source */}
                 <div className="testimonial-row__meta">
-                  <span className="testimonial-row__num" aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
                   <div className="testimonial-row__stars" aria-label="5 stars">
                     <i className="ph-fill ph-star"></i>
                     <i className="ph-fill ph-star"></i>

@@ -109,7 +109,6 @@ export default function Header() {
               </div>
             </div>
 
-            <Link href="/testimonials" className={isActive('testimonials')}>Reviews</Link>
             <Link href="/contact" className={isActive('contact')}>Contact</Link>
           </nav>
           <Link href="#consultation" className="btn btn--primary btn--sm header__cta">Free Consultation</Link>
@@ -163,7 +162,6 @@ export default function Header() {
               </div>
             )}
 
-            <Link href="/testimonials" onClick={closeMobile}>Reviews</Link>
             <Link href="/contact" onClick={closeMobile}>Contact</Link>
           </nav>
           <Link href="#consultation" className="btn btn--primary" onClick={closeMobile}>Free Consultation</Link>
