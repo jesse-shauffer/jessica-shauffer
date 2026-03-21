@@ -90,7 +90,8 @@ const faqSchema = {
 
 export default async function AboutPage() {
   const reviews = await getReviews();
-  const displayReviews = reviews.slice(0, 6);
+  // Randomly pick 9 reviews on each server render — keeps carousel fresh without showing all 21
+  const displayReviews = [...reviews].sort(() => Math.random() - 0.5).slice(0, 9);
   return (
     <>
       <JsonLd data={personSchema} />
