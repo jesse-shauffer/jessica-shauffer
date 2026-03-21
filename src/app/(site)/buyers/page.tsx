@@ -4,6 +4,8 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import BuyersChart from '@/components/BuyersChart';
 import ConsultationForm from '@/components/ConsultationForm';
+import ReviewCarousel from '@/components/ReviewCarousel';
+import { getReviews } from '@/lib/sanity';
 
 export const metadata: Metadata = {
   title: 'Buy a Home in South Shore & MetroWest MA — Jessica Shauffer',
@@ -43,7 +45,9 @@ const faqSchema = {
   ],
 };
 
-export default function BuyersPage() {
+export default async function BuyersPage() {
+  const reviews = await getReviews();
+  const displayReviews = reviews.slice(0, 6);
   return (
     <>
       <JsonLd data={serviceSchema} />
@@ -128,6 +132,27 @@ export default function BuyersPage() {
               <Image src="/assets/interior.webp" alt="Beautiful home interior" width={600} height={400} style={{ borderRadius: 'var(--radius-2xl)', boxShadow: 'var(--shadow-lg)', width: '100%', height: 'auto' }} />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="section section--testimonials" id="reviews">
+        <div className="container">
+          <div className="section__header">
+            <p className="section__label">Client Success Stories</p>
+            <h2 className="section__title">What Jessica&apos;s Clients Say</h2>
+            <div className="reviews-summary">
+              <div className="reviews-summary__stars">
+                <i className="ph-fill ph-star" aria-hidden="true"></i>
+                <i className="ph-fill ph-star" aria-hidden="true"></i>
+                <i className="ph-fill ph-star" aria-hidden="true"></i>
+                <i className="ph-fill ph-star" aria-hidden="true"></i>
+                <i className="ph-fill ph-star" aria-hidden="true"></i>
+              </div>
+              <span className="reviews-summary__text">5.0 &middot; 19 Google Reviews</span>
+            </div>
+          </div>
+          <ReviewCarousel reviews={displayReviews} />
         </div>
       </section>
 
