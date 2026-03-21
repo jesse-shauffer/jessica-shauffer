@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
+import FaqAccordion from '@/components/FaqAccordion';
 import {
   getCountyBySlug,
   getAllCountySlugs,
@@ -307,14 +308,7 @@ export default async function CountyPage({ params }: { params: { slug: string } 
               <p className="section__label">Common Questions</p>
               <h2 className="section__title">{name} Real Estate — FAQ</h2>
             </div>
-            <div className="faq-list">
-              {faqItems.map(({ q, a }, i) => (
-                <div key={i} className="faq-item">
-                  <h3 className="faq-item__question">{q}</h3>
-                  <p className="faq-item__answer">{a}</p>
-                </div>
-              ))}
-            </div>
+            <FaqAccordion items={faqItems.map(({ q, a }) => ({ question: q, answer: a }))} />
           </div>
         </section>
       )}

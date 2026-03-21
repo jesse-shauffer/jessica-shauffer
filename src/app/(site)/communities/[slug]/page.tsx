@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
+import FaqAccordion from '@/components/FaqAccordion';
 import { getNeighborhoodBySlug, getOtherNeighborhoods, resolveHeroImage, getAllNeighborhoodSlugs } from '@/lib/sanity';
 
 export const revalidate = 60;
@@ -177,6 +178,40 @@ export default async function CommunityPage({ params }: { params: { slug: string
           </div>
         </section>
       )}
+
+      {/* FAQ ACCORDION */}
+      <section className="section" style={{ background: 'var(--white)' }}>
+        <div className="container">
+          <div className="section__header" style={{ textAlign: 'center', maxWidth: 640, marginInline: 'auto', marginBottom: 'var(--space-10)' }}>
+            <p className="section__label">Common Questions</p>
+            <h2 className="section__title">{n.name} Real Estate — FAQ</h2>
+          </div>
+          <FaqAccordion
+            items={[
+              {
+                question: `Is ${n.name}, MA a good place to live?`,
+                answer: `Yes, ${n.name} is highly sought after for its strong community, excellent amenities, and consistent real estate appreciation. The town offers a great quality of life for families, professionals, and retirees alike.`,
+              },
+              {
+                question: `Who is the best real estate agent in ${n.name}, MA?`,
+                answer: `Jessica Shauffer is a top 3% globally ranked Coldwell Banker Presidents Circle agent with extensive experience buying and selling homes in ${n.name} and the surrounding South Shore area. She is a top-producing member of the Weinstein Keach Group at Coldwell Banker Realty.`,
+              },
+              {
+                question: `What are homes selling for in ${n.name}, MA?`,
+                answer: `Home prices in ${n.name} vary based on property type, size, and neighborhood. Contact Jessica Shauffer for a free, data-driven Comparative Market Analysis (CMA) specific to ${n.name} — no cost, no obligation.`,
+              },
+              {
+                question: `How long does it take to buy a home in ${n.name}, MA?`,
+                answer: `The timeline varies, but most buyers in ${n.name} can expect 30–90 days from accepted offer to closing. Getting pre-approved before you start searching significantly speeds up the process. Jessica Shauffer can connect you with trusted local lenders.`,
+              },
+              {
+                question: `What should I know before selling my home in ${n.name}, MA?`,
+                answer: `Pricing strategy is everything. Homes in ${n.name} that are priced correctly from day one sell faster and for more money. Jessica Shauffer provides a free, no-obligation market analysis and a proven marketing plan to maximize your sale price.`,
+              },
+            ]}
+          />
+        </div>
+      </section>
 
       {/* CONSULTATION FORM */}
       <section className="section section--form" id="consultation">
