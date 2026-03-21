@@ -539,11 +539,11 @@ a, button, [role="button"], input, textarea, select {
 @media (max-width: 47.9375rem) {
   .hero__actions {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
   }
   .hero__actions .btn {
     min-width: unset;
-    width: 100%;
+    width: auto;
   }
 }
 
