@@ -150,6 +150,34 @@ export default async function CommunityPage({ params }: { params: { slug: string
         </section>
       )}
 
+      {others && others.length > 0 && (
+        <section className="section" style={{ background: 'var(--warm-gray)' }}>
+          <div className="container">
+            <div className="content-block__header" style={{ textAlign: 'center', maxWidth: 640, marginInline: 'auto', marginBottom: 'var(--space-12)' }}>
+              <h2>Explore Nearby Communities</h2>
+              <p>Discover other highly-rated towns across the South Shore and MetroWest.</p>
+            </div>
+            <div className="neighborhood-grid">
+              {others.slice(0, 6).map((other) => (
+                <Link key={other.slug} href={`/communities/${other.slug}`} className="neighborhood-card">
+                  <div className="neighborhood-card__bg">
+                    <Image src={resolveHeroImage(other.image, 600)} alt={other.name} fill style={{ objectFit: 'cover' }} />
+                  </div>
+                  <div className="neighborhood-card__arrow"><i className="ph ph-arrow-right"></i></div>
+                  <div className="neighborhood-card__content">
+                    <h3>{other.name}</h3>
+                    <p>{other.tagline || `Explore ${other.name} real estate`}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 'var(--space-10)' }}>
+              <Link href="/communities" className="btn btn--outline">View All Communities</Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* CONSULTATION FORM */}
       <section className="section section--form" id="consultation">
         <div className="container">
@@ -190,34 +218,6 @@ export default async function CommunityPage({ params }: { params: { slug: string
           </div>
         </div>
       </section>
-
-      {others && others.length > 0 && (
-        <section className="section" style={{ background: 'var(--white)' }}>
-          <div className="container">
-            <div className="content-block__header" style={{ textAlign: 'center', maxWidth: 640, marginInline: 'auto', marginBottom: 'var(--space-12)' }}>
-              <h2>Explore Nearby Communities</h2>
-              <p>Discover other highly-rated towns across the South Shore and MetroWest.</p>
-            </div>
-            <div className="neighborhood-grid">
-              {others.slice(0, 6).map((other) => (
-                <Link key={other.slug} href={`/communities/${other.slug}`} className="neighborhood-card">
-                  <div className="neighborhood-card__bg">
-                    <Image src={resolveHeroImage(other.image, 600)} alt={other.name} fill style={{ objectFit: 'cover' }} />
-                  </div>
-                  <div className="neighborhood-card__arrow"><i className="ph ph-arrow-right"></i></div>
-                  <div className="neighborhood-card__content">
-                    <h3>{other.name}</h3>
-                    <p>{other.tagline || `Explore ${other.name} real estate`}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            <div style={{ textAlign: 'center', marginTop: 'var(--space-10)' }}>
-              <Link href="/communities" className="btn btn--outline">View All Communities</Link>
-            </div>
-          </div>
-        </section>
-      )}
     </>
   );
 }
