@@ -68,8 +68,7 @@ export default function ContactPage() {
             <div className="contact-info-card">
               <i className="ph ph-phone"></i>
               <h3>Call Jessica</h3>
-              <a href="tel:+16179491046">(617) 949-1046</a><br />
-              <a href="tel:+15082302544">Office: (508) 230-2544</a>
+              <a href="tel:+16179491046">(617) 949-1046</a>
             </div>
             <div className="contact-info-card">
               <i className="ph ph-envelope-simple"></i>

@@ -2239,7 +2239,7 @@ a, button, [role="button"], input, textarea, select {
 }
 
 .contact-info-card h3 {
-  font-size: var(--text-sm);
+  font-size: var(--text-lg);
   font-weight: 700;
   color: var(--primary);
   margin-bottom: var(--space-2);
