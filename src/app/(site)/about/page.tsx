@@ -224,15 +224,15 @@ export default async function AboutPage() {
               <h2 className="section__title">Education &amp; Affiliations</h2>
               <div className="timeline">
                 <div className="timeline__item">
-                  <h4>Coldwell Banker Presidents Circle</h4>
+                  <p className="timeline__item-title">Coldwell Banker Presidents Circle</p>
                   <p>Top 3% of Coldwell Banker agents worldwide — sustained excellence in production and client service across Eastern Massachusetts.</p>
                 </div>
                 <div className="timeline__item">
-                  <h4>Weinstein Keach Group, Coldwell Banker Realty</h4>
+                  <p className="timeline__item-title">Weinstein Keach Group, Coldwell Banker Realty</p>
                   <p>Top-producing agent on an award-winning team led by Stephanie Weinstein and Meredith Keach, serving the South Shore and surrounding areas.</p>
                 </div>
                 <div className="timeline__item">
-                  <h4>University of Massachusetts</h4>
+                  <p className="timeline__item-title">University of Massachusetts</p>
                   <p>B.S. in Sociology and Education — the foundation for Jessica&apos;s people-first approach to real estate and her ability to guide clients through complex decisions.</p>
                 </div>
               </div>

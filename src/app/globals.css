@@ -2338,7 +2338,7 @@ a, button, [role="button"], input, textarea, select {
   border: 3px solid var(--accent);
 }
 
-.timeline__item h4 {
+.timeline__item h4, .timeline__item-title {
   font-size: var(--text-sm);
   font-weight: 700;
   color: var(--primary);
