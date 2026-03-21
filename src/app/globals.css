@@ -2108,6 +2108,7 @@ a, button, [role="button"], input, textarea, select {
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
+    justify-self: start;
   }
 }
 
