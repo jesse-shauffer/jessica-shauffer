@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import ConsultationForm from '@/components/ConsultationForm';
 
 export const metadata: Metadata = {
   title: 'About Jessica Shauffer — Top Real Estate Agent, South Shore & MetroWest MA',
@@ -236,13 +237,43 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section">
+      {/* CONSULTATION FORM */}
+      <section className="section section--form" id="consultation">
         <div className="container">
-          <div className="cta-banner">
-            <h2>Ready to Get Started?</h2>
-            <p>Whether you&apos;re buying, selling, or just exploring your options across the South Shore or MetroWest, Jessica Shauffer is here to help with expert guidance and no pressure.</p>
-            <Link href="/contact#consultation" className="btn btn--accent btn--lg">Book a Free Consultation</Link>
+          <div className="form-split">
+            <div className="form-split__content">
+              <p className="section__label">Free Consultation</p>
+              <h2 className="section__title">Let&apos;s Talk About Your Goals</h2>
+              <p>
+                Whether you&apos;re buying, selling, or just exploring your options across the South Shore or MetroWest &mdash; a quick conversation with Jessica can save you time, money, and stress.
+              </p>
+              <div className="form-benefits">
+                <div className="form-benefit">
+                  <i className="ph ph-clock" aria-hidden="true"></i>
+                  <div>
+                    <strong>15-Minute Call</strong>
+                    <span>Quick, focused, and tailored to you</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-currency-dollar-simple" aria-hidden="true"></i>
+                  <div>
+                    <strong>100% Free</strong>
+                    <span>No cost, no obligation, no pressure</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-shield-check" aria-hidden="true"></i>
+                  <div>
+                    <strong>Regional Expertise</strong>
+                    <span>Data-driven insights for 25 local communities</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="form-split__form">
+              <ConsultationForm />
+            </div>
           </div>
         </div>
       </section>

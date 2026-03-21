@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
+import ConsultationForm from '@/components/ConsultationForm';
 
 export const revalidate = 3600;
 
@@ -174,12 +175,43 @@ export default function CountiesPage() {
         </div>
       </section>
 
-      <section className="section">
+      {/* CONSULTATION FORM */}
+      <section className="section section--form" id="consultation">
         <div className="container">
-          <div className="cta-banner">
-            <h2>Not Sure Which County Is Right for You?</h2>
-            <p>Jessica Shauffer can walk you through the differences between Bristol, Norfolk, and Plymouth Counties — schools, commute times, price points, and lifestyle — so you can make the most informed decision possible.</p>
-            <Link href="/contact#consultation" className="btn btn--accent btn--lg">Book a Free Consultation</Link>
+          <div className="form-split">
+            <div className="form-split__content">
+              <p className="section__label">Free Consultation</p>
+              <h2 className="section__title">Let&apos;s Talk About Your Goals</h2>
+              <p>
+                Not sure which county is right for you? Jessica can walk you through the differences between Bristol, Norfolk, and Plymouth Counties &mdash; schools, commute times, price points, and lifestyle.
+              </p>
+              <div className="form-benefits">
+                <div className="form-benefit">
+                  <i className="ph ph-clock" aria-hidden="true"></i>
+                  <div>
+                    <strong>15-Minute Call</strong>
+                    <span>Quick, focused, and tailored to you</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-currency-dollar-simple" aria-hidden="true"></i>
+                  <div>
+                    <strong>100% Free</strong>
+                    <span>No cost, no obligation, no pressure</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-shield-check" aria-hidden="true"></i>
+                  <div>
+                    <strong>Regional Expertise</strong>
+                    <span>Data-driven insights for all 3 counties</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="form-split__form">
+              <ConsultationForm />
+            </div>
           </div>
         </div>
       </section>

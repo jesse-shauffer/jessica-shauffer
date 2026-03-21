@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import CommunitiesHoverList from '@/components/CommunitiesHoverList';
+import ConsultationForm from '@/components/ConsultationForm';
 import { getAllNeighborhoods, resolveHeroImage } from '@/lib/sanity';
 
 export const revalidate = 3600;
@@ -113,24 +114,42 @@ export default async function CommunitiesPage() {
         </div>
       </section>
 
-      <section className="section" style={{ background: 'var(--white)' }}>
+      {/* CONSULTATION FORM */}
+      <section className="section section--form" id="consultation">
         <div className="container">
-          <div className="split">
-            <div className="split__content">
-              <p className="section__label">Regional Lifestyle</p>
-              <h2 className="section__title">Why Buyers Love Eastern Mass</h2>
-              <p>With top-rated public schools, beautiful coastal and forested open spaces, and excellent commuter access to Boston and Providence, the South Shore and MetroWest regions offer an unparalleled quality of life.</p>
-              <ul className="check-list">
-                <li><i className="ph ph-check-circle"></i> Top-tier public school districts statewide</li>
-                <li><i className="ph ph-check-circle"></i> Miles of coastal beaches and harbor access</li>
-                <li><i className="ph ph-check-circle"></i> Direct MBTA commuter rail access to Boston</li>
-                <li><i className="ph ph-check-circle"></i> Historic downtowns with local dining and shops</li>
-                <li><i className="ph ph-check-circle"></i> Strong, consistent property value appreciation</li>
-              </ul>
-              <Link href="/contact#consultation" className="btn btn--primary">Find Your Perfect Town</Link>
+          <div className="form-split">
+            <div className="form-split__content">
+              <p className="section__label">Free Consultation</p>
+              <h2 className="section__title">Let&apos;s Talk About Your Goals</h2>
+              <p>
+                Whether you&apos;re ready to make a move or just exploring the market across the South Shore, MetroWest, or Bristol County &mdash; a quick conversation with Jessica can save you time, money, and stress.
+              </p>
+              <div className="form-benefits">
+                <div className="form-benefit">
+                  <i className="ph ph-clock" aria-hidden="true"></i>
+                  <div>
+                    <strong>15-Minute Call</strong>
+                    <span>Quick, focused, and tailored to you</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-currency-dollar-simple" aria-hidden="true"></i>
+                  <div>
+                    <strong>100% Free</strong>
+                    <span>No cost, no obligation, no pressure</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-shield-check" aria-hidden="true"></i>
+                  <div>
+                    <strong>Regional Expertise</strong>
+                    <span>Data-driven insights for 25 local communities</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="split__media">
-              <Image src="/assets/consultation.webp" alt="Jessica Shauffer real estate consultation" width={600} height={450} style={{ borderRadius: 'var(--radius-lg)' }} />
+            <div className="form-split__form">
+              <ConsultationForm />
             </div>
           </div>
         </div>

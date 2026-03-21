@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import ConsultationForm from '@/components/ConsultationForm';
 import { getNeighborhoodBySlug, getOtherNeighborhoods, resolveHeroImage, getAllNeighborhoodSlugs } from '@/lib/sanity';
 
 export const revalidate = 3600;
@@ -149,12 +150,43 @@ export default async function CommunityPage({ params }: { params: { slug: string
         </section>
       )}
 
-      <section className="section">
+      {/* CONSULTATION FORM */}
+      <section className="section section--form" id="consultation">
         <div className="container">
-          <div className="cta-banner">
-            <h2>Looking to Buy or Sell in {n.name}?</h2>
-            <p>Jessica Shauffer is a top 3% Coldwell Banker agent globally. Let her data-driven approach and local expertise guide your next move in {n.name}.</p>
-            <Link href="/contact#consultation" className="btn btn--accent btn--lg">Book a Free Consultation</Link>
+          <div className="form-split">
+            <div className="form-split__content">
+              <p className="section__label">Free Consultation</p>
+              <h2 className="section__title">Let&apos;s Talk About Your Goals</h2>
+              <p>
+                Looking to buy or sell in {n.name}? A quick conversation with Jessica can save you time, money, and stress &mdash; no pressure, just expert local guidance.
+              </p>
+              <div className="form-benefits">
+                <div className="form-benefit">
+                  <i className="ph ph-clock" aria-hidden="true"></i>
+                  <div>
+                    <strong>15-Minute Call</strong>
+                    <span>Quick, focused, and tailored to you</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-currency-dollar-simple" aria-hidden="true"></i>
+                  <div>
+                    <strong>100% Free</strong>
+                    <span>No cost, no obligation, no pressure</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-shield-check" aria-hidden="true"></i>
+                  <div>
+                    <strong>Local Expertise</strong>
+                    <span>Deep knowledge of {n.name} and surrounding towns</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="form-split__form">
+              <ConsultationForm />
+            </div>
           </div>
         </div>
       </section>

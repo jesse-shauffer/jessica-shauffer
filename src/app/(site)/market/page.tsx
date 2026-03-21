@@ -152,7 +152,7 @@ export default function MarketPage() {
               <h2 className="section__title">What This Means for You</h2>
               <p>The Eastern Massachusetts real estate market rewards those who are prepared. Whether you are buying in Plymouth, selling in Canton, or investing in Easton, having the right strategy and the right agent makes all the difference.</p>
               <p>Jessica monitors these micro-markets daily and can help you understand exactly how regional trends impact your specific situation — your target neighborhood, your property type, and your timeline.</p>
-              <Link href="/contact#consultation" className="btn btn--primary">Get a Personalized Market Analysis</Link>
+              <Link href="#consultation" className="btn btn--primary">Get a Personalized Market Analysis</Link>
             </div>
             <div className="split__media">
               <Image src="/assets/market-kitchen.webp" alt="Beautiful modern kitchen interior" width={600} height={400} />

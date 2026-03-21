@@ -180,7 +180,7 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="hero__actions">
-              <Link href="/contact#consultation" className="btn btn--accent btn--lg">
+              <Link href="#consultation" className="btn btn--accent btn--lg">
                 Book a Free Consultation
               </Link>
               <a href="tel:+16179491046" className="btn btn--ghost btn--lg">

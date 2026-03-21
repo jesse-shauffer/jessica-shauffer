@@ -136,7 +136,7 @@ export default function SellersPage() {
         </div>
       </section>
 
-      <section className="section section--form" id="valuation" style={{ background: 'var(--white)' }}>
+      <section className="section section--form" id="consultation" style={{ background: 'var(--white)' }}>
         <div className="container">
           <div className="form-split">
             <div className="form-split__content">

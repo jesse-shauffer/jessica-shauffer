@@ -252,7 +252,7 @@ export default async function CountyPage({ params }: { params: { slug: string } 
               {description.map((para, i) => (
                 <p key={i} style={{ marginBottom: 'var(--space-4)', lineHeight: 1.75 }}>{para}</p>
               ))}
-              <Link href="/contact#consultation" className="btn btn--primary" style={{ marginTop: 'var(--space-4)' }}>
+              <Link href="#consultation" className="btn btn--primary" style={{ marginTop: 'var(--space-4)' }}>
                 Get a Free Market Analysis
               </Link>
             </div>
