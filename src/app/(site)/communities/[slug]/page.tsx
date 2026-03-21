@@ -138,7 +138,7 @@ export default async function CommunityPage({ params }: { params: { slug: string
             <div className="highlight-grid">
               {n.highlights.map((h: { icon: string; title: string; description: string }, i: number) => (
                 <div key={i} className="highlight-card">
-                  <i className={`ph ${h.icon}`}></i>
+                  <i className={`ph ${h.icon || 'ph-map-pin'}`}></i>
                   <div>
                     <h4>{h.title}</h4>
                     <p>{h.description}</p>
