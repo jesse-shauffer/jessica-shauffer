@@ -125,6 +125,7 @@ export default function Header() {
             <i className="ph ph-x"></i>
           </button>
           <nav className="mobile-nav__links">
+            <Link href="/" onClick={closeMobile}>Home</Link>
             <Link href="/about" onClick={closeMobile}>About</Link>
             <Link href="/market" onClick={closeMobile}>Market</Link>
             <Link href="/buyers" onClick={closeMobile}>Buyers</Link>
