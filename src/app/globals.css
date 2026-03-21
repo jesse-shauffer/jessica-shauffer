@@ -2048,6 +2048,10 @@ a, button, [role="button"], input, textarea, select {
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   text-align: right;
+  transition: color 0.25s ease;
+}
+.communities-hover-list__row:hover .communities-hover-list__num {
+  color: var(--gold);
 }
 /* Inline thumbnail */
 .communities-hover-list__thumb {
@@ -2062,6 +2066,10 @@ a, button, [role="button"], input, textarea, select {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.35s ease;
+}
+.communities-hover-list__row:hover .communities-hover-list__thumb img {
+  transform: scale(1.06);
 }
 .communities-hover-list__name {
   font-size: clamp(var(--text-base), 1.5vw, var(--text-xl));
@@ -2082,10 +2090,19 @@ a, button, [role="button"], input, textarea, select {
   padding: 2px 10px;
   border-radius: var(--radius-full);
   white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.communities-hover-list__row:hover .communities-hover-list__county {
+  background: rgba(200,162,78,0.12);
+  color: var(--gold-dark);
 }
 /* Tagline — hidden on mobile/tablet, shown desktop */
 .communities-hover-list__tagline {
   display: none;
+  transition: color 0.25s ease;
+}
+.communities-hover-list__row:hover .communities-hover-list__tagline {
+  color: var(--gray-700);
 }
 .communities-hover-list__arrow {
   font-size: var(--text-lg);
