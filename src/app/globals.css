@@ -545,6 +545,8 @@ a, button, [role="button"], input, textarea, select {
   .hero__actions .btn {
     min-width: unset;
     width: auto;
+    padding: var(--space-2) var(--space-5);
+    font-size: var(--text-xs);
   }
 }
 
