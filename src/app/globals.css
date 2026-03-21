@@ -1146,7 +1146,7 @@ a, button, [role="button"], input, textarea, select {
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
   margin-bottom: var(--space-4);
-  align-items: start;
+  align-items: stretch;
 }
 
 .testimonial {
@@ -1157,6 +1157,7 @@ a, button, [role="button"], input, textarea, select {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  height: 100%;
 }
 
 .testimonial__stars {
