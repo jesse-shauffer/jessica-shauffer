@@ -110,7 +110,7 @@ export default function Header() {
 
             <Link href="/contact" className={isActive('contact')}>Contact</Link>
           </nav>
-          <Link href="/contact#consultation" className="btn btn--primary btn--sm header__cta">Free Consultation</Link>
+          <Link href="#consultation" className="btn btn--primary btn--sm header__cta">Free Consultation</Link>
           <button className="header__menu-btn" aria-label="Open menu" onClick={openMobile}>
             <i className="ph ph-list"></i>
           </button>
@@ -163,7 +163,7 @@ export default function Header() {
 
             <Link href="/contact" onClick={closeMobile}>Contact</Link>
           </nav>
-          <Link href="/contact#consultation" className="btn btn--primary" onClick={closeMobile}>Free Consultation</Link>
+          <Link href="#consultation" className="btn btn--primary" onClick={closeMobile}>Free Consultation</Link>
         </div>
       </div>
     </>
