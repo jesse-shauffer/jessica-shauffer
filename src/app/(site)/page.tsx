@@ -6,7 +6,7 @@ import JsonLd from '@/components/JsonLd';
 import ReviewCarousel from '@/components/ReviewCarousel';
 import ConsultationForm from '@/components/ConsultationForm';
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug('home');
