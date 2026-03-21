@@ -1490,7 +1490,7 @@ a, button, [role="button"], input, textarea, select {
   gap: var(--space-3);
 }
 
-.footer__links h4 {
+.footer__links h4, .footer__links .footer__col-heading {
   color: var(--white);
   font-size: var(--text-sm);
   font-weight: 700;

@@ -15,7 +15,7 @@ export default function Footer() {
             <p>Weinstein Keach Group | Coldwell Banker Realty<br />Top 3% agent serving the South Shore, MetroWest, and Bristol County, MA.</p>
           </div>
           <div className="footer__links">
-            <h4>Quick Links</h4>
+            <p className="footer__col-heading">Quick Links</p>
             <Link href="/about">About</Link>
             <Link href="/market">Market</Link>
             <Link href="/buyers">Buyers</Link>
@@ -26,7 +26,7 @@ export default function Footer() {
             <Link href="/contact">Contact</Link>
           </div>
           <div className="footer__links">
-            <h4>Contact Jessica</h4>
+            <p className="footer__col-heading">Contact Jessica</p>
             <a href="tel:+16179491046">(617) 949-1046</a>
             <a href="mailto:Jessica.Shauffer@nemoves.com">Jessica.Shauffer@nemoves.com</a>
             <a href={gReviewUrl} target="_blank" rel="noopener noreferrer">159 Belmont Street<br />South Easton, MA 02375</a>
