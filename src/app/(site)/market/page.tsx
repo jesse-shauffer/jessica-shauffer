@@ -5,17 +5,22 @@ import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import StatCard from '@/components/StatCard';
 import HomeValueChart from '@/components/HomeValueChart';
+import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
-export const metadata: Metadata = {
-  title: 'South Shore & MetroWest MA Real Estate Market Data — Jessica Shauffer',
-  description: 'Current housing market data for the South Shore and MetroWest MA. Get expert analysis, median home values, and trends for Plymouth, Easton, Canton, and more.',
-  openGraph: {
-    title: 'South Shore & MetroWest MA Real Estate Market Data — Jessica Shauffer',
-    description: 'Current housing market data for the South Shore and MetroWest MA. Get expert analysis, median home values, and trends for Plymouth, Easton, Canton, and more.',
-    images: ['/assets/jessica.jpg'],
-  },
-  alternates: { canonical: '/market' },
-};
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug('market');
+  const title = page?.metaTitle || 'South Shore & MetroWest MA Real Estate Market Data — Jessica Shauffer';
+  const description = page?.metaDescription || 'Current housing market data for the South Shore and MetroWest MA. Get expert analysis, median home values, and trends for Plymouth, Easton, Canton, and more.';
+  const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: [ogImage] },
+    alternates: { canonical: '/market' },
+  };
+}
 
 const marketSchema = {
   '@context': 'https://schema.org',
@@ -35,7 +40,9 @@ const faqSchema = {
   ],
 };
 
-export default function MarketPage() {
+export default async function MarketPage() {
+  const page = await getPageBySlug('market');
+  const heroSrc = resolveHeroImage(page?.heroImage, 1920);
   return (
     <>
       <JsonLd data={marketSchema} />
@@ -43,12 +50,12 @@ export default function MarketPage() {
       
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src="/assets/market-aerial.webp" alt="Aerial view of Eastern Massachusetts real estate" fill style={{ objectFit: 'cover' }} priority />
+          <Image src={heroSrc} alt={page?.heroTitle || 'Aerial view of Eastern Massachusetts real estate'} fill style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Market Data</p>
-          <h1 className="page-hero__title">Regional Market Insights</h1>
-          <p className="page-hero__desc">Data-driven analysis across 25+ communities in the South Shore, MetroWest, and Bristol County to help you make informed decisions.</p>
+          <h1 className="page-hero__title">{page?.heroTitle || 'Regional Market Insights'}</h1>
+          <p className="page-hero__desc">{page?.heroDesc || 'Data-driven analysis across 25+ communities in the South Shore, MetroWest, and Bristol County to help you make informed decisions.'}</p>
         </div>
       </section>
 

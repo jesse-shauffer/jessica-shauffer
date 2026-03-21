@@ -1,24 +1,30 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getReviews } from '@/lib/sanity';
+import { getReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 import JsonLd from '@/components/JsonLd';
 import ReviewCarousel from '@/components/ReviewCarousel';
 import ConsultationForm from '@/components/ConsultationForm';
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Jessica Shauffer — Coldwell Banker's Top Agent for the South Shore",
-  description: "South Shore & MetroWest's top-rated Coldwell Banker real estate agent. Jessica Shauffer serves 25 communities across Eastern Massachusetts including Easton, Canton, Sharon, Plymouth, Hingham, and more.",
-  alternates: { canonical: 'https://jessicashauffer.com' },
-  openGraph: {
-    title: "Jessica Shauffer — Coldwell Banker's Top Agent for the South Shore",
-    description: "South Shore & MetroWest's top-rated Coldwell Banker real estate agent. Jessica Shauffer serves 25 communities across Eastern Massachusetts.",
-    url: 'https://jessicashauffer.com',
-    images: [{ url: '/assets/hero.webp', width: 1200, height: 630, alt: 'South Shore Massachusetts homes for sale' }],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug('home');
+  const title = page?.metaTitle || "Jessica Shauffer — Coldwell Banker's Top Agent for the South Shore";
+  const description = page?.metaDescription || "South Shore & MetroWest's top-rated Coldwell Banker real estate agent. Jessica Shauffer serves 25 communities across Eastern Massachusetts including Easton, Canton, Sharon, Plymouth, Hingham, and more.";
+  const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
+  return {
+    title,
+    description,
+    alternates: { canonical: 'https://jessicashauffer.com' },
+    openGraph: {
+      title,
+      description,
+      url: 'https://jessicashauffer.com',
+      images: [{ url: ogImage, width: 1200, height: 630, alt: 'South Shore Massachusetts homes for sale' }],
+    },
+  };
+}
 
 const agentSchema = {
   '@context': 'https://schema.org',
@@ -138,7 +144,8 @@ const faqSchema = {
 };
 
 export default async function HomePage() {
-  const reviews = await getReviews();
+  const [reviews, page] = await Promise.all([getReviews(), getPageBySlug('home')]);
+  const heroSrc = resolveHeroImage(page?.heroImage, 1920);
   // Randomly pick 9 reviews on each server render — keeps carousel fresh without showing all 21
   const displayReviews = [...reviews].sort(() => Math.random() - 0.5).slice(0, 9);
 
@@ -151,8 +158,8 @@ export default async function HomePage() {
       <section className="hero">
         <div className="hero__bg">
           <Image
-            src="/assets/hero.webp"
-            alt="Beautiful South Shore Massachusetts home exterior"
+            src={heroSrc}
+            alt={page?.heroTitle || 'Beautiful South Shore Massachusetts home exterior'}
             fill
             style={{ objectFit: 'cover' }}
             priority

@@ -3,17 +3,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
+import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
-export const metadata: Metadata = {
-  title: 'Contact Jessica Shauffer — Easton, MA Real Estate Agent',
-  description: 'Book a free consultation with Jessica Shauffer, Coldwell Banker Presidents Circle agent. Call (617) 949-1046 or schedule online.',
-  openGraph: {
-    title: 'Contact Jessica Shauffer — Easton, MA Real Estate Agent',
-    description: 'Book a free consultation with Jessica Shauffer, Coldwell Banker Presidents Circle agent. Call (617) 949-1046 or schedule online.',
-    images: ['/assets/jessica.jpg'],
-  },
-  alternates: { canonical: '/contact' },
-};
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug('contact');
+  const title = page?.metaTitle || 'Contact Jessica Shauffer — Easton, MA Real Estate Agent';
+  const description = page?.metaDescription || 'Book a free consultation with Jessica Shauffer, Coldwell Banker Presidents Circle agent. Call (617) 949-1046 or schedule online.';
+  const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: [ogImage] },
+    alternates: { canonical: '/contact' },
+  };
+}
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
@@ -37,19 +42,21 @@ const localBusinessSchema = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const page = await getPageBySlug('contact');
+  const heroSrc = resolveHeroImage(page?.heroImage, 1920);
   return (
     <>
       <JsonLd data={localBusinessSchema} />
 
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src="/assets/consultation.webp" alt="Real estate consultation" fill style={{ objectFit: 'cover' }} priority />
+          <Image src={heroSrc} alt={page?.heroTitle || 'Real estate consultation'} fill style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Get in Touch</p>
-          <h1 className="page-hero__title">Contact Jessica Shauffer</h1>
-          <p className="page-hero__desc">Ready to make a move? Let&apos;s talk. Book a free consultation or reach out directly.</p>
+          <h1 className="page-hero__title">{page?.heroTitle || 'Contact Jessica Shauffer'}</h1>
+          <p className="page-hero__desc">{page?.heroDesc || "Ready to make a move? Let's talk. Book a free consultation or reach out directly."}</p>
         </div>
       </section>
 

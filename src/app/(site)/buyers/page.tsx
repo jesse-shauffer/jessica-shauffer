@@ -5,18 +5,22 @@ import JsonLd from '@/components/JsonLd';
 import BuyersChart from '@/components/BuyersChart';
 import ConsultationForm from '@/components/ConsultationForm';
 import ReviewCarousel from '@/components/ReviewCarousel';
-import { getReviews } from '@/lib/sanity';
+import { getReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
-export const metadata: Metadata = {
-  title: 'Buy a Home in South Shore & MetroWest MA — Jessica Shauffer',
-  description: 'Expert buyer representation for South Shore and MetroWest MA real estate. Let top 3% agent Jessica Shauffer guide you to your dream home.',
-  openGraph: {
-    title: 'Buy a Home in South Shore & MetroWest MA — Jessica Shauffer',
-    description: 'Expert buyer representation for South Shore and MetroWest MA real estate. Let top 3% agent Jessica Shauffer guide you to your dream home.',
-    images: ['/assets/interior.webp'],
-  },
-  alternates: { canonical: '/buyers' },
-};
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug('buyers');
+  const title = page?.metaTitle || 'Buy a Home in South Shore & MetroWest MA — Jessica Shauffer';
+  const description = page?.metaDescription || 'Expert buyer representation for South Shore and MetroWest MA real estate. Let top 3% agent Jessica Shauffer guide you to your dream home.';
+  const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: [ogImage] },
+    alternates: { canonical: '/buyers' },
+  };
+}
 
 const serviceSchema = {
   '@context': 'https://schema.org',
@@ -46,7 +50,8 @@ const faqSchema = {
 };
 
 export default async function BuyersPage() {
-  const reviews = await getReviews();
+  const [reviews, page] = await Promise.all([getReviews(), getPageBySlug('buyers')]);
+  const heroSrc = resolveHeroImage(page?.heroImage, 1920);
   // Randomly pick 9 reviews on each server render — keeps carousel fresh without showing all 21
   const displayReviews = [...reviews].sort(() => Math.random() - 0.5).slice(0, 9);
   return (
@@ -56,12 +61,12 @@ export default async function BuyersPage() {
       
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src="/assets/interior.webp" alt="Beautiful modern living room interior" fill style={{ objectFit: 'cover' }} priority />
+          <Image src={heroSrc} alt={page?.heroTitle || 'Beautiful modern living room interior'} fill style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Buyer&apos;s Guide</p>
-          <h1 className="page-hero__title">Find Your Dream Home in Eastern Mass</h1>
-          <p className="page-hero__desc">From coastal Plymouth to commuter-friendly Canton, let top 3% agent Jessica Shauffer guide you home.</p>
+          <h1 className="page-hero__title">{page?.heroTitle || 'Find Your Dream Home in Eastern Mass'}</h1>
+          <p className="page-hero__desc">{page?.heroDesc || 'From coastal Plymouth to commuter-friendly Canton, let top 3% agent Jessica Shauffer guide you home.'}</p>
         </div>
       </section>
 

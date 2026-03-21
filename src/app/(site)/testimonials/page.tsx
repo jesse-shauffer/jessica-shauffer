@@ -3,25 +3,26 @@ import Link from 'next/link';
 import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
-import { getAllReviews } from '@/lib/sanity';
+import { getAllReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: 'Client Reviews & Testimonials — Jessica Shauffer, South Shore MA Real Estate',
-  description:
-    'Read verified 5-star reviews from buyers and sellers who worked with Jessica Shauffer across the South Shore, MetroWest, and Bristol County, MA. Top 3% Coldwell Banker agent.',
-  openGraph: {
-    title: 'Client Reviews & Testimonials — Jessica Shauffer, South Shore MA Real Estate',
-    description:
-      'Verified 5-star reviews from real buyers and sellers across 25 Eastern Massachusetts communities. See why clients trust Jessica Shauffer with their most important financial decision.',
-    images: ['/assets/jessica.jpg'],
-  },
-  alternates: { canonical: '/testimonials' },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug('testimonials');
+  const title = page?.metaTitle || 'Client Reviews & Testimonials — Jessica Shauffer, South Shore MA Real Estate';
+  const description = page?.metaDescription || 'Read verified 5-star reviews from buyers and sellers who worked with Jessica Shauffer across the South Shore, MetroWest, and Bristol County, MA. Top 3% Coldwell Banker agent.';
+  const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: [ogImage] },
+    alternates: { canonical: '/testimonials' },
+  };
+}
 
 export default async function TestimonialsPage() {
-  const reviews = await getAllReviews();
+  const [reviews, page] = await Promise.all([getAllReviews(), getPageBySlug('reviews')]);
+  const heroSrc = resolveHeroImage(page?.heroImage, 1920);
 
   /* ── Schema: AggregateRating + individual Review items ── */
   const aggregateRatingSchema = {
@@ -101,8 +102,8 @@ export default async function TestimonialsPage() {
       <section className="page-hero">
         <div className="page-hero__bg">
           <Image
-            src="/assets/jessica-portrait-02.webp"
-            alt="Jessica Shauffer — 5-star rated South Shore MA real estate agent"
+            src={heroSrc}
+            alt={page?.heroTitle || 'Jessica Shauffer — 5-star rated South Shore MA real estate agent'}
             fill
             style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
             priority
@@ -110,9 +111,9 @@ export default async function TestimonialsPage() {
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Client Testimonials</p>
-          <h1 className="page-hero__title">Real Stories from Real Clients</h1>
+          <h1 className="page-hero__title">{page?.heroTitle || 'Real Stories from Real Clients'}</h1>
           <p className="page-hero__desc">
-            {reviews.length || 19} verified 5-star reviews from buyers and sellers across the South Shore, MetroWest, and Bristol County, MA.
+            {page?.heroDesc || `${reviews.length || 19} verified 5-star reviews from buyers and sellers across the South Shore, MetroWest, and Bristol County, MA.`}
           </p>
         </div>
       </section>

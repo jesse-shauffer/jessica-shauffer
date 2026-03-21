@@ -5,17 +5,22 @@ import JsonLd from '@/components/JsonLd';
 import SellersChart from '@/components/SellersChart';
 import StatCard from '@/components/StatCard';
 import ConsultationForm from '@/components/ConsultationForm';
+import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
-export const metadata: Metadata = {
-  title: 'Sell Your Home in South Shore & MetroWest MA — Jessica Shauffer',
-  description: 'Sell your home for top dollar with Jessica Shauffer. Expert pricing, staging, and digital marketing across Plymouth, Canton, Easton, and 25+ local towns.',
-  openGraph: {
-    title: 'Sell Your Home in South Shore & MetroWest MA — Jessica Shauffer',
-    description: 'Sell your home for top dollar with Jessica Shauffer. Expert pricing, staging, and digital marketing across Plymouth, Canton, Easton, and 25+ local towns.',
-    images: ['/assets/market-neighborhood.webp'],
-  },
-  alternates: { canonical: '/sellers' },
-};
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug('sellers');
+  const title = page?.metaTitle || 'Sell Your Home in South Shore & MetroWest MA — Jessica Shauffer';
+  const description = page?.metaDescription || 'Sell your home for top dollar with Jessica Shauffer. Expert pricing, staging, and digital marketing across Plymouth, Canton, Easton, and 25+ local towns.';
+  const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: [ogImage] },
+    alternates: { canonical: '/sellers' },
+  };
+}
 
 const serviceSchema = {
   '@context': 'https://schema.org',
@@ -44,7 +49,9 @@ const faqSchema = {
   ],
 };
 
-export default function SellersPage() {
+export default async function SellersPage() {
+  const page = await getPageBySlug('sellers');
+  const heroSrc = resolveHeroImage(page?.heroImage, 1920);
   return (
     <>
       <JsonLd data={serviceSchema} />
@@ -52,12 +59,12 @@ export default function SellersPage() {
       
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src="/assets/market-neighborhood.webp" alt="Beautiful suburban neighborhood from above" fill style={{ objectFit: 'cover' }} priority />
+          <Image src={heroSrc} alt={page?.heroTitle || 'Beautiful suburban neighborhood from above'} fill style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Seller&apos;s Guide</p>
-          <h1 className="page-hero__title">Maximize Your Home&apos;s Value</h1>
-          <p className="page-hero__desc">Data-driven pricing, elite marketing, and tenacious negotiation to get you top dollar across Eastern Massachusetts.</p>
+          <h1 className="page-hero__title">{page?.heroTitle || "Maximize Your Home's Value"}</h1>
+          <p className="page-hero__desc">{page?.heroDesc || 'Data-driven pricing, elite marketing, and tenacious negotiation to get you top dollar across Eastern Massachusetts.'}</p>
         </div>
       </section>
 

@@ -273,3 +273,107 @@ export async function getAllReviews(): Promise<SanityReview[]> {
 
 /** Alias used by homepage and other pages */
 export const getReviews = getAllReviews;
+
+/* ── Page CMS Types & Queries ── */
+export interface SanityPage {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  heroImage?: SanityImageSource | string;
+  heroTitle?: string;
+  heroDesc?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: SanityImageSource | string;
+}
+
+/** Static fallbacks — used until a Sanity Page document is published */
+const STATIC_PAGES: Record<string, Omit<SanityPage, '_id'>> = {
+  home: {
+    title: 'Home',
+    slug: { current: 'home' },
+    heroImage: '/assets/hero.webp',
+    heroTitle: "Jessica Shauffer — Coldwell Banker's Top Agent for the South Shore",
+    heroDesc: "South Shore & MetroWest's top-rated Coldwell Banker real estate agent serving 25 communities across Eastern Massachusetts.",
+    metaTitle: "Jessica Shauffer — Coldwell Banker's Top Agent for the South Shore",
+    metaDescription: "South Shore & MetroWest's top-rated Coldwell Banker real estate agent. Jessica Shauffer serves 25 communities across Eastern Massachusetts including Easton, Canton, Sharon, Plymouth, Hingham, and more.",
+    ogImage: '/assets/hero.webp',
+  },
+  market: {
+    title: 'Market',
+    slug: { current: 'market' },
+    heroImage: '/assets/market-aerial.webp',
+    heroTitle: 'South Shore & MetroWest MA Real Estate Market Data',
+    heroDesc: 'Current housing market data for the South Shore and MetroWest MA. Expert analysis, median home values, and trends.',
+    metaTitle: 'South Shore & MetroWest MA Real Estate Market Data — Jessica Shauffer',
+    metaDescription: 'Current housing market data for the South Shore and MetroWest MA. Get expert analysis, median home values, and trends for Plymouth, Easton, Canton, and more.',
+    ogImage: '/assets/jessica.jpg',
+  },
+  buyers: {
+    title: 'Buyers',
+    slug: { current: 'buyers' },
+    heroImage: '/assets/buyers-hero.webp',
+    heroTitle: 'Buy a Home on the South Shore & MetroWest MA',
+    heroDesc: 'Expert buyer representation across 25 communities in Eastern Massachusetts. Find your perfect home with Jessica Shauffer.',
+    metaTitle: 'Buy a Home in South Shore & MetroWest MA — Jessica Shauffer',
+    metaDescription: 'Find your perfect home with Jessica Shauffer, top 3% Coldwell Banker agent. Expert buyer representation across Plymouth, Easton, Canton, and 25+ South Shore communities.',
+    ogImage: '/assets/jessica.jpg',
+  },
+  sellers: {
+    title: 'Sellers',
+    slug: { current: 'sellers' },
+    heroImage: '/assets/market-neighborhood.webp',
+    heroTitle: 'Sell Your Home in South Shore & MetroWest MA',
+    heroDesc: 'Sell your home for top dollar with expert pricing, staging, and digital marketing across 25+ local towns.',
+    metaTitle: 'Sell Your Home in South Shore & MetroWest MA — Jessica Shauffer',
+    metaDescription: 'Sell your home for top dollar with Jessica Shauffer. Expert pricing, staging, and digital marketing across Plymouth, Canton, Easton, and 25+ local towns.',
+    ogImage: '/assets/market-neighborhood.webp',
+  },
+  about: {
+    title: 'About',
+    slug: { current: 'about' },
+    heroImage: '/assets/hero.webp',
+    heroTitle: 'About Jessica Shauffer',
+    heroDesc: 'Top-producing Coldwell Banker Presidents Circle agent serving 25 communities across the South Shore, MetroWest, and Bristol County, MA.',
+    metaTitle: 'About Jessica Shauffer — Top Real Estate Agent, South Shore & MetroWest MA',
+    metaDescription: "Meet Jessica Shauffer — a top-producing Coldwell Banker Presidents Circle agent and member of the Weinstein Keach Group, serving 25 communities across the South Shore, MetroWest, and Bristol County, MA.",
+    ogImage: '/assets/jessica.jpg',
+  },
+  contact: {
+    title: 'Contact',
+    slug: { current: 'contact' },
+    heroImage: '/assets/consultation.webp',
+    heroTitle: 'Contact Jessica Shauffer',
+    heroDesc: "Ready to make a move? Let's talk. Book a free consultation or reach out directly.",
+    metaTitle: 'Contact Jessica Shauffer — Easton, MA Real Estate Agent',
+    metaDescription: 'Book a free consultation with Jessica Shauffer, Coldwell Banker Presidents Circle agent. Call (617) 949-1046 or schedule online.',
+    ogImage: '/assets/jessica.jpg',
+  },
+  testimonials: {
+    title: 'Testimonials',
+    slug: { current: 'testimonials' },
+    heroImage: '/assets/jessica.jpg',
+    heroTitle: 'Client Reviews & Testimonials',
+    heroDesc: 'Verified 5-star reviews from real buyers and sellers across 25 Eastern Massachusetts communities.',
+    metaTitle: 'Client Reviews & Testimonials — Jessica Shauffer, South Shore MA Real Estate',
+    metaDescription: 'Read verified 5-star reviews from buyers and sellers who worked with Jessica Shauffer across the South Shore, MetroWest, and Bristol County, MA. Top 3% Coldwell Banker agent.',
+    ogImage: '/assets/jessica.jpg',
+  },
+};
+
+const pageFields = `
+  _id, title, slug,
+  heroImage, heroTitle, heroDesc,
+  metaTitle, metaDescription, ogImage
+`;
+
+export async function getPageBySlug(slug: string): Promise<SanityPage | null> {
+  const result = await client.fetch<SanityPage | null>(
+    `*[_type == "page" && slug.current == $slug][0] { ${pageFields} }`,
+    { slug }
+  );
+  if (result) return result;
+  const fallback = STATIC_PAGES[slug];
+  if (fallback) return { _id: `static-${slug}`, ...fallback };
+  return null;
+}

@@ -4,18 +4,22 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import ReviewCarousel from '@/components/ReviewCarousel';
-import { getReviews } from '@/lib/sanity';
+import { getReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
-export const metadata: Metadata = {
-  title: 'About Jessica Shauffer — Top Real Estate Agent, South Shore & MetroWest MA',
-  description: "Meet Jessica Shauffer — a top-producing Coldwell Banker Presidents Circle agent and member of the Weinstein Keach Group, serving 25 communities across the South Shore, MetroWest, and Bristol County, MA.",
-  openGraph: {
-    title: 'About Jessica Shauffer — Top Real Estate Agent, South Shore & MetroWest MA',
-    description: "Meet Jessica Shauffer — a top-producing Coldwell Banker Presidents Circle agent and member of the Weinstein Keach Group, serving 25 communities across Eastern Massachusetts.",
-    images: ['/assets/jessica.jpg'],
-  },
-  alternates: { canonical: '/about' },
-};
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug('about');
+  const title = page?.metaTitle || 'About Jessica Shauffer — Top Real Estate Agent, South Shore & MetroWest MA';
+  const description = page?.metaDescription || 'Meet Jessica Shauffer — a top-producing Coldwell Banker Presidents Circle agent and member of the Weinstein Keach Group, serving 25 communities across the South Shore, MetroWest, and Bristol County, MA.';
+  const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: [ogImage] },
+    alternates: { canonical: '/about' },
+  };
+}
 
 const personSchema = {
   '@context': 'https://schema.org',
@@ -89,7 +93,8 @@ const faqSchema = {
 };
 
 export default async function AboutPage() {
-  const reviews = await getReviews();
+  const [reviews, page] = await Promise.all([getReviews(), getPageBySlug('about')]);
+  const heroSrc = resolveHeroImage(page?.heroImage, 1920);
   // Randomly pick 9 reviews on each server render — keeps carousel fresh without showing all 21
   const displayReviews = [...reviews].sort(() => Math.random() - 0.5).slice(0, 9);
   return (
@@ -99,12 +104,12 @@ export default async function AboutPage() {
 
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src="/assets/hero.webp" alt="South Shore Massachusetts real estate" fill style={{ objectFit: 'cover' }} priority />
+          <Image src={heroSrc} alt={page?.heroTitle || 'South Shore Massachusetts real estate'} fill style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">About Jessica Shauffer</p>
-          <h1 className="page-hero__title">Your Trusted South Shore &amp; MetroWest Real Estate Expert</h1>
-          <p className="page-hero__desc">Coldwell Banker Presidents Circle member. Top-producing agent on the Weinstein Keach Group. Serving 25 communities across Eastern Massachusetts.</p>
+          <h1 className="page-hero__title">{page?.heroTitle || 'Your Trusted South Shore & MetroWest Real Estate Expert'}</h1>
+          <p className="page-hero__desc">{page?.heroDesc || 'Coldwell Banker Presidents Circle member. Top-producing agent on the Weinstein Keach Group. Serving 25 communities across Eastern Massachusetts.'}</p>
         </div>
       </section>
 
