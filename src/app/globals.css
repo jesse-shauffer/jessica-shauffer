@@ -2985,3 +2985,33 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   line-height: 1.75;
   margin: 0;
 }
+
+/* ─── Community page: locked home value chart section ─────────────────────── */
+.community-chart-section {
+  background: var(--navy, #0f1f3d);
+  padding-block: var(--space-16);
+}
+
+.community-chart__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.community-chart__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.community-chart__title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
