@@ -2067,6 +2067,8 @@ a, button, [role="button"], input, textarea, select {
   color: var(--navy-900);
   transition: color 0.25s ease;
   letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.2;
 }
 /* County badge — hidden on mobile, shown tablet+ */
 .communities-hover-list__county {
@@ -2278,7 +2280,7 @@ a, button, [role="button"], input, textarea, select {
   margin-bottom: var(--space-4);
 }
 
-.contact-info-card h3 {
+.contact-info-card h3, .contact-info-card h2 {
   font-size: var(--text-lg);
   font-weight: 700;
   color: var(--primary);

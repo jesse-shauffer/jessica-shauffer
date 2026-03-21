@@ -40,7 +40,7 @@ export default function CommunitiesHoverList({ towns }: Props) {
             </span>
 
             {/* Town name */}
-            <span className="communities-hover-list__name">{town.name}</span>
+            <h2 className="communities-hover-list__name">{town.name}</h2>
 
             {/* Tagline — hidden on mobile/tablet */}
             <span className="communities-hover-list__tagline">{town.tagline}</span>
