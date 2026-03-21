@@ -2040,7 +2040,7 @@ a, button, [role="button"], input, textarea, select {
 /* Inline thumbnail */
 .communities-hover-list__thumb {
   width: 9rem;
-  height: 4.5rem;
+  height: 5rem;
   border-radius: var(--radius-md);
   overflow: hidden;
   flex-shrink: 0;
