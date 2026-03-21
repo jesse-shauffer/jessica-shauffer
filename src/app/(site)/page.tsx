@@ -163,9 +163,7 @@ export default async function HomePage() {
           <div className="hero__content">
             <span className="hero__badge">Top 3% Coldwell Banker Agent Globally</span>
             <h1 className="hero__title">
-              Jessica Shauffer &mdash;<br />
-              Coldwell Banker&apos;s Top Agent<br />
-              for the South Shore
+              Jessica Shauffer &mdash; Coldwell Banker&apos;s Top Agent for the South Shore
             </h1>
             <p className="hero__subtitle">
               Whether you&apos;re buying your dream home or selling for top dollar, get the results you deserve with Jessica Shauffer and the award-winning Weinstein Keach Group.
