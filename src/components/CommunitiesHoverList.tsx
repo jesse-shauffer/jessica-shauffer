@@ -42,11 +42,11 @@ export default function CommunitiesHoverList({ towns }: Props) {
             {/* Town name */}
             <span className="communities-hover-list__name">{town.name}</span>
 
-            {/* County badge */}
-            <span className="communities-hover-list__county">{town.county}</span>
-
             {/* Tagline — hidden on mobile/tablet */}
             <span className="communities-hover-list__tagline">{town.tagline}</span>
+
+            {/* County badge */}
+            <span className="communities-hover-list__county">{town.county}</span>
 
             {/* Arrow */}
             <span className="communities-hover-list__arrow">
