@@ -2,7 +2,6 @@
 
 import { useRef, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import gsap from 'gsap';
 
 interface Town {
@@ -20,7 +19,6 @@ interface Props {
 export default function CommunitiesHoverList({ towns }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
-  const imgInnerRef = useRef<HTMLImageElement>(null);
   const activeIndexRef = useRef<number>(-1);
   const mousePos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
@@ -60,14 +58,15 @@ export default function CommunitiesHoverList({ towns }: Props) {
   const handleRowEnter = (index: number) => {
     activeIndexRef.current = index;
     const imgEl = imgRef.current;
-    const imgInner = imgInnerRef.current;
-    if (!imgEl || !imgInner) return;
-
-    // Show the floating image
+    if (!imgEl) return;
+    // Switch visible frame first
+    const frames = imgEl.querySelectorAll<HTMLElement>('.communities-hover-list__img-frame');
+    frames.forEach((f, fi) => {
+      f.style.opacity = fi === index ? '1' : '0';
+    });
+    // Show the floating container
     gsap.killTweensOf(imgEl);
     gsap.to(imgEl, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
-    // Clip reveal — scale inner from 1.15 to 1
-    gsap.fromTo(imgInner, { scale: 1.15 }, { scale: 1, duration: 0.45, ease: 'power2.out' });
   };
 
   const handleRowLeave = () => {
@@ -102,21 +101,20 @@ export default function CommunitiesHoverList({ towns }: Props) {
         {towns.map((town, i) => (
           <div
             key={town.slug}
+            className="communities-hover-list__img-frame"
             style={{
               position: 'absolute',
               inset: 0,
               opacity: 0,
-              transition: 'opacity 0.2s ease',
+              transition: 'opacity 0.15s ease',
             }}
-            className={`communities-hover-list__img-frame`}
-            data-index={i}
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={town.image}
               alt={town.name}
-              fill
-              style={{ objectFit: 'cover' }}
-              sizes="320px"
+              loading={i < 6 ? 'eager' : 'lazy'}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
           </div>
         ))}
@@ -129,14 +127,7 @@ export default function CommunitiesHoverList({ towns }: Props) {
             key={town.slug}
             href={`/communities/${town.slug}`}
             className="communities-hover-list__row"
-            onMouseEnter={() => {
-              handleRowEnter(i);
-              // Show correct image frame
-              const frames = containerRef.current?.querySelectorAll('.communities-hover-list__img-frame');
-              frames?.forEach((f, fi) => {
-                (f as HTMLElement).style.opacity = fi === i ? '1' : '0';
-              });
-            }}
+            onMouseEnter={() => handleRowEnter(i)}
             onMouseLeave={handleRowLeave}
           >
             <span className="communities-hover-list__num">
