@@ -95,50 +95,119 @@ export default function MarketPage() {
 
       <section className="section" style={{ background: 'var(--white)' }}>
         <div className="container">
-          <div className="content-block__header" style={{ textAlign: 'center', maxWidth: 640, marginInline: 'auto', marginBottom: 'var(--space-12)' }}>
-            <h2>Micro-Market Dynamics</h2>
-            <p>Real estate is hyper-local. Here is a look at what is driving the market across our three primary service areas.</p>
+          <div className="section__header">
+            <p className="section__label">Micro-Market Dynamics</p>
+            <h2 className="section__title">What&apos;s Driving Each Region</h2>
+            <p className="section__desc">Real estate is hyper-local. Here is a look at what is driving the market across our three primary service areas.</p>
           </div>
-          
+
           <div className="market-highlights">
             <div className="market-highlight">
-              <h3><i className="ph ph-map-pin"></i> South Shore Coastal</h3>
-              <ul>
-                <li><strong>Towns:</strong> Plymouth, Hingham, Kingston, Halifax</li>
-                <li><strong>Trend:</strong> High demand for coastal access and lifestyle amenities</li>
-                <li><strong>Buyer Tip:</strong> Expect intense competition for turnkey properties near the water</li>
-                <li><strong>Seller Tip:</strong> Emphasize lifestyle features and outdoor living spaces</li>
-              </ul>
+              <div className="market-highlight__header">
+                <div className="market-highlight__icon"><i className="ph ph-map-pin" aria-hidden="true"></i></div>
+                <div>
+                  <span className="market-highlight__badge">South Shore</span>
+                  <h3 className="market-highlight__title">South Shore Coastal</h3>
+                </div>
+              </div>
+              <div className="market-highlight__rows">
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Towns</span>
+                  <span className="market-highlight__row-value">Plymouth, Hingham, Kingston, Halifax</span>
+                </div>
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Trend</span>
+                  <span className="market-highlight__row-value">High demand for coastal access and lifestyle amenities</span>
+                </div>
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Buyer Tip</span>
+                  <span className="market-highlight__row-value">Expect intense competition for turnkey properties near the water</span>
+                </div>
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Seller Tip</span>
+                  <span className="market-highlight__row-value">Emphasize lifestyle features and outdoor living spaces</span>
+                </div>
+              </div>
             </div>
-            
+
             <div className="market-highlight">
-              <h3><i className="ph ph-buildings"></i> MetroWest Commuter</h3>
-              <ul>
-                <li><strong>Towns:</strong> Canton, Sharon, Norwood, Westwood, Stoughton</li>
-                <li><strong>Trend:</strong> Premium pricing driven by top-tier school districts and rail access</li>
-                <li><strong>Buyer Tip:</strong> Pre-approval is mandatory; be prepared to waive minor contingencies</li>
-                <li><strong>Seller Tip:</strong> Highlight commuter rail proximity and school ratings</li>
-              </ul>
+              <div className="market-highlight__header">
+                <div className="market-highlight__icon"><i className="ph ph-buildings" aria-hidden="true"></i></div>
+                <div>
+                  <span className="market-highlight__badge">MetroWest</span>
+                  <h3 className="market-highlight__title">MetroWest Commuter</h3>
+                </div>
+              </div>
+              <div className="market-highlight__rows">
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Towns</span>
+                  <span className="market-highlight__row-value">Canton, Sharon, Norwood, Westwood, Stoughton</span>
+                </div>
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Trend</span>
+                  <span className="market-highlight__row-value">Premium pricing driven by top-tier school districts and rail access</span>
+                </div>
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Buyer Tip</span>
+                  <span className="market-highlight__row-value">Pre-approval is mandatory; be prepared to waive minor contingencies</span>
+                </div>
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Seller Tip</span>
+                  <span className="market-highlight__row-value">Highlight commuter rail proximity and school ratings</span>
+                </div>
+              </div>
             </div>
-            
+
             <div className="market-highlight">
-              <h3><i className="ph ph-house-line"></i> Bristol County Value</h3>
-              <ul>
-                <li><strong>Towns:</strong> Easton, Mansfield, Norton, Raynham, Bridgewaters</li>
-                <li><strong>Trend:</strong> Strong growth as buyers seek more square footage and yard space</li>
-                <li><strong>Buyer Tip:</strong> Excellent opportunities for first-time buyers and growing families</li>
-                <li><strong>Seller Tip:</strong> Focus on home office spaces and family-friendly neighborhood aspects</li>
-              </ul>
+              <div className="market-highlight__header">
+                <div className="market-highlight__icon"><i className="ph ph-house-line" aria-hidden="true"></i></div>
+                <div>
+                  <span className="market-highlight__badge">Bristol County</span>
+                  <h3 className="market-highlight__title">Bristol County Value</h3>
+                </div>
+              </div>
+              <div className="market-highlight__rows">
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Towns</span>
+                  <span className="market-highlight__row-value">Easton, Mansfield, Norton, Raynham, Bridgewater</span>
+                </div>
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Trend</span>
+                  <span className="market-highlight__row-value">Strong growth as buyers seek more square footage and yard space</span>
+                </div>
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Buyer Tip</span>
+                  <span className="market-highlight__row-value">Excellent opportunities for first-time buyers and growing families</span>
+                </div>
+                <div className="market-highlight__row">
+                  <span className="market-highlight__row-label">Seller Tip</span>
+                  <span className="market-highlight__row-value">Focus on home office spaces and family-friendly neighborhood aspects</span>
+                </div>
+              </div>
             </div>
-            
-            <div className="market-highlight">
-              <h3><i className="ph ph-trend-up"></i> Overall Market Outlook</h3>
-              <ul>
-                <li>Inventory remains historically tight across all 25 communities</li>
-                <li>Interest rate stabilization is bringing more buyers back to the market</li>
-                <li>Well-priced, move-in ready homes still generate multiple offers</li>
-                <li>Strategic pricing is more important than ever to avoid stale listings</li>
-              </ul>
+
+            <div className="market-highlight market-highlight--outlook">
+              <div className="market-highlight__header">
+                <div className="market-highlight__icon market-highlight__icon--gold"><i className="ph ph-trend-up" aria-hidden="true"></i></div>
+                <div>
+                  <span className="market-highlight__badge">2025 Outlook</span>
+                  <h3 className="market-highlight__title">Overall Market Outlook</h3>
+                </div>
+              </div>
+              <div className="market-highlight__rows">
+                <div className="market-highlight__row market-highlight__row--bullet">
+                  <span className="market-highlight__row-value">Inventory remains historically tight across all 25 communities</span>
+                </div>
+                <div className="market-highlight__row market-highlight__row--bullet">
+                  <span className="market-highlight__row-value">Interest rate stabilization is bringing more buyers back to the market</span>
+                </div>
+                <div className="market-highlight__row market-highlight__row--bullet">
+                  <span className="market-highlight__row-value">Well-priced, move-in ready homes still generate multiple offers</span>
+                </div>
+                <div className="market-highlight__row market-highlight__row--bullet">
+                  <span className="market-highlight__row-value">Strategic pricing is more important than ever to avoid stale listings</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
