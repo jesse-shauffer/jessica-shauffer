@@ -2064,7 +2064,7 @@ a, button, [role="button"], input, textarea, select {
   display: block;
 }
 .communities-hover-list__name {
-  font-size: clamp(var(--text-base), 2vw, var(--text-2xl));
+  font-size: clamp(var(--text-base), 1.5vw, var(--text-xl));
   font-weight: 700;
   color: var(--navy-900);
   transition: color 0.25s ease;
