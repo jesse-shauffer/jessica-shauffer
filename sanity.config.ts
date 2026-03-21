@@ -12,6 +12,7 @@ const deskStructure = (S: StructureBuilder) =>
       ),
       S.divider(),
       S.listItem().title('Communities').child(S.documentTypeList('neighborhood').title('Communities').defaultOrdering([{ field: 'name', direction: 'asc' }])),
+      S.listItem().title('Counties').child(S.documentTypeList('county').title('Counties').defaultOrdering([{ field: 'name', direction: 'asc' }])),
       S.listItem().title('Reviews').child(S.documentTypeList('review').title('Reviews')),
       S.listItem().title('Market Data').child(S.documentTypeList('marketData').title('Market Data')),
       S.divider(),
