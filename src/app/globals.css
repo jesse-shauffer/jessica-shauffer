@@ -915,11 +915,11 @@ a, button, [role="button"], input, textarea, select {
 }
 
 .section__title--light {
-  color: #fff;
+  color: #fff !important;
 }
 
 .split__desc--light {
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.9) !important;
   margin-bottom: var(--space-6);
 }
 
@@ -948,7 +948,7 @@ a, button, [role="button"], input, textarea, select {
 }
 
 .split__checklist--light li {
-  color: rgba(255,255,255,0.85);
+  color: #fff;
 }
 
 .split__checklist--light li i {
