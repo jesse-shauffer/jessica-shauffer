@@ -50,8 +50,8 @@ const COUNTY_MAP: Record<string, string> = {
   'weston': 'Norfolk County',
 };
 
-// Sub-neighborhoods to exclude (old Easton parts)
-const EXCLUDED_SLUGS = new Set(['eastondale', 'north-easton', 'south-easton']);
+// Sub-neighborhoods to exclude (deleted from Sanity)
+const EXCLUDED_SLUGS = new Set(['eastondale', 'five-corners', 'furnace-village', 'unionville']);
 
 export default async function CommunitiesPage() {
   const rawCommunities = await getAllNeighborhoods();
