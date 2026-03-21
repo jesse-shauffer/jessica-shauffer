@@ -887,7 +887,7 @@ a, button, [role="button"], input, textarea, select {
 
 /* --- Section Navy (For Sellers) --- */
 .section--navy {
-  background: var(--navy);
+  background: var(--navy-900);
   color: #fff;
 }
 
