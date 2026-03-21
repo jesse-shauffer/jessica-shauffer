@@ -83,6 +83,6 @@ export default defineType({
     }),
   ],
   preview: {
-    select: { title: 'name', subtitle: 'tagline' },
+    select: { title: 'name', subtitle: 'tagline', media: 'heroImage' },
   },
 });
