@@ -19,6 +19,8 @@ const interestLabels: Record<string, string> = {
   selling: 'Selling my home',
   both: 'Buying and selling',
   investing: 'Investment property',
+  vacation: 'Vacation home',
+  commercial: 'Commercial property',
   other: 'Something else',
 };
 

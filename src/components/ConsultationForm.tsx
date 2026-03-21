@@ -83,6 +83,8 @@ export default function ConsultationForm({ source = 'homepage' }: ConsultationFo
           <option value="selling">Selling my home</option>
           <option value="both">Buying and selling</option>
           <option value="investing">Investment property</option>
+          <option value="vacation">Vacation home</option>
+          <option value="commercial">Commercial property</option>
           <option value="other">Something else</option>
         </select>
       </div>
