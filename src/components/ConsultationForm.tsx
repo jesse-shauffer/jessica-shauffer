@@ -73,7 +73,7 @@ export default function ConsultationForm({ source = 'homepage' }: ConsultationFo
       </div>
       <div className="form-group">
         <label htmlFor="phone">Phone</label>
-        <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" />
+        <input type="tel" id="phone" name="phone" placeholder="e.g. (508) 123-4567" />
       </div>
       <div className="form-group">
         <label htmlFor="interest">I&apos;m interested in...</label>
