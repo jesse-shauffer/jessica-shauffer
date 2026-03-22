@@ -3,20 +3,27 @@ import Link from 'next/link';
 import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
+import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: 'Bristol, Norfolk & Plymouth County MA Real Estate',
-  description: 'Explore real estate across Bristol, Norfolk & Plymouth counties in MA. 25 communities, market data & expert guidance from Jessica Shauffer.',
-  alternates: { canonical: 'https://jessicashauffer.com/counties' },
-  openGraph: {
-    title: 'Bristol, Norfolk & Plymouth County MA Real Estate',
-    description: 'Explore real estate across Bristol, Norfolk & Plymouth counties in MA. 25 communities, market data & expert guidance from Jessica Shauffer.',
-    url: 'https://jessicashauffer.com/counties',
-    images: [{ url: '/assets/hero.webp', width: 1200, height: 630, alt: 'Eastern Massachusetts real estate by county' }],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug('counties');
+  const title = page?.metaTitle ?? 'Bristol, Norfolk & Plymouth County MA Real Estate | Jessica Shauffer';
+  const description = page?.metaDescription ?? 'Browse homes for sale and real estate market data across Bristol, Norfolk, and Plymouth Counties, MA. Expert guidance from top 3% Coldwell Banker agent Jessica Shauffer.';
+  const ogImage = page?.ogImage ? resolveHeroImage(page.ogImage, 1200) : '/assets/hero.webp';
+  return {
+    title,
+    description,
+    alternates: { canonical: 'https://jessicashauffer.com/counties' },
+    openGraph: {
+      title,
+      description,
+      url: 'https://jessicashauffer.com/counties',
+      images: [{ url: ogImage, width: 1200, height: 630, alt: 'Eastern Massachusetts real estate by county' }],
+    },
+  };
+}
 
 const itemListSchema = {
   '@context': 'https://schema.org',
@@ -88,7 +95,12 @@ const COUNTIES = [
   },
 ];
 
-export default function CountiesPage() {
+export default async function CountiesPage() {
+  const page = await getPageBySlug('counties');
+  const heroSrc = page?.heroImage ? resolveHeroImage(page.heroImage, 1600) : '/assets/hero.webp';
+  const heroTitle = page?.heroTitle ?? 'Real Estate Across Three Massachusetts Counties';
+  const heroDesc = page?.heroDesc ?? 'Jessica Shauffer serves 25 communities across Bristol County, Norfolk County, and Plymouth County — bringing deep local expertise and monthly market data to every town.';
+
   return (
     <>
       <JsonLd data={itemListSchema} />
@@ -96,14 +108,12 @@ export default function CountiesPage() {
 
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src="/assets/hero.webp" alt="Eastern Massachusetts real estate by county" fill style={{ objectFit: 'cover' }} priority />
+          <Image src={heroSrc} alt="Eastern Massachusetts real estate by county" fill style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Service Area</p>
-          <h1 className="page-hero__title">Real Estate Across Three Massachusetts Counties</h1>
-          <p className="page-hero__desc">
-            Jessica Shauffer serves 25 communities across Bristol County, Norfolk County, and Plymouth County — bringing deep local expertise and monthly market data to every town.
-          </p>
+          <h1 className="page-hero__title">{heroTitle}</h1>
+          <p className="page-hero__desc">{heroDesc}</p>
         </div>
       </section>
 
