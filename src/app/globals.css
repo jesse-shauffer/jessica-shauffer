@@ -911,7 +911,7 @@ a, button, [role="button"], input, textarea, select {
 }
 
 .section__label--gold {
-  color: var(--gold-light);
+  color: var(--gold-light) !important;
 }
 
 .section__title--light {
