@@ -911,7 +911,7 @@ a, button, [role="button"], input, textarea, select {
 }
 
 .section__label--gold {
-  color: var(--gold);
+  color: var(--gold-light);
 }
 
 .section__title--light {
@@ -953,6 +953,16 @@ a, button, [role="button"], input, textarea, select {
 
 .split__checklist--light li i {
   color: var(--gold);
+}
+
+/* Chart column in sellers split */
+.split__chart {
+  width: 100%;
+  min-width: 0;
+}
+
+.split__chart .chart-container {
+  margin: 0;
 }
 
 /* Stats Card */

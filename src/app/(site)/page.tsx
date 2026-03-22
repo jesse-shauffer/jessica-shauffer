@@ -5,6 +5,7 @@ import { getReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 import JsonLd from '@/components/JsonLd';
 import ReviewCarousel from '@/components/ReviewCarousel';
 import ConsultationForm from '@/components/ConsultationForm';
+import SellersChart from '@/components/SellersChart';
 
 export const revalidate = 60;
 
@@ -351,22 +352,8 @@ export default async function HomePage() {
                 Full Seller&apos;s Guide
               </Link>
             </div>
-            <div className="split__stats-card">
-              <div className="stats-card">
-                <p className="stats-card__label"><i className="ph ph-trend-up" aria-hidden="true"></i> Average Seller Outcome</p>
-                <div className="stats-card__stat">
-                  <span className="stats-card__number">3.4%</span>
-                  <span className="stats-card__desc">Year-over-year appreciation</span>
-                </div>
-                <div className="stats-card__stat">
-                  <span className="stats-card__number">23 Days</span>
-                  <span className="stats-card__desc">Average time to sell</span>
-                </div>
-                <div className="stats-card__stat">
-                  <span className="stats-card__number">101%</span>
-                  <span className="stats-card__desc">Of list price received</span>
-                </div>
-              </div>
+            <div className="split__chart">
+              <SellersChart />
             </div>
           </div>
         </div>
