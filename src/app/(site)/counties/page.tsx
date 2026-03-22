@@ -7,12 +7,12 @@ import ConsultationForm from '@/components/ConsultationForm';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'Massachusetts Counties — Bristol, Norfolk & Plymouth | Jessica Shauffer',
-  description: 'Explore real estate across Bristol County, Norfolk County, and Plymouth County, MA with top Coldwell Banker agent Jessica Shauffer. 25 communities, monthly market data, and expert local guidance.',
+  title: 'Bristol, Norfolk & Plymouth County MA Real Estate',
+  description: 'Explore real estate across Bristol, Norfolk & Plymouth counties in MA. 25 communities, market data & expert guidance from Jessica Shauffer.',
   alternates: { canonical: 'https://jessicashauffer.com/counties' },
   openGraph: {
-    title: 'Massachusetts Counties — Bristol, Norfolk & Plymouth | Jessica Shauffer',
-    description: 'Explore real estate across Bristol County, Norfolk County, and Plymouth County, MA with top Coldwell Banker agent Jessica Shauffer.',
+    title: 'Bristol, Norfolk & Plymouth County MA Real Estate',
+    description: 'Explore real estate across Bristol, Norfolk & Plymouth counties in MA. 25 communities, market data & expert guidance from Jessica Shauffer.',
     url: 'https://jessicashauffer.com/counties',
     images: [{ url: '/assets/hero.webp', width: 1200, height: 630, alt: 'Eastern Massachusetts real estate by county' }],
   },

@@ -9,11 +9,11 @@ import { getAllNeighborhoods, resolveHeroImage } from '@/lib/sanity';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'South Shore & MetroWest MA Communities — Jessica Shauffer',
-  description: 'Explore real estate and homes for sale across 25+ communities in the South Shore, MetroWest, and Bristol County, MA. Find your perfect town with Jessica Shauffer.',
+  title: 'South Shore MA Communities | Jessica Shauffer Realtor',
+  description: 'Explore 25 communities across the South Shore, MetroWest & Bristol County, MA. Find homes, market data & local guides with Jessica Shauffer.',
   openGraph: {
-    title: 'South Shore & MetroWest MA Communities — Jessica Shauffer',
-    description: 'Explore real estate and homes for sale across 25+ communities in the South Shore, MetroWest, and Bristol County, MA. Find your perfect town with Jessica Shauffer.',
+    title: 'South Shore MA Communities | Jessica Shauffer Realtor',
+    description: 'Explore 25 communities across the South Shore, MetroWest & Bristol County, MA. Find homes, market data & local guides with Jessica Shauffer.',
     images: ['/assets/jessica.jpg'],
   },
   alternates: { canonical: '/communities' },

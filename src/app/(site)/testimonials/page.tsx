@@ -9,8 +9,8 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug('testimonials');
-  const title = page?.metaTitle || 'Client Reviews & Testimonials — Jessica Shauffer, South Shore MA Real Estate';
-  const description = page?.metaDescription || 'Read verified 5-star reviews from buyers and sellers who worked with Jessica Shauffer across the South Shore, MetroWest, and Bristol County, MA. Top 3% Coldwell Banker agent.';
+  const title = page?.metaTitle || 'Client Reviews | Jessica Shauffer, South Shore MA Realtor';
+  const description = page?.metaDescription || 'Read verified 5-star reviews from buyers & sellers who worked with Jessica Shauffer across the South Shore, MetroWest & Bristol County, MA.';
   const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
   return {
     title,

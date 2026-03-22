@@ -26,6 +26,12 @@ const localBusinessSchema = {
   name: 'Jessica Shauffer',
   telephone: '(617) 949-1046',
   email: 'Jessica.Shauffer@nemoves.com',
+  image: 'https://jessicashauffer.com/assets/jessica.jpg',
+  priceRange: '$$$',
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday'], opens: '10:00', closes: '16:00' },
+  ],
   address: {
     '@type': 'PostalAddress',
     streetAddress: '159 Belmont St #1175',
@@ -34,12 +40,33 @@ const localBusinessSchema = {
     postalCode: '02375',
     addressCountry: 'US',
   },
-  url: 'https://JessicaShauffer.com',
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 42.0501,
+    longitude: -71.1006,
+  },
+  url: 'https://jessicashauffer.com',
+  sameAs: [
+    'https://www.coldwellbankerhomes.com/ma/south-easton/agent/jessica-shauffer/aid_1095428/',
+    'https://www.zillow.com/profile/JessicaShauffer',
+    'https://www.linkedin.com/in/jessica-shauffer',
+    'https://www.facebook.com/JessicaShaufferRealEstate',
+  ],
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '5.0',
     reviewCount: '19',
+    bestRating: '5',
+    worstRating: '1',
   },
+};
+const contactBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://jessicashauffer.com/contact' },
+  ],
 };
 
 export default async function ContactPage() {
@@ -48,6 +75,7 @@ export default async function ContactPage() {
   return (
     <>
       <JsonLd data={localBusinessSchema} />
+      <JsonLd data={contactBreadcrumb} />
 
       <section className="page-hero">
         <div className="page-hero__bg">

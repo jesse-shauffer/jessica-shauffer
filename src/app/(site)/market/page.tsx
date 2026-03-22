@@ -11,7 +11,7 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug('market');
-  const title = page?.metaTitle || 'South Shore & MetroWest MA Real Estate Market Data — Jessica Shauffer';
+  const title = page?.metaTitle || 'South Shore MA Real Estate Market Data | Jessica Shauffer';
   const description = page?.metaDescription || 'Current housing market data for the South Shore and MetroWest MA. Get expert analysis, median home values, and trends for Plymouth, Easton, Canton, and more.';
   const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
   return {
@@ -47,7 +47,15 @@ export default async function MarketPage() {
     <>
       <JsonLd data={marketSchema} />
       <JsonLd data={faqSchema} />
-      
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
+          { '@type': 'ListItem', position: 2, name: 'Market Data', item: 'https://jessicashauffer.com/market' },
+        ],
+      }} />
+
       <section className="page-hero">
         <div className="page-hero__bg">
           <Image src={heroSrc} alt={page?.heroTitle || 'Aerial view of Eastern Massachusetts real estate'} fill style={{ objectFit: 'cover' }} priority />

@@ -11,7 +11,7 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug('sellers');
-  const title = page?.metaTitle || 'Sell Your Home in South Shore & MetroWest MA — Jessica Shauffer';
+  const title = page?.metaTitle || 'Sell Your Home on the South Shore MA | Jessica Shauffer';
   const description = page?.metaDescription || 'Sell your home for top dollar with Jessica Shauffer. Expert pricing, staging, and digital marketing across Plymouth, Canton, Easton, and 25+ local towns.';
   const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
   return {
@@ -56,7 +56,15 @@ export default async function SellersPage() {
     <>
       <JsonLd data={serviceSchema} />
       <JsonLd data={faqSchema} />
-      
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
+          { '@type': 'ListItem', position: 2, name: "Seller's Guide", item: 'https://jessicashauffer.com/sellers' },
+        ],
+      }} />
+
       <section className="page-hero">
         <div className="page-hero__bg">
           <Image src={heroSrc} alt={page?.heroTitle || 'Beautiful suburban neighborhood from above'} fill style={{ objectFit: 'cover' }} priority />

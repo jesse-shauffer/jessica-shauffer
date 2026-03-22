@@ -80,8 +80,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const c = await getCountyBySlug(params.slug);
   if (!c) return { title: 'County Not Found' };
 
-  const title = c.metaTitle || `${c.name}, MA Real Estate — Homes for Sale | Jessica Shauffer`;
-  const description = c.metaDescription || `Explore real estate in ${c.name}, MA. Find homes for sale, community guides, and monthly market data with top 3% Coldwell Banker agent Jessica Shauffer.`;
+  const title = c.metaTitle || `${c.name}, MA Real Estate | Jessica Shauffer`;
+  const description = c.metaDescription || `Explore homes for sale in ${c.name}, MA. Community guides, market data & expert advice from top 3% Coldwell Banker agent Jessica Shauffer.`;
 
   return {
     title,

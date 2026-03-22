@@ -11,8 +11,8 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug('home');
-  const title = page?.metaTitle || "Jessica Shauffer — Coldwell Banker's Top Agent for the South Shore";
-  const description = page?.metaDescription || "South Shore & MetroWest's top-rated Coldwell Banker real estate agent. Jessica Shauffer serves 25 communities across Eastern Massachusetts including Easton, Canton, Sharon, Plymouth, Hingham, and more.";
+  const title = page?.metaTitle || 'Jessica Shauffer — South Shore MA Real Estate';
+  const description = page?.metaDescription || 'Top 3% Coldwell Banker agent serving 25 communities across the South Shore, MetroWest & Bristol County, MA. Free consultation.';
   const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
   return {
     title,
@@ -83,6 +83,12 @@ const agentSchema = {
     worstRating: '1',
   },
   award: 'Coldwell Banker Presidents Circle — Top 3% of Agents Globally',
+  sameAs: [
+    'https://www.coldwellbankerhomes.com/ma/south-easton/agent/jessica-shauffer/aid_1095428/',
+    'https://www.zillow.com/profile/JessicaShauffer',
+    'https://www.linkedin.com/in/jessica-shauffer',
+    'https://www.facebook.com/JessicaShaufferRealEstate',
+  ],
   memberOf: {
     '@type': 'Organization',
     name: 'Weinstein Keach Group',
@@ -154,6 +160,17 @@ export default async function HomePage() {
     <>
       <JsonLd data={agentSchema} />
       <JsonLd data={faqSchema} />
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Jessica Shauffer Real Estate',
+        url: 'https://jessicashauffer.com',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: 'https://jessicashauffer.com/communities?q={search_term_string}',
+          'query-input': 'required name=search_term_string',
+        },
+      }} />
 
       {/* HERO */}
       <section className="hero">

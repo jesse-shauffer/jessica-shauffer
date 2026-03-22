@@ -10,8 +10,8 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug('about');
-  const title = page?.metaTitle || 'About Jessica Shauffer — Top Real Estate Agent, South Shore & MetroWest MA';
-  const description = page?.metaDescription || 'Meet Jessica Shauffer — a top-producing Coldwell Banker Presidents Circle agent and member of the Weinstein Keach Group, serving 25 communities across the South Shore, MetroWest, and Bristol County, MA.';
+  const title = page?.metaTitle || 'About Jessica Shauffer | South Shore MA Realtor';
+  const description = page?.metaDescription || 'Meet Jessica Shauffer — Coldwell Banker Presidents Circle, top 3% globally. Serving the South Shore, MetroWest & Bristol County, MA.';
   const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
   return {
     title,
@@ -101,6 +101,14 @@ export default async function AboutPage() {
     <>
       <JsonLd data={personSchema} />
       <JsonLd data={faqSchema} />
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
+          { '@type': 'ListItem', position: 2, name: 'About Jessica', item: 'https://jessicashauffer.com/about' },
+        ],
+      }} />
 
       <section className="page-hero">
         <div className="page-hero__bg">
