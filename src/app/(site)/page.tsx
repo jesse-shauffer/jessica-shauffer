@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getReviews, getPageBySlug, resolveHeroImage, type SanityReview } from '@/lib/sanity';
+import { getReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 import JsonLd from '@/components/JsonLd';
 import ReviewCarousel from '@/components/ReviewCarousel';
 import ConsultationForm from '@/components/ConsultationForm';
@@ -184,7 +184,6 @@ export default async function HomePage() {
   const heroSrc = resolveHeroImage(page?.heroImage, 1920);
   // Randomly pick 9 reviews on each server render — keeps carousel fresh without showing all 21
   const displayReviews = [...reviews].sort(() => Math.random() - 0.5).slice(0, 9);
-  const agentSchema = buildAgentSchema(reviews);
 
   return (
     <>
