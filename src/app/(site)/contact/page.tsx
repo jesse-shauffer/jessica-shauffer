@@ -26,7 +26,7 @@ const localBusinessSchema = {
   name: 'Jessica Shauffer',
   telephone: '(617) 949-1046',
   email: 'Jessica.Shauffer@nemoves.com',
-  image: 'https://jessicashauffer.com/assets/jessica.jpg',
+  image: 'https://www.jessicashauffer.com/assets/jessica.jpg',
   priceRange: '$$$',
   openingHoursSpecification: [
     { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
@@ -45,7 +45,7 @@ const localBusinessSchema = {
     latitude: 42.0501,
     longitude: -71.1006,
   },
-  url: 'https://jessicashauffer.com',
+  url: 'https://www.jessicashauffer.com',
   sameAs: [
     'https://www.coldwellbankerhomes.com/ma/south-easton/agent/jessica-shauffer/aid_1095428/',
     'https://www.zillow.com/profile/JessicaShauffer',
@@ -64,8 +64,8 @@ const contactBreadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
-    { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://jessicashauffer.com/contact' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://www.jessicashauffer.com/contact' },
   ],
 };
 

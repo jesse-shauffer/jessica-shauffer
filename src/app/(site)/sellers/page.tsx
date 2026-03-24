@@ -29,7 +29,7 @@ const serviceSchema = {
   provider: {
     '@type': 'RealEstateAgent',
     name: 'Jessica Shauffer',
-    url: 'https://jessicashauffer.com',
+    url: 'https://www.jessicashauffer.com',
   },
   areaServed: [
     { '@type': 'Place', name: 'South Shore Massachusetts' },
@@ -60,8 +60,8 @@ export default async function SellersPage() {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
-          { '@type': 'ListItem', position: 2, name: "Seller's Guide", item: 'https://jessicashauffer.com/sellers' },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
+          { '@type': 'ListItem', position: 2, name: "Seller's Guide", item: 'https://www.jessicashauffer.com/sellers' },
         ],
       }} />
 

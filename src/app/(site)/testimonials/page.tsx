@@ -29,8 +29,8 @@ export default async function TestimonialsPage() {
     '@context': 'https://schema.org',
     '@type': 'RealEstateAgent',
     name: 'Jessica Shauffer',
-    url: 'https://jessicashauffer.com',
-    image: 'https://jessicashauffer.com/assets/jessica.jpg',
+    url: 'https://www.jessicashauffer.com',
+    image: 'https://www.jessicashauffer.com/assets/jessica.jpg',
     telephone: '+16179491046',
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -56,8 +56,8 @@ export default async function TestimonialsPage() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Testimonials', item: 'https://jessicashauffer.com/testimonials' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Testimonials', item: 'https://www.jessicashauffer.com/testimonials' },
     ],
   };
 

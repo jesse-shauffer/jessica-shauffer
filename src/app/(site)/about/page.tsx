@@ -44,8 +44,8 @@ const personSchema = {
     'Home Buying', 'Home Selling', 'Luxury Real Estate', 'Market Analysis',
     'Easton MA', 'Canton MA', 'Sharon MA', 'Plymouth MA', 'Hingham MA',
   ],
-  url: 'https://jessicashauffer.com/about',
-  image: 'https://jessicashauffer.com/assets/jessica.jpg',
+  url: 'https://www.jessicashauffer.com/about',
+  image: 'https://www.jessicashauffer.com/assets/jessica.jpg',
   telephone: '+16179491046',
   email: 'Jessica.Shauffer@nemoves.com',
   award: 'Coldwell Banker Presidents Circle — Top 3% of Agents Globally',
@@ -105,8 +105,8 @@ export default async function AboutPage() {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
-          { '@type': 'ListItem', position: 2, name: 'About Jessica', item: 'https://jessicashauffer.com/about' },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
+          { '@type': 'ListItem', position: 2, name: 'About Jessica', item: 'https://www.jessicashauffer.com/about' },
         ],
       }} />
 

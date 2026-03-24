@@ -53,9 +53,9 @@ export default async function CommunityPage({ params }: { params: { slug: string
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Communities', item: 'https://jessicashauffer.com/communities' },
-      { '@type': 'ListItem', position: 3, name: n.name, item: `https://jessicashauffer.com/communities/${n.slug.current}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Communities', item: 'https://www.jessicashauffer.com/communities' },
+      { '@type': 'ListItem', position: 3, name: n.name, item: `https://www.jessicashauffer.com/communities/${n.slug.current}` },
     ],
   };
 

@@ -359,8 +359,27 @@ const STATIC_PAGES: Record<string, Omit<SanityPage, '_id'>> = {
     metaDescription: 'Read verified 5-star reviews from buyers and sellers who worked with Jessica Shauffer across the South Shore, MetroWest, and Bristol County, MA. Top 3% Coldwell Banker agent.',
     ogImage: '/assets/jessica.jpg',
   },
+  communities: {
+    title: 'Communities',
+    slug: { current: 'communities' },
+    heroImage: '/assets/park.webp',
+    heroTitle: 'Explore Communities Across Eastern Massachusetts',
+    heroDesc: 'Browse 25 towns across the South Shore, MetroWest, and Bristol County. Find market data, local highlights, and homes for sale.',
+    metaTitle: 'Communities in South Shore & MetroWest MA | Jessica Shauffer',
+    metaDescription: 'Explore 25 communities across the South Shore, MetroWest, and Bristol County, MA. Find homes, market data, and local insights with top agent Jessica Shauffer.',
+    ogImage: '/assets/park.webp',
+  },
+  counties: {
+    title: 'Counties',
+    slug: { current: 'counties' },
+    heroImage: '/assets/hero.webp',
+    heroTitle: 'Real Estate Across Bristol, Norfolk & Plymouth Counties',
+    heroDesc: 'Explore homes for sale and market trends across three Eastern Massachusetts counties served by Jessica Shauffer.',
+    metaTitle: 'Bristol, Norfolk & Plymouth County MA Real Estate | Jessica Shauffer',
+    metaDescription: 'Browse homes for sale and real estate market data across Bristol, Norfolk, and Plymouth Counties, MA. Expert guidance from top 3% Coldwell Banker agent Jessica Shauffer.',
+    ogImage: '/assets/hero.webp',
+  },
 };
-
 const pageFields = `
   _id, title, slug,
   heroImage, heroTitle, heroDesc,

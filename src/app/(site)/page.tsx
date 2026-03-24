@@ -17,11 +17,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: { canonical: 'https://jessicashauffer.com' },
+    alternates: { canonical: 'https://www.jessicashauffer.com' },
     openGraph: {
       title,
       description,
-      url: 'https://jessicashauffer.com',
+      url: 'https://www.jessicashauffer.com',
       images: [{ url: ogImage, width: 1200, height: 630, alt: 'South Shore Massachusetts homes for sale' }],
     },
   };
@@ -31,8 +31,8 @@ const agentSchema = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
   name: 'Jessica Shauffer',
-  url: 'https://jessicashauffer.com',
-  image: 'https://jessicashauffer.com/assets/jessica.jpg',
+  url: 'https://www.jessicashauffer.com',
+  image: 'https://www.jessicashauffer.com/assets/jessica.jpg',
   telephone: '+16179491046',
   email: 'Jessica.Shauffer@nemoves.com',
   jobTitle: 'Real Estate Agent',
@@ -164,10 +164,10 @@ export default async function HomePage() {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'Jessica Shauffer Real Estate',
-        url: 'https://jessicashauffer.com',
+        url: 'https://www.jessicashauffer.com',
         potentialAction: {
           '@type': 'SearchAction',
-          target: 'https://jessicashauffer.com/communities?q={search_term_string}',
+          target: 'https://www.jessicashauffer.com/communities?q={search_term_string}',
           'query-input': 'required name=search_term_string',
         },
       }} />

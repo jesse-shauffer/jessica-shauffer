@@ -4,20 +4,22 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import CommunitiesHoverList from '@/components/CommunitiesHoverList';
 import ConsultationForm from '@/components/ConsultationForm';
-import { getAllNeighborhoods, resolveHeroImage } from '@/lib/sanity';
+import { getAllNeighborhoods, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: 'South Shore MA Communities | Jessica Shauffer Realtor',
-  description: 'Explore 25 communities across the South Shore, MetroWest & Bristol County, MA. Find homes, market data & local guides with Jessica Shauffer.',
-  openGraph: {
-    title: 'South Shore MA Communities | Jessica Shauffer Realtor',
-    description: 'Explore 25 communities across the South Shore, MetroWest & Bristol County, MA. Find homes, market data & local guides with Jessica Shauffer.',
-    images: ['/assets/jessica.jpg'],
-  },
-  alternates: { canonical: '/communities' },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug('communities');
+  const title = page?.metaTitle ?? 'Communities in South Shore & MetroWest MA | Jessica Shauffer';
+  const description = page?.metaDescription ?? 'Explore 25 communities across the South Shore, MetroWest, and Bristol County, MA. Find homes, market data, and local insights with top agent Jessica Shauffer.';
+  const ogImage = page?.ogImage ? resolveHeroImage(page.ogImage, 1200) : '/assets/park.webp';
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: [ogImage] },
+    alternates: { canonical: '/communities' },
+  };
+}
 
 // County mapping for each town slug
 const COUNTY_MAP: Record<string, string> = {
@@ -50,11 +52,18 @@ const COUNTY_MAP: Record<string, string> = {
   'weston': 'Norfolk County',
 };
 
-// Sub-neighborhoods to exclude (deleted from Sanity)
+// Sub-neighborhoods to exclude
 const EXCLUDED_SLUGS = new Set(['eastondale', 'five-corners', 'furnace-village', 'unionville']);
 
 export default async function CommunitiesPage() {
-  const rawCommunities = await getAllNeighborhoods();
+  const [rawCommunities, page] = await Promise.all([
+    getAllNeighborhoods(),
+    getPageBySlug('communities'),
+  ]);
+
+  const heroSrc = page?.heroImage ? resolveHeroImage(page.heroImage, 1600) : '/assets/park.webp';
+  const heroTitle = page?.heroTitle ?? 'Explore Our Communities';
+  const heroDesc = page?.heroDesc ?? 'From historic coastal villages to bustling commuter suburbs, discover the perfect town for your lifestyle across the South Shore and MetroWest.';
 
   // Filter out old sub-neighborhoods, sort alphabetically, and map to the shape CommunitiesHoverList needs
   const communities = rawCommunities
@@ -76,22 +85,32 @@ export default async function CommunitiesPage() {
       '@type': 'ListItem',
       position: i + 1,
       name: c.name,
-      url: `https://jessicashauffer.com/communities/${c.slug}`,
+      url: `https://www.jessicashauffer.com/communities/${c.slug}`,
     })),
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com' },
+      { '@type': 'ListItem', position: 2, name: 'Communities', item: 'https://www.jessicashauffer.com/communities' },
+    ],
   };
 
   return (
     <>
       <JsonLd data={itemListSchema} />
+      <JsonLd data={breadcrumbSchema} />
 
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src="/assets/park.webp" alt="Beautiful New England scenery in Eastern MA" fill style={{ objectFit: 'cover' }} priority />
+          <Image src={heroSrc} alt="Beautiful New England scenery in Eastern MA" fill style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Local Expertise</p>
-          <h1 className="page-hero__title">Explore Our Communities</h1>
-          <p className="page-hero__desc">From historic coastal villages to bustling commuter suburbs, discover the perfect town for your lifestyle across the South Shore and MetroWest.</p>
+          <h1 className="page-hero__title">{heroTitle}</h1>
+          <p className="page-hero__desc">{heroDesc}</p>
         </div>
       </section>
 

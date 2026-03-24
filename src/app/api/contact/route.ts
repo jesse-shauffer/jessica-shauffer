@@ -77,7 +77,7 @@ export async function POST(request: Request) {
               ${message ? `<tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;">Message</td><td style="padding: 8px 0;">${message}</td></tr>` : ''}
             </table>
             <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
-            <p style="color: #9ca3af; font-size: 13px;">This lead was also saved to your <a href="https://jessicashauffer.com/studio">Sanity dashboard</a>.</p>
+            <p style="color: #9ca3af; font-size: 13px;">This lead was also saved to your <a href="https://www.jessicashauffer.com/studio">Sanity dashboard</a>.</p>
           </div>
         `,
       });

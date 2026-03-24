@@ -86,11 +86,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title,
     description,
-    alternates: { canonical: `https://jessicashauffer.com/counties/${params.slug}` },
+    alternates: { canonical: `https://www.jessicashauffer.com/counties/${params.slug}` },
     openGraph: {
       title,
       description,
-      url: `https://jessicashauffer.com/counties/${params.slug}`,
+      url: `https://www.jessicashauffer.com/counties/${params.slug}`,
       images: [{ url: '/assets/hero.webp', width: 1200, height: 630 }],
     },
   };
@@ -129,7 +129,7 @@ export default async function CountyPage({ params }: { params: { slug: string } 
     '@context': 'https://schema.org',
     '@type': 'RealEstateAgent',
     name: 'Jessica Shauffer',
-    url: 'https://jessicashauffer.com',
+    url: 'https://www.jessicashauffer.com',
     areaServed: { '@type': 'AdministrativeArea', name: `${name}, Massachusetts` },
     award: 'Coldwell Banker Presidents Circle — Top 3% Globally',
     worksFor: { '@type': 'Organization', name: 'Weinstein Keach Group at Coldwell Banker Realty' },
@@ -149,9 +149,9 @@ export default async function CountyPage({ params }: { params: { slug: string } 
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Counties', item: 'https://jessicashauffer.com/counties' },
-      { '@type': 'ListItem', position: 3, name: name, item: `https://jessicashauffer.com/counties/${params.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Counties', item: 'https://www.jessicashauffer.com/counties' },
+      { '@type': 'ListItem', position: 3, name: name, item: `https://www.jessicashauffer.com/counties/${params.slug}` },
     ],
   };
 
