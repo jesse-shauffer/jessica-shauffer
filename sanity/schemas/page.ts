@@ -49,6 +49,7 @@ export default defineType({
       title: 'SEO Title',
       type: 'string',
       description: 'Browser tab / Google result title. Recommended: 50–60 characters.',
+      validation: (Rule) => Rule.max(60).error('Title must be 60 characters or fewer for optimal SERP display'),
     }),
     defineField({
       name: 'metaDescription',
@@ -56,6 +57,7 @@ export default defineType({
       type: 'text',
       rows: 3,
       description: 'Google search snippet. Recommended: 150–160 characters.',
+      validation: (Rule) => Rule.max(160).error('Description must be 160 characters or fewer for optimal SERP display'),
     }),
     defineField({
       name: 'ogImage',

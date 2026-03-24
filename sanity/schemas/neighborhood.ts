@@ -55,8 +55,8 @@ export default defineType({
       to: [{ type: 'county' }],
       description: 'Which county does this town belong to?',
     }),
-    defineField({ name: 'metaTitle', title: 'Meta Title', type: 'string' }),
-    defineField({ name: 'metaDescription', title: 'Meta Description', type: 'text', rows: 3 }),
+    defineField({ name: 'metaTitle', title: 'Meta Title', type: 'string', validation: (Rule) => Rule.max(60).error('Title must be 60 characters or fewer for optimal SERP display') }),
+    defineField({ name: 'metaDescription', title: 'Meta Description', type: 'text', rows: 3, validation: (Rule) => Rule.max(160).error('Description must be 160 characters or fewer for optimal SERP display') }),
   ],
   preview: {
     select: { title: 'name', subtitle: 'tagline' },

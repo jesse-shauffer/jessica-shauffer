@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.jessicashauffer.com'),
   title: {
     default: 'Jessica Shauffer — Easton, MA Real Estate | Coldwell Banker Realty',
-    template: '%s | Jessica Shauffer',
   },
   description: 'Buy or sell your home in Easton, MA with Jessica Shauffer — Coldwell Banker Presidents Circle, 5.0-star rated agent with 19 reviews. Free consultation.',
   openGraph: {

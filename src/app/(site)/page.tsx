@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
+import { getReviews, getPageBySlug, resolveHeroImage, type SanityReview } from '@/lib/sanity';
 import JsonLd from '@/components/JsonLd';
 import ReviewCarousel from '@/components/ReviewCarousel';
 import ConsultationForm from '@/components/ConsultationForm';
@@ -188,7 +188,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <JsonLd data={agentSchema} />
+      <JsonLd data={buildAgentSchema(reviews)} />
       <JsonLd data={faqSchema} />
       <JsonLd data={{
         '@context': 'https://schema.org',
