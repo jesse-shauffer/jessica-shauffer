@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
+import { getReviews, getPageBySlug, resolveHeroImage, type SanityReview } from '@/lib/sanity';
 import JsonLd from '@/components/JsonLd';
 import ReviewCarousel from '@/components/ReviewCarousel';
 import ConsultationForm from '@/components/ConsultationForm';
@@ -27,81 +27,95 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const agentSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'RealEstateAgent',
-  name: 'Jessica Shauffer',
-  url: 'https://www.jessicashauffer.com',
-  image: 'https://www.jessicashauffer.com/assets/jessica.jpg',
-  telephone: '+16179491046',
-  email: 'Jessica.Shauffer@nemoves.com',
-  jobTitle: 'Real Estate Agent',
-  worksFor: [
-    { '@type': 'Organization', name: 'Weinstein Keach Group', url: 'https://weinsteinkeach.com' },
-    { '@type': 'Organization', name: 'Coldwell Banker Realty', url: 'https://www.coldwellbanker.com' },
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '159 Belmont St #1175',
-    addressLocality: 'South Easton',
-    addressRegion: 'MA',
-    postalCode: '02375',
-    addressCountry: 'US',
-  },
-  areaServed: [
-    { '@type': 'City', name: 'North Easton', addressRegion: 'MA' },
-    { '@type': 'City', name: 'South Easton', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Easton', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Bridgewater', addressRegion: 'MA' },
-    { '@type': 'City', name: 'West Bridgewater', addressRegion: 'MA' },
-    { '@type': 'City', name: 'East Bridgewater', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Canton', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Sharon', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Raynham', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Taunton', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Plymouth', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Norton', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Mansfield', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Foxborough', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Attleboro', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Halifax', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Kingston', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Lakeville', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Middleborough', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Stoughton', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Hingham', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Norwood', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Weston', addressRegion: 'MA' },
-    { '@type': 'City', name: 'Westwood', addressRegion: 'MA' },
-    { '@type': 'City', name: 'North Attleborough', addressRegion: 'MA' },
-  ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '19',
-    bestRating: '5',
-    worstRating: '1',
-  },
-  award: 'Coldwell Banker Presidents Circle — Top 3% of Agents Globally',
-  sameAs: [
-    'https://www.coldwellbankerhomes.com/ma/south-easton/agent/jessica-shauffer/aid_1095428/',
-    'https://www.zillow.com/profile/JessicaShauffer',
-    'https://www.linkedin.com/in/jessica-shauffer',
-    'https://www.facebook.com/JessicaShaufferRealEstate',
-  ],
-  memberOf: {
-    '@type': 'Organization',
-    name: 'Weinstein Keach Group',
-    url: 'https://weinsteinkeach.com',
-    member: [
-      { '@type': 'Person', name: 'Stephanie Weinstein' },
-      { '@type': 'Person', name: 'Meredith Keach' },
-      { '@type': 'Person', name: 'Alexa Weinstein' },
-      { '@type': 'Person', name: 'Samantha Godfrey' },
-      { '@type': 'Person', name: 'Jessica Shauffer' },
+function buildAgentSchema(reviews: SanityReview[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateAgent',
+    name: 'Jessica Shauffer',
+    url: 'https://www.jessicashauffer.com',
+    image: 'https://www.jessicashauffer.com/assets/jessica.jpg',
+    telephone: '+16179491046',
+    email: 'Jessica.Shauffer@nemoves.com',
+    jobTitle: 'Real Estate Agent',
+    worksFor: [
+      { '@type': 'Organization', name: 'Weinstein Keach Group', url: 'https://weinsteinkeach.com' },
+      { '@type': 'Organization', name: 'Coldwell Banker Realty', url: 'https://www.coldwellbanker.com' },
     ],
-  },
-};
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '159 Belmont St #1175',
+      addressLocality: 'South Easton',
+      addressRegion: 'MA',
+      postalCode: '02375',
+      addressCountry: 'US',
+    },
+    areaServed: [
+      { '@type': 'City', name: 'North Easton', addressRegion: 'MA' },
+      { '@type': 'City', name: 'South Easton', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Easton', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Bridgewater', addressRegion: 'MA' },
+      { '@type': 'City', name: 'West Bridgewater', addressRegion: 'MA' },
+      { '@type': 'City', name: 'East Bridgewater', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Canton', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Sharon', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Raynham', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Taunton', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Plymouth', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Norton', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Mansfield', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Foxborough', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Attleboro', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Halifax', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Kingston', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Lakeville', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Middleborough', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Stoughton', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Hingham', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Norwood', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Weston', addressRegion: 'MA' },
+      { '@type': 'City', name: 'Westwood', addressRegion: 'MA' },
+      { '@type': 'City', name: 'North Attleborough', addressRegion: 'MA' },
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      reviewCount: '19',
+      bestRating: '5',
+      worstRating: '1',
+    },
+    review: reviews.map((r) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.author },
+      datePublished: r.date,
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: r.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      reviewBody: r.text,
+    })),
+    award: 'Coldwell Banker Presidents Circle — Top 3% of Agents Globally',
+    sameAs: [
+      'https://www.coldwellbankerhomes.com/ma/south-easton/agent/jessica-shauffer/aid_1095428/',
+      'https://www.zillow.com/profile/JessicaShauffer',
+      'https://www.linkedin.com/in/jessica-shauffer',
+      'https://www.facebook.com/JessicaShaufferRealEstate',
+    ],
+    memberOf: {
+      '@type': 'Organization',
+      name: 'Weinstein Keach Group',
+      url: 'https://weinsteinkeach.com',
+      member: [
+        { '@type': 'Person', name: 'Stephanie Weinstein' },
+        { '@type': 'Person', name: 'Meredith Keach' },
+        { '@type': 'Person', name: 'Alexa Weinstein' },
+        { '@type': 'Person', name: 'Samantha Godfrey' },
+        { '@type': 'Person', name: 'Jessica Shauffer' },
+      ],
+    },
+  };
+}
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -158,7 +172,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <JsonLd data={agentSchema} />
+      <JsonLd data={buildAgentSchema(reviews)} />
       <JsonLd data={faqSchema} />
       <JsonLd data={{
         '@context': 'https://schema.org',
