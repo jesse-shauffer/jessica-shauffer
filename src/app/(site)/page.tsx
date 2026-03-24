@@ -27,7 +27,21 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-function buildAgentSchema(reviews: SanityReview[]) {
+const agentItemReviewed = {
+  '@type': 'RealEstateAgent',
+  name: 'Jessica Shauffer',
+  url: 'https://www.jessicashauffer.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '159 Belmont Street',
+    addressLocality: 'South Easton',
+    addressRegion: 'MA',
+    postalCode: '02375',
+    addressCountry: 'US',
+  },
+};
+
+function buildAgentSchema(reviews: Array<{ author: string; date: string; rating: number; text: string }>) {
   return {
     '@context': 'https://schema.org',
     '@type': 'RealEstateAgent',
@@ -89,11 +103,12 @@ function buildAgentSchema(reviews: SanityReview[]) {
       datePublished: r.date,
       reviewRating: {
         '@type': 'Rating',
-        ratingValue: r.rating,
-        bestRating: 5,
-        worstRating: 1,
+        ratingValue: String(r.rating),
+        bestRating: '5',
+        worstRating: '1',
       },
       reviewBody: r.text,
+      itemReviewed: agentItemReviewed,
     })),
     award: 'Coldwell Banker Presidents Circle — Top 3% of Agents Globally',
     sameAs: [
@@ -169,6 +184,7 @@ export default async function HomePage() {
   const heroSrc = resolveHeroImage(page?.heroImage, 1920);
   // Randomly pick 9 reviews on each server render — keeps carousel fresh without showing all 21
   const displayReviews = [...reviews].sort(() => Math.random() - 0.5).slice(0, 9);
+  const agentSchema = buildAgentSchema(reviews);
 
   return (
     <>
