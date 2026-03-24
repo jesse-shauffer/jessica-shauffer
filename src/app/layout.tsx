@@ -4,7 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://jessicashauffer.com'),
+  metadataBase: new URL('https://www.jessicashauffer.com'),
   title: {
     default: 'Jessica Shauffer — Easton, MA Real Estate | Coldwell Banker Realty',
     template: '%s | Jessica Shauffer',

@@ -85,7 +85,7 @@ export default async function CommunitiesPage() {
       '@type': 'ListItem',
       position: i + 1,
       name: c.name,
-      url: `https://jessicashauffer.com/communities/${c.slug}`,
+      url: `https://www.jessicashauffer.com/communities/${c.slug}`,
     })),
   };
 
@@ -93,8 +93,8 @@ export default async function CommunitiesPage() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com' },
-      { '@type': 'ListItem', position: 2, name: 'Communities', item: 'https://jessicashauffer.com/communities' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com' },
+      { '@type': 'ListItem', position: 2, name: 'Communities', item: 'https://www.jessicashauffer.com/communities' },
     ],
   };
 

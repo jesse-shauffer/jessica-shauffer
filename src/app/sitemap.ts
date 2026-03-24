@@ -11,7 +11,7 @@ const COMMUNITY_SLUGS = [
 const COUNTY_SLUGS = ['bristol-county', 'norfolk-county', 'plymouth-county'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://jessicashauffer.com';
+  const base = 'https://www.jessicashauffer.com';
 
   const staticPages = [
     { url: base, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 1.0 },

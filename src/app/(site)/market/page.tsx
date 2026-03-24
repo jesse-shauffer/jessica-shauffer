@@ -27,7 +27,7 @@ const marketSchema = {
   '@type': 'WebPage',
   name: 'South Shore & MetroWest MA Real Estate Market Data',
   about: { '@type': 'Place', name: 'Eastern Massachusetts' },
-  url: 'https://jessicashauffer.com/market',
+  url: 'https://www.jessicashauffer.com/market',
 };
 
 const faqSchema = {
@@ -51,8 +51,8 @@ export default async function MarketPage() {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
-          { '@type': 'ListItem', position: 2, name: 'Market Data', item: 'https://jessicashauffer.com/market' },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
+          { '@type': 'ListItem', position: 2, name: 'Market Data', item: 'https://www.jessicashauffer.com/market' },
         ],
       }} />
 

@@ -15,11 +15,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: { canonical: 'https://jessicashauffer.com/counties' },
+    alternates: { canonical: 'https://www.jessicashauffer.com/counties' },
     openGraph: {
       title,
       description,
-      url: 'https://jessicashauffer.com/counties',
+      url: 'https://www.jessicashauffer.com/counties',
       images: [{ url: ogImage, width: 1200, height: 630, alt: 'Eastern Massachusetts real estate by county' }],
     },
   };
@@ -36,21 +36,21 @@ const itemListSchema = {
       '@type': 'ListItem',
       position: 1,
       name: 'Bristol County, MA',
-      url: 'https://jessicashauffer.com/counties/bristol-county',
+      url: 'https://www.jessicashauffer.com/counties/bristol-county',
       description: 'Easton, Mansfield, Norton, Raynham, Taunton, Attleboro, North Attleborough, Bridgewater, West Bridgewater, East Bridgewater',
     },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Norfolk County, MA',
-      url: 'https://jessicashauffer.com/counties/norfolk-county',
+      url: 'https://www.jessicashauffer.com/counties/norfolk-county',
       description: 'Canton, Sharon, Norwood, Westwood, Stoughton, Foxborough, Weston',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Plymouth County, MA',
-      url: 'https://jessicashauffer.com/counties/plymouth-county',
+      url: 'https://www.jessicashauffer.com/counties/plymouth-county',
       description: 'Plymouth, Hingham, Kingston, Halifax, Lakeville, Middleborough',
     },
   ],
@@ -60,8 +60,8 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jessicashauffer.com/' },
-    { '@type': 'ListItem', position: 2, name: 'Counties', item: 'https://jessicashauffer.com/counties' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Counties', item: 'https://www.jessicashauffer.com/counties' },
   ],
 };
 
