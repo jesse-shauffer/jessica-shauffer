@@ -1,26 +1,36 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import MortgageCalculator from '@/components/calculators/MortgageCalculator';
+import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
-export const metadata: Metadata = {
-  title: 'Mortgage Calculator | Jessica Shauffer — Coldwell Banker Realty',
-  description: 'Estimate your monthly mortgage payment with Jessica Shauffer\'s free mortgage calculator. Calculate principal, interest, property tax, insurance, and PMI for South Shore MA homes.',
-  openGraph: {
-    title: 'Mortgage Calculator | Jessica Shauffer',
-    description: 'Estimate your monthly mortgage payment including P&I, property tax, insurance, and PMI.',
-    url: 'https://www.jessicashauffer.com/calculators',
-    images: [{ url: '/assets/hero.webp', width: 1200, height: 630, alt: 'Mortgage Calculator — Jessica Shauffer Real Estate' }],
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Mortgage Calculator | Jessica Shauffer',
-    description: 'Estimate your monthly mortgage payment including P&I, property tax, insurance, and PMI.',
-    images: ['/assets/hero.webp'],
-  },
-  alternates: { canonical: '/calculators' },
-};
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug('calculators');
+  const title = page?.metaTitle || 'Mortgage Calculator | Jessica Shauffer — Coldwell Banker Realty';
+  const description = page?.metaDescription || "Estimate your monthly mortgage payment with Jessica Shauffer's free mortgage calculator. Calculate principal, interest, property tax, insurance, and PMI for South Shore MA homes.";
+  const ogImage = resolveHeroImage(page?.ogImage || page?.heroImage, 1200);
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.jessicashauffer.com/calculators',
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
+    },
+    alternates: { canonical: '/calculators' },
+  };
+}
 
 const faqItems = [
   {
@@ -29,7 +39,7 @@ const faqItems = [
   },
   {
     q: 'What is PMI and when do I have to pay it?',
-    a: 'PMI (Private Mortgage Insurance) is required by most lenders when your down payment is less than 20% of the home\'s purchase price. It protects the lender in case of default. PMI typically costs between 0.5%–1.5% of the loan amount per year and can be cancelled once you reach 20% equity in your home.',
+    a: "PMI (Private Mortgage Insurance) is required by most lenders when your down payment is less than 20% of the home's purchase price. It protects the lender in case of default. PMI typically costs between 0.5%–1.5% of the loan amount per year and can be cancelled once you reach 20% equity in your home.",
   },
   {
     q: 'How much should I put down on a home in Massachusetts?',
@@ -60,45 +70,76 @@ const breadcrumbSchema = {
   ],
 };
 
-export default function CalculatorsPage() {
+export default async function CalculatorsPage() {
+  const page = await getPageBySlug('calculators');
+  const heroSrc = resolveHeroImage(page?.heroImage, 1920);
+
   return (
     <>
       <JsonLd data={faqSchema} />
       <JsonLd data={breadcrumbSchema} />
 
-      {/* Breadcrumbs */}
-      <nav aria-label="Breadcrumb" className="container py-3">
-        <ol className="flex items-center gap-2 text-sm text-stone-500">
-          <li><Link href="/" className="hover:text-stone-700">Home</Link></li>
-          <li aria-hidden="true">/</li>
-          <li className="text-stone-800 font-medium">Calculators</li>
-        </ol>
-      </nav>
-
       {/* Hero */}
-      <section className="page-hero page-hero--short" style={{ background: '#0c2340' }}>
-        <div className="page-hero__content" style={{ position: 'relative' }}>
+      <section className="page-hero">
+        <div className="page-hero__bg">
+          <Image
+            src={heroSrc}
+            alt={page?.heroTitle || 'Mortgage calculator for South Shore Massachusetts homes'}
+            fill
+            sizes="100vw"
+            style={{ objectFit: 'cover' }}
+            priority
+          />
+        </div>
+        <div className="page-hero__content">
           <p className="page-hero__label">Tools</p>
-          <h1 className="page-hero__title">Mortgage Calculator</h1>
+          <h1 className="page-hero__title">
+            {page?.heroTitle || 'Mortgage Calculator'}
+          </h1>
           <p className="page-hero__desc">
-            Estimate your monthly payment in seconds. Adjust home price, down payment, rate, and term to see how it affects your budget.
+            {page?.heroDesc || 'Estimate your monthly payment in seconds. Adjust home price, down payment, rate, and term to see how it affects your budget.'}
           </p>
         </div>
       </section>
+
+      {/* Breadcrumbs */}
+      <div className="container">
+        <nav className="breadcrumbs" aria-label="Breadcrumb">
+          <ol className="breadcrumbs__list">
+            <li><Link href="/">Home</Link></li>
+            <li>Mortgage Calculator</li>
+          </ol>
+        </nav>
+      </div>
 
       {/* Calculator */}
       <MortgageCalculator />
 
       {/* FAQ */}
-      <section className="container py-16 max-w-3xl">
-        <h2 className="text-2xl font-bold mb-8" style={{ color: '#0c2340' }}>Mortgage FAQ</h2>
-        <div className="space-y-6">
-          {faqItems.map(({ q, a }) => (
-            <div key={q} className="border-b border-stone-200 pb-6">
-              <h3 className="font-semibold text-stone-800 mb-2">{q}</h3>
-              <p className="text-stone-600 text-sm leading-relaxed">{a}</p>
-            </div>
-          ))}
+      <section className="section">
+        <div className="container" style={{ maxWidth: '48rem' }}>
+          <h2 className="section__title" style={{ marginBottom: 'var(--space-8)' }}>
+            Mortgage FAQ
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+            {faqItems.map(({ q, a }) => (
+              <div key={q} style={{ borderBottom: '1px solid var(--gray-200)', paddingBottom: 'var(--space-6)' }}>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 600,
+                    color: 'var(--gray-800)',
+                    marginBottom: 'var(--space-2)',
+                  }}
+                >
+                  {q}
+                </h3>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--text-sm)', lineHeight: 1.7 }}>
+                  {a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>
