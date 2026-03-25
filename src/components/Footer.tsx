@@ -23,6 +23,7 @@ export default function Footer() {
             <Link href="/counties">Counties</Link>
             <Link href="/communities">Communities</Link>
             <Link href="/testimonials">Reviews</Link>
+            <Link href="/calculators">Calculators</Link>
             <Link href="/contact">Contact</Link>
           </div>
           <div className="footer__links">
