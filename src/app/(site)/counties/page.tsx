@@ -21,6 +21,13 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url: 'https://www.jessicashauffer.com/counties',
       images: [{ url: ogImage, width: 1200, height: 630, alt: 'Eastern Massachusetts real estate by county' }],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
