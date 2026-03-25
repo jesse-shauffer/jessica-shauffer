@@ -83,7 +83,7 @@ const neighborhoodFields = `
 export function resolveHeroImage(heroImage: SanityImageSource | string | undefined, width = 1200): string {
   if (!heroImage) return '/assets/eastondale.webp';
   if (typeof heroImage === 'string') return heroImage;
-  return urlFor(heroImage).width(width).auto('format').quality(80).url();
+  return urlFor(heroImage).width(width).fit('max').auto('format').quality(80).url();
 }
 
 export async function getAllNeighborhoods(): Promise<SanityNeighborhood[]> {

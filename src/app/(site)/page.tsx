@@ -208,6 +208,7 @@ export default async function HomePage() {
             src={heroSrc}
             alt={page?.heroTitle || 'Beautiful South Shore Massachusetts home exterior'}
             fill
+            sizes="100vw"
             style={{ objectFit: 'cover' }}
             priority
           />

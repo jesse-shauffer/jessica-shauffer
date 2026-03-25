@@ -67,7 +67,7 @@ export default async function SellersPage() {
 
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src={heroSrc} alt={page?.heroTitle || 'Beautiful suburban neighborhood from above'} fill style={{ objectFit: 'cover' }} priority />
+          <Image src={heroSrc} alt={page?.heroTitle || 'Beautiful suburban neighborhood from above'} fill sizes="100vw" style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Seller&apos;s Guide</p>

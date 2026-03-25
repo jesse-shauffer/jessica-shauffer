@@ -91,7 +91,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title,
       description,
       url: `https://www.jessicashauffer.com/counties/${params.slug}`,
-      images: [{ url: '/assets/hero.webp', width: 1200, height: 630 }],
+      images: [{ url: resolveHeroImage(c.heroImage, 1200), width: 1200, height: 630 }],
     },
   };
 }
@@ -169,6 +169,7 @@ export default async function CountyPage({ params }: { params: { slug: string } 
             src={heroImageUrl}
             alt={`${name} Massachusetts real estate`}
             fill
+            sizes="100vw"
             style={{ objectFit: 'cover' }}
             priority
           />
