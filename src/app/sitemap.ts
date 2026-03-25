@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/communities`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.9 },
     { url: `${base}/counties`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.9 },
     { url: `${base}/contact`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: `${base}/testimonials`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
   ];
 
   const countyPages = COUNTY_SLUGS.map((slug) => ({

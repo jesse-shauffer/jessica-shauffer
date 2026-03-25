@@ -23,6 +23,13 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url: 'https://www.jessicashauffer.com',
       images: [{ url: ogImage, width: 1200, height: 630, alt: 'South Shore Massachusetts homes for sale' }],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
