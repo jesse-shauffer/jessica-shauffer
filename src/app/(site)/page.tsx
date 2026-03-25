@@ -34,20 +34,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const agentItemReviewed = {
-  '@type': 'RealEstateAgent',
-  name: 'Jessica Shauffer',
-  url: 'https://www.jessicashauffer.com',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '159 Belmont Street',
-    addressLocality: 'South Easton',
-    addressRegion: 'MA',
-    postalCode: '02375',
-    addressCountry: 'US',
-  },
-};
-
 function buildAgentSchema(reviews: Array<{ author: string; date: string; rating: number; text: string }>) {
   return {
     '@context': 'https://schema.org',
@@ -115,7 +101,6 @@ function buildAgentSchema(reviews: Array<{ author: string; date: string; rating:
         worstRating: '1',
       },
       reviewBody: r.text,
-      itemReviewed: agentItemReviewed,
     })),
     award: 'Coldwell Banker Presidents Circle — Top 3% of Agents Globally',
     sameAs: [
