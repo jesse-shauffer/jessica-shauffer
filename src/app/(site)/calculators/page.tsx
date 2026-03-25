@@ -53,13 +53,20 @@ export default function CalculatorsPage() {
 
       <section className="section" style={{ paddingTop: 'var(--space-8)' }}>
         <div className="container">
-          <iframe
-            src="https://search.jessicashauffer.com/financial-calculators"
-            className="w-full border-0"
-            style={{ minHeight: '900px' }}
-            title="Financial Calculators"
-            allow="fullscreen"
-          />
+          {/*
+            Negative margins + overflow-hidden crop the embedded site's own nav (top)
+            and footer (bottom) from showing inside the iframe.
+            Adjust marginTop / top to change how much of the header is hidden,
+            and marginBottom to change how much of the footer is hidden.
+          */}
+          <div className="relative overflow-hidden" style={{ marginTop: '-80px', marginBottom: '-60px' }}>
+            <iframe
+              src="https://search.jessicashauffer.com/financial-calculators"
+              className="w-full border-0"
+              style={{ minHeight: '1100px', position: 'relative', top: '80px' }}
+              title="Financial Calculators"
+            />
+          </div>
         </div>
       </section>
     </>
