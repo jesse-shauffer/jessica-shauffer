@@ -173,9 +173,9 @@ export default async function ContactPage() {
       <section className="section section--warm">
         <div className="container">
           <div className="section__header" style={{ textAlign: 'center' }}>
-            <p className="section__label">Google Reviews</p>
-            <h2 className="section__title">See What Our Clients Are Saying</h2>
-            <p className="section__desc">Real reviews from real buyers and sellers across the South Shore, MetroWest, and Bristol County.</p>
+            <p className="section__label">Follow Along</p>
+            <h2 className="section__title">Follow Me on Instagram</h2>
+            <p className="section__desc">Stay up to date with the latest listings, market updates, and South Shore real estate tips.</p>
           </div>
           <Script src="https://apps.elfsight.com/p/platform.js" strategy="lazyOnload" />
           <div className="elfsight-app-89aa0776-ad9c-4a4c-ae56-ef0f9e421d5f"></div>
