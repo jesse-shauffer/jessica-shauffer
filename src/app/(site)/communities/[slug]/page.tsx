@@ -24,6 +24,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title: n.metaTitle || `${n.name}, MA Real Estate & Homes for Sale | Jessica Shauffer`,
       description: n.metaDescription || `Explore real estate in ${n.name}, MA. Find homes for sale, market data, and community insights with top 3% agent Jessica Shauffer.`,
+      url: `https://www.jessicashauffer.com/communities/${n.slug.current}`,
+      images: [{ url: resolveHeroImage(n.heroImage, 1200), width: 1200, height: 630, alt: `${n.name}, MA real estate` }],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: n.metaTitle || `${n.name}, MA Real Estate & Homes for Sale | Jessica Shauffer`,
+      description: n.metaDescription || `Explore real estate in ${n.name}, MA. Find homes for sale, market data, and community insights with top 3% agent Jessica Shauffer.`,
       images: [resolveHeroImage(n.heroImage, 1200)],
     },
     alternates: { canonical: `/communities/${n.slug.current}` },

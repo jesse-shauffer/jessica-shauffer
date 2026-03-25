@@ -92,6 +92,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description,
       url: `https://www.jessicashauffer.com/counties/${params.slug}`,
       images: [{ url: resolveHeroImage(c.heroImage, 1200), width: 1200, height: 630 }],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [resolveHeroImage(c.heroImage, 1200)],
     },
   };
 }
