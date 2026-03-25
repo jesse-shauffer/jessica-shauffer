@@ -97,7 +97,7 @@ export default async function CommunityPage({ params }: { params: { slug: string
 
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src={resolveHeroImage(n.heroImage, 1600)} alt={`${n.name}, MA real estate`} fill style={{ objectFit: 'cover' }} priority />
+          <Image src={resolveHeroImage(n.heroImage, 1600)} alt={`${n.name}, MA real estate`} fill sizes="100vw" style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Community Guide</p>
@@ -171,7 +171,7 @@ export default async function CommunityPage({ params }: { params: { slug: string
               {others.slice(0, 6).map((other) => (
                 <Link key={other.slug} href={`/communities/${other.slug}`} className="neighborhood-card">
                   <div className="neighborhood-card__bg">
-                    <Image src={resolveHeroImage(other.image, 600)} alt={other.name} fill style={{ objectFit: 'cover' }} />
+                    <Image src={resolveHeroImage(other.image, 600)} alt={other.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" style={{ objectFit: 'cover' }} />
                   </div>
                   <div className="neighborhood-card__arrow"><i className="ph ph-arrow-right"></i></div>
                   <div className="neighborhood-card__content">

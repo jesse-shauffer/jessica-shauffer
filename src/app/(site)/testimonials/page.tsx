@@ -117,6 +117,7 @@ export default async function TestimonialsPage() {
             src={heroSrc}
             alt={page?.heroTitle || 'Jessica Shauffer — 5-star rated South Shore MA real estate agent'}
             fill
+            sizes="100vw"
             style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
             priority
           />

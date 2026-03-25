@@ -115,7 +115,7 @@ export default async function CountiesPage() {
 
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src={heroSrc} alt="Eastern Massachusetts real estate by county" fill style={{ objectFit: 'cover' }} priority />
+          <Image src={heroSrc} alt="Eastern Massachusetts real estate by county" fill sizes="100vw" style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Service Area</p>

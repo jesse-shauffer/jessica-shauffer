@@ -91,14 +91,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title,
       description,
       url: `https://www.jessicashauffer.com/counties/${params.slug}`,
-      images: [{ url: '/assets/hero.webp', width: 1200, height: 630, alt: `${title}` }],
+      images: [{ url: resolveHeroImage(c.heroImage, 1200), width: 1200, height: 630 }],
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ['/assets/hero.webp'],
+      images: [resolveHeroImage(c.heroImage, 1200)],
     },
   };
 }
@@ -176,6 +176,7 @@ export default async function CountyPage({ params }: { params: { slug: string } 
             src={heroImageUrl}
             alt={`${name} Massachusetts real estate`}
             fill
+            sizes="100vw"
             style={{ objectFit: 'cover' }}
             priority
           />

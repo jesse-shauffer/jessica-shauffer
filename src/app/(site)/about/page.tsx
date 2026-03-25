@@ -124,7 +124,7 @@ export default async function AboutPage() {
 
       <section className="page-hero">
         <div className="page-hero__bg">
-          <Image src={heroSrc} alt={page?.heroTitle || 'South Shore Massachusetts real estate'} fill style={{ objectFit: 'cover' }} priority />
+          <Image src={heroSrc} alt={page?.heroTitle || 'South Shore Massachusetts real estate'} fill sizes="100vw" style={{ objectFit: 'cover' }} priority />
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">About Jessica Shauffer</p>
