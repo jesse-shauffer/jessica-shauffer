@@ -73,7 +73,7 @@ export default function MortgageCalculator() {
           </div>
 
           {/* Body — two columns on desktop, stacked on mobile */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10" style={{ padding: 'var(--space-8)' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 calc-body" style={{ padding: 'var(--space-8)' }}>
 
             {/* ── Inputs ── */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>

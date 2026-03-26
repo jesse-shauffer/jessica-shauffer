@@ -1520,6 +1520,13 @@ a, button, [role="button"], input, textarea, select {
   box-shadow: 0 0 0 3px rgba(200,162,78,0.15);
 }
 
+/* Calculator inputs use navy focus instead of gold */
+.calc-body .form-group input:focus,
+.calc-body .form-group select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(10,35,81,0.12);
+}
+
 .form-group textarea {
   resize: vertical;
   min-height: 5rem;
