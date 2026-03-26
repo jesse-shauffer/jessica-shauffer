@@ -135,7 +135,7 @@ export default function MortgageCalculator() {
             </div>
 
             {/* ── Results ── */}
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--space-6)' }}>
+            <div className="lg:mt-0" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--space-6)', marginTop: 'var(--space-8)' }}>
 
               {/* Total payment card */}
               <div
