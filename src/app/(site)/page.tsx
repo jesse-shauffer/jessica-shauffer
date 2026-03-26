@@ -179,7 +179,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <JsonLd data={buildAgentSchema(reviews)} />
+      <JsonLd data={buildAgentSchema(reviews.filter(r => r.source === 'google'))} />
       <JsonLd data={faqSchema} />
       <JsonLd data={{
         '@context': 'https://schema.org',
