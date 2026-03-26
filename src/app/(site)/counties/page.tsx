@@ -9,8 +9,8 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug('counties');
-  const title = page?.metaTitle ?? 'Bristol, Norfolk & Plymouth County MA Real Estate | Jessica Shauffer';
-  const description = page?.metaDescription ?? 'Browse homes for sale and real estate market data across Bristol, Norfolk, and Plymouth Counties, MA. Expert guidance from top 3% Coldwell Banker agent Jessica Shauffer.';
+  const title = page?.metaTitle ?? 'MA Counties Real Estate | Jessica Shauffer';
+  const description = page?.metaDescription ?? 'Browse homes & market data across Bristol, Norfolk & Plymouth Counties, MA. Expert guidance from top 3% Coldwell Banker agent Jessica Shauffer.';
   const ogImage = page?.ogImage ? resolveHeroImage(page.ogImage, 1200) : '/assets/hero.webp';
   return {
     title,

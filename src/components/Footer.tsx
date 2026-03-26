@@ -22,7 +22,7 @@ export default function Footer() {
             <Link href="/sellers">Sellers</Link>
             <Link href="/counties">Counties</Link>
             <Link href="/communities">Communities</Link>
-            <Link href="/testimonials">Reviews</Link>
+            <Link href="/testimonials">Testimonials</Link>
             <Link href="/contact">Contact</Link>
           </div>
           <div className="footer__links">
