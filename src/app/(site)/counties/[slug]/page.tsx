@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
+import CountyPriceChart from '@/components/CountyPriceChart';
 import FaqAccordion from '@/components/FaqAccordion';
 import {
   getCountyBySlug,
@@ -237,6 +238,9 @@ export default async function CountyPage({ params }: { params: { slug: string } 
           </div>
         </section>
       )}
+
+      {/* COUNTY PRICE CHART */}
+      <CountyPriceChart county={params.slug} />
 
       {/* TOWNS GRID */}
       <section className="section section--warm">
