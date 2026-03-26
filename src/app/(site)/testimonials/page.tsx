@@ -188,14 +188,11 @@ export default async function TestimonialsPage() {
             <p>Every review below comes from a real client who trusted Jessica with their most important financial decision.</p>
           </div>
 
-          <div className="testimonials-rows" itemScope itemType="https://schema.org/ItemList">
+          <div className="testimonials-rows">
             {reviews.map((review) => (
               <article
                 key={review._id}
                 className="testimonial-row"
-                itemScope
-                itemType="https://schema.org/Review"
-                itemProp="itemListElement"
               >
                 {/* Left: stars + source */}
                 <div className="testimonial-row__meta">
@@ -212,7 +209,7 @@ export default async function TestimonialsPage() {
                 </div>
 
                 {/* Center: quote */}
-                <blockquote className="testimonial-row__body" itemProp="reviewBody">
+                <blockquote className="testimonial-row__body">
                   &ldquo;{review.text}&rdquo;
                 </blockquote>
 
@@ -222,13 +219,8 @@ export default async function TestimonialsPage() {
                     {review.author.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <strong itemProp="author">{review.author}</strong>
+                    <strong>{review.author}</strong>
                     <span>{review.role || 'Client'}</span>
-                  </div>
-                  <meta itemProp="datePublished" content={review.date} />
-                  <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-                    <meta itemProp="ratingValue" content={String(review.rating ?? 5)} />
-                    <meta itemProp="bestRating" content="5" />
                   </div>
                 </footer>
               </article>
