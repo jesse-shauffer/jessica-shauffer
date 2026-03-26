@@ -74,7 +74,8 @@ export default defineType({
       name: 'metaTitle',
       title: 'Meta Title',
       type: 'string',
-      validation: (Rule) => Rule.max(60).error('Title must be 60 characters or fewer for optimal SERP display'),
+      description: 'Google search result title. Always end with "| Jessica Shauffer". Example: "Bristol County, MA Real Estate | Jessica Shauffer". Max 60 chars total.',
+      validation: (Rule) => Rule.max(60).error('Title must be 60 characters or fewer — remember to include "| Jessica Shauffer" at the end'),
     }),
     defineField({
       name: 'metaDescription',
