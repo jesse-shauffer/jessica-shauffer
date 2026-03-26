@@ -27,7 +27,7 @@ export default function ReviewCard({ body, author, role, date }: ReviewCardProps
   }, []);
 
   return (
-    <blockquote className="testimonial" itemScope itemType="https://schema.org/Review">
+    <blockquote className="testimonial">
       <div className="testimonial__stars" aria-label="5 stars">
         <i className="ph-fill ph-star"></i>
         <i className="ph-fill ph-star"></i>
@@ -37,7 +37,6 @@ export default function ReviewCard({ body, author, role, date }: ReviewCardProps
       </div>
       <p
         ref={pRef}
-        itemProp="reviewBody"
         className={clamped ? 'is-clamped' : ''}
       >
         &ldquo;{body}&rdquo;
@@ -52,14 +51,9 @@ export default function ReviewCard({ body, author, role, date }: ReviewCardProps
         </button>
       )}
       <footer>
-        <strong itemProp="author">{author}</strong>
+        <strong>{author}</strong>
         <span>{role}</span>
       </footer>
-      <meta itemProp="datePublished" content={date} />
-      <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-        <meta itemProp="ratingValue" content="5" />
-        <meta itemProp="bestRating" content="5" />
-      </div>
     </blockquote>
   );
 }
