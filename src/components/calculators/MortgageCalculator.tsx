@@ -6,8 +6,25 @@ function formatCurrency(value: number): string {
   return value.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 }
 
+/** Format a raw number string with commas as the user types */
+function formatWithCommas(raw: string): string {
+  const digits = raw.replace(/[^0-9]/g, '');
+  if (!digits) return '';
+  return Number(digits).toLocaleString('en-US');
+}
+
+/** Strip commas to get the numeric value */
+function parseCommas(formatted: string): number {
+  const digits = formatted.replace(/[^0-9]/g, '');
+  return digits ? Number(digits) : 0;
+}
+
 export default function MortgageCalculator() {
+  // homePrice is stored as a number for calculations
   const [homePrice, setHomePrice] = useState(500000);
+  // homePriceDisplay is the formatted string shown in the input
+  const [homePriceDisplay, setHomePriceDisplay] = useState('500,000');
+
   const [downPaymentPct, setDownPaymentPct] = useState(20);
   const [interestRate, setInterestRate] = useState(6.5);
   const [loanTerm, setLoanTerm] = useState(30);
@@ -41,6 +58,14 @@ export default function MortgageCalculator() {
     { label: 'Homeowners Insurance', value: results.insurance },
     ...(results.pmi > 0 ? [{ label: 'PMI (< 20% down)', value: results.pmi }] : []),
   ];
+
+  function handleHomePriceChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const raw = e.target.value;
+    const formatted = formatWithCommas(raw);
+    const numeric = parseCommas(raw);
+    setHomePriceDisplay(formatted);
+    setHomePrice(numeric);
+  }
 
   return (
     <section style={{ background: 'var(--off-white)', padding: 'var(--space-16) 0' }}>
@@ -78,16 +103,16 @@ export default function MortgageCalculator() {
             {/* ── Inputs ── */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
 
+              {/* Home Price — text input with comma formatting */}
               <div className="form-group">
                 <label htmlFor="calc-home-price">Home Price ($)</label>
                 <input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   id="calc-home-price"
-                  min={50000}
-                  max={5000000}
-                  step={5000}
-                  value={homePrice}
-                  onChange={(e) => setHomePrice(Number(e.target.value))}
+                  value={homePriceDisplay}
+                  onChange={handleHomePriceChange}
+                  placeholder="500,000"
                 />
               </div>
 
