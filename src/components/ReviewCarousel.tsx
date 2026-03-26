@@ -61,7 +61,6 @@ export default function ReviewCarousel({ reviews }: ReviewCarouselProps) {
             body={review.text}
             author={review.author}
             role={review.role || 'Client'}
-            date={review.date}
           />
         ))}
       </div>

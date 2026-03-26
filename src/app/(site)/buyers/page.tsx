@@ -4,8 +4,8 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import BuyersChart from '@/components/BuyersChart';
 import ConsultationForm from '@/components/ConsultationForm';
-import ReviewCarousel from '@/components/ReviewCarousel';
-import { getReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
+import ReviewsSection from '@/components/ReviewsSection';
+import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
 export const revalidate = 60;
 
@@ -62,10 +62,8 @@ const faqSchema = {
 };
 
 export default async function BuyersPage() {
-  const [reviews, page] = await Promise.all([getReviews(), getPageBySlug('buyers')]);
+  const page = await getPageBySlug('buyers');
   const heroSrc = resolveHeroImage(page?.heroImage, 1920);
-  // Randomly pick 9 reviews on each server render — keeps carousel fresh without showing all 21
-  const displayReviews = [...reviews].sort(() => Math.random() - 0.5).slice(0, 9);
   return (
     <>
       <JsonLd data={serviceSchema} />
@@ -162,25 +160,7 @@ export default async function BuyersPage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="section section--testimonials" id="reviews">
-        <div className="container">
-          <div className="section__header">
-            <p className="section__label">Client Success Stories</p>
-            <h2 className="section__title">What Jessica&apos;s Clients Say</h2>
-            <div className="reviews-summary">
-              <div className="reviews-summary__stars">
-                <i className="ph-fill ph-star" aria-hidden="true"></i>
-                <i className="ph-fill ph-star" aria-hidden="true"></i>
-                <i className="ph-fill ph-star" aria-hidden="true"></i>
-                <i className="ph-fill ph-star" aria-hidden="true"></i>
-                <i className="ph-fill ph-star" aria-hidden="true"></i>
-              </div>
-              <span className="reviews-summary__text">5.0 &middot; 19 Google Reviews</span>
-            </div>
-          </div>
-          <ReviewCarousel reviews={displayReviews} />
-        </div>
-      </section>
+      <ReviewsSection />
 
       <section className="section section--form" id="consultation" style={{ background: 'var(--white)' }}>
         <div className="container">
