@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import MortgageCalculator from '@/components/calculators/MortgageCalculator';
+import FaqAccordion from '@/components/FaqAccordion';
 import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
 export const revalidate = 60;
@@ -121,25 +122,7 @@ export default async function CalculatorsPage() {
           <h2 className="section__title" style={{ marginBottom: 'var(--space-8)' }}>
             Mortgage FAQ
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-            {faqItems.map(({ q, a }) => (
-              <div key={q} style={{ borderBottom: '1px solid var(--gray-200)', paddingBottom: 'var(--space-6)' }}>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 600,
-                    color: 'var(--gray-800)',
-                    marginBottom: 'var(--space-2)',
-                  }}
-                >
-                  {q}
-                </h3>
-                <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--text-sm)', lineHeight: 1.7 }}>
-                  {a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion items={faqItems.map(({ q, a }) => ({ question: q, answer: a }))} />
         </div>
       </section>
     </>
