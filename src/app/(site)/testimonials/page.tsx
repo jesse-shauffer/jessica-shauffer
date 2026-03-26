@@ -51,8 +51,12 @@ export default async function TestimonialsPage() {
       worstRating: '1',
       reviewCount: String(reviews.length || 19),
     },
-    review: reviews.map((r) => ({
+    review: reviews.filter((r) => r.source === 'google').map((r) => ({
       '@type': 'Review',
+      itemReviewed: {
+        '@type': 'RealEstateAgent',
+        name: 'Jessica Shauffer',
+      },
       author: { '@type': 'Person', name: r.author },
       datePublished: r.date,
       reviewBody: r.text,

@@ -92,6 +92,10 @@ function buildAgentSchema(reviews: Array<{ author: string; date: string; rating:
     },
     review: reviews.map((r) => ({
       '@type': 'Review',
+      itemReviewed: {
+        '@type': 'RealEstateAgent',
+        name: 'Jessica Shauffer',
+      },
       author: { '@type': 'Person', name: r.author },
       datePublished: r.date,
       reviewRating: {
