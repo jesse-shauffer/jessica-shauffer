@@ -6,10 +6,9 @@ interface ReviewCardProps {
   body: string;
   author: string;
   role: string;
-  date: string;
 }
 
-export default function ReviewCard({ body, author, role, date }: ReviewCardProps) {
+export default function ReviewCard({ body, author, role }: ReviewCardProps) {
   const pRef = useRef<HTMLParagraphElement>(null);
   const [clamped, setClamped] = useState(true);
   const [needsToggle, setNeedsToggle] = useState(false);
@@ -55,8 +54,7 @@ export default function ReviewCard({ body, author, role, date }: ReviewCardProps
         <strong itemProp="author">{author}</strong>
         <span>{role}</span>
       </footer>
-      <meta itemProp="datePublished" content={date} />
-      <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+<div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
         <meta itemProp="ratingValue" content="5" />
         <meta itemProp="bestRating" content="5" />
       </div>
