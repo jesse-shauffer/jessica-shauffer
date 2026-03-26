@@ -5,6 +5,7 @@ import Script from 'next/script';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
+import { buildBreadcrumbSchema, AGENT } from '@/lib/schema';
 
 export const revalidate = 60;
 
@@ -33,61 +34,31 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const localBusinessSchema = {
+// Reference the canonical agent entity defined on the homepage via @id
+// This tells Google this is the same entity without re-declaring a second LocalBusiness
+const contactAgentRef = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
-  name: 'Jessica Shauffer',
-  telephone: '(617) 949-1046',
-  email: 'Jessica.Shauffer@nemoves.com',
-  image: 'https://www.jessicashauffer.com/assets/jessica.jpg',
-  priceRange: '$$$',
-  openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday'], opens: '10:00', closes: '16:00' },
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '159 Belmont St #1175',
-    addressLocality: 'South Easton',
-    addressRegion: 'MA',
-    postalCode: '02375',
-    addressCountry: 'US',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 42.0501,
-    longitude: -71.1006,
-  },
-  url: 'https://www.jessicashauffer.com',
-  sameAs: [
-    'https://www.coldwellbankerhomes.com/ma/south-easton/agent/jessica-shauffer/aid_1095428/',
-    'https://www.zillow.com/profile/JessicaShauffer',
-    'https://www.linkedin.com/in/jessica-shauffer',
-    'https://www.facebook.com/JessicaShaufferRealEstate',
-  ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '19',
-    bestRating: '5',
-    worstRating: '1',
-  },
+  '@id': `${AGENT.url}/#agent`,
+  name: AGENT.name,
+  url: AGENT.url,
+  telephone: AGENT.telephone,
+  email: AGENT.email,
+  address: AGENT.address,
+  geo: AGENT.geo,
+  openingHoursSpecification: AGENT.openingHoursSpecification,
+  priceRange: AGENT.priceRange,
 };
-const contactBreadcrumb = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
-    { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://www.jessicashauffer.com/contact' },
-  ],
-};
+const contactBreadcrumb = buildBreadcrumbSchema([
+  { name: 'Contact', url: 'https://www.jessicashauffer.com/contact' },
+]);
 
 export default async function ContactPage() {
   const page = await getPageBySlug('contact');
   const heroSrc = resolveHeroImage(page?.heroImage, 1920);
   return (
     <>
-      <JsonLd data={localBusinessSchema} />
+      <JsonLd data={contactAgentRef} />
       <JsonLd data={contactBreadcrumb} />
 
       <section className="page-hero">

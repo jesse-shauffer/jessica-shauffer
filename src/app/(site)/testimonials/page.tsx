@@ -4,6 +4,7 @@ import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import { getAllReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
+import { buildBreadcrumbSchema } from '@/lib/schema';
 
 export const revalidate = 60;
 
@@ -36,46 +37,9 @@ export default async function TestimonialsPage() {
   const [reviews, page] = await Promise.all([getAllReviews(), getPageBySlug('reviews')]);
   const heroSrc = resolveHeroImage(page?.heroImage, 1920);
 
-  /* ── Schema: AggregateRating + individual Review items ── */
-  const aggregateRatingSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'RealEstateAgent',
-    name: 'Jessica Shauffer',
-    url: 'https://www.jessicashauffer.com',
-    image: 'https://www.jessicashauffer.com/assets/jessica.jpg',
-    telephone: '+16179491046',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5',
-      bestRating: '5',
-      worstRating: '1',
-      reviewCount: String(reviews.length || 19),
-    },
-    review: reviews.filter((r) => r.source === 'google').map((r) => ({
-      '@type': 'Review',
-      itemReviewed: {
-        '@type': 'RealEstateAgent',
-        name: 'Jessica Shauffer',
-      },
-      author: { '@type': 'Person', name: r.author },
-      datePublished: r.date,
-      reviewBody: r.text,
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: String(r.rating ?? 5),
-        bestRating: '5',
-      },
-    })),
-  };
-
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Testimonials', item: 'https://www.jessicashauffer.com/testimonials' },
-    ],
-  };
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Testimonials', url: 'https://www.jessicashauffer.com/testimonials' },
+  ]);
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -110,7 +74,6 @@ export default async function TestimonialsPage() {
 
   return (
     <>
-      <JsonLd data={aggregateRatingSchema} />
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={faqSchema} />
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getReviews, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
+import { buildAgentSchema, websiteSchema } from '@/lib/schema';
 import JsonLd from '@/components/JsonLd';
 import ReviewsSection from '@/components/ReviewsSection';
 import ConsultationForm from '@/components/ConsultationForm';
@@ -34,100 +35,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-function buildAgentSchema(reviews: Array<{ author: string; date: string; rating: number; text: string }>) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'RealEstateAgent',
-    name: 'Jessica Shauffer',
-    url: 'https://www.jessicashauffer.com',
-    image: 'https://www.jessicashauffer.com/assets/jessica.jpg',
-    telephone: '+16179491046',
-    email: 'Jessica.Shauffer@nemoves.com',
-    jobTitle: 'Real Estate Agent',
-    worksFor: [
-      { '@type': 'Organization', name: 'Weinstein Keach Group', url: 'https://weinsteinkeach.com' },
-      { '@type': 'Organization', name: 'Coldwell Banker Realty', url: 'https://www.coldwellbanker.com' },
-    ],
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: '159 Belmont St #1175',
-      addressLocality: 'South Easton',
-      addressRegion: 'MA',
-      postalCode: '02375',
-      addressCountry: 'US',
-    },
-    areaServed: [
-      { '@type': 'City', name: 'North Easton', addressRegion: 'MA' },
-      { '@type': 'City', name: 'South Easton', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Easton', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Bridgewater', addressRegion: 'MA' },
-      { '@type': 'City', name: 'West Bridgewater', addressRegion: 'MA' },
-      { '@type': 'City', name: 'East Bridgewater', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Canton', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Sharon', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Raynham', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Taunton', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Plymouth', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Norton', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Mansfield', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Foxborough', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Attleboro', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Halifax', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Kingston', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Lakeville', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Middleborough', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Stoughton', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Hingham', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Norwood', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Weston', addressRegion: 'MA' },
-      { '@type': 'City', name: 'Westwood', addressRegion: 'MA' },
-      { '@type': 'City', name: 'North Attleborough', addressRegion: 'MA' },
-    ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5.0',
-      reviewCount: '19',
-      bestRating: '5',
-      worstRating: '1',
-    },
-    review: reviews.map((r) => ({
-      '@type': 'Review',
-      itemReviewed: {
-        '@type': 'RealEstateAgent',
-        name: 'Jessica Shauffer',
-      },
-      author: { '@type': 'Person', name: r.author },
-      datePublished: r.date,
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: String(r.rating),
-        bestRating: '5',
-        worstRating: '1',
-      },
-      reviewBody: r.text,
-    })),
-    award: 'Coldwell Banker Presidents Circle — Top 3% of Agents Globally',
-    sameAs: [
-      'https://www.coldwellbankerhomes.com/ma/south-easton/agent/jessica-shauffer/aid_1095428/',
-      'https://www.zillow.com/profile/JessicaShauffer',
-      'https://www.linkedin.com/in/jessica-shauffer',
-      'https://www.facebook.com/JessicaShaufferRealEstate',
-    ],
-    memberOf: {
-      '@type': 'Organization',
-      name: 'Weinstein Keach Group',
-      url: 'https://weinsteinkeach.com',
-      member: [
-        { '@type': 'Person', name: 'Stephanie Weinstein' },
-        { '@type': 'Person', name: 'Meredith Keach' },
-        { '@type': 'Person', name: 'Alexa Weinstein' },
-        { '@type': 'Person', name: 'Samantha Godfrey' },
-        { '@type': 'Person', name: 'Jessica Shauffer' },
-      ],
-    },
-  };
-}
-
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -153,7 +60,7 @@ const faqSchema = {
       name: 'Who are the top agents on the Weinstein Keach Group?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The Weinstein Keach Group at Coldwell Banker Realty is led by Stephanie Weinstein and Meredith Keach, and includes top-producing agents Jessica Shauffer, Alexa Weinstein, and Samantha Godfrey, among others. Jessica Shauffer is one of the team\'s highest-performing agents and a member of the Coldwell Banker Presidents Circle.',
+        text: "The Weinstein Keach Group at Coldwell Banker Realty is led by Stephanie Weinstein and Meredith Keach, and includes top-producing agents Jessica Shauffer, Alexa Weinstein, and Samantha Godfrey, among others. Jessica Shauffer is one of the team's highest-performing agents and a member of the Coldwell Banker Presidents Circle.",
       },
     },
     {
@@ -181,19 +88,10 @@ export default async function HomePage() {
 
   return (
     <>
-      <JsonLd data={buildAgentSchema(reviews.filter(r => r.source === 'google'))} />
+      {/* Single authoritative RealEstateAgent entity — emitted on homepage only */}
+      <JsonLd data={buildAgentSchema(reviews)} />
       <JsonLd data={faqSchema} />
-      <JsonLd data={{
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: 'Jessica Shauffer Real Estate',
-        url: 'https://www.jessicashauffer.com',
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: 'https://www.jessicashauffer.com/communities?q={search_term_string}',
-          'query-input': 'required name=search_term_string',
-        },
-      }} />
+      <JsonLd data={websiteSchema} />
 
       {/* HERO */}
       <section className="hero">
@@ -215,187 +113,131 @@ export default async function HomePage() {
               Jessica Shauffer &mdash; Coldwell Banker&apos;s Top Agent for the South Shore
             </h1>
             <p className="hero__subtitle">
-              Whether you&apos;re buying your dream home or selling for top dollar, get the results you deserve with Jessica Shauffer and the award-winning Weinstein Keach Group.
+              Serving 25 communities across the South Shore, MetroWest &amp; Bristol County, MA
             </p>
-            <div className="hero__trust">
-              <div className="hero__rating">
-                <i className="ph-fill ph-star"></i>
-                <i className="ph-fill ph-star"></i>
-                <i className="ph-fill ph-star"></i>
-                <i className="ph-fill ph-star"></i>
-                <i className="ph-fill ph-star"></i>
-                <span>5.0 from 19 Google Reviews</span>
-              </div>
-            </div>
             <div className="hero__actions">
-              <Link href="#consultation" className="btn btn--accent btn--lg">
-                Free Consultation
-              </Link>
-              <a href="tel:+16179491046" className="btn btn--ghost btn--lg">
-                <i className="ph ph-phone"></i> (617) 949-1046
-              </a>
+              <Link href="#consultation" className="btn btn--primary">Book Free Consultation</Link>
+              <Link href="/communities" className="btn btn--outline">Explore Communities</Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ABOUT SPLIT */}
-      <section className="section" id="about">
-        <div className="container">
-          <div className="split">
-            <div className="split__media split__media--portrait">
-              <Image
-                src="/assets/jessica-portrait-01.webp"
-                alt="Jessica Shauffer — Top Real Estate Agent, South Shore MA"
-                width={600}
-                height={600}
-                className="agent-portrait"
-                style={{ borderRadius: 'var(--radius-lg)' }}
-              />
-            </div>
-            <div className="split__content">
-              <p className="section__label">Meet Jessica Shauffer</p>
-              <h2 className="section__title">Unwavering Integrity. Proven Results.</h2>
-              <p>
-                As a top-producing agent on the award-winning Weinstein Keach Group at Coldwell Banker Realty, Jessica Shauffer is accustomed to delivering exceptional results. She is a member of the esteemed Coldwell Banker® Presidents Circle — an honor reserved for the top 3% of agents globally — and one of the highest-performing agents on a team.
-              </p>
-              <p>
-                Buyers, sellers, and renters across the South Shore, MetroWest, and Bristol County benefit from Jessica&apos;s experience, local knowledge, and relentless drive to help clients achieve their real estate goals. Whether you need a luxury home, vacation property, investment property, or your very first house, Jessica works tirelessly on your behalf.
-              </p>
-              <p>
-                She studies market trends daily and offers invaluable insights on communities, schools, and amenities from Easton to Plymouth, Canton to Hingham, and everywhere in between.
-              </p>
-              <div className="about-pills">
-                <span className="about-pill"><i className="ph ph-trophy" aria-hidden="true"></i> Presidents Circle</span>
-                <span className="about-pill"><i className="ph-fill ph-star" aria-hidden="true"></i> 5.0 Google Rating</span>
-                <span className="about-pill"><i className="ph ph-certificate" aria-hidden="true"></i> 10+ Designations</span>
-              </div>
-              <Link href="/about" className="btn btn--primary" style={{ marginTop: 'var(--space-6)' }}>
-                Learn More About Jessica
-              </Link>
-            </div>
+      {/* STATS BAR */}
+      <section className="stats-bar">
+        <div className="container stats-bar__grid">
+          <div className="stat">
+            <span className="stat__number">Top 3%</span>
+            <span className="stat__label">Coldwell Banker Globally</span>
+          </div>
+          <div className="stat">
+            <span className="stat__number">25+</span>
+            <span className="stat__label">Communities Served</span>
+          </div>
+          <div className="stat">
+            <span className="stat__number">5.0★</span>
+            <span className="stat__label">Google Reviews</span>
+          </div>
+          <div className="stat">
+            <span className="stat__number">$100M+</span>
+            <span className="stat__label">In Sales</span>
           </div>
         </div>
       </section>
 
-      {/* SERVICE AREA */}
-      <section className="section section--warm">
+      {/* ABOUT PREVIEW */}
+      <section className="section section--about" id="about">
+        <div className="container about-split">
+          <div className="about-split__image">
+            <Image
+              src="/assets/jessica.jpg"
+              alt="Jessica Shauffer — Top 3% Coldwell Banker Agent, South Shore MA"
+              width={560}
+              height={700}
+              style={{ objectFit: 'cover', borderRadius: '8px' }}
+            />
+          </div>
+          <div className="about-split__content">
+            <p className="section__label">About Jessica</p>
+            <h2 className="section__title">South Shore&apos;s Most Trusted Real Estate Agent</h2>
+            <p>
+              Jessica Shauffer is a top-producing real estate agent with Coldwell Banker Realty, proudly serving the South Shore, MetroWest, and Bristol County communities of Eastern Massachusetts. A member of the prestigious Presidents Circle — an honor reserved for the top 3% of Coldwell Banker agents globally — Jessica brings unmatched market expertise and a client-first approach to every transaction.
+            </p>
+            <p>
+              As a proud member of the award-winning Weinstein Keach Group, Jessica combines the resources of one of New England&apos;s top real estate teams with a deeply personal commitment to her clients. Whether you&apos;re buying your first home or selling a luxury property, Jessica delivers results.
+            </p>
+            <div className="credentials">
+              <span className="credential">Presidents Circle</span>
+              <span className="credential">CNRLS</span>
+              <span className="credential">CBR</span>
+              <span className="credential">MRP</span>
+              <span className="credential">SCRP</span>
+            </div>
+            <Link href="/about" className="btn btn--primary" style={{ marginTop: '1.5rem', display: 'inline-block' }}>
+              Meet Jessica
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* COMMUNITIES PREVIEW */}
+      <section className="section section--communities" id="communities">
         <div className="container">
           <div className="section__header">
             <p className="section__label">Service Area</p>
-            <h2 className="section__title">Serving 25 Communities Across Eastern Massachusetts</h2>
+            <h2 className="section__title">25 Communities Across Eastern Massachusetts</h2>
             <p className="section__desc">
-              Deep local knowledge across three counties. Whether you&apos;re buying or selling, understanding the local micro-market is the difference between a good deal and a great one.
+              From the South Shore to MetroWest and Bristol County, Jessica Shauffer has the local knowledge to guide you home.
             </p>
           </div>
-          <div className="county-cards-grid">
-            {/* Bristol County */}
+          <div className="county-grid">
             <div className="county-card">
-              <div className="county-card__header">
-                <div className="county-card__icon"><i className="ph-fill ph-house-line" aria-hidden="true"></i></div>
-                <span className="county-card__count">12 Communities</span>
-              </div>
-              <h3 className="county-card__title">Bristol County</h3>
-              <p className="county-card__tagline">The Heart of the South Shore</p>
-              <p className="county-card__desc">Bristol County is home to some of the most sought-after communities in Eastern Massachusetts, including Easton, Mansfield, and the Bridgewater towns. With a mix of historic charm, excellent schools, and strong commuter access to Boston and Providence, Bristol County offers exceptional value for buyers and strong returns for sellers.</p>
-              <div className="county-card__pills">
-                {[['Easton','easton'],['North Easton','north-easton'],['South Easton','south-easton'],['Mansfield','mansfield'],['Norton','norton'],['Raynham','raynham'],['Taunton','taunton'],['Attleboro','attleboro'],['North Attleborough','north-attleborough'],['Bridgewater','bridgewater'],['West Bridgewater','west-bridgewater'],['East Bridgewater','east-bridgewater']].map(([name, slug]) => (
-                  <Link key={slug} href={`/communities/${slug}`} className="county-pill">{name}</Link>
-                ))}
-              </div>
-              <Link href="/counties/bristol-county" className="btn btn--outline county-card__btn">Explore Bristol County →</Link>
-            </div>
-            {/* Norfolk County */}
-            <div className="county-card">
-              <div className="county-card__header">
-                <div className="county-card__icon"><i className="ph-fill ph-buildings" aria-hidden="true"></i></div>
-                <span className="county-card__count">7 Communities</span>
-              </div>
-              <h3 className="county-card__title">Norfolk County</h3>
-              <p className="county-card__tagline">Affluent Towns, Top-Rated Schools</p>
-              <p className="county-card__desc">Norfolk County consistently ranks among the most desirable counties in Massachusetts, featuring high-income communities like Canton, Sharon, Westwood, and Weston. With top-rated school districts, convenient highway access, and a strong luxury market, Norfolk County attracts discerning buyers from across the region.</p>
-              <div className="county-card__pills">
-                {[['Canton','canton'],['Sharon','sharon'],['Norwood','norwood'],['Westwood','westwood'],['Stoughton','stoughton'],['Foxborough','foxborough'],['Weston','weston']].map(([name, slug]) => (
-                  <Link key={slug} href={`/communities/${slug}`} className="county-pill">{name}</Link>
-                ))}
-              </div>
-              <Link href="/counties/norfolk-county" className="btn btn--outline county-card__btn">Explore Norfolk County →</Link>
-            </div>
-            {/* Plymouth County */}
-            <div className="county-card">
-              <div className="county-card__header">
-                <div className="county-card__icon"><i className="ph-fill ph-map-pin" aria-hidden="true"></i></div>
-                <span className="county-card__count">6 Communities</span>
-              </div>
               <h3 className="county-card__title">Plymouth County</h3>
-              <p className="county-card__tagline">Coastal Living &amp; Historic Charm</p>
-              <p className="county-card__desc">Plymouth County stretches from the historic town of Plymouth on the coast to the inland communities of Lakeville and Middleborough. With waterfront properties, strong tourism economies, and growing residential demand, Plymouth County offers diverse opportunities for buyers and investors alike.</p>
-              <div className="county-card__pills">
-                {[['Plymouth','plymouth'],['Hingham','hingham'],['Kingston','kingston'],['Halifax','halifax'],['Lakeville','lakeville'],['Middleborough','middleborough']].map(([name, slug]) => (
-                  <Link key={slug} href={`/communities/${slug}`} className="county-pill">{name}</Link>
-                ))}
-              </div>
-              <Link href="/counties/plymouth-county" className="btn btn--outline county-card__btn">Explore Plymouth County →</Link>
+              <p className="county-card__desc">South Shore communities with top schools and coastal living</p>
+              <ul className="county-card__towns">
+                <li>Easton</li><li>Bridgewater</li><li>Plymouth</li><li>Kingston</li>
+                <li>Halifax</li><li>Lakeville</li><li>Middleborough</li>
+              </ul>
+              <Link href="/counties/plymouth-county" className="county-card__link">Explore Plymouth County →</Link>
+            </div>
+            <div className="county-card">
+              <h3 className="county-card__title">Norfolk County</h3>
+              <p className="county-card__desc">Top-rated schools and strong appreciation near Boston</p>
+              <ul className="county-card__towns">
+                <li>Canton</li><li>Sharon</li><li>Norwood</li><li>Westwood</li>
+                <li>Stoughton</li><li>Weston</li>
+              </ul>
+              <Link href="/counties/norfolk-county" className="county-card__link">Explore Norfolk County →</Link>
+            </div>
+            <div className="county-card">
+              <h3 className="county-card__title">Bristol County</h3>
+              <p className="county-card__desc">Affordable options with excellent highway access</p>
+              <ul className="county-card__towns">
+                <li>Taunton</li><li>Raynham</li><li>Mansfield</li><li>Foxborough</li>
+                <li>Attleboro</li><li>Norton</li><li>North Attleborough</li>
+              </ul>
+              <Link href="/counties/bristol-county" className="county-card__link">Explore Bristol County →</Link>
             </div>
           </div>
-          <div style={{ textAlign: 'center', marginTop: 'var(--space-12)' }}>
-            <Link href="/communities" className="btn btn--primary">View All Communities</Link>
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <Link href="/communities" className="btn btn--outline">View All 25 Communities</Link>
           </div>
         </div>
       </section>
 
-      {/* FOR BUYERS */}
-      <section className="section">
+      {/* SELLERS MARKET CHART */}
+      <section className="section section--market" id="market">
         <div className="container">
-          <div className="split split--buyers">
-            <div className="split__media">
-              <Image
-                src="/assets/market-kitchen.webp"
-                alt="Beautiful South Shore home interior for buyers"
-                width={720}
-                height={540}
-                style={{ borderRadius: 'var(--radius-lg)', width: '100%', height: 'auto' }}
-              />
-            </div>
-            <div className="split__content">
-              <p className="section__label">For Buyers</p>
-              <h2 className="section__title">Find Your Dream Home on the South Shore</h2>
-              <p>Whether you&apos;re a first-time buyer or upgrading to your forever home, Jessica Shauffer delivers expert guidance, access to off-market listings, and tenacious negotiation across 25 communities in Eastern Massachusetts.</p>
-              <ul className="split__checklist">
-                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Access off-market and pre-listed properties</li>
-                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Expert negotiation to win in a competitive market</li>
-                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Neighborhood tours and school district guidance</li>
-                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Mortgage pre-qualification referrals</li>
-              </ul>
-              <Link href="/buyers" className="btn btn--primary" style={{ marginTop: 'var(--space-6)' }}>
-                Full Buyer&apos;s Guide
-              </Link>
-            </div>
+          <div className="section__header">
+            <p className="section__label">Market Intelligence</p>
+            <h2 className="section__title">South Shore Real Estate Market Trends</h2>
+            <p className="section__desc">
+              Median sale prices across key South Shore communities — updated monthly.
+            </p>
           </div>
-        </div>
-      </section>
-
-      {/* FOR SELLERS */}
-      <section className="section section--navy">
-        <div className="container">
-          <div className="split split--sellers">
-            <div className="split__content">
-              <p className="section__label section__label--gold">For Sellers</p>
-              <h2 className="section__title section__title--light">Sell Smarter, Net More</h2>
-              <p className="split__desc--light">South Shore homes are selling fast and at or above asking price. Jessica leverages her market analysis expertise, proven pricing strategies, innovative digital marketing, and home staging specialization to maximize your return.</p>
-              <ul className="split__checklist split__checklist--light">
-                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Complimentary home valuation</li>
-                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Professional staging and photography</li>
-                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Marketing across hundreds of websites and social platforms</li>
-                <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Tenacious negotiation for top dollar</li>
-              </ul>
-              <Link href="/sellers" className="btn btn--accent" style={{ marginTop: 'var(--space-6)' }}>
-                Full Seller&apos;s Guide
-              </Link>
-            </div>
-            <div className="split__chart">
-              <SellersChart />
-            </div>
+          <SellersChart />
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <Link href="/market" className="btn btn--outline">Full Market Report</Link>
           </div>
         </div>
       </section>
@@ -411,31 +253,14 @@ export default async function HomePage() {
               <p className="section__label">Free Consultation</p>
               <h2 className="section__title">Let&apos;s Talk About Your Goals</h2>
               <p>
-                Whether you&apos;re ready to make a move or just exploring the market across the South Shore, MetroWest, or Bristol County — a quick conversation with Jessica can save you time, money, and stress.
+                Whether you&apos;re buying, selling, or just exploring your options, Jessica offers a no-pressure, no-obligation consultation to help you understand the market and make the best decision for your family.
               </p>
-              <div className="form-benefits">
-                <div className="form-benefit">
-                  <i className="ph ph-clock" aria-hidden="true"></i>
-                  <div>
-                    <strong>15-Minute Call</strong>
-                    <span>Quick, focused, and tailored to you</span>
-                  </div>
-                </div>
-                <div className="form-benefit">
-                  <i className="ph ph-currency-dollar-simple" aria-hidden="true"></i>
-                  <div>
-                    <strong>100% Free</strong>
-                    <span>No cost, no obligation, no pressure</span>
-                  </div>
-                </div>
-                <div className="form-benefit">
-                  <i className="ph ph-shield-check" aria-hidden="true"></i>
-                  <div>
-                    <strong>Regional Expertise</strong>
-                    <span>Data-driven insights for 25 local communities</span>
-                  </div>
-                </div>
-              </div>
+              <ul className="consult-benefits">
+                <li>Free home valuation for sellers</li>
+                <li>Personalized buyer search strategy</li>
+                <li>Local market insights for your town</li>
+                <li>No obligation — just expert advice</li>
+              </ul>
             </div>
             <div className="form-split__form">
               <ConsultationForm />

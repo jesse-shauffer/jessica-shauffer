@@ -6,6 +6,7 @@ import BuyersChart from '@/components/BuyersChart';
 import ConsultationForm from '@/components/ConsultationForm';
 import ReviewsSection from '@/components/ReviewsSection';
 import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
+import { buildBreadcrumbSchema, AGENT } from '@/lib/schema';
 
 export const revalidate = 60;
 
@@ -40,8 +41,9 @@ const serviceSchema = {
   name: 'Buyer Representation',
   provider: {
     '@type': 'RealEstateAgent',
-    name: 'Jessica Shauffer',
-    url: 'https://www.jessicashauffer.com',
+    '@id': `${AGENT.url}/#agent`,
+    name: AGENT.name,
+    url: AGENT.url,
   },
   areaServed: [
     { '@type': 'Place', name: 'South Shore Massachusetts' },
@@ -68,14 +70,7 @@ export default async function BuyersPage() {
     <>
       <JsonLd data={serviceSchema} />
       <JsonLd data={faqSchema} />
-      <JsonLd data={{
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
-          { '@type': 'ListItem', position: 2, name: "Buyer's Guide", item: 'https://www.jessicashauffer.com/buyers' },
-        ],
-      }} />
+      <JsonLd data={buildBreadcrumbSchema([{ name: "Buyer's Guide", url: 'https://www.jessicashauffer.com/buyers' }])} />
 
       <section className="page-hero">
         <div className="page-hero__bg">

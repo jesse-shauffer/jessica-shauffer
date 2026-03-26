@@ -5,6 +5,7 @@ import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import ReviewsSection from '@/components/ReviewsSection';
 import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
+import { buildBreadcrumbSchema } from '@/lib/schema';
 
 export const revalidate = 60;
 
@@ -111,14 +112,7 @@ export default async function AboutPage() {
     <>
       <JsonLd data={personSchema} />
       <JsonLd data={faqSchema} />
-      <JsonLd data={{
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com/' },
-          { '@type': 'ListItem', position: 2, name: 'About Jessica', item: 'https://www.jessicashauffer.com/about' },
-        ],
-      }} />
+      <JsonLd data={buildBreadcrumbSchema([{ name: 'About Jessica', url: 'https://www.jessicashauffer.com/about' }])} />
 
       <section className="page-hero">
         <div className="page-hero__bg">
