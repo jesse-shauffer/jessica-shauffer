@@ -3261,3 +3261,98 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   color: #fff;
   margin: 0;
 }
+
+/* ─── Homepage: Stats Bar ─────────────────────────────────────────────────── */
+.stats-bar {
+  background: var(--primary);
+  padding-block: var(--space-6);
+}
+.stats-bar__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  text-align: center;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.stat__number {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1.1;
+}
+.stat__label {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+@media (max-width: 47.9375rem) {
+  .stats-bar__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6) var(--space-4);
+  }
+}
+
+/* ─── Homepage: About Split ───────────────────────────────────────────────── */
+.about-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+.about-split__image {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+.about-split__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-xl);
+}
+.about-split__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.about-split__content p {
+  color: var(--gray-600);
+  line-height: 1.75;
+  margin: 0;
+}
+@media (max-width: 61.9375rem) {
+  .about-split {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .about-split__image {
+    max-width: 28rem;
+    margin-inline: auto;
+  }
+}
+
+/* ─── Homepage: Credential Pills ─────────────────────────────────────────── */
+.credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.credential {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--navy-50);
+  border: 1px solid rgba(10, 35, 81, 0.15);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+}
