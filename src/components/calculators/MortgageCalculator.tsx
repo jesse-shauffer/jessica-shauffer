@@ -423,7 +423,7 @@ function AmortizationTab() {
 
       {/* Summary bar */}
       {schedule.length > 0 && (
-        <div className="grid grid-cols-3 gap-4" style={{ marginBottom: 'var(--space-6)' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
           {[
             { label: 'Monthly Payment', value: `$${fmt2(schedule[0].payment)}` },
             { label: 'Total Interest', value: `$${fmt(schedule[schedule.length - 1].interest)}` },
@@ -517,14 +517,14 @@ export default function MortgageCalculator() {
                     type="button"
                     onClick={() => setActiveTab(tab.id)}
                     style={{
-                      padding: 'var(--space-2) var(--space-5)',
+                      padding: 'var(--space-1) var(--space-4)',
                       borderRadius: 'var(--radius-full)',
                       border: '2px solid',
                       borderColor: active ? 'var(--gold)' : 'rgba(255,255,255,0.25)',
                       background: active ? 'var(--gold)' : 'transparent',
                       color: active ? 'var(--primary)' : 'rgba(255,255,255,0.75)',
-                      fontWeight: active ? 700 : 500,
-                      fontSize: 'var(--text-sm)',
+                      fontWeight: active ? 700 : 400,
+                      fontSize: 'var(--text-xs)',
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
                       transition: 'all 0.15s ease',

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import MortgageCalculator from '@/components/calculators/MortgageCalculator';
 import FaqAccordion from '@/components/FaqAccordion';
+import ReviewsSection from '@/components/ReviewsSection';
+import ConsultationForm from '@/components/ConsultationForm';
 import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
 export const revalidate = 60;
@@ -125,6 +127,53 @@ export default async function CalculatorsPage() {
             Mortgage FAQ
           </h2>
           <FaqAccordion items={faqItems.map(({ q, a }) => ({ question: q, answer: a }))} />
+        </div>
+      </section>
+
+      {/* REVIEWS */}
+      <ReviewsSection
+        label="Client Success Stories"
+        heading="What Jessica&apos;s Clients Say"
+      />
+
+      {/* CONSULTATION FORM */}
+      <section className="section section--form" id="consultation">
+        <div className="container">
+          <div className="form-split">
+            <div className="form-split__content">
+              <p className="section__label">Free Consultation</p>
+              <h2 className="section__title">Let&apos;s Talk About Your Goals</h2>
+              <p>
+                Whether you&apos;re ready to make a move or just exploring the market across the South Shore, MetroWest, or Bristol County — a quick conversation with Jessica can save you time, money, and stress.
+              </p>
+              <div className="form-benefits">
+                <div className="form-benefit">
+                  <i className="ph ph-clock" aria-hidden="true"></i>
+                  <div>
+                    <strong>15-Minute Call</strong>
+                    <span>Quick, focused, and tailored to you</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-currency-dollar-simple" aria-hidden="true"></i>
+                  <div>
+                    <strong>100% Free</strong>
+                    <span>No cost, no obligation, no pressure</span>
+                  </div>
+                </div>
+                <div className="form-benefit">
+                  <i className="ph ph-shield-check" aria-hidden="true"></i>
+                  <div>
+                    <strong>Regional Expertise</strong>
+                    <span>Data-driven insights for 25 local communities</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="form-split__form">
+              <ConsultationForm source="calculators" />
+            </div>
+          </div>
         </div>
       </section>
     </>
