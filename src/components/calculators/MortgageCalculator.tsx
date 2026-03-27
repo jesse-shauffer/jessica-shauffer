@@ -502,7 +502,7 @@ export default function MortgageCalculator() {
 
   return (
     <section style={{ background: 'var(--off-white)', padding: 'var(--space-16) 0' }}>
-      <div className="container">
+      <div className="container" style={{ maxWidth: '64rem' }}>
         <div style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', borderRadius: 'var(--radius-2xl)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden' }}>
 
           {/* ── Header with tab nav ── */}
@@ -523,7 +523,7 @@ export default function MortgageCalculator() {
                       borderColor: active ? 'var(--gold)' : 'rgba(255,255,255,0.25)',
                       background: active ? 'var(--gold)' : 'transparent',
                       color: active ? 'var(--primary)' : 'rgba(255,255,255,0.75)',
-                      fontWeight: active ? 700 : 400,
+                      fontWeight: 400,
                       fontSize: 'var(--text-xs)',
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
