@@ -42,7 +42,33 @@ export default function Footer() {
         </div>
         <div className="footer__bottom">
           <p>&copy; 2026 Jessica Shauffer — Weinstein Keach, Coldwell Banker Realty. All rights reserved.</p>
-          <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>Serving Easton, Canton, Sharon, Plymouth, Hingham, Norwood, Westwood, Mansfield, Foxborough, Bridgewater, Taunton, Kingston, Halifax, Lakeville, Stoughton, Attleboro &amp; more.</p>
+          <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>
+            Serving{' '}
+            {[
+              { name: 'Easton',       slug: 'easton' },
+              { name: 'Canton',       slug: 'canton' },
+              { name: 'Sharon',       slug: 'sharon' },
+              { name: 'Plymouth',     slug: 'plymouth' },
+              { name: 'Hingham',      slug: 'hingham' },
+              { name: 'Norwood',      slug: 'norwood' },
+              { name: 'Westwood',     slug: 'westwood' },
+              { name: 'Mansfield',    slug: 'mansfield' },
+              { name: 'Foxborough',   slug: 'foxborough' },
+              { name: 'Bridgewater',  slug: 'bridgewater' },
+              { name: 'Taunton',      slug: 'taunton' },
+              { name: 'Kingston',     slug: 'kingston' },
+              { name: 'Halifax',      slug: 'halifax' },
+              { name: 'Lakeville',    slug: 'lakeville' },
+              { name: 'Stoughton',    slug: 'stoughton' },
+              { name: 'Attleboro',    slug: 'attleboro' },
+            ].map((town, i, arr) => (
+              <span key={town.slug}>
+                <Link href={`/communities/${town.slug}`} style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }} className="footer__town-link">{town.name}</Link>
+                {i < arr.length - 1 ? ', ' : ' '}
+              </span>
+            ))}
+            <Link href="/communities" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }} className="footer__town-link">&amp; more</Link>.
+          </p>
         </div>
       </div>
     </footer>

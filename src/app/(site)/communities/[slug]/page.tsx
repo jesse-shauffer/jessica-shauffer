@@ -150,7 +150,7 @@ export default async function CommunityPage({ params }: { params: { slug: string
                 <div key={i} className="highlight-card">
                   <i className={`ph ${h.icon || 'ph-map-pin'}`}></i>
                   <div>
-                    <h4>{h.title}</h4>
+                    <h3>{h.title}</h3>
                     <p>{h.description}</p>
                   </div>
                 </div>
