@@ -18,8 +18,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
-    // Noindex — this page is not linked from nav/footer and should not appear in search results
-    robots: { index: false, follow: false },
     openGraph: {
       title,
       description,

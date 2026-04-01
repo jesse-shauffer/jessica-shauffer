@@ -369,6 +369,16 @@ const STATIC_PAGES: Record<string, Omit<SanityPage, '_id'>> = {
     metaDescription: 'Explore 25 communities across the South Shore, MetroWest, and Bristol County, MA. Find homes, market data, and local insights with top agent Jessica Shauffer.',
     ogImage: '/assets/park.webp',
   },
+  calculators: {
+    title: 'Mortgage Calculator',
+    slug: { current: 'calculators' },
+    heroImage: '/assets/buyers-hero.webp',
+    heroTitle: 'Mortgage Calculator',
+    heroDesc: 'Estimate your monthly payment in seconds. Adjust home price, down payment, rate, and term to see how it affects your budget.',
+    metaTitle: 'Mortgage Calculator | Jessica Shauffer — South Shore MA Real Estate',
+    metaDescription: 'Free mortgage calculator for South Shore MA homes. Estimate monthly payment, closing costs, interest savings, and amortization schedule.',
+    ogImage: '/assets/buyers-hero.webp',
+  },
   counties: {
     title: 'Counties',
     slug: { current: 'counties' },

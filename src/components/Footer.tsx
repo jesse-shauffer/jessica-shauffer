@@ -24,6 +24,7 @@ export default function Footer() {
             <Link href="/communities">Communities</Link>
             <Link href="/testimonials">Testimonials</Link>
             <Link href="/contact">Contact</Link>
+            <Link href="/calculators">Mortgage Calculator</Link>
           </div>
           <div className="footer__links">
             <p className="footer__col-heading">Contact Jessica</p>
