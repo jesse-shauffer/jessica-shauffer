@@ -4015,12 +4015,44 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   color: var(--primary);
 }
 
+/* Copy link button */
+.post-share-icon--copy {
+  background: none;
+  border: 1.5px solid var(--gray-200);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.post-share-icon--copy.is-copied {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--primary);
+}
+
+/* Breadcrumb below hero */
+.post-header__breadcrumb {
+  margin-top: var(--space-4);
+  margin-bottom: 0;
+}
+
+/* Mobile: Z-flex 2-column grid for meta bar */
 @media (max-width: 768px) {
   .post-meta-bar__divider {
     display: none;
   }
   .post-meta-bar {
-    gap: var(--space-3);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4) var(--space-6);
+    padding: var(--space-4) 0;
+  }
+  /* Share item spans full width on its own row */
+  .post-meta-bar__share {
+    grid-column: 1 / -1;
+  }
+  .post-share-icons {
+    flex-wrap: wrap;
+    gap: var(--space-2);
   }
 }
 
