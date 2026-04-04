@@ -3919,7 +3919,7 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
 /* Post header section */
 .post-header {
   background: var(--white);
-  padding: var(--space-10) 0 var(--space-8);
+  padding: 5.5rem 0 var(--space-8); /* 5.5rem clears the ~4rem fixed nav with breathing room */
   border-bottom: 1px solid var(--gray-100);
 }
 
