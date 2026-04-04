@@ -1895,6 +1895,20 @@ a, button, [role="button"], input, textarea, select {
   color: var(--color-text-muted);
 }
 
+/* Mobile portrait: allow wrap but keep last crumb (post title) as one unbroken unit */
+@media (max-width: 480px) {
+  .breadcrumbs__list {
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+  }
+  .breadcrumbs__list li:last-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+}
+
 .breadcrumbs__list a {
   color: var(--color-text-muted);
   text-decoration: none;
