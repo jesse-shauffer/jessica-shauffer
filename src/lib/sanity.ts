@@ -435,3 +435,60 @@ export async function getPageBySlug(slug: string): Promise<SanityPage | null> {
   if (fallback) return { _id: `static-${slug}`, ...fallback };
   return null;
 }
+
+// ── Blog Posts ─────────────────────────────────────────────────────────────────
+
+export interface SanityBlogPost {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  publishedAt: string;
+  topic: string;
+  primaryKeyword?: string;
+  heroImage?: SanityImageSource;
+  heroImageAlt?: string;
+  excerpt: string;
+  body?: unknown[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: SanityImageSource;
+  author?: string;
+}
+
+const blogPostCardFields = `
+  _id, title, slug, publishedAt, topic, primaryKeyword,
+  heroImage, heroImageAlt, excerpt, author
+`;
+
+const blogPostFullFields = `
+  _id, title, slug, publishedAt, topic, primaryKeyword,
+  heroImage, heroImageAlt, excerpt, body,
+  metaTitle, metaDescription, ogImage, author
+`;
+
+export async function getAllBlogPosts(): Promise<SanityBlogPost[]> {
+  return client.fetch<SanityBlogPost[]>(
+    `*[_type == "blogPost"] | order(publishedAt desc) { ${blogPostCardFields} }`
+  );
+}
+
+export async function getBlogPostBySlug(slug: string): Promise<SanityBlogPost | null> {
+  return client.fetch<SanityBlogPost | null>(
+    `*[_type == "blogPost" && slug.current == $slug][0] { ${blogPostFullFields} }`,
+    { slug }
+  );
+}
+
+export async function getAllBlogPostSlugs(): Promise<string[]> {
+  const results = await client.fetch<{ slug: { current: string } }[]>(
+    `*[_type == "blogPost"] { slug }`
+  );
+  return results.map((r) => r.slug.current);
+}
+
+export async function getBlogPostsByTopic(topic: string, excludeSlug?: string): Promise<SanityBlogPost[]> {
+  const query = excludeSlug
+    ? `*[_type == "blogPost" && topic == $topic && slug.current != $excludeSlug] | order(publishedAt desc) [0...3] { ${blogPostCardFields} }`
+    : `*[_type == "blogPost" && topic == $topic] | order(publishedAt desc) [0...3] { ${blogPostCardFields} }`;
+  return client.fetch<SanityBlogPost[]>(query, { topic, excludeSlug });
+}
