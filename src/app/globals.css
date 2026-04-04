@@ -3409,7 +3409,8 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   border: 1.5px solid var(--primary);
   border-radius: var(--radius-md);
   background: var(--white);
-  font-size: var(--text-sm);
+  font-size: 1rem; /* 16px min prevents iOS auto-zoom on focus */
+  font-weight: 500; /* match pill weight */
   font-family: var(--font-body);
   color: var(--color-text);
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -3484,12 +3485,14 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   }
 }
 
-/* Topic filter pills */
+/* Topic filter pills — indented to match controls box */
 .blog-topics {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
   margin-bottom: var(--space-4);
+  padding-left: var(--space-1);
+  padding-right: var(--space-1);
 }
 
 .blog-topic-btn {
@@ -3556,7 +3559,8 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   border: 1.5px solid var(--primary);
   border-radius: var(--radius-md);
   background: var(--white);
-  font-size: var(--text-sm);
+  font-size: 1rem; /* 16px min prevents iOS auto-zoom */
+  font-weight: 500; /* match pill weight */
   font-family: var(--font-body);
   color: var(--color-text);
   cursor: pointer;
@@ -3654,11 +3658,13 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   flex-shrink: 0;
 }
 
-/* Results count */
+/* Results count — indented to match controls box */
 .blog-results-count {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   margin-bottom: var(--space-6);
+  padding-left: var(--space-1);
+  padding-right: var(--space-1);
 }
 
 .blog-results-count strong {
