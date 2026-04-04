@@ -7,7 +7,7 @@ import { AGENT } from '@/lib/schema';
 import ConsultationForm from '@/components/ConsultationForm';
 import FaqAccordion from '@/components/FaqAccordion';
 import CommunityChartTabs from '@/components/CommunityChartTabs';
-import { getNeighborhoodBySlug, getOtherNeighborhoods, resolveHeroImage, getAllNeighborhoodSlugs } from '@/lib/sanity';
+import { getNeighborhoodBySlug, getOtherNeighborhoods, resolveHeroImage, getAllNeighborhoodSlugs, TOWN_COUNTY_MAP } from '@/lib/sanity';
 
 export const revalidate = 60;
 
@@ -170,10 +170,17 @@ export default async function CommunityPage({ params }: { params: { slug: string
       {others && others.length > 0 && (
         <section className="section" style={{ background: 'var(--warm-gray)' }}>
           <div className="container">
-            <div className="content-block__header" style={{ textAlign: 'center', maxWidth: 640, marginInline: 'auto', marginBottom: 'var(--space-12)' }}>
-              <h2>Explore Nearby Communities</h2>
-              <p>Discover other highly-rated towns across the South Shore and MetroWest.</p>
-            </div>
+            {(() => {
+              const currentCounty = TOWN_COUNTY_MAP[params.slug] || '';
+              const countyLabel = currentCounty === 'bristol-county' ? 'Bristol County' : currentCounty === 'norfolk-county' ? 'Norfolk County' : currentCounty === 'plymouth-county' ? 'Plymouth County' : 'the South Shore';
+              const sameCountyCount = others.slice(0, 6).filter(o => TOWN_COUNTY_MAP[o.slug] === currentCounty).length;
+              return (
+                <div className="content-block__header" style={{ textAlign: 'center', maxWidth: 640, marginInline: 'auto', marginBottom: 'var(--space-12)' }}>
+                  <h2>Explore Nearby Communities</h2>
+                  <p>{sameCountyCount > 0 ? `More towns in ${countyLabel} and across the South Shore served by Jessica Shauffer.` : `Discover other highly-rated towns across the South Shore served by Jessica Shauffer.`}</p>
+                </div>
+              );
+            })()}
             <div className="neighborhood-grid">
               {others.slice(0, 6).map((other) => (
                 <Link key={other.slug} href={`/communities/${other.slug}`} className="neighborhood-card">

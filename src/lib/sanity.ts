@@ -114,6 +114,22 @@ export async function getAllNeighborhoodSlugs(): Promise<string[]> {
   return allSlugs;
 }
 
+// Maps each town slug to its county for county-aware nearby community ordering
+export const TOWN_COUNTY_MAP: Record<string, string> = {
+  // Bristol County
+  'easton': 'bristol-county', 'north-easton': 'bristol-county', 'south-easton': 'bristol-county',
+  'mansfield': 'bristol-county', 'norton': 'bristol-county', 'raynham': 'bristol-county',
+  'taunton': 'bristol-county', 'attleboro': 'bristol-county', 'north-attleborough': 'bristol-county',
+  'bridgewater': 'bristol-county', 'west-bridgewater': 'bristol-county', 'east-bridgewater': 'bristol-county',
+  // Norfolk County
+  'canton': 'norfolk-county', 'sharon': 'norfolk-county', 'norwood': 'norfolk-county',
+  'westwood': 'norfolk-county', 'stoughton': 'norfolk-county', 'foxborough': 'norfolk-county',
+  'weston': 'norfolk-county',
+  // Plymouth County
+  'plymouth': 'plymouth-county', 'hingham': 'plymouth-county', 'kingston': 'plymouth-county',
+  'halifax': 'plymouth-county', 'lakeville': 'plymouth-county', 'middleborough': 'plymouth-county',
+};
+
 export async function getOtherNeighborhoods(currentSlug: string) {
   const results = await client.fetch<{ slug: string; name: string; tagline: string; image: SanityImageSource | string }[]>(
     `*[_type == "neighborhood" && slug.current != $slug] | order(name asc) {
@@ -124,16 +140,29 @@ export async function getOtherNeighborhoods(currentSlug: string) {
     }`,
     { slug: currentSlug }
   );
-  // If Sanity returns results, use them; otherwise fall back to static towns
-  if (results && results.length > 0) return results;
-  return Object.entries(STATIC_TOWNS)
-    .filter(([slug]) => slug !== currentSlug)
-    .map(([slug, town]) => ({
-      slug,
-      name: town.name,
-      tagline: town.tagline,
-      image: town.heroImage,
-    }));
+  // Build the full list: prefer Sanity data, fall back to static towns
+  const allOthers: { slug: string; name: string; tagline: string; image: SanityImageSource | string }[] =
+    results && results.length > 0
+      ? results
+      : Object.entries(STATIC_TOWNS)
+          .filter(([slug]) => slug !== currentSlug)
+          .map(([slug, town]) => ({
+            slug,
+            name: town.name,
+            tagline: town.tagline,
+            image: town.heroImage,
+          }));
+
+  // Sort: same-county towns first (alphabetically), then other counties (alphabetically)
+  const currentCounty = TOWN_COUNTY_MAP[currentSlug] || '';
+  return allOthers.sort((a, b) => {
+    const aCounty = TOWN_COUNTY_MAP[a.slug] || '';
+    const bCounty = TOWN_COUNTY_MAP[b.slug] || '';
+    const aSame = aCounty === currentCounty ? 0 : 1;
+    const bSame = bCounty === currentCounty ? 0 : 1;
+    if (aSame !== bSame) return aSame - bSame;
+    return a.name.localeCompare(b.name);
+  });
 }
 
 /* ── Static fallback data for the 3 counties ── */

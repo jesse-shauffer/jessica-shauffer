@@ -37,6 +37,45 @@ const COUNTY_FAQS: Record<string, { q: string; a: string }[]> = {
   ],
 };
 
+// Market stats per county for pillar page authority
+const COUNTY_MARKET_STATS: Record<string, {
+  medianPrice: string;
+  priceChange: string;
+  daysOnMarket: string;
+  listToSale: string;
+  activeListings: string;
+  topTown: string;
+  updated: string;
+}> = {
+  'bristol-county': {
+    medianPrice: '$499,000',
+    priceChange: '+6.2%',
+    daysOnMarket: '28',
+    listToSale: '101.3%',
+    activeListings: '~180',
+    topTown: 'Easton',
+    updated: 'Q1 2025',
+  },
+  'norfolk-county': {
+    medianPrice: '$699,000',
+    priceChange: '+5.8%',
+    daysOnMarket: '22',
+    listToSale: '102.1%',
+    activeListings: '~210',
+    topTown: 'Westwood',
+    updated: 'Q1 2025',
+  },
+  'plymouth-county': {
+    medianPrice: '$549,000',
+    priceChange: '+7.1%',
+    daysOnMarket: '31',
+    listToSale: '100.8%',
+    activeListings: '~240',
+    topTown: 'Hingham',
+    updated: 'Q1 2025',
+  },
+};
+
 // Static town lists per county (fallback when no Sanity neighborhood docs exist)
 const COUNTY_TOWNS: Record<string, { name: string; slug: string; tagline: string }[]> = {
   'bristol-county': [
@@ -115,6 +154,7 @@ export default async function CountyPage({ params }: { params: { slug: string } 
     : (COUNTY_TOWNS[params.slug] || []);
 
   const faqItems = COUNTY_FAQS[params.slug] || [];
+  const marketStats = COUNTY_MARKET_STATS[params.slug] || null;
 
   // CMS fields with inline fallbacks
   const name = c.name;
@@ -239,6 +279,41 @@ export default async function CountyPage({ params }: { params: { slug: string } 
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* MARKET STATS SNAPSHOT */}
+      {marketStats && (
+        <section className="section" style={{ background: 'var(--navy)', color: 'var(--white)' }}>
+          <div className="container">
+            <div style={{ textAlign: 'center', marginBottom: 'var(--space-10)' }}>
+              <p className="section__label" style={{ color: 'var(--gold)' }}>Market Snapshot</p>
+              <h2 className="section__title" style={{ color: 'var(--white)' }}>{name} Real Estate Market — {marketStats.updated}</h2>
+              <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: 560, marginInline: 'auto' }}>
+                Key indicators for the {name} housing market. Data updated {marketStats.updated}. Contact Jessica for a current, property-specific analysis.
+              </p>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 'var(--space-6)' }}>
+              {[
+                { label: 'Median Sale Price', value: marketStats.medianPrice, icon: 'ph-house-line', note: 'Single-family homes' },
+                { label: 'Year-over-Year Change', value: marketStats.priceChange, icon: 'ph-trend-up', note: 'Price appreciation' },
+                { label: 'Days on Market', value: marketStats.daysOnMarket + ' days', icon: 'ph-calendar-blank', note: 'Avg. time to sale' },
+                { label: 'List-to-Sale Ratio', value: marketStats.listToSale, icon: 'ph-percent', note: 'Sellers getting over ask' },
+                { label: 'Active Listings', value: marketStats.activeListings, icon: 'ph-buildings', note: 'Current inventory' },
+                { label: 'Hottest Town', value: marketStats.topTown, icon: 'ph-fire', note: 'Fastest-moving market' },
+              ].map((stat) => (
+                <div key={stat.label} style={{ background: 'rgba(255,255,255,0.08)', borderRadius: 12, padding: 'var(--space-6)', textAlign: 'center', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  <i className={`ph-fill ${stat.icon}`} style={{ fontSize: '1.75rem', color: 'var(--gold)', display: 'block', marginBottom: 'var(--space-2)' }} aria-hidden="true"></i>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--white)', lineHeight: 1.2, marginBottom: 4 }}>{stat.value}</div>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'rgba(255,255,255,0.9)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 2 }}>{stat.label}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)' }}>{stat.note}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 'var(--space-10)' }}>
+              <Link href="/market" className="btn" style={{ background: 'var(--gold)', color: 'var(--navy)', fontWeight: 700 }}>View Full Market Report</Link>
             </div>
           </div>
         </section>

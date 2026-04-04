@@ -290,9 +290,14 @@ export default async function HomePage() {
                 <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Marketing across hundreds of websites and social platforms</li>
                 <li><i className="ph-fill ph-check-circle" aria-hidden="true"></i> Tenacious negotiation for top dollar</li>
               </ul>
-              <Link href="/sellers" className="btn btn--accent" style={{ marginTop: 'var(--space-6)' }}>
-                Full Seller&apos;s Guide
-              </Link>
+              <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap', marginTop: 'var(--space-6)' }}>
+                <Link href="/sellers" className="btn btn--accent">
+                  Full Seller&apos;s Guide
+                </Link>
+                <Link href="/market" className="btn" style={{ background: 'transparent', border: '2px solid rgba(255,255,255,0.5)', color: 'var(--white)' }}>
+                  View Market Report
+                </Link>
+              </div>
             </div>
             <div className="split__chart">
               <SellersChart />
