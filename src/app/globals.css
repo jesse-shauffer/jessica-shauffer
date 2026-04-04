@@ -3370,19 +3370,31 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   margin-bottom: var(--space-6);
 }
 
-/* Controls bar: search on top, sort-row below */
+/* Controls bar: 3-column grid on desktop — search (1fr) | sort (max-content) | reset (max-content) */
 .blog-controls {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-/* Sort + reset always side-by-side: 1fr + max-content */
-.blog-sort-row {
   display: grid;
-  grid-template-columns: 1fr max-content;
+  grid-template-columns: 1fr max-content max-content;
   gap: var(--space-3);
   align-items: center;
+}
+
+/* blog-sort-row is only used on mobile — on desktop the grid handles layout */
+.blog-sort-row {
+  display: contents; /* let children participate in parent grid */
+}
+
+@media (max-width: 640px) {
+  .blog-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .blog-sort-row {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: var(--space-3);
+    align-items: center;
+  }
 }
 
 /* Search bar */
