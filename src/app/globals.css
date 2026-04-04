@@ -3429,7 +3429,8 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
 }
 
 .blog-search__input::placeholder {
-  color: var(--color-text-muted);
+  color: var(--primary); /* match sort dropdown text color */
+  opacity: 0.6;
 }
 
 .blog-search__input:focus {
@@ -3489,11 +3490,18 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
     min-width: unset;
     width: 100%;
   }
+  /* Sort dropdown stretches to fill 1fr column */
   .blog-sort {
     width: 100%;
+    min-width: 0;
   }
   .blog-sort__trigger {
     width: 100%;
+    min-width: 0;
+  }
+  /* Ensure blog-sort participates in the 1fr column */
+  .blog-sort-row .blog-sort {
+    flex: 1 1 0;
   }
 }
 
