@@ -150,7 +150,8 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
             )}
           </div>
 
-          {/* Custom sort dropdown */}
+          {/* Sort + Reset: 2-column grid (1fr + max-content) */}
+          <div className="blog-sort-row">
           <div className="blog-sort" ref={sortRef}>
             <button
               className={`blog-sort__trigger${sortOpen ? ' is-open' : ''}`}
@@ -196,6 +197,7 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
           >
             <i className="ph ph-arrow-counter-clockwise" aria-hidden="true" />
           </button>
+          </div>{/* end blog-sort-row */}
         </div>
       </div>
 

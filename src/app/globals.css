@@ -3370,12 +3370,19 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   margin-bottom: var(--space-6);
 }
 
-/* Controls bar */
+/* Controls bar: search on top, sort-row below */
 .blog-controls {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: var(--space-3);
-  flex-wrap: wrap;
+}
+
+/* Sort + reset always side-by-side: 1fr + max-content */
+.blog-sort-row {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  gap: var(--space-3);
+  align-items: center;
 }
 
 /* Search bar */
@@ -3465,10 +3472,6 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
 }
 
 @media (max-width: 640px) {
-  .blog-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
   .blog-search {
     min-width: unset;
     width: 100%;
@@ -3476,13 +3479,8 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   .blog-sort {
     width: 100%;
   }
-  .blog-sort__select {
+  .blog-sort__trigger {
     width: 100%;
-  }
-  .blog-controls > .blog-sort-row {
-    display: flex;
-    gap: var(--space-3);
-    align-items: center;
   }
 }
 
