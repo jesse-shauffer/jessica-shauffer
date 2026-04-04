@@ -3411,14 +3411,16 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
     width: 100%;
   }
   .blog-sort-row > .blog-sort {
-    width: 100% !important;
-    min-width: 0 !important;
-    flex-shrink: 1 !important;
+    display: block !important;
+    width: 100%;
+    min-width: 0;
   }
   .blog-sort-row > .blog-sort > .blog-sort__trigger {
-    width: 100% !important;
-    min-width: 0 !important;
+    display: flex;
+    width: 100%;
+    min-width: 0;
     box-sizing: border-box;
+    justify-content: space-between;
   }
 }
 
@@ -3454,6 +3456,16 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
 }
 
 .blog-search__input::placeholder {
+  color: #0A1730 !important;
+  opacity: 1 !important;
+}
+
+.blog-search__input::-webkit-input-placeholder {
+  color: #0A1730 !important;
+  opacity: 1 !important;
+}
+
+.blog-search__input::-moz-placeholder {
   color: #0A1730 !important;
   opacity: 1 !important;
 }
