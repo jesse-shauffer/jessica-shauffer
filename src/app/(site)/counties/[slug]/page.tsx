@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import { AGENT } from '@/lib/schema';
 import ConsultationForm from '@/components/ConsultationForm';
 import FaqAccordion from '@/components/FaqAccordion';
 import {
@@ -126,20 +127,25 @@ export default async function CountyPage({ params }: { params: { slug: string } 
   const areaSchema = {
     '@context': 'https://schema.org',
     '@type': 'AdministrativeArea',
+    '@id': `https://www.jessicashauffer.com/counties/${params.slug}/#area`,
     name: `${name}, Massachusetts`,
     description: description[0] || heroDesc,
     address: { '@type': 'PostalAddress', addressRegion: 'MA', addressCountry: 'US' },
     containedInPlace: { '@type': 'State', name: 'Massachusetts' },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: `Homes for Sale in ${name}, Massachusetts`,
+      provider: { '@type': 'RealEstateAgent', '@id': `${AGENT.url}/#agent` },
+    },
   };
-
-  const agentSchema = {
+  // Reference the canonical agent entity by @id — no duplicate RealEstateAgent needed
+  const agentRefSchema = {
     '@context': 'https://schema.org',
     '@type': 'RealEstateAgent',
-    name: 'Jessica Shauffer',
-    url: 'https://www.jessicashauffer.com',
-    areaServed: { '@type': 'AdministrativeArea', name: `${name}, Massachusetts` },
-    award: 'Coldwell Banker Presidents Circle — Top 3% Globally',
-    worksFor: { '@type': 'Organization', name: 'Weinstein Keach Group at Coldwell Banker Realty' },
+    '@id': `${AGENT.url}/#agent`,
+    name: AGENT.name,
+    url: AGENT.url,
+    areaServed: { '@type': 'AdministrativeArea', '@id': `https://www.jessicashauffer.com/counties/${params.slug}/#area` },
   };
 
   const faqSchema = faqItems.length > 0 ? {
@@ -165,7 +171,7 @@ export default async function CountyPage({ params }: { params: { slug: string } 
   return (
     <>
       <JsonLd data={areaSchema} />
-      <JsonLd data={agentSchema} />
+      <JsonLd data={agentRefSchema} />
       {faqSchema && <JsonLd data={faqSchema} />}
       <JsonLd data={breadcrumbSchema} />
 

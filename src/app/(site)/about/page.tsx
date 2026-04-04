@@ -37,6 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': 'https://www.jessicashauffer.com/#agent',
   name: 'Jessica Shauffer',
   jobTitle: 'Real Estate Agent',
   worksFor: {

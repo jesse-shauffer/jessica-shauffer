@@ -73,6 +73,18 @@ const breadcrumbSchema = {
   ],
 };
 
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Mortgage Calculator — South Shore MA',
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  url: 'https://www.jessicashauffer.com/calculators',
+  description: 'Free mortgage calculator for South Shore Massachusetts homes. Estimate monthly payment, interest savings, closing costs, and full amortization schedule.',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  author: { '@type': 'RealEstateAgent', '@id': 'https://www.jessicashauffer.com/#agent' },
+};
+
 export default async function CalculatorsPage() {
   const page = await getPageBySlug('calculators');
   const heroSrc = resolveHeroImage(page?.heroImage, 1920);
@@ -81,6 +93,7 @@ export default async function CalculatorsPage() {
     <>
       <JsonLd data={faqSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={softwareSchema} />
 
       {/* Hero */}
       <section className="page-hero">

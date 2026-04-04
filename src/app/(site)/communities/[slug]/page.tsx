@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import { AGENT } from '@/lib/schema';
 import ConsultationForm from '@/components/ConsultationForm';
 import FaqAccordion from '@/components/FaqAccordion';
 import CommunityChartTabs from '@/components/CommunityChartTabs';
@@ -46,6 +47,7 @@ export default async function CommunityPage({ params }: { params: { slug: string
   const placeSchema = {
     '@context': 'https://schema.org',
     '@type': 'Place',
+    '@id': `https://www.jessicashauffer.com/communities/${n.slug.current}/#place`,
     name: `${n.name}, MA`,
     description: n.description?.[0] || `Community information for ${n.name}, Massachusetts.`,
     address: {
@@ -54,6 +56,11 @@ export default async function CommunityPage({ params }: { params: { slug: string
       addressRegion: 'MA',
       postalCode: n.zipCode || '',
       addressCountry: 'US',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: `Homes for Sale in ${n.name}, MA`,
+      provider: { '@type': 'RealEstateAgent', '@id': `${AGENT.url}/#agent` },
     },
   };
 

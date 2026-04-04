@@ -37,9 +37,14 @@ export async function generateMetadata(): Promise<Metadata> {
 const marketSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
+  '@id': 'https://www.jessicashauffer.com/market/#webpage',
   name: 'South Shore & MetroWest MA Real Estate Market Data',
+  description: 'Current real estate market data for South Shore, MetroWest, and Bristol County Massachusetts — median prices, days on market, and inventory trends.',
   about: { '@type': 'Place', name: 'Eastern Massachusetts' },
   url: 'https://www.jessicashauffer.com/market',
+  author: { '@type': 'RealEstateAgent', '@id': 'https://www.jessicashauffer.com/#agent' },
+  publisher: { '@type': 'RealEstateAgent', '@id': 'https://www.jessicashauffer.com/#agent' },
+  inLanguage: 'en-US',
 };
 
 const faqSchema = {
