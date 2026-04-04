@@ -32,6 +32,8 @@ export default function Header() {
     if (page === 'communities') return pathname.startsWith('/communities') ? 'is-active' : '';
     if (page === 'counties') return pathname.startsWith('/counties') ? 'is-active' : '';
     if (page === 'testimonials') return pathname.startsWith('/testimonials') ? 'is-active' : '';
+    if (page === 'blog') return pathname.startsWith('/blog') ? 'is-active' : '';
+    if (page === 'calculators') return pathname.startsWith('/calculators') ? 'is-active' : '';
     return pathname === `/${page}` ? 'is-active' : '';
   }
 
@@ -105,6 +107,8 @@ export default function Header() {
               </div>
             </div>
 
+            <Link href="/blog" className={isActive('blog')}>Blog</Link>
+            <Link href="/calculators" className={isActive('calculators')}>Calculator</Link>
             <Link href="/contact" className={isActive('contact')}>Contact</Link>
           </nav>
           <Link href="#consultation" className="btn btn--primary btn--sm header__cta">Free Consultation</Link>
@@ -159,6 +163,8 @@ export default function Header() {
               </div>
             )}
 
+            <Link href="/blog" onClick={closeMobile}>Blog</Link>
+            <Link href="/calculators" onClick={closeMobile}>Calculator</Link>
             <Link href="/contact" onClick={closeMobile}>Contact</Link>
           </nav>
           <Link href="#consultation" className="btn btn--primary" onClick={closeMobile}>Free Consultation</Link>
