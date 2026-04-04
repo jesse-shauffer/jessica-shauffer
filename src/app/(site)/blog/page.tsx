@@ -77,6 +77,7 @@ export default async function BlogPage() {
     slug: p.slug.current,
     publishedAt: p.publishedAt,
     topic: p.topic,
+    secondaryTopic: p.secondaryTopic,
     excerpt: p.excerpt,
     author: p.author || 'Jessica Shauffer',
     heroImageUrl: p.heroImage ? resolveHeroImage(p.heroImage, 800) : '/assets/hero.webp',

@@ -444,7 +444,9 @@ export interface SanityBlogPost {
   slug: { current: string };
   publishedAt: string;
   topic: string;
+  secondaryTopic?: string;
   primaryKeyword?: string;
+  readTimeMinutes?: number;
   heroImage?: SanityImageSource;
   heroImageAlt?: string;
   excerpt: string;
@@ -456,12 +458,12 @@ export interface SanityBlogPost {
 }
 
 const blogPostCardFields = `
-  _id, title, slug, publishedAt, topic, primaryKeyword,
+  _id, title, slug, publishedAt, topic, secondaryTopic, primaryKeyword,
   heroImage, heroImageAlt, excerpt, author
 `;
 
 const blogPostFullFields = `
-  _id, title, slug, publishedAt, topic, primaryKeyword,
+  _id, title, slug, publishedAt, topic, secondaryTopic, primaryKeyword, readTimeMinutes,
   heroImage, heroImageAlt, excerpt, body,
   metaTitle, metaDescription, ogImage, author
 `;
@@ -491,4 +493,27 @@ export async function getBlogPostsByTopic(topic: string, excludeSlug?: string): 
     ? `*[_type == "blogPost" && topic == $topic && slug.current != $excludeSlug] | order(publishedAt desc) [0...3] { ${blogPostCardFields} }`
     : `*[_type == "blogPost" && topic == $topic] | order(publishedAt desc) [0...3] { ${blogPostCardFields} }`;
   return client.fetch<SanityBlogPost[]>(query, { topic, excludeSlug });
+}
+
+// Fetch 6 related posts (same topic or secondary topic, excluding current)
+export async function getRelatedBlogPosts(topic: string, excludeSlug: string): Promise<SanityBlogPost[]> {
+  return client.fetch<SanityBlogPost[]>(
+    `*[_type == "blogPost" && (topic == $topic || secondaryTopic == $topic) && slug.current != $excludeSlug] | order(publishedAt desc) [0...6] { ${blogPostCardFields} }`,
+    { topic, excludeSlug }
+  );
+}
+
+// Fetch the previous and next post by date for prev/next navigation
+export async function getBlogPostNavigation(publishedAt: string): Promise<{ prev: SanityBlogPost | null; next: SanityBlogPost | null }> {
+  const [prev, next] = await Promise.all([
+    client.fetch<SanityBlogPost | null>(
+      `*[_type == "blogPost" && publishedAt < $publishedAt] | order(publishedAt desc) [0] { _id, title, slug, publishedAt, heroImage, heroImageAlt }`,
+      { publishedAt }
+    ),
+    client.fetch<SanityBlogPost | null>(
+      `*[_type == "blogPost" && publishedAt > $publishedAt] | order(publishedAt asc) [0] { _id, title, slug, publishedAt, heroImage, heroImageAlt }`,
+      { publishedAt }
+    ),
+  ]);
+  return { prev: prev ?? null, next: next ?? null };
 }

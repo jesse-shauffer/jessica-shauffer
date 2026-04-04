@@ -10,6 +10,7 @@ interface BlogPostCard {
   slug: string;
   publishedAt: string;
   topic: string;
+  secondaryTopic?: string;
   excerpt: string;
   author: string;
   heroImageUrl: string;
@@ -62,7 +63,10 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
   // Build unique topic list from posts
   const topics = useMemo(() => {
     const seen = new Set<string>();
-    posts.forEach((p) => { if (p.topic) seen.add(p.topic); });
+    posts.forEach((p) => {
+      if (p.topic) seen.add(p.topic);
+      if (p.secondaryTopic) seen.add(p.secondaryTopic);
+    });
     return Array.from(seen).sort((a, b) =>
       (topicLabels[a] || a).localeCompare(topicLabels[b] || b)
     );
@@ -81,7 +85,9 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
     }
 
     if (activeTopic !== 'all') {
-      result = result.filter((p) => p.topic === activeTopic);
+      result = result.filter(
+        (p) => p.topic === activeTopic || p.secondaryTopic === activeTopic
+      );
     }
 
     switch (sortBy) {
@@ -170,6 +176,9 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
                       setSortOpen(false);
                     }}
                   >
+                    {opt.value === sortBy && (
+                      <i className="ph ph-check" aria-hidden="true" style={{ marginRight: '0.4rem', color: 'var(--gold)' }} />
+                    )}
                     {opt.label}
                   </li>
                 ))}
@@ -209,7 +218,7 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
           >
             {topicLabels[t] || t}
             <span className="blog-topic-count">
-              {posts.filter((p) => p.topic === t).length}
+              {posts.filter((p) => p.topic === t || p.secondaryTopic === t).length}
             </span>
           </button>
         ))}
@@ -248,6 +257,7 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
         <div className="blog-grid">
           {filtered.map((post) => (
             <article key={post._id} className="blog-card">
+              {/* Image block with hover arrow circle */}
               <Link href={`/blog/${post.slug}`} className="blog-card__image-link" tabIndex={-1} aria-hidden="true">
                 <div className="blog-card__image-wrap">
                   <Image
@@ -257,13 +267,22 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     style={{ objectFit: 'cover' }}
                   />
+                  {/* Arrow circle overlay — appears on hover */}
+                  <div className="blog-card__arrow-circle" aria-hidden="true">
+                    <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+                      <path d="M13.0003 5.00586L11.5316 6.47461L17.3441 12.2975H4.66699V14.3809H17.3441L11.5316 20.2038L13.0003 21.6725L21.3337 13.3392L13.0003 5.00586Z" fill="currentColor"/>
+                    </svg>
+                  </div>
                 </div>
               </Link>
+
+              {/* Card body */}
               <div className="blog-card__body">
-                <div className="blog-card__meta">
+                {/* Category pills */}
+                <div className="blog-card__cats">
                   {post.topic && (
                     <button
-                      className="blog-card__topic"
+                      className="blog-card__cat"
                       onClick={() => setActiveTopic(post.topic)}
                       title={`Filter by ${topicLabels[post.topic] || post.topic}`}
                       type="button"
@@ -271,17 +290,33 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
                       {topicLabels[post.topic] || post.topic}
                     </button>
                   )}
-                  <time className="blog-card__date" dateTime={post.publishedAt}>
-                    {formatDate(post.publishedAt)}
-                  </time>
+                  {post.secondaryTopic && post.secondaryTopic !== post.topic && (
+                    <button
+                      className="blog-card__cat"
+                      onClick={() => setActiveTopic(post.secondaryTopic!)}
+                      title={`Filter by ${topicLabels[post.secondaryTopic] || post.secondaryTopic}`}
+                      type="button"
+                    >
+                      {topicLabels[post.secondaryTopic] || post.secondaryTopic}
+                    </button>
+                  )}
                 </div>
+
+                {/* Title */}
                 <h2 className="blog-card__title">
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                 </h2>
-                <p className="blog-card__excerpt">{post.excerpt}</p>
-                <Link href={`/blog/${post.slug}`} className="blog-card__cta">
-                  Read Article <i className="ph ph-arrow-right" aria-hidden="true"></i>
-                </Link>
+
+                {/* Date + Read more row */}
+                <div className="blog-card__footer">
+                  <time className="blog-card__date" dateTime={post.publishedAt}>
+                    {formatDate(post.publishedAt)}
+                  </time>
+                  <Link href={`/blog/${post.slug}`} className="blog-card__cta" aria-label={`Read ${post.title}`}>
+                    Read Article
+                    <i className="ph ph-arrow-right" aria-hidden="true" />
+                  </Link>
+                </div>
               </div>
             </article>
           ))}

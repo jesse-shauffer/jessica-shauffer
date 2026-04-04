@@ -5,10 +5,12 @@ import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
+import AgentAbout from '@/components/AgentAbout';
 import {
   getBlogPostBySlug,
   getAllBlogPostSlugs,
-  getBlogPostsByTopic,
+  getRelatedBlogPosts,
+  getBlogPostNavigation,
   resolveHeroImage,
   urlFor,
 } from '@/lib/sanity';
@@ -108,24 +110,44 @@ function formatDate(iso: string): string {
   });
 }
 
+/** Estimate read time from PortableText body blocks */
+function estimateReadTime(body: unknown[]): number {
+  const text = body
+    .filter((b: unknown) => (b as { _type: string })._type === 'block')
+    .flatMap((b: unknown) => ((b as { children?: { text?: string }[] }).children || []).map((c) => c.text || ''))
+    .join(' ');
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 260));
+}
+
 export default async function BlogPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [post, relatedPosts] = await Promise.all([
-    getBlogPostBySlug(slug),
-    getBlogPostBySlug(slug).then((p) =>
-      p ? getBlogPostsByTopic(p.topic, slug) : []
-    ),
-  ]);
-
+  const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
+
+  const [relatedPosts, nav] = await Promise.all([
+    getRelatedBlogPosts(post.topic, slug),
+    getBlogPostNavigation(post.publishedAt),
+  ]);
 
   const heroSrc = post.heroImage
     ? resolveHeroImage(post.heroImage, 1600)
     : '/assets/hero.webp';
+
+  const readTime =
+    post.readTimeMinutes ??
+    (post.body && post.body.length > 0 ? estimateReadTime(post.body) : 5);
+
+  const postUrl = `https://www.jessicashauffer.com/blog/${slug}`;
+  const encodedUrl = encodeURIComponent(postUrl);
+  const encodedTitle = encodeURIComponent(post.title);
+
+  const primaryLabel = TOPIC_LABELS[post.topic] || post.topic;
+  const secondaryLabel = post.secondaryTopic ? (TOPIC_LABELS[post.secondaryTopic] || post.secondaryTopic) : null;
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -134,7 +156,7 @@ export default async function BlogPostPage({
     description: post.excerpt,
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
-    url: `https://www.jessicashauffer.com/blog/${slug}`,
+    url: postUrl,
     image: heroSrc,
     author: {
       '@type': 'Person',
@@ -151,7 +173,7 @@ export default async function BlogPostPage({
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://www.jessicashauffer.com/blog/${slug}`,
+      '@id': postUrl,
     },
   };
 
@@ -161,71 +183,134 @@ export default async function BlogPostPage({
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jessicashauffer.com' },
       { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.jessicashauffer.com/blog' },
-      { '@type': 'ListItem', position: 3, name: post.title, item: `https://www.jessicashauffer.com/blog/${slug}` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: postUrl },
     ],
   };
-
-  const topicLabel = TOPIC_LABELS[post.topic] || post.topic;
 
   return (
     <>
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
 
-      {/* HERO */}
-      <section className="page-hero">
-        <div className="page-hero__bg">
-          <Image
-            src={heroSrc}
-            alt={post.heroImageAlt || post.title}
-            fill
-            sizes="100vw"
-            style={{ objectFit: 'cover' }}
-            priority
-          />
-        </div>
-        <div className="page-hero__content">
-          {post.topic && (
-            <p className="page-hero__label">{topicLabel}</p>
-          )}
-          <h1 className="page-hero__title">{post.title}</h1>
-          <p className="page-hero__desc">{post.excerpt}</p>
+      {/* ── POST HEADER ──────────────────────────────────────────── */}
+      <section className="post-header">
+        <div className="container">
+
+          {/* Breadcrumb */}
+          <nav className="breadcrumbs" aria-label="Breadcrumb">
+            <ol className="breadcrumbs__list">
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
+              <li>{post.title}</li>
+            </ol>
+          </nav>
+
+          {/* Label pill */}
+          <div className="post-header__label-row">
+            <span className="post-header__label">Blog Post</span>
+          </div>
+
+          {/* H1 */}
+          <h1 className="post-header__title">{post.title}</h1>
+
+          {/* Hero image */}
+          <div className="post-header__image-wrap">
+            <Image
+              src={heroSrc}
+              alt={post.heroImageAlt || post.title}
+              width={1200}
+              height={630}
+              sizes="(max-width: 1280px) 100vw, 1200px"
+              style={{ width: '100%', height: 'auto', borderRadius: 'var(--radius-lg)', display: 'block' }}
+              priority
+            />
+          </div>
+
+          {/* Meta bar */}
+          <div className="post-meta-bar">
+            <div className="post-meta-bar__item">
+              <span className="post-meta-bar__label">Written by</span>
+              <span className="post-meta-bar__value">{post.author || 'Jessica Shauffer'}</span>
+            </div>
+            <div className="post-meta-bar__divider" aria-hidden="true" />
+            <div className="post-meta-bar__item">
+              <span className="post-meta-bar__label">Published on</span>
+              <time className="post-meta-bar__value" dateTime={post.publishedAt}>
+                {formatDate(post.publishedAt)}
+              </time>
+            </div>
+            <div className="post-meta-bar__divider" aria-hidden="true" />
+            <div className="post-meta-bar__item">
+              <span className="post-meta-bar__label">Category</span>
+              <div className="post-meta-bar__cats">
+                <Link href={`/blog?topic=${post.topic}`} className="post-meta-bar__cat">
+                  {primaryLabel}
+                </Link>
+                {secondaryLabel && (
+                  <>
+                    <span className="post-meta-bar__cat-sep" aria-hidden="true">|</span>
+                    <Link href={`/blog?topic=${post.secondaryTopic}`} className="post-meta-bar__cat">
+                      {secondaryLabel}
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="post-meta-bar__divider" aria-hidden="true" />
+            <div className="post-meta-bar__item">
+              <span className="post-meta-bar__label">Read Time</span>
+              <span className="post-meta-bar__value">{readTime} min read</span>
+            </div>
+            <div className="post-meta-bar__divider" aria-hidden="true" />
+            {/* Social share */}
+            <div className="post-meta-bar__item post-meta-bar__share">
+              <span className="post-meta-bar__label">Share</span>
+              <div className="post-share-icons">
+                <a
+                  href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="post-share-icon"
+                  aria-label="Share on X (Twitter)"
+                >
+                  {/* X / Twitter icon */}
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" fill="currentColor"/>
+                  </svg>
+                </a>
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="post-share-icon"
+                  aria-label="Share on LinkedIn"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+                    <path clipRule="evenodd" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm3 15.5V10H6.5v8.5H8Zm-.75-9.75a.875.875 0 1 0 0-1.75.875.875 0 0 0 0 1.75ZM18 18.5v-5.1c.033-1.59-1.142-2.946-2.72-3.14-.9-.1-1.969.325-2.53 1.1V10H11.5v8.5H13v-4.75a1.75 1.75 0 0 1 3.5 0V18.5H18Z" fill="currentColor" fillRule="evenodd"/>
+                  </svg>
+                </a>
+                <a
+                  href={`mailto:?subject=${encodedTitle}&body=${encodedUrl}`}
+                  className="post-share-icon"
+                  aria-label="Share via email"
+                >
+                  <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+                    <path clipRule="evenodd" d="M4 4.758h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Zm9.65 11.45 6.35-4.45V8.208l-7.35 5.15a.875.875 0 0 1-1.3 0L4 8.208v3.55l6.35 4.45a2.625 2.625 0 0 0 3.3 0Z" fill="currentColor" fillRule="evenodd"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* BREADCRUMB */}
-      <div className="container">
-        <nav className="breadcrumbs" aria-label="Breadcrumb">
-          <ol className="breadcrumbs__list">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/blog">Blog</Link></li>
-            <li>{post.title}</li>
-          </ol>
-        </nav>
-      </div>
-
-      {/* ARTICLE */}
+      {/* ── ARTICLE + SIDEBAR ────────────────────────────────────── */}
       <section className="section">
         <div className="container">
-          <div className="blog-post-layout">
-            {/* Main content */}
-            <article className="blog-post__article">
-              {/* Post meta */}
-              <div className="blog-post__meta">
-                {post.topic && (
-                  <Link href={`/blog?topic=${post.topic}`} className="blog-card__topic">
-                    {topicLabel}
-                  </Link>
-                )}
-                <time dateTime={post.publishedAt} className="blog-post__date">
-                  {formatDate(post.publishedAt)}
-                </time>
-                <span className="blog-post__author">
-                  By {post.author || 'Jessica Shauffer'}
-                </span>
-              </div>
+          <div className="post-layout">
 
-              {/* Body */}
+            {/* Main article */}
+            <article className="post-article" id="blog-content">
               {post.body && post.body.length > 0 ? (
                 <div className="blog-post__body portable-text">
                   <PortableText value={post.body as Parameters<typeof PortableText>[0]['value']} components={ptComponents} />
@@ -236,7 +321,7 @@ export default async function BlogPostPage({
                 </div>
               )}
 
-              {/* CTA at bottom of post */}
+              {/* In-article CTA */}
               <div className="blog-post__cta-box">
                 <div className="blog-post__cta-content">
                   <h3>Ready to Make a Move?</h3>
@@ -250,71 +335,124 @@ export default async function BlogPostPage({
               </div>
             </article>
 
-            {/* Sidebar */}
-            <aside className="blog-post__sidebar">
-              <div className="blog-sidebar-card">
-                <div className="blog-sidebar-card__avatar">
-                  <Image
-                    src="/assets/jessica-headshot.webp"
-                    alt="Jessica Shauffer, Coldwell Banker Realty"
-                    width={80}
-                    height={80}
-                    style={{ borderRadius: '50%', objectFit: 'cover' }}
-                  />
-                </div>
-                <h3 className="blog-sidebar-card__name">Jessica Shauffer</h3>
-                <p className="blog-sidebar-card__title">Coldwell Banker Realty</p>
-                <p className="blog-sidebar-card__bio">
-                  Top 3% agent serving 25 communities across Bristol, Norfolk &amp; Plymouth Counties. Over $50M in transactions.
-                </p>
-                <a href="#consultation" className="btn btn--primary btn--sm" style={{ width: '100%', textAlign: 'center' }}>
-                  Free Consultation
-                </a>
-              </div>
-
-              {/* Related posts */}
-              {relatedPosts.length > 0 && (
-                <div className="blog-sidebar-related">
-                  <h3 className="blog-sidebar-related__title">More in {topicLabel}</h3>
-                  <ul className="blog-sidebar-related__list">
-                    {relatedPosts.map((rp) => (
-                      <li key={rp._id} className="blog-sidebar-related__item">
-                        <Link href={`/blog/${rp.slug.current}`} className="blog-sidebar-related__link">
-                          {rp.heroImage && (
-                            <div className="blog-sidebar-related__thumb">
-                              <Image
-                                src={resolveHeroImage(rp.heroImage, 120)}
-                                alt={rp.heroImageAlt || rp.title}
-                                width={80}
-                                height={60}
-                                style={{ objectFit: 'cover', borderRadius: 'var(--radius-md)' }}
-                              />
-                            </div>
-                          )}
-                          <div>
-                            <span className="blog-sidebar-related__post-title">{rp.title}</span>
-                            <time className="blog-sidebar-related__date" dateTime={rp.publishedAt}>
-                              {formatDate(rp.publishedAt)}
-                            </time>
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              <div className="blog-sidebar-back">
-                <Link href="/blog" className="btn btn--ghost btn--sm">
-                  <i className="ph ph-arrow-left" aria-hidden="true"></i> All Posts
-                </Link>
+            {/* Sticky sidebar — Table of Contents */}
+            <aside className="post-sidebar">
+              <div className="post-toc" id="toc-wrapper">
+                <h3 className="post-toc__title">Table of Contents</h3>
+                <div className="post-toc__divider" />
+                {/* TOC links are injected client-side by PostTocScript */}
+                <nav className="post-toc__nav" aria-label="Table of contents" />
               </div>
             </aside>
           </div>
         </div>
       </section>
 
-      {/* CONSULTATION FORM */}
+      {/* ── PREV / NEXT NAVIGATION ───────────────────────────────── */}
+      {(nav.prev || nav.next) && (
+        <section className="section section--warm post-prevnext">
+          <div className="container">
+            <div className="post-prevnext__inner">
+              {nav.prev ? (
+                <Link href={`/blog/${nav.prev.slug.current}`} className="post-prevnext__btn post-prevnext__btn--prev">
+                  <i className="ph ph-arrow-left" aria-hidden="true" />
+                  <div className="post-prevnext__text">
+                    <span className="post-prevnext__dir">Previous Post</span>
+                    <span className="post-prevnext__name">{nav.prev.title}</span>
+                  </div>
+                </Link>
+              ) : (
+                <div />
+              )}
+              {nav.next ? (
+                <Link href={`/blog/${nav.next.slug.current}`} className="post-prevnext__btn post-prevnext__btn--next">
+                  <div className="post-prevnext__text post-prevnext__text--right">
+                    <span className="post-prevnext__dir">Next Post</span>
+                    <span className="post-prevnext__name">{nav.next.title}</span>
+                  </div>
+                  <i className="ph ph-arrow-right" aria-hidden="true" />
+                </Link>
+              ) : (
+                <div />
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── RELATED POSTS ────────────────────────────────────────── */}
+      {relatedPosts.length > 0 && (
+        <section className="section post-related">
+          <div className="container">
+            <div className="section__header">
+              <p className="section__label">Keep Reading</p>
+              <h2 className="section__title">More Articles You May Like</h2>
+            </div>
+            <div className="blog-grid blog-grid--related">
+              {relatedPosts.map((rp) => {
+                const rpHero = rp.heroImage ? resolveHeroImage(rp.heroImage, 600) : '/assets/hero.webp';
+                const rpPrimary = TOPIC_LABELS[rp.topic] || rp.topic;
+                const rpSecondary = rp.secondaryTopic ? (TOPIC_LABELS[rp.secondaryTopic] || rp.secondaryTopic) : null;
+                return (
+                  <article key={rp._id} className="blog-card">
+                    <Link href={`/blog/${rp.slug.current}`} className="blog-card__image-link" tabIndex={-1} aria-hidden="true">
+                      <div className="blog-card__image-wrap">
+                        <Image
+                          src={rpHero}
+                          alt={rp.heroImageAlt || rp.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          style={{ objectFit: 'cover' }}
+                        />
+                        <div className="blog-card__arrow-circle" aria-hidden="true">
+                          <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+                            <path d="M13.0003 5.00586L11.5316 6.47461L17.3441 12.2975H4.66699V14.3809H17.3441L11.5316 20.2038L13.0003 21.6725L21.3337 13.3392L13.0003 5.00586Z" fill="currentColor"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </Link>
+                    <div className="blog-card__body">
+                      <div className="blog-card__cats">
+                        {rpPrimary && (
+                          <Link href={`/blog?topic=${rp.topic}`} className="blog-card__cat">
+                            {rpPrimary}
+                          </Link>
+                        )}
+                        {rpSecondary && (
+                          <Link href={`/blog?topic=${rp.secondaryTopic}`} className="blog-card__cat">
+                            {rpSecondary}
+                          </Link>
+                        )}
+                      </div>
+                      <h3 className="blog-card__title">
+                        <Link href={`/blog/${rp.slug.current}`}>{rp.title}</Link>
+                      </h3>
+                      <div className="blog-card__footer">
+                        <time className="blog-card__date" dateTime={rp.publishedAt}>
+                          {formatDate(rp.publishedAt)}
+                        </time>
+                        <Link href={`/blog/${rp.slug.current}`} className="blog-card__cta" aria-label={`Read ${rp.title}`}>
+                          Read Article <i className="ph ph-arrow-right" aria-hidden="true" />
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 'var(--space-8)' }}>
+              <Link href="/blog" className="btn btn--ghost">
+                View All Articles
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── ABOUT JESSICA ────────────────────────────────────────── */}
+      <AgentAbout />
+
+      {/* ── CONSULTATION FORM ────────────────────────────────────── */}
       <section className="section section--form" id="consultation">
         <div className="container">
           <div className="form-split">

@@ -1,6 +1,6 @@
 import { defineType, defineField } from 'sanity';
 
-// Blog topic categories — single topic per post for SEO focus
+// Blog topic categories — primary and secondary topic per post
 const BLOG_TOPICS = [
   { title: 'Market Updates', value: 'market-updates' },
   { title: 'Buying a Home', value: 'buying' },
@@ -42,14 +42,31 @@ export default defineType({
     }),
     defineField({
       name: 'topic',
-      title: 'Topic',
+      title: 'Primary Topic',
       type: 'string',
-      description: 'Single topic category for this post. One per post for SEO focus.',
+      description: 'Primary topic category for this post.',
       options: {
         list: BLOG_TOPICS,
         layout: 'radio',
       },
       validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'secondaryTopic',
+      title: 'Secondary Topic (optional)',
+      type: 'string',
+      description: 'Optional second topic tag shown alongside the primary topic on cards and post header.',
+      options: {
+        list: BLOG_TOPICS,
+        layout: 'radio',
+      },
+    }),
+    defineField({
+      name: 'readTimeMinutes',
+      title: 'Read Time (minutes)',
+      type: 'number',
+      description: 'Estimated read time in minutes. Shown in the post header meta bar. Leave blank to auto-calculate from word count.',
+      validation: (r) => r.min(1).max(60),
     }),
     defineField({
       name: 'primaryKeyword',
@@ -143,7 +160,7 @@ export default defineType({
           ],
         },
       ],
-      description: 'Full post body. Use H2/H3 headings to structure content.',
+      description: 'Full post body. Use H2/H3 headings to structure content. H2 headings auto-populate the Table of Contents sidebar.',
     }),
 
     // ── SEO ───────────────────────────────────────────────────────────
