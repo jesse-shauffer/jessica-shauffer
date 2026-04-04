@@ -3541,7 +3541,7 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   color: var(--color-text-muted);
 }
 
-/* Sort selector */
+/* Sort — custom dropdown */
 .blog-sort {
   position: relative;
   display: flex;
@@ -3549,8 +3549,12 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   flex-shrink: 0;
 }
 
-.blog-sort__select {
-  padding: 0.65rem 2.25rem 0.65rem 1rem;
+/* Trigger button */
+.blog-sort__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
   border: 1.5px solid var(--primary);
   border-radius: var(--radius-md);
   background: var(--white);
@@ -3559,23 +3563,59 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   color: var(--color-text);
   cursor: pointer;
   transition: border-color 0.2s, box-shadow 0.2s;
-  appearance: none;
-  -webkit-appearance: none;
+  white-space: nowrap;
+  min-width: 160px;
+  justify-content: space-between;
 }
 
-.blog-sort__select:focus {
-  outline: none;
-  border-color: var(--accent);
+.blog-sort__trigger:hover,
+.blog-sort__trigger.is-open {
+  border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(200, 162, 78, 0.15);
 }
 
 .blog-sort__caret {
-  position: absolute;
-  right: 0.875rem;
   font-size: 0.875rem;
   color: var(--primary);
-  pointer-events: none;
-  line-height: 1;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+/* Dropdown panel */
+.blog-sort__panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 100%;
+  background: var(--white);
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  list-style: none;
+  margin: 0;
+  padding: 0.375rem 0;
+  z-index: 200;
+  overflow: hidden;
+}
+
+.blog-sort__option {
+  padding: 0.65rem 1.125rem;
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.blog-sort__option:hover {
+  background: rgba(200, 162, 78, 0.08);
+  color: var(--primary);
+}
+
+.blog-sort__option.is-selected {
+  background: rgba(200, 162, 78, 0.12);
+  color: var(--gold);
+  font-weight: 600;
 }
 
 /* Active filter tags */

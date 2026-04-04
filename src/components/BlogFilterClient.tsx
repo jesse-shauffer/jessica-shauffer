@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -23,6 +23,13 @@ interface Props {
 
 type SortOption = 'date-desc' | 'date-asc' | 'title-asc' | 'title-desc';
 
+const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+  { value: 'date-desc', label: 'Date (Newest)' },
+  { value: 'date-asc',  label: 'Date (Oldest)' },
+  { value: 'title-asc', label: 'Name (A to Z)' },
+  { value: 'title-desc',label: 'Name (Z to A)' },
+];
+
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', {
     month: 'long',
@@ -35,7 +42,22 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTopic, setActiveTopic] = useState<string>('all');
   const [sortBy, setSortBy] = useState<SortOption>('date-desc');
+  const [sortOpen, setSortOpen] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
+  const sortRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
+        setSortOpen(false);
+      }
+    }
+    if (sortOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [sortOpen]);
 
   // Build unique topic list from posts
   const topics = useMemo(() => {
@@ -49,7 +71,6 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
   const filtered = useMemo(() => {
     let result = [...posts];
 
-    // Text search filter
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
       result = result.filter(
@@ -59,12 +80,10 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
       );
     }
 
-    // Topic filter
     if (activeTopic !== 'all') {
       result = result.filter((p) => p.topic === activeTopic);
     }
 
-    // Sort
     switch (sortBy) {
       case 'date-desc':
         result.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
@@ -94,64 +113,81 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
   };
 
   const hasActiveFilters = searchQuery.trim() || activeTopic !== 'all';
+  const currentSortLabel = SORT_OPTIONS.find((o) => o.value === sortBy)?.label ?? 'Sort By';
 
   return (
     <div>
-      {/* ── Controls row ─────────────────────────────────────────── */}
+      {/* ── Controls box ─────────────────────────────────────────── */}
       <div className="blog-controls-box">
-      <div className="blog-controls">
-        {/* Search bar */}
-        <div className="blog-search">
-          <i className="ph ph-magnifying-glass blog-search__icon" aria-hidden="true" />
-          <input
-            ref={searchRef}
-            type="text"
-            className="blog-search__input"
-            placeholder="Search articles…"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            aria-label="Search blog posts"
-          />
-          {searchQuery && (
+        <div className="blog-controls">
+          {/* Search bar */}
+          <div className="blog-search">
+            <i className="ph ph-magnifying-glass blog-search__icon" aria-hidden="true" />
+            <input
+              ref={searchRef}
+              type="text"
+              className="blog-search__input"
+              placeholder="Search articles…"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search blog posts"
+            />
+            {searchQuery && (
+              <button
+                className="blog-search__clear"
+                onClick={clearSearch}
+                aria-label="Clear search"
+                type="button"
+              >
+                <i className="ph ph-x" aria-hidden="true" />
+              </button>
+            )}
+          </div>
+
+          {/* Custom sort dropdown */}
+          <div className="blog-sort" ref={sortRef}>
             <button
-              className="blog-search__clear"
-              onClick={clearSearch}
-              aria-label="Clear search"
+              className={`blog-sort__trigger${sortOpen ? ' is-open' : ''}`}
               type="button"
+              aria-haspopup="listbox"
+              aria-expanded={sortOpen}
+              onClick={() => setSortOpen((v) => !v)}
             >
-              <i className="ph ph-x" aria-hidden="true" />
+              <span>{currentSortLabel}</span>
+              <i className={`ph ${sortOpen ? 'ph-caret-up' : 'ph-caret-down'} blog-sort__caret`} aria-hidden="true" />
             </button>
-          )}
-        </div>
 
-        {/* Sort selector */}
-        <div className="blog-sort">
-          <select
-            id="blog-sort-select"
-            className="blog-sort__select"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as SortOption)}
-            aria-label="Sort posts"
+            {sortOpen && (
+              <ul className="blog-sort__panel" role="listbox" aria-label="Sort options">
+                {SORT_OPTIONS.map((opt) => (
+                  <li
+                    key={opt.value}
+                    role="option"
+                    aria-selected={sortBy === opt.value}
+                    className={`blog-sort__option${sortBy === opt.value ? ' is-selected' : ''}`}
+                    onClick={() => {
+                      setSortBy(opt.value);
+                      setSortOpen(false);
+                    }}
+                  >
+                    {opt.label}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* Reset button */}
+          <button
+            className="blog-reset-btn"
+            onClick={clearAll}
+            type="button"
+            aria-label="Reset all filters"
+            title="Reset all filters"
           >
-            <option value="date-desc">Date (Newest)</option>
-            <option value="date-asc">Date (Oldest)</option>
-            <option value="title-asc">Title A–Z</option>
-            <option value="title-desc">Title Z–A</option>
-          </select>
-          <i className="ph ph-caret-down blog-sort__caret" aria-hidden="true" />
+            <i className="ph ph-arrow-counter-clockwise" aria-hidden="true" />
+          </button>
         </div>
-
-        {/* Reset all button — always visible inside box */}
-        <button
-          className="blog-reset-btn"
-          onClick={clearAll}
-          type="button"
-          aria-label="Reset all filters"
-          title="Reset all filters"
-        >
-          <i className="ph ph-arrow-counter-clockwise" aria-hidden="true" />
-        </button>
-      </div>
       </div>
 
       {/* ── Topic filter pills ───────────────────────────────────── */}
@@ -183,21 +219,13 @@ export default function BlogFilterClient({ posts, topicLabels }: Props) {
       {hasActiveFilters && (
         <div className="blog-active-filters">
           {searchQuery.trim() && (
-            <button
-              className="blog-active-tag"
-              onClick={clearSearch}
-              type="button"
-            >
+            <button className="blog-active-tag" onClick={clearSearch} type="button">
               {searchQuery.trim()}
               <i className="ph ph-x" aria-hidden="true" />
             </button>
           )}
           {activeTopic !== 'all' && (
-            <button
-              className="blog-active-tag"
-              onClick={() => setActiveTopic('all')}
-              type="button"
-            >
+            <button className="blog-active-tag" onClick={() => setActiveTopic('all')} type="button">
               {topicLabels[activeTopic] || activeTopic}
               <i className="ph ph-x" aria-hidden="true" />
             </button>
