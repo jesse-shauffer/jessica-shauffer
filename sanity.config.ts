@@ -16,6 +16,10 @@ const deskStructure = (S: StructureBuilder) =>
       S.listItem().title('Reviews').child(S.documentTypeList('review').title('Reviews')),
       S.listItem().title('Market Data').child(S.documentTypeList('marketData').title('Market Data')),
       S.divider(),
+      S.listItem().title('Blog Posts').child(
+        S.documentTypeList('blogPost').title('Blog Posts').defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
+      ),
+      S.divider(),
       S.listItem().title('Pages').child(S.documentTypeList('page').title('Pages')),
       S.listItem().title('Agent').child(S.documentTypeList('agent').title('Agent')),
     ]);

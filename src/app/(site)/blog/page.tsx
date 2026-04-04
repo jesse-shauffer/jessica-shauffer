@@ -4,7 +4,7 @@ import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import BlogFilterClient from '@/components/BlogFilterClient';
-import { getAllBlogPosts, resolveHeroImage } from '@/lib/sanity';
+import { getAllBlogPosts, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
 export const revalidate = 60;
 
@@ -40,7 +40,16 @@ export const TOPIC_LABELS: Record<string, string> = {
 };
 
 export default async function BlogPage() {
-  const posts = await getAllBlogPosts();
+  const [posts, pageData] = await Promise.all([
+    getAllBlogPosts(),
+    getPageBySlug('blog'),
+  ]);
+
+  const heroImageSrc = pageData?.heroImage
+    ? (typeof pageData.heroImage === 'string' ? pageData.heroImage : resolveHeroImage(pageData.heroImage, 1920))
+    : '/assets/hero.webp';
+  const heroTitle = pageData?.heroTitle || 'Real Estate Insights';
+  const heroDesc = pageData?.heroDesc || 'Market updates, neighborhood guides, and home buying tips for Easton, Attleboro, Mansfield, and the South Shore of Massachusetts.';
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -94,7 +103,7 @@ export default async function BlogPage() {
       <section className="page-hero">
         <div className="page-hero__bg">
           <Image
-            src="/assets/hero.webp"
+            src={heroImageSrc}
             alt="South Shore Massachusetts real estate insights"
             fill
             sizes="100vw"
@@ -104,10 +113,8 @@ export default async function BlogPage() {
         </div>
         <div className="page-hero__content">
           <p className="page-hero__label">Local Expertise</p>
-          <h1 className="page-hero__title">Real Estate Insights</h1>
-          <p className="page-hero__desc">
-            Market updates, neighborhood guides, and home buying tips for Easton, Attleboro, Mansfield, and the South Shore of Massachusetts.
-          </p>
+          <h1 className="page-hero__title">{heroTitle}</h1>
+          <p className="page-hero__desc">{heroDesc}</p>
         </div>
       </section>
 
