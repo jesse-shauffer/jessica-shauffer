@@ -248,7 +248,21 @@ export default async function BlogPostPage({
         ...((post.bodyBottom as unknown[]) || []),
       ]
     : [...((post.body as unknown[]) || [])];
-  const tocHeadings = allBodyBlocks.length > 0 ? extractTocHeadings(allBodyBlocks) : [];
+  const bodyTocHeadings = allBodyBlocks.length > 0 ? extractTocHeadings(allBodyBlocks) : [];
+  // Inject "Frequently Asked Questions" into the TOC between bodyTop and bodyBottom headings
+  const faqTocEntry = faqItems.length > 0
+    ? [{ id: 'frequently-asked-questions', text: 'Frequently Asked Questions', level: 2 as const }]
+    : [];
+  // Insert FAQ entry after bodyTop headings (before bodyBottom headings)
+  const bodyTopHeadings = ((post.bodyTop as unknown[]) || []).length > 0
+    ? extractTocHeadings((post.bodyTop as unknown[]) || [])
+    : bodyTocHeadings;
+  const bodyBottomHeadings = ((post.bodyBottom as unknown[]) || []).length > 0
+    ? extractTocHeadings((post.bodyBottom as unknown[]) || [])
+    : [];
+  const tocHeadings = hasNewBody
+    ? [...bodyTopHeadings, ...faqTocEntry, ...bodyBottomHeadings]
+    : [...bodyTocHeadings, ...faqTocEntry];
   const heroSrc = post.heroImage
     ? resolveHeroImage(post.heroImage, 1600)
     : '/assets/hero.webp';
@@ -475,7 +489,7 @@ export default async function BlogPostPage({
               {/* FAQ Accordion — only shown when structured FAQs exist */}
               {faqItems.length > 0 && (
                 <div className="blog-post__faqs">
-                  <h2 className="blog-post__faqs-title">Frequently Asked Questions</h2>
+                  <h2 id="frequently-asked-questions" className="blog-post__faqs-title" style={{ scrollMarginTop: '5rem' }}>Frequently Asked Questions</h2>
                   <FaqAccordion items={faqItems} defaultOpenIndex={-1} />
                 </div>
               )}
