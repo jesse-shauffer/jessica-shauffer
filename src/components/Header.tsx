@@ -139,11 +139,11 @@ export default function Header() {
               Counties <i className="ph ph-caret-down" style={{ fontSize: '0.75rem', transition: 'transform 0.2s', transform: countiesOpen ? 'rotate(180deg)' : '' }}></i>
             </a>
             {countiesOpen && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', paddingLeft: 'var(--space-4)' }}>
+              <div className="mobile-nav__sub">
                 {COUNTIES.map((c) => (
-                  <Link key={c.slug} href={`/counties/${c.slug}`} onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none' }}>{c.name}</Link>
+                  <Link key={c.slug} href={`/counties/${c.slug}`} onClick={closeMobile} className="mobile-nav__sub-link">{c.name}</Link>
                 ))}
-                <Link href="/counties" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none', fontWeight: 600 }}>All Counties →</Link>
+                <Link href="/counties" onClick={closeMobile} className="mobile-nav__sub-link mobile-nav__sub-link--all">All Counties →</Link>
               </div>
             )}
 
@@ -155,11 +155,11 @@ export default function Header() {
               Communities <i className="ph ph-caret-down" style={{ fontSize: '0.75rem', transition: 'transform 0.2s', transform: communitiesOpen ? 'rotate(180deg)' : '' }}></i>
             </a>
             {communitiesOpen && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', paddingLeft: 'var(--space-4)' }}>
+              <div className="mobile-nav__sub">
                 {FEATURED_COMMUNITIES.map((c) => (
-                  <Link key={c.slug} href={`/communities/${c.slug}`} onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none' }}>{c.name}</Link>
+                  <Link key={c.slug} href={`/communities/${c.slug}`} onClick={closeMobile} className="mobile-nav__sub-link">{c.name}</Link>
                 ))}
-                <Link href="/communities" onClick={closeMobile} style={{ fontSize: 'var(--text-base)', borderBottom: 'none', fontWeight: 600 }}>View All Communities →</Link>
+                <Link href="/communities" onClick={closeMobile} className="mobile-nav__sub-link mobile-nav__sub-link--all">View All Communities →</Link>
               </div>
             )}
 
