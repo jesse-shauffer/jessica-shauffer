@@ -1,12 +1,12 @@
 import Link from 'next/link';
-
 const gReviewUrl = "https://www.google.com/maps/place/Jessica+Shauffer+%E2%80%93+Weinstein+Keach,+Coldwell+Banker+Realty/@42.0556882,-71.0717385,17z/data=!4m8!3m7!1s0x89e485762d91504d:0xa1d3cddd7b582786!8m2!3d42.0556882!4d-71.0717385!9m1!1b1!16s%2Fg%2F11h5qq5tp7?entry=ttu&g_ep=EgoyMDI2MDMwOC4wIKXMDSoASAFQAw%3D%3D";
-
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer__inner">
+
+          {/* Col 1 — Brand */}
           <div className="footer__brand">
             <Link href="/" className="header__logo" aria-label="Jessica Shauffer Real Estate">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -14,20 +14,29 @@ export default function Footer() {
             </Link>
             <p>Weinstein Keach Group | Coldwell Banker Realty<br />Top 3% agent serving the South Shore, MetroWest, and Bristol County, MA.</p>
           </div>
+
+          {/* Col 2 — Navigate */}
           <div className="footer__links">
-            <p className="footer__col-heading">Quick Links</p>
+            <p className="footer__col-heading">Navigate</p>
             <Link href="/about">About</Link>
             <Link href="/market">Market</Link>
             <Link href="/buyers">Buyers</Link>
             <Link href="/sellers">Sellers</Link>
-            <Link href="/counties">Counties</Link>
-            <Link href="/communities">Communities</Link>
             <Link href="/testimonials">Testimonials</Link>
             <Link href="/contact">Contact</Link>
+          </div>
+
+          {/* Col 3 — Explore */}
+          <div className="footer__links">
+            <p className="footer__col-heading">Explore</p>
+            <Link href="/communities">Communities</Link>
+            <Link href="/counties">Counties</Link>
             <Link href="/blog">Blog</Link>
             <Link href="/calculators">Mortgage Calculator</Link>
             <Link href="/sitemap">Sitemap</Link>
           </div>
+
+          {/* Col 4 — Contact Jessica */}
           <div className="footer__links">
             <p className="footer__col-heading">Contact Jessica</p>
             <a href="tel:+16179491046">(617) 949-1046</a>
@@ -42,6 +51,7 @@ export default function Footer() {
               <a href="https://www.instagram.com/jessicashauffer_realtor" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="ph ph-instagram-logo"></i></a>
             </div>
           </div>
+
         </div>
         <div className="footer__bottom">
           <p>&copy; 2026 Jessica Shauffer — Weinstein Keach, Coldwell Banker Realty. All rights reserved.</p>
