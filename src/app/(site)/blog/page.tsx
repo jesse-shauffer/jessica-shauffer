@@ -129,7 +129,7 @@ export default async function BlogPage() {
       </div>
 
       {/* BLOG GRID WITH CLIENT-SIDE FILTER */}
-      <section className="section">
+      <section className="section section--blog-grid">
         <div className="container">
           <BlogFilterClient posts={serializedPosts} topicLabels={TOPIC_LABELS} />
         </div>
