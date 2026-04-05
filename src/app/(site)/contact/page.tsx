@@ -83,7 +83,7 @@ export default async function ContactPage() {
         </nav>
       </div>
 
-      <section className="section">
+      <section className="section section--compact">
         <div className="container">
           <div className="contact-info-grid">
             <div className="contact-info-card">

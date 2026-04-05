@@ -176,6 +176,9 @@ a, button, [role="button"], input, textarea, select {
 .section--blog-grid {
   padding-top: clamp(var(--space-6), 4vw, var(--space-12));
 }
+.section--compact {
+  padding-block: clamp(var(--space-6), 4vw, var(--space-12));
+}
 
 .section__header {
   text-align: center;
