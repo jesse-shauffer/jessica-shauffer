@@ -4380,6 +4380,11 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   margin-bottom: var(--space-5);
 }
 
+/* Remove top margin from the very first element in the body */
+.blog-post__body.portable-text > *:first-child {
+  margin-top: 0;
+}
+
 .blog-post__body.portable-text a {
   color: var(--accent);
   text-decoration: underline;

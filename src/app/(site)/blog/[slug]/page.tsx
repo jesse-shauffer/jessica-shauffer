@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
+import type { PortableTextBlock } from '@portabletext/types';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import AgentAbout from '@/components/AgentAbout';
@@ -82,7 +83,7 @@ function extractTocHeadings(body: unknown[]): { id: string; text: string; level:
     .filter((b) => b._type === 'block' && (b.style === 'h2' || b.style === 'h3'))
     .map((b) => {
       const text = (b.children || []).map((c) => c.text || '').join('');
-      return { id: slugifyHeading(text), text, level: b.style === 'h2' ? 2 : 3 };
+      return { id: slugifyHeading(text), text, level: (b.style === 'h2' ? 2 : 3) as 2 | 3 };
     })
     .filter((h) => h.text.length > 0);
 }
@@ -150,18 +151,18 @@ const ptComponents = {
     },
   },
   block: {
-    h2: ({ children, value }: { children?: React.ReactNode; value?: PtBlock }) => {
-      const text = (value?.children || []).map((c) => c.text || '').join('');
+    h2: ({ children, value }: { children?: React.ReactNode; value?: PortableTextBlock }) => {
+      const text = (value?.children || []).map((c) => ('text' in c ? (c as { text: string }).text : '')).join('');
       const id = slugifyHeading(text);
       return <h2 id={id} style={{ scrollMarginTop: '5rem' }}>{children}</h2>;
     },
-    h3: ({ children, value }: { children?: React.ReactNode; value?: PtBlock }) => {
-      const text = (value?.children || []).map((c) => c.text || '').join('');
+    h3: ({ children, value }: { children?: React.ReactNode; value?: PortableTextBlock }) => {
+      const text = (value?.children || []).map((c) => ('text' in c ? (c as { text: string }).text : '')).join('');
       const id = slugifyHeading(text);
       return <h3 id={id} style={{ scrollMarginTop: '5rem' }}>{children}</h3>;
     },
-    h4: ({ children, value }: { children?: React.ReactNode; value?: PtBlock }) => {
-      const text = (value?.children || []).map((c) => c.text || '').join('');
+    h4: ({ children, value }: { children?: React.ReactNode; value?: PortableTextBlock }) => {
+      const text = (value?.children || []).map((c) => ('text' in c ? (c as { text: string }).text : '')).join('');
       const id = slugifyHeading(text);
       return <h4 id={id} style={{ scrollMarginTop: '5rem' }}>{children}</h4>;
     },
