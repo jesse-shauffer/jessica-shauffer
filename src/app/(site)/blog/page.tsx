@@ -25,7 +25,6 @@ export const metadata: Metadata = {
     images: ['/assets/hero.webp'],
   },
   alternates: { canonical: '/blog' },
-  robots: { index: false, follow: false },
 };
 
 export const TOPIC_LABELS: Record<string, string> = {

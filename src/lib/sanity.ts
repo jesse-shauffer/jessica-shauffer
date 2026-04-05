@@ -505,7 +505,7 @@ export async function getRelatedBlogPosts(topic: string, excludeSlug: string): P
 
 // Fetch the previous and next post by date for prev/next navigation
 export async function getBlogPostNavigation(publishedAt: string): Promise<{ prev: SanityBlogPost | null; next: SanityBlogPost | null }> {
-  const [prev, next] = await Promise.all([
+  const [prev, next, oldest, newest] = await Promise.all([
     client.fetch<SanityBlogPost | null>(
       `*[_type == "blogPost" && publishedAt < $publishedAt] | order(publishedAt desc) [0] { _id, title, slug, publishedAt, heroImage, heroImageAlt }`,
       { publishedAt }
@@ -514,6 +514,16 @@ export async function getBlogPostNavigation(publishedAt: string): Promise<{ prev
       `*[_type == "blogPost" && publishedAt > $publishedAt] | order(publishedAt asc) [0] { _id, title, slug, publishedAt, heroImage, heroImageAlt }`,
       { publishedAt }
     ),
+    client.fetch<SanityBlogPost | null>(
+      `*[_type == "blogPost"] | order(publishedAt asc) [0] { _id, title, slug, publishedAt, heroImage, heroImageAlt }`
+    ),
+    client.fetch<SanityBlogPost | null>(
+      `*[_type == "blogPost"] | order(publishedAt desc) [0] { _id, title, slug, publishedAt, heroImage, heroImageAlt }`
+    ),
   ]);
-  return { prev: prev ?? null, next: next ?? null };
+  // Circular wrap: if no prev, show newest; if no next, show oldest
+  return {
+    prev: prev ?? newest ?? null,
+    next: next ?? oldest ?? null,
+  };
 }

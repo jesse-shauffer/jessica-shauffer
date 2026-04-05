@@ -10,6 +10,7 @@ import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import AgentAbout from '@/components/AgentAbout';
 import CopyLinkButton from '@/components/CopyLinkButton';
+import TocObserver from '@/components/TocObserver';
 import {
   getBlogPostBySlug,
   getAllBlogPostSlugs,
@@ -63,7 +64,6 @@ export async function generateMetadata({
       images: [ogImage],
     },
     alternates: { canonical: `/blog/${slug}` },
-    robots: { index: false, follow: false },
   };
 }
 
@@ -462,6 +462,7 @@ export default async function BlogPostPage({
                 <nav className="post-toc__nav" aria-label="Table of contents">
                   <TocNav headings={tocHeadings} />
                 </nav>
+                <TocObserver />
               </div>
             </aside>
           </div>

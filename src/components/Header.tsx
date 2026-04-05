@@ -107,7 +107,7 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Blog nav link hidden until launch */}
+            <Link href="/blog" className={isActive('blog')}>Blog</Link>
             {/* Calculator nav link hidden until launch */}
             <Link href="/contact" className={isActive('contact')}>Contact</Link>
           </nav>
@@ -163,7 +163,7 @@ export default function Header() {
               </div>
             )}
 
-            {/* Blog nav link hidden until launch */}
+            <Link href="/blog" onClick={closeMobile}>Blog</Link>
             {/* Calculator nav link hidden until launch */}
             <Link href="/contact" onClick={closeMobile}>Contact</Link>
           </nav>
