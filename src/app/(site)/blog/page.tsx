@@ -134,6 +134,17 @@ export default async function BlogPage() {
         </div>
       </section>
 
+      {/* FULL-WIDTH IMAGE BAND */}
+      <div className="blog-image-band" aria-hidden="true">
+        <Image
+          src="/assets/market-neighborhood.webp"
+          alt=""
+          width={1920}
+          height={420}
+          style={{ width: '100%', height: 420, objectFit: 'cover', display: 'block' }}
+        />
+      </div>
+
       {/* CONSULTATION FORM */}
       <section className="section section--form" id="consultation">
         <div className="container">

@@ -562,7 +562,7 @@ export default async function BlogPostPage({
               })}
             </div>
             <div style={{ textAlign: 'center', marginTop: 'var(--space-8)' }}>
-              <Link href="/blog" className="btn btn--ghost">
+              <Link href="/blog" className="btn btn--primary">
                 View All Articles
               </Link>
             </div>
