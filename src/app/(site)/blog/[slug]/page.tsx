@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
-import type { PortableTextBlock } from '@portabletext/types';
+
+
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import AgentAbout from '@/components/AgentAbout';
@@ -66,7 +68,8 @@ export async function generateMetadata({
 }
 
 // ── TOC helpers ────────────────────────────────────────────────────────────
-type PtBlock = { _type: string; style?: string; children?: { text?: string }[] };
+type PtBlockChild = { _type?: string; text?: string; [key: string]: unknown };
+type PtBlock = { _type: string; style?: string; children?: PtBlockChild[] };
 
 /** Slugify a heading string into a URL-safe anchor ID */
 function slugifyHeading(text: string): string {
@@ -132,6 +135,17 @@ function TocNav({ headings }: { headings: ReturnType<typeof extractTocHeadings> 
   return <ul>{items}</ul>;
 }
 
+/** Extract plain text from React children for use as anchor ID */
+function extractChildText(children: React.ReactNode): string {
+  if (typeof children === 'string') return children;
+  if (Array.isArray(children)) return children.map(extractChildText).join('');
+  if (React.isValidElement(children)) {
+    const el = children as React.ReactElement<{ children?: React.ReactNode }>;
+    return extractChildText(el.props.children);
+  }
+  return '';
+}
+
 // Portable Text component overrides
 const ptComponents = {
   types: {
@@ -154,19 +168,19 @@ const ptComponents = {
     },
   },
   block: {
-    h2: ({ children, value }: { children?: React.ReactNode; value?: PortableTextBlock }) => {
-      const text = (value?.children || []).map((c) => ('text' in c ? (c as { text: string }).text : '')).join('');
-      const id = slugifyHeading(text);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    h2: ({ children }: any) => {
+      const id = slugifyHeading(extractChildText(children));
       return <h2 id={id} style={{ scrollMarginTop: '5rem' }}>{children}</h2>;
     },
-    h3: ({ children, value }: { children?: React.ReactNode; value?: PortableTextBlock }) => {
-      const text = (value?.children || []).map((c) => ('text' in c ? (c as { text: string }).text : '')).join('');
-      const id = slugifyHeading(text);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    h3: ({ children }: any) => {
+      const id = slugifyHeading(extractChildText(children));
       return <h3 id={id} style={{ scrollMarginTop: '5rem' }}>{children}</h3>;
     },
-    h4: ({ children, value }: { children?: React.ReactNode; value?: PortableTextBlock }) => {
-      const text = (value?.children || []).map((c) => ('text' in c ? (c as { text: string }).text : '')).join('');
-      const id = slugifyHeading(text);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    h4: ({ children }: any) => {
+      const id = slugifyHeading(extractChildText(children));
       return <h4 id={id} style={{ scrollMarginTop: '5rem' }}>{children}</h4>;
     },
   },
