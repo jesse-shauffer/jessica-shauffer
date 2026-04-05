@@ -617,6 +617,17 @@ export default async function BlogPostPage({
         </section>
       )}
 
+      {/* ── AERIAL IMAGE BAND ─────────────────────────────────────── */}
+      <div className="blog-image-band" aria-hidden="true">
+        <Image
+          src="/assets/market-neighborhood.webp"
+          alt=""
+          width={1920}
+          height={416}
+          style={{ width: '100%', height: '26rem', objectFit: 'cover', display: 'block' }}
+        />
+      </div>
+
       {/* ── ABOUT JESSICA ────────────────────────────────────────── */}
       <AgentAbout />
 
