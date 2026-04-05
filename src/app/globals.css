@@ -190,7 +190,7 @@ a, button, [role="button"], input, textarea, select {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--accent);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .section__label--light,
