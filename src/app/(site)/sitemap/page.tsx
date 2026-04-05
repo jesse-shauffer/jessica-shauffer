@@ -112,7 +112,7 @@ export default async function SitemapPage() {
           </section>
 
           {/* ── Communities ── */}
-          <section className="sitemap-section">
+          <section className="sitemap-section sitemap-section--communities">
             <h2 className="sitemap-section__heading">
               Communities
               <span className="sitemap-section__count">{sortedCommunities.length}</span>

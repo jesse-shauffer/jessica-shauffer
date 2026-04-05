@@ -1799,6 +1799,7 @@ a, button, [role="button"], input, textarea, select {
   align-items: start;
 }
 
+.sitemap-section--communities,
 .sitemap-section--blog {
   grid-column: 1 / -1;
   column-count: 3;
@@ -1881,6 +1882,7 @@ a, button, [role="button"], input, textarea, select {
   .sitemap-page__grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .sitemap-section--communities,
   .sitemap-section--blog {
     grid-column: 1 / -1;
     column-count: 2;
@@ -1891,6 +1893,7 @@ a, button, [role="button"], input, textarea, select {
   .sitemap-page__grid {
     grid-template-columns: 1fr;
   }
+  .sitemap-section--communities,
   .sitemap-section--blog {
     column-count: 1;
   }
