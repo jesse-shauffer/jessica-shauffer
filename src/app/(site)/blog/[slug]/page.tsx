@@ -236,13 +236,18 @@ export default async function BlogPostPage({
     getBlogPostNavigation(post.publishedAt),
   ]);
 
-  // Combine bodyTop + bodyBottom for TOC extraction
-  const allBodyBlocks = [
-    ...((post.bodyTop as unknown[]) || []),
-    ...((post.bodyBottom as unknown[]) || []),
-    // fallback: legacy posts still using body field
-    ...((post.body as unknown[]) || []),
-  ];
+  // Combine bodyTop + bodyBottom for TOC extraction.
+  // If the post has been migrated to bodyTop/bodyBottom, use only those.
+  // Fall back to legacy body field only if neither bodyTop nor bodyBottom exists.
+  const hasNewBody =
+    ((post.bodyTop as unknown[]) || []).length > 0 ||
+    ((post.bodyBottom as unknown[]) || []).length > 0;
+  const allBodyBlocks = hasNewBody
+    ? [
+        ...((post.bodyTop as unknown[]) || []),
+        ...((post.bodyBottom as unknown[]) || []),
+      ]
+    : [...((post.body as unknown[]) || [])];
   const tocHeadings = allBodyBlocks.length > 0 ? extractTocHeadings(allBodyBlocks) : [];
   const heroSrc = post.heroImage
     ? resolveHeroImage(post.heroImage, 1600)
