@@ -26,6 +26,7 @@ export default function Footer() {
             <Link href="/contact">Contact</Link>
             <Link href="/blog">Blog</Link>
             <Link href="/calculators">Mortgage Calculator</Link>
+            <Link href="/sitemap">Sitemap</Link>
           </div>
           <div className="footer__links">
             <p className="footer__col-heading">Contact Jessica</p>
