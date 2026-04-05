@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Script from 'next/script';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
+import MortgageCalculatorPromo from '@/components/MortgageCalculatorPromo';
+import ReviewsSection from '@/components/ReviewsSection';
 import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 import { buildBreadcrumbSchema, AGENT } from '@/lib/schema';
 
@@ -140,6 +142,12 @@ export default async function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* CALCULATOR PROMO */}
+      <MortgageCalculatorPromo />
+
+      {/* TESTIMONIALS */}
+      <ReviewsSection />
 
       <section className="section section--warm">
         <div className="container">
