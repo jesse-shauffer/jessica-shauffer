@@ -387,7 +387,7 @@ a, button, [role="button"], input, textarea, select {
   color: var(--primary);
 }
 
-@media (max-width: 47.9375rem) {
+@media (max-width: 60rem) {
   .header__nav, .header__cta { display: none; }
   .header__menu-btn { display: flex; }
 }
@@ -430,10 +430,22 @@ a, button, [role="button"], input, textarea, select {
   transform: translateX(0);
 }
 
+.mobile-nav__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-nav__logo {
+  width: 8rem;
+  height: auto;
+  display: block;
+}
+
 .mobile-nav__close {
-  align-self: flex-end;
   font-size: 1.5rem;
   color: var(--gray-600);
+  flex-shrink: 0;
 }
 
 .mobile-nav__links {

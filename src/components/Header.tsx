@@ -121,9 +121,13 @@ export default function Header() {
       {/* MOBILE NAV */}
       <div className={`mobile-nav${mobileOpen ? ' is-open' : ''}`} id="mobileNav" aria-hidden={!mobileOpen}>
         <div className="mobile-nav__inner">
-          <button className="mobile-nav__close" aria-label="Close menu" onClick={closeMobile}>
-            <i className="ph ph-x"></i>
-          </button>
+          <div className="mobile-nav__header">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/coldwell-banker-logo-nav.svg" alt="Coldwell Banker Realty" className="mobile-nav__logo" />
+            <button className="mobile-nav__close" aria-label="Close menu" onClick={closeMobile}>
+              <i className="ph ph-x"></i>
+            </button>
+          </div>
           <nav className="mobile-nav__links">
             <Link href="/" onClick={closeMobile}>Home</Link>
             <Link href="/about" onClick={closeMobile}>About</Link>
