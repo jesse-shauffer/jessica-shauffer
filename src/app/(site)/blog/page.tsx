@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
@@ -130,7 +131,9 @@ export default async function BlogPage() {
       {/* BLOG GRID WITH CLIENT-SIDE FILTER */}
       <section className="section section--blog-grid">
         <div className="container">
-          <BlogFilterClient posts={serializedPosts} topicLabels={TOPIC_LABELS} />
+          <Suspense fallback={null}>
+            <BlogFilterClient posts={serializedPosts} topicLabels={TOPIC_LABELS} />
+          </Suspense>
         </div>
       </section>
 

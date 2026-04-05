@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo, useRef, useEffect } from 'react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -40,12 +41,32 @@ function formatDate(iso: string): string {
 }
 
 export default function BlogFilterClient({ posts, topicLabels }: Props) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Initialise activeTopic from ?topic= URL param (mirrors Finsweet/JetBoost URL-driven filtering)
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTopic, setActiveTopic] = useState<string>('all');
+  const [activeTopic, setActiveTopic] = useState<string>(
+    () => searchParams.get('topic') || 'all'
+  );
   const [sortBy, setSortBy] = useState<SortOption>('date-desc');
   const [sortOpen, setSortOpen] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);
+
+  // Sync URL when activeTopic changes
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (activeTopic === 'all') {
+      params.delete('topic');
+    } else {
+      params.set('topic', activeTopic);
+    }
+    const newUrl = params.toString() ? `${pathname}?${params.toString()}` : pathname;
+    router.replace(newUrl, { scroll: false });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTopic]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
