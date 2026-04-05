@@ -471,7 +471,7 @@ export default async function BlogPostPage({
               {faqItems.length > 0 && (
                 <div className="blog-post__faqs">
                   <h2 className="blog-post__faqs-title">Frequently Asked Questions</h2>
-                  <FaqAccordion items={faqItems} />
+                  <FaqAccordion items={faqItems} defaultOpenIndex={-1} />
                 </div>
               )}
 

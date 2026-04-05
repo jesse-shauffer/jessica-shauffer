@@ -9,11 +9,12 @@ export interface FaqItem {
 
 interface Props {
   items: FaqItem[];
+  /** Index of the item that should be open on first render. Pass -1 to start all closed. Defaults to 0 (first item open). */
+  defaultOpenIndex?: number;
 }
 
-export default function FaqAccordion({ items }: Props) {
-  // First item is open by default (index 0); null = all closed
-  const [openIndex, setOpenIndex] = useState<number>(0);
+export default function FaqAccordion({ items, defaultOpenIndex = 0 }: Props) {
+  const [openIndex, setOpenIndex] = useState<number>(defaultOpenIndex);
 
   function toggle(i: number) {
     setOpenIndex((prev) => (prev === i ? -1 : i));
