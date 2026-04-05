@@ -4351,7 +4351,7 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
 }
 
 .blog-post__body.portable-text h2 {
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   font-weight: 700;
   color: var(--primary);
   margin-top: var(--space-10);
@@ -4360,7 +4360,7 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
 }
 
 .blog-post__body.portable-text h3 {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: 700;
   color: var(--primary);
   margin-top: var(--space-8);
@@ -4369,10 +4369,19 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
 }
 
 .blog-post__body.portable-text h4 {
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   font-weight: 600;
   color: var(--primary);
   margin-top: var(--space-6);
+  margin-bottom: var(--space-2);
+}
+
+.blog-post__body.portable-text h5,
+.blog-post__body.portable-text h6 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: var(--space-5);
   margin-bottom: var(--space-2);
 }
 
