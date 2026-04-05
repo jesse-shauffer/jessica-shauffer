@@ -208,15 +208,16 @@ export default async function BlogPostPage({
 
           {/* Hero image */}
           <div className="post-header__image-wrap">
-            <Image
-              src={heroSrc}
-              alt={post.heroImageAlt || post.title}
-              width={1200}
-              height={630}
-              sizes="(max-width: 1280px) 100vw, 1200px"
-              style={{ width: '100%', height: 'auto', borderRadius: 'var(--radius-lg)', display: 'block' }}
-              priority
-            />
+            <div className="post-header__image-ratio">
+              <Image
+                src={heroSrc}
+                alt={post.heroImageAlt || post.title}
+                fill
+                sizes="(max-width: 1280px) 100vw, 1200px"
+                style={{ objectFit: 'cover', borderRadius: 'var(--radius-lg)' }}
+                priority
+              />
+            </div>
           </div>
 
           {/* Breadcrumb — below hero image */}

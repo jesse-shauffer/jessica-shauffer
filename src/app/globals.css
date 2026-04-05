@@ -3987,6 +3987,20 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   margin-bottom: var(--space-6);
 }
 
+.post-header__image-ratio {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .post-header__image-ratio {
+    aspect-ratio: 21 / 9;
+  }
+}
+
 /* Meta bar */
 .post-meta-bar {
   display: flex;
