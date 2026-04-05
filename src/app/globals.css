@@ -3625,7 +3625,7 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   cursor: pointer;
   transition: border-color 0.2s, box-shadow 0.2s;
   white-space: nowrap;
-  min-width: 160px;
+  min-width: 11rem;
   justify-content: space-between;
 }
 
@@ -3647,7 +3647,7 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
-  min-width: 100%;
+  min-width: max(100%, 11rem);
   background: var(--white);
   border: 1.5px solid var(--primary);
   border-radius: var(--radius-md);
@@ -4207,6 +4207,28 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
 .post-toc__nav a.is-active {
   color: var(--primary);
   border-left-color: var(--gold);
+}
+
+/* H2 top-level TOC links */
+.post-toc__link--h2 {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* H3 nested TOC links */
+.post-toc__link--h3 {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+/* Nested H3 sub-list */
+.post-toc__sub {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-1) 0 var(--space-1) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 }
 
 /* Prev / Next navigation */

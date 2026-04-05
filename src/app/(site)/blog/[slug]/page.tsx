@@ -64,6 +64,70 @@ export async function generateMetadata({
   };
 }
 
+// ── TOC helpers ────────────────────────────────────────────────────────────
+type PtBlock = { _type: string; style?: string; children?: { text?: string }[] };
+
+/** Slugify a heading string into a URL-safe anchor ID */
+function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+}
+
+/** Extract H2/H3 headings from a Portable Text body array */
+function extractTocHeadings(body: unknown[]): { id: string; text: string; level: 2 | 3 }[] {
+  return (body as PtBlock[])
+    .filter((b) => b._type === 'block' && (b.style === 'h2' || b.style === 'h3'))
+    .map((b) => {
+      const text = (b.children || []).map((c) => c.text || '').join('');
+      return { id: slugifyHeading(text), text, level: b.style === 'h2' ? 2 : 3 };
+    })
+    .filter((h) => h.text.length > 0);
+}
+
+/** Render nested TOC from headings */
+function TocNav({ headings }: { headings: ReturnType<typeof extractTocHeadings> }) {
+  if (headings.length === 0) return null;
+  const items: React.ReactNode[] = [];
+  for (let i = 0; i < headings.length; i++) {
+    const h = headings[i];
+    if (h.level === 2) {
+      // Collect following H3s
+      const children: React.ReactNode[] = [];
+      let j = i + 1;
+      while (j < headings.length && headings[j].level === 3) {
+        children.push(
+          <li key={headings[j].id}>
+            <a href={`#${headings[j].id}`} className="post-toc__link post-toc__link--h3">
+              {headings[j].text}
+            </a>
+          </li>
+        );
+        j++;
+      }
+      items.push(
+        <li key={h.id}>
+          <a href={`#${h.id}`} className="post-toc__link post-toc__link--h2">{h.text}</a>
+          {children.length > 0 && (
+            <ul className="post-toc__sub">{children}</ul>
+          )}
+        </li>
+      );
+    }
+    // H3s are consumed above; skip standalone H3s that appear before any H2
+    else if (h.level === 3 && items.length === 0) {
+      items.push(
+        <li key={h.id}>
+          <a href={`#${h.id}`} className="post-toc__link post-toc__link--h3">{h.text}</a>
+        </li>
+      );
+    }
+  }
+  return <ul>{items}</ul>;
+}
+
 // Portable Text component overrides
 const ptComponents = {
   types: {
@@ -83,6 +147,23 @@ const ptComponents = {
           )}
         </figure>
       );
+    },
+  },
+  block: {
+    h2: ({ children, value }: { children?: React.ReactNode; value?: PtBlock }) => {
+      const text = (value?.children || []).map((c) => c.text || '').join('');
+      const id = slugifyHeading(text);
+      return <h2 id={id} style={{ scrollMarginTop: '5rem' }}>{children}</h2>;
+    },
+    h3: ({ children, value }: { children?: React.ReactNode; value?: PtBlock }) => {
+      const text = (value?.children || []).map((c) => c.text || '').join('');
+      const id = slugifyHeading(text);
+      return <h3 id={id} style={{ scrollMarginTop: '5rem' }}>{children}</h3>;
+    },
+    h4: ({ children, value }: { children?: React.ReactNode; value?: PtBlock }) => {
+      const text = (value?.children || []).map((c) => c.text || '').join('');
+      const id = slugifyHeading(text);
+      return <h4 id={id} style={{ scrollMarginTop: '5rem' }}>{children}</h4>;
     },
   },
   marks: {
@@ -136,6 +217,7 @@ export default async function BlogPostPage({
     getBlogPostNavigation(post.publishedAt),
   ]);
 
+  const tocHeadings = post.body && post.body.length > 0 ? extractTocHeadings(post.body) : [];
   const heroSrc = post.heroImage
     ? resolveHeroImage(post.heroImage, 1600)
     : '/assets/hero.webp';
@@ -359,8 +441,9 @@ export default async function BlogPostPage({
               <div className="post-toc" id="toc-wrapper">
                 <h3 className="post-toc__title">Table of Contents</h3>
                 <div className="post-toc__divider" />
-                {/* TOC links are injected client-side by PostTocScript */}
-                <nav className="post-toc__nav" aria-label="Table of contents" />
+                <nav className="post-toc__nav" aria-label="Table of contents">
+                  <TocNav headings={tocHeadings} />
+                </nav>
               </div>
             </aside>
           </div>
