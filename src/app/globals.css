@@ -3216,10 +3216,15 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   cursor: pointer;
   text-align: left;
   font-family: var(--font-heading);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   font-weight: 700;
   color: var(--primary);
   transition: color 0.2s ease;
+}
+@media (min-width: 768px) {
+  .faq-accordion__trigger {
+    font-size: var(--text-lg);
+  }
 }
 .faq-accordion__trigger:hover {
   color: var(--gold-dark, var(--accent));
@@ -4434,6 +4439,23 @@ a.county-pill:hover { background: var(--navy-50); border-color: var(--primary); 
   text-align: center;
   margin-top: var(--space-2);
   font-style: italic;
+}
+
+/* FAQ section spacing */
+.blog-post__faqs {
+  margin-top: var(--space-10);
+  margin-bottom: var(--space-4);
+}
+.blog-post__faqs-title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 0 var(--space-6);
+}
+
+/* Body bottom section spacing */
+.blog-post__body--bottom.portable-text > *:first-child {
+  margin-top: var(--space-10);
 }
 
 /* CTA box at bottom of post */
