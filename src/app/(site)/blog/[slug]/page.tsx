@@ -236,6 +236,9 @@ export default async function BlogPostPage({
     getBlogPostNavigation(post.publishedAt),
   ]);
 
+  // FAQ items — declared early so TOC injection can reference faqItems.length
+  const faqItems = (post.faqs as { question: string; answer: string }[] | undefined) || [];
+
   // Combine bodyTop + bodyBottom for TOC extraction.
   // If the post has been migrated to bodyTop/bodyBottom, use only those.
   // Fall back to legacy body field only if neither bodyTop nor bodyBottom exists.
@@ -279,7 +282,6 @@ export default async function BlogPostPage({
   const secondaryLabel = post.secondaryTopic ? (TOPIC_LABELS[post.secondaryTopic] || post.secondaryTopic) : null;
 
   // FAQ schema — only inject if post has structured faqs
-  const faqItems = (post.faqs as { question: string; answer: string }[] | undefined) || [];
   const faqSchema = faqItems.length > 0 ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
