@@ -79,13 +79,16 @@ function slugifyHeading(text: string): string {
 
 /** Extract H2/H3 headings from a Portable Text body array */
 function extractTocHeadings(body: unknown[]): { id: string; text: string; level: 2 | 3 }[] {
-  return (body as PtBlock[])
-    .filter((b) => b._type === 'block' && (b.style === 'h2' || b.style === 'h3'))
-    .map((b) => {
-      const text = (b.children || []).map((c) => c.text || '').join('');
-      return { id: slugifyHeading(text), text, level: (b.style === 'h2' ? 2 : 3) as 2 | 3 };
-    })
-    .filter((h) => h.text.length > 0);
+  const results: { id: string; text: string; level: 2 | 3 }[] = [];
+  for (const block of body as PtBlock[]) {
+    if (block._type !== 'block') continue;
+    if (block.style !== 'h2' && block.style !== 'h3') continue;
+    const text = (block.children || []).map((c) => c.text || '').join('');
+    if (!text) continue;
+    const level: 2 | 3 = block.style === 'h2' ? 2 : 3;
+    results.push({ id: slugifyHeading(text), text, level });
+  }
+  return results;
 }
 
 /** Render nested TOC from headings */
