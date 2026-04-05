@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity';
+import { defineType, defineField, defineArrayMember } from 'sanity';
 
 // Blog topic categories — primary and secondary topic per post
 const BLOG_TOPICS = [
@@ -100,8 +100,8 @@ export default defineType({
       validation: (r) => r.required().max(160),
     }),
     defineField({
-      name: 'body',
-      title: 'Body Content',
+      name: 'bodyTop',
+      title: 'Body — Top (before FAQs)',
       type: 'array',
       of: [
         {
@@ -160,7 +160,72 @@ export default defineType({
           ],
         },
       ],
-      description: 'Full post body. Use H2/H3 headings to structure content. H2 headings auto-populate the Table of Contents sidebar.',
+      description: 'Top section of the post body — appears before the FAQ accordion. Use H2/H3 headings to structure content. H2 headings auto-populate the Table of Contents sidebar.',
+    }),
+
+    // ── Body Bottom ───────────────────────────────────────────────────
+    defineField({
+      name: 'bodyBottom',
+      title: 'Body — Bottom (after FAQs)',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          styles: [
+            { title: 'Normal', value: 'normal' },
+            { title: 'H2', value: 'h2' },
+            { title: 'H3', value: 'h3' },
+            { title: 'H4', value: 'h4' },
+            { title: 'Quote', value: 'blockquote' },
+          ],
+          marks: {
+            decorators: [
+              { title: 'Bold', value: 'strong' },
+              { title: 'Italic', value: 'em' },
+            ],
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  {
+                    name: 'href',
+                    type: 'url',
+                    title: 'URL',
+                    validation: (r) =>
+                      r.uri({ scheme: ['http', 'https', 'mailto', 'tel'] }),
+                  },
+                  {
+                    name: 'blank',
+                    type: 'boolean',
+                    title: 'Open in new tab',
+                    initialValue: false,
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alt Text',
+              validation: (r) => r.required(),
+            },
+            {
+              name: 'caption',
+              type: 'string',
+              title: 'Caption',
+            },
+          ],
+        },
+      ],
+      description: 'Bottom section of the post body — appears after the FAQ accordion. Use for closing sections, CTA, and summary content.',
     }),
 
     // ── SEO ───────────────────────────────────────────────────────────
@@ -194,6 +259,39 @@ export default defineType({
       type: 'string',
       initialValue: 'Jessica Shauffer',
       description: 'Author name shown on the post.',
+    }),
+
+    // ── FAQs ──────────────────────────────────────────────────────────
+    defineField({
+      name: 'faqs',
+      title: 'FAQs',
+      type: 'array',
+      description: 'Structured FAQ pairs used to generate FAQ schema (Google rich results). Add the same Q&A pairs that appear in the post body.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'faq',
+          title: 'FAQ',
+          fields: [
+            defineField({
+              name: 'question',
+              title: 'Question',
+              type: 'string',
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: 'answer',
+              title: 'Answer',
+              type: 'text',
+              rows: 3,
+              validation: (r) => r.required(),
+            }),
+          ],
+          preview: {
+            select: { title: 'question' },
+          },
+        }),
+      ],
     }),
   ],
 

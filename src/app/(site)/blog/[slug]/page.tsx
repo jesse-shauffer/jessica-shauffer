@@ -11,6 +11,7 @@ import ConsultationForm from '@/components/ConsultationForm';
 import AgentAbout from '@/components/AgentAbout';
 import CopyLinkButton from '@/components/CopyLinkButton';
 import TocObserver from '@/components/TocObserver';
+import FaqAccordion from '@/components/FaqAccordion';
 import {
   getBlogPostBySlug,
   getAllBlogPostSlugs,
@@ -235,14 +236,21 @@ export default async function BlogPostPage({
     getBlogPostNavigation(post.publishedAt),
   ]);
 
-  const tocHeadings = post.body && post.body.length > 0 ? extractTocHeadings(post.body) : [];
+  // Combine bodyTop + bodyBottom for TOC extraction
+  const allBodyBlocks = [
+    ...((post.bodyTop as unknown[]) || []),
+    ...((post.bodyBottom as unknown[]) || []),
+    // fallback: legacy posts still using body field
+    ...((post.body as unknown[]) || []),
+  ];
+  const tocHeadings = allBodyBlocks.length > 0 ? extractTocHeadings(allBodyBlocks) : [];
   const heroSrc = post.heroImage
     ? resolveHeroImage(post.heroImage, 1600)
     : '/assets/hero.webp';
 
   const readTime =
     post.readTimeMinutes ??
-    (post.body && post.body.length > 0 ? estimateReadTime(post.body) : 5);
+    (allBodyBlocks.length > 0 ? estimateReadTime(allBodyBlocks) : 5);
 
   const postUrl = `https://www.jessicashauffer.com/blog/${slug}`;
   const encodedUrl = encodeURIComponent(postUrl);
@@ -250,6 +258,18 @@ export default async function BlogPostPage({
 
   const primaryLabel = TOPIC_LABELS[post.topic] || post.topic;
   const secondaryLabel = post.secondaryTopic ? (TOPIC_LABELS[post.secondaryTopic] || post.secondaryTopic) : null;
+
+  // FAQ schema — only inject if post has structured faqs
+  const faqItems = (post.faqs as { question: string; answer: string }[] | undefined) || [];
+  const faqSchema = faqItems.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  } : null;
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -293,6 +313,7 @@ export default async function BlogPostPage({
     <>
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
+      {faqSchema && <JsonLd data={faqSchema} />}
 
       {/* ── POST HEADER ──────────────────────────────────────────── */}
       <section className="post-header">
@@ -430,13 +451,34 @@ export default async function BlogPostPage({
 
             {/* Main article */}
             <article className="post-article" id="blog-content">
-              {post.body && post.body.length > 0 ? (
+              {/* Body Top */}
+              {post.bodyTop && (post.bodyTop as unknown[]).length > 0 ? (
+                <div className="blog-post__body portable-text">
+                  <PortableText value={post.bodyTop as Parameters<typeof PortableText>[0]['value']} components={ptComponents} />
+                </div>
+              ) : post.body && (post.body as unknown[]).length > 0 ? (
+                // Legacy fallback: posts not yet migrated use body field
                 <div className="blog-post__body portable-text">
                   <PortableText value={post.body as Parameters<typeof PortableText>[0]['value']} components={ptComponents} />
                 </div>
               ) : (
                 <div className="blog-post__body">
                   <p>{post.excerpt}</p>
+                </div>
+              )}
+
+              {/* FAQ Accordion — only shown when structured FAQs exist */}
+              {faqItems.length > 0 && (
+                <div className="blog-post__faqs">
+                  <h2 className="blog-post__faqs-title">Frequently Asked Questions</h2>
+                  <FaqAccordion items={faqItems} />
+                </div>
+              )}
+
+              {/* Body Bottom */}
+              {post.bodyBottom && (post.bodyBottom as unknown[]).length > 0 && (
+                <div className="blog-post__body blog-post__body--bottom portable-text">
+                  <PortableText value={post.bodyBottom as Parameters<typeof PortableText>[0]['value']} components={ptComponents} />
                 </div>
               )}
 

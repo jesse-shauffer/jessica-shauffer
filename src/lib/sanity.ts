@@ -451,6 +451,9 @@ export interface SanityBlogPost {
   heroImageAlt?: string;
   excerpt: string;
   body?: unknown[];
+  bodyTop?: unknown[];
+  bodyBottom?: unknown[];
+  faqs?: { question: string; answer: string }[];
   metaTitle?: string;
   metaDescription?: string;
   ogImage?: SanityImageSource;
@@ -464,7 +467,7 @@ const blogPostCardFields = `
 
 const blogPostFullFields = `
   _id, title, slug, publishedAt, topic, secondaryTopic, primaryKeyword, readTimeMinutes,
-  heroImage, heroImageAlt, excerpt, body,
+  heroImage, heroImageAlt, excerpt, body, bodyTop, bodyBottom, faqs,
   metaTitle, metaDescription, ogImage, author
 `;
 

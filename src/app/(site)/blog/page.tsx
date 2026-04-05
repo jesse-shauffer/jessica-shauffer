@@ -140,8 +140,8 @@ export default async function BlogPage() {
           src="/assets/market-neighborhood.webp"
           alt=""
           width={1920}
-          height={420}
-          style={{ width: '100%', height: 420, objectFit: 'cover', display: 'block' }}
+          height={416}
+          style={{ width: '100%', height: '26rem', objectFit: 'cover', display: 'block' }}
         />
       </div>
 
