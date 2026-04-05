@@ -5,6 +5,7 @@ import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import BlogFilterClient from '@/components/BlogFilterClient';
+import InstagramFeed from '@/components/InstagramFeed';
 import { getAllBlogPosts, getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 
 export const revalidate = 60;
@@ -188,6 +189,9 @@ export default async function BlogPage() {
           </div>
         </div>
       </section>
+
+      {/* INSTAGRAM FEED */}
+      <InstagramFeed bg="white" />
     </>
   );
 }

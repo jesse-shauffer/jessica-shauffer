@@ -4,6 +4,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ConsultationForm from '@/components/ConsultationForm';
 import ReviewsSection from '@/components/ReviewsSection';
+import InstagramFeed from '@/components/InstagramFeed';
 import { getPageBySlug, resolveHeroImage } from '@/lib/sanity';
 import { buildBreadcrumbSchema } from '@/lib/schema';
 
@@ -262,6 +263,9 @@ export default async function AboutPage() {
 
       {/* TESTIMONIALS */}
       <ReviewsSection />
+
+      {/* INSTAGRAM FEED */}
+      <InstagramFeed bg="cream" />
 
       {/* CONSULTATION FORM */}
       <section className="section section--form" id="consultation">
