@@ -137,6 +137,9 @@ export default async function CommunityPage({ params }: { params: { slug: string
                   <p>Whether you are looking for a historic home with character or new construction, the {n.name} real estate market offers diverse options. With easy access to major highways and commuter routes, residents enjoy the perfect balance of suburban tranquility and urban accessibility.</p>
                 </>
               )}
+              <div style={{ marginTop: 'var(--space-6)' }}>
+                <Link href="#consultation" className="btn btn--primary">Free Consultation</Link>
+              </div>
             </div>
             <div className="split__media">
               <Image src={resolveHeroImage(n.heroImage, 600)} alt={`${n.name} MA community`} width={600} height={450} style={{ borderRadius: 'var(--radius-lg)' }} />
