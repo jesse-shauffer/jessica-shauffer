@@ -43,7 +43,7 @@ export default function TocObserver() {
         }
       },
       {
-        rootMargin: '-80px 0px -60% 0px',
+        rootMargin: '-80px 0px -75% 0px',
         threshold: 0,
       }
     );
